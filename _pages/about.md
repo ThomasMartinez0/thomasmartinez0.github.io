@@ -8,8 +8,13 @@ redirect_from:
   - /about.html
 ---
 
-Hello! Welcome to my webpage. I am a 2nd year PhD Student at UCLA's Math department. I currently do not have an advisor however I am primarily interested in combinatorics.
+I am a 2nd year PhD Student at UCLA's Math department working with [Pavel Galashin.](https://www.math.ucla.edu/~galashin/) I am primarily interested in algebraic and enumerative combinatorics. Before UCLA, I received my B.S. with High Distinction and Honors in Mathematics at Harvey Mudd College in 2021.
 
-Before UCLA, I received my B.S. with High Distinction and Honors in Mathematics at Harvey Mudd College, where I was advised by [Mohamed Omar](https://www.mohamedomar.org/). In my senior year I won the [Alvin White Prize,](https://www.hmc.edu/mathematics/about/awards/) due to my involvement in the Academic Excellence program during the COVID19 Pandemic. I was also a part of the University of Virginia REU in the Summer of 2020 under the mentorship of [Ken Ono](https://uva.theopenscholar.com/ken-ono) and the Williams College SMALL REU in the Summer of 2019 under the mentorship of [Steven J. Miller](https://web.williams.edu/Mathematics/sjmiller/public_html/).
+Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated January 4, 2024)
 
-Download my [CV](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated September 28, 2023)
+This quarter (Winter 2024), I am organizing the UCLA Combinatorics Graduate Student Research Seminar -- a seminar for and by the UCLA graduate students where we talk about the research we are currently working on. Email me if you would like to join the mailing list and/or Discord server.
+
+**Email:** tmartinez at math.ucla.edu\
+**Office:** Mathematical Sciences 3955\
+**Office Hours:** TBD (Winter 2024)\
+**Pronouns:** he/him
