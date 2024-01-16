@@ -16,5 +16,5 @@ This quarter (Winter 2024), I am organizing the UCLA Combinatorics Graduate Stud
 
 **Email:** tmartinez at math.ucla.edu\
 **Office:** Mathematical Sciences 3955\
-**Office Hours:** TBD (Winter 2024)\
+**Office Hours:** Thursdays 10 - 11AM (115A), Thursdays 12 - 1PM (31B)\
 **Pronouns:** he/him
