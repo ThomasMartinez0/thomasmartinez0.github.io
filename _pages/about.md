@@ -12,7 +12,7 @@ I am a 2nd year PhD Student at UCLA's Math department working with [Pavel Galash
 
 Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated January 4, 2024)
 
-This quarter (Winter 2024), I am organizing the UCLA Combinatorics Graduate Student Research Seminar -- a seminar for and by the UCLA graduate students where we talk about the research we are currently working on. Email me if you would like to join the mailing list and/or Discord server.
+This quarter (Spring 2024), I am co-organizing the UCLA Combinatorics Student Seminar with [Olha Shevchenko](https://olha-shevchenko.github.io/). I am also organizing this quarter's UCLA Combinatorics Learning Seminar, which is on Coxeter Groups and Root Systems.
 
 **Email:** tmartinez at math.ucla.edu\
 **Office:** Mathematical Sciences 3955\
