@@ -13,6 +13,10 @@ UCLA Geometry Qualifying Exam
 ======
 * [These](http://thomasmartinez0.github.io/files/Math61MiscellaneousNotes.pdf) are some notes I created for my Math 61 Discussion sections, which I plan to expand.-->
 
+UCLA Combinatorics Learning Seminars
+======
+* In Spring 2024, I organized a learning seminar on Coxeter Groups and Root Systems. See [here](http://thomasmartinez0.github.io/files/Coxeter_Groups_Syllabus_Website.pdf) for a syllabus.
+
 The Slice Rank Polynomial Method
 ======
 * [The Slice Rank Polynomial Method](https://scholarship.claremont.edu/cgi/viewcontent.cgi?article=1247&context=hmc_theses) is my Harvey Mudd College senior thesis, where I wrote it under the mentorship of Mohamed Omar. It is an expositorial thesis, focusing on the development and application of the Slice Rank Polynomial Method.
