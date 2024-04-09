@@ -16,5 +16,5 @@ This quarter (Spring 2024), I am co-organizing the UCLA Combinatorics Student Se
 
 **Email:** tmartinez at math.ucla.edu\
 **Office:** Mathematical Sciences 3955\
-**Office Hours:** Mondays 2:45 - 3:50PM (61, in MS3955), Thursdays 3 - 4PM (32A, in MS3955)\
+**Office Hours:** Mondays 2:45 - 3:50PM (Math 61, in MS3955), Thursdays 3 - 4PM (Math 32A, in MS3955)\
 **Pronouns:** he/him
