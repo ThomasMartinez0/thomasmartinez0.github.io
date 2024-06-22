@@ -181,6 +181,12 @@ collections:
   publications:
     output: true
     permalink: /:collection/:path/
+  organizing:
+    output: true
+    permalink: /:collection/:path/
+  whereabouts:
+    output: true
+    permalink: /:collection/:path/
   portfolio:
     output: false
     permalink: /:collection/:path/
@@ -253,6 +259,15 @@ defaults:
       layout: talk
       author_profile: false
       share: true
+  # _whereabouts
+  - scope:
+      path: ""
+      type: whereabouts
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      comments: true
 
 # Sass/SCSS
 sass:

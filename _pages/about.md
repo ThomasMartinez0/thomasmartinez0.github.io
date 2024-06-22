@@ -16,6 +16,3 @@ I am a 2nd year PhD Student at UCLA's Math department working with [Pavel Galash
 **Pronouns:** he/him
 
 Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated June 21, 2024)
-
-Last quarter (Spring 2024), I am co-organizing the UCLA Combinatorics Student Seminar and organizing the UCLA Combinatorics Learning Seminar, which is on Coxeter Groups and Root Systems. For a syllabus and some notes, see the Writing tab.
-

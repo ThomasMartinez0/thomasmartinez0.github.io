@@ -18,5 +18,8 @@ main:
   - title: "Writing"
     url: /writing/
     
-  #- title: "Guide"
-  #  url: /markdown/
+  - title: "Whereabouts"
+    url: /whereabouts/
+
+  - title: "Organizing"
+    url: /organizing/
