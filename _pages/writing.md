@@ -15,7 +15,7 @@ UCLA Geometry Qualifying Exam
 
 UCLA Combinatorics Learning Seminars
 ======
-* In Spring 2024, I organized a learning seminar on Coxeter Groups and Root Systems. See [here](http://thomasmartinez0.github.io/files/Coxeter_Groups_Syllabus_Website.pdf) for a syllabus.
+* In Spring 2024, I organized a learning seminar on Coxeter Groups and Root Systems. See [here](http://thomasmartinez0.github.io/files/Coxeter_Groups_Syllabus_Website.pdf) for a syllabus, and [here](http://thomasmartinez0.github.io/files/CoxeterNotes.pdf) for notes.
 
 The Slice Rank Polynomial Method
 ======
