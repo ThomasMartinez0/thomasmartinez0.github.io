@@ -12,7 +12,7 @@ I am a 3rd year PhD Student at UCLA's Math department working with [Pavel Galash
 
 **Email:** tmartinez at math.ucla.edu\
 **Office:** Mathematical Sciences 3919\
-**Office Hours:** Thursdays 10 - 11AM and 2 - 3PM in MS 3919
+**Office Hours:** Tuesdays 3 - 4PM in MS 3919\
 **Pronouns:** he/him
 
 Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated October 1, 2024)
