@@ -9,7 +9,7 @@ author_profile: true
 
 Current Teaching (Winter 2025)
 ======
-* Math 61 (Graph Theory)
+* Math 61
 
 Past Teaching
 =====
