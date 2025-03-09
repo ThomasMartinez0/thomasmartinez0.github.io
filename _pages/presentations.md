@@ -13,7 +13,7 @@ Presentations
     * Graduate Student Combinatorics Conference at USC - March 2025
     * Poster Session - LatMath Conference at IPAM - March 2025 [(Poster)](http://thomasmartinez0.github.io/files/LatMathPoster.pdf) (awarded 'Outstanding Poster')
     * UCLA Combinatorics Seminar - February 2025\
-Abstract: Given a bounded affine permutation f, we introduce affine Deodhar diagrams for f, similar to affine pipe dreams introduced by Snider. We explore combinatorial moves between these diagrams, and, as an application, use these moves to establish a bijection between Deodhar diagrams and rational Dyck paths for a special class of bounded affine permutations. This resolves an open problem posed by Galashin and Lam.
+**Abstract:** Given a bounded affine permutation f, we introduce affine Deodhar diagrams for f, similar to affine pipe dreams introduced by Snider. We explore combinatorial moves between these diagrams, and, as an application, use these moves to establish a bijection between Deodhar diagrams and rational Dyck paths for a special class of bounded affine permutations. This resolves an open problem posed by Galashin and Lam.
 
 * **Miscellaneous Presentations at the UCLA Combinatorics Seminar**
     * Les Transformations Fondamentales de Foata et Renyi - November 2024
