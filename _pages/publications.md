@@ -7,6 +7,8 @@ author_profile: true
 
 You can also find my articles on <u><a href="https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en">my Google Scholar profile</a>.</u>
 
+Affine Deodhar Diagrams and Rational Dyck Paths. In preparation.
+
 [On Class Numbers, Torsion Subgroups, and Quadratic Twists of Elliptic Curves.](https://arxiv.org/abs/2007.08756)\
 (with T. Blum, C. Choi, A. Hoey, J. Iskander and K. Lakein).\
 *Trans. Amer. Math. Soc.* **375**(1), 351-368. 2022.
