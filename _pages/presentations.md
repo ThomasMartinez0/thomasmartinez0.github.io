@@ -10,6 +10,8 @@ author_profile: true
 Presentations
 ======
 * **Affine Deodhar Diagrams and Rational Dyck Paths**
+    * CanaDAM at University of Ottawa - May 2025
+    * UCLA Combinatorics Forum - April 2025
     * Graduate Student Combinatorics Conference at USC - March 2025 [(Slides)](http://thomasmartinez0.github.io/files/GSCC.pdf)
     * Poster Session - LatMath Conference at IPAM - March 2025 [(Poster)](http://thomasmartinez0.github.io/files/LatMathPoster.pdf) (awarded 'Outstanding Poster')
     * UCLA Combinatorics Seminar - February 2025\
@@ -26,6 +28,7 @@ Conferences and Travel
 * [Summer School](https://sites.google.com/view/ssac2025/home) at KIAS; July 28 - 31, 2025; Seoul, Korea
 * [Formal Power Series and Algebraic Combinatorics](https://www.math.sci.hokudai.ac.jp/sympo/fpsac2025/) at Hokkaido University; July 21 - 25, 2025; Sapporo, Japan
 * [Summer Graduate School](https://www.slmath.org/summer-schools/1121#overview_summer_graduate_school) at SLMath; June 23 - July 3, 2025; Berkeley, CA
+* [CanaDAM](https://canadam.ca/2025) at University of Ottawa; May 20 - 25; Ottawa, Canada
 * [Graduate Student Combinatorics Conference](https://sites.google.com/usc.edu/gscc-2025/home) at USC; March 15 - 17, 2025; Los Angeles, CA
 * [LatMath](https://www.ipam.ucla.edu/programs/special-events-and-conferences/latmath-2025/) at IPAM; March 6 - 8, 2025; Los Angeles, CA
 * [Formal Power Series and Algebraic Combinatorics](https://fpsac2024.rub.de/) at Ruhr-Universität Bochum; July 22 - 26, 2024; Bochum, Germany
