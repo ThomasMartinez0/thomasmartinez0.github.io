@@ -11,7 +11,7 @@ Presentations
 ======
 * **Affine Deodhar Diagrams and Rational Dyck Paths**
     * CanaDAM at University of Ottawa - May 2025
-    * UCLA Combinatorics Forum - April 2025
+    * UCLA Combinatorics Forum - April 2025 [(Slides)](http://thomasmartinez0.github.io/files/UCLA_Forum.pdf)
     * Graduate Student Combinatorics Conference at USC - March 2025 [(Slides)](http://thomasmartinez0.github.io/files/GSCC.pdf)
     * Poster Session - LatMath Conference at IPAM - March 2025 [(Poster)](http://thomasmartinez0.github.io/files/LatMathPoster.pdf) (awarded 'Outstanding Poster')
     * UCLA Combinatorics Seminar - February 2025\
