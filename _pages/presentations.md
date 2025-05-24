@@ -10,7 +10,7 @@ author_profile: true
 Presentations
 ======
 * **Affine Deodhar Diagrams and Rational Dyck Paths**
-    * CanaDAM at University of Ottawa - May 2025
+    * CanaDAM at University of Ottawa - May 2025 [(Slides)](http://thomasmartinez0.github.io/files/CANADAM.pdf)
     * UCLA Combinatorics Forum - April 2025 [(Slides)](http://thomasmartinez0.github.io/files/UCLA_Forum.pdf)
     * Graduate Student Combinatorics Conference at USC - March 2025 [(Slides)](http://thomasmartinez0.github.io/files/GSCC.pdf)
     * Poster Session - LatMath Conference at IPAM - March 2025 [(Poster)](http://thomasmartinez0.github.io/files/LatMathPoster.pdf) (awarded 'Outstanding Poster')
@@ -18,7 +18,7 @@ Presentations
 **Abstract:** Given a bounded affine permutation f, we introduce affine Deodhar diagrams for f, similar to affine pipe dreams introduced by Snider. We explore combinatorial moves between these diagrams, and, as an application, use these moves to establish a bijection between Deodhar diagrams and rational Dyck paths for a special class of bounded affine permutations. This resolves an open problem posed by Galashin and Lam.
 
 * **Miscellaneous Presentations at the UCLA Combinatorics Seminar**
-    * Les Transformations Fondamentales de Foata et Renyi - November 2024
+    * Les Transformations Fondamentales de Foata et Rényi - November 2024
     * Complex weighted tilings and Kasteleyn's Theorem - April 2024
     * The Slice Rank Polynomial Method - May 2023
 
