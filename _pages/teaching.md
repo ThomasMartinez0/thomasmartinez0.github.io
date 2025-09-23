@@ -33,5 +33,5 @@ I have also been deeply involved in the [Directed Reading Program](https://sites
 * Arjun Mittha (Spring and Fall 2025): Combinatorial optimization
 * Darsh Verma (Spring 2025): The art of the combinatorial proof
 * Thomas Slavonia (Winter and Spring 2024): (1) Representation theory of the symmetric group (2) Schubert polynomials and pipe Dreams 
-* Anika Misra (Winter 2024): Graph theory and graph olorings
+* Anika Misra (Winter 2024): Graph theory and graph colorings
 * Akash Kote (Fall 2023): Probabilistic method in combinatorics
