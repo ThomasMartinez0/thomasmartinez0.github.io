@@ -25,6 +25,7 @@ Presentations
 Conferences and Travel
 ======
 
+* [Category Theory, Combinatorics, and Machine Learning Workshop](https://icerm.brown.edu/program/semester_program_workshop/sp-f25-w1) at ICERM; September 15 - 19, 2025; Providence, Rhode Island
 * [Graduate Summer School](https://sites.google.com/view/ssac2025/home) at KIAS; July 28 - 31, 2025; Seoul, Korea
 * [Formal Power Series and Algebraic Combinatorics](https://www.math.sci.hokudai.ac.jp/sympo/fpsac2025/) at Hokkaido University; July 21 - 25, 2025; Sapporo, Japan
 * [Graduate Summer School](https://www.slmath.org/summer-schools/1121#overview_summer_graduate_school) at SLMath; June 23 - July 3, 2025; Berkeley, CA
