@@ -15,4 +15,4 @@ I am a 4th year PhD Student at UCLA's Math department working with [Pavel Galash
 **Office Hours:** Mondays 3-4PM (for Math 61) and Thursdays 10-11AM (for Math 32A) in MS 3949\
 **Pronouns:** he/him
 
-Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated October 1, 2024)
+Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated September 23, 2025)
