@@ -11,7 +11,7 @@ author_profile: true
 Current Teaching (Fall 2025)
 ======
 * Math 61
-* Math 32A
+* Math 31B
 
 Past Teaching
 =====
