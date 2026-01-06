@@ -8,13 +8,13 @@ author_profile: true
 <!--{% include base_path %}
 -->
 
-Current Teaching (Fall 2025)
+Current Teaching (Spring 2026)
 ======
-* Math 61
-* Math 31B
+* Math 2930 (Cornell: Differential Equations for Engineers)
 
 Past Teaching
 =====
+* Fall 2025: Math 61 and Math 31B
 * Spring 2025: Math 184 (Enumerative Combinatorics)
 * Winter 2025: Math 61
 * Fall 2024: Math 180 (Graph Theory)
