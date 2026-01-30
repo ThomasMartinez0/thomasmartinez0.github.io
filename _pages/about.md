@@ -13,8 +13,7 @@ I am a 4th year PhD Student at UCLA's Math department working with [Pavel Galash
 For the Spring 2026 semester, I am visiting Cornell University. 
 
 **Email:** tmartinez at math.ucla.edu\
-**Office:** TBD\
-**Office Hours:** TBD\
+**Office Hours:** 4 - 6pm on Thursdays in Malott 218\
 **Pronouns:** he/him
 
 Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated September 23, 2025)
