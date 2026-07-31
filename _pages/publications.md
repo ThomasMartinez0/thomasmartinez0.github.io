@@ -7,7 +7,11 @@ author_profile: true
 
 You can also find my articles on <u><a href="https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en">my Google Scholar profile</a>.</u>
 
-The Combinatorics of Affine Deodhar Diagrams. In preparation.
+[The Combinatorics of Affine Deodhar Diagrams.](https://arxiv.org/abs/2607.15672) 2026.
+
+[Unimodality of _q_-Fibonomial coefficients for small cases.](https://arxiv.org/abs/2605.12822)\
+(with B. B. Connelly<sup>\*</sup>, E. Ito<sup>\*</sup>, O. Shevchenko and K. Yang<sup>\*</sup>).\
+2026.
 
 [On Class Numbers, Torsion Subgroups, and Quadratic Twists of Elliptic Curves.](https://arxiv.org/abs/2007.08756)\
 (with T. Blum, C. Choi, A. Hoey, J. Iskander and K. Lakein).\
@@ -29,7 +33,7 @@ The Combinatorics of Affine Deodhar Diagrams. In preparation.
 (with A. T. Benjamin and J. Lentfer).\
 *Fibonacci Quarterly.* **58**(5), 30-33. 2020.
 
-
+<sup>\*</sup> Indicates an undergraduate author (and I was no longer an undergraduate)
 <!--{% include base_path %}
 
 {% for post in site.publications reversed %}

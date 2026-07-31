@@ -2,27 +2,27 @@
 layout: archive
 title: "Presentations and Travel"
 permalink: /presentations/
-author_profile: true
+author_profile: false
 ---
 
 {% include base_path %}
 
 Presentations
 ======
-* **Affine Deodhar Diagrams and Rational Dyck Paths**
+<!--* **Affine Deodhar Diagrams and Rational Dyck Paths**
     * CanaDAM at University of Ottawa - May 2025 [(Slides)](http://thomasmartinez0.github.io/files/CANADAM.pdf)
     * UCLA Combinatorics Forum - April 2025 [(Slides)](http://thomasmartinez0.github.io/files/UCLA_Forum.pdf)
     * Graduate Student Combinatorics Conference at USC - March 2025 [(Slides)](http://thomasmartinez0.github.io/files/GSCC.pdf)
     * Poster Session - LatMath Conference at IPAM - March 2025 [(Poster)](http://thomasmartinez0.github.io/files/LatMathPoster.pdf) (awarded 'Outstanding Poster')
     * UCLA Combinatorics Seminar - February 2025\
-**Abstract:** Given a bounded affine permutation f, we introduce affine Deodhar diagrams for f, similar to affine pipe dreams introduced by Snider. We explore combinatorial moves between these diagrams, and, as an application, use these moves to establish a bijection between Deodhar diagrams and rational Dyck paths for a special class of bounded affine permutations. This resolves an open problem posed by Galashin and Lam.
+**Abstract:** Given a bounded affine permutation f, we introduce affine Deodhar diagrams for f, similar to affine pipe dreams introduced by Snider. We explore combinatorial moves between these diagrams, and, as an application, use these moves to establish a bijection between Deodhar diagrams and rational Dyck paths for a special class of bounded affine permutations. This resolves an open problem posed by Galashin and Lam.-->
 
 * **Miscellaneous Presentations at the UCLA Combinatorics Seminar**
     * Les Transformations Fondamentales de Foata et Rényi - November 2024
     * Complex weighted tilings and Kasteleyn's Theorem - April 2024
     * The Slice Rank Polynomial Method - May 2023
 
-Conferences and Travel
+<!--Conferences and Travel
 ======
 
 * [Category Theory, Combinatorics, and Machine Learning Workshop](https://icerm.brown.edu/program/semester_program_workshop/sp-f25-w1) at ICERM; September 15 - 19, 2025; Providence, Rhode Island
@@ -38,4 +38,4 @@ Conferences and Travel
 * [Integrability and Algebraic Combinatorics Workshop](https://www.ipam.ucla.edu/programs/workshops/workshop-ii-integrability-and-algebraic-combinatorics/) at IPAM; April 15 - 19, 2024; Los Angeles, CA
 * [Southern California Discrete Mathematics Symposium](https://sites.google.com/view/socaldm2024/home) at UCLA; April 14, 2024; Los Angeles, CA
 * [Graduate Student Combinatorics Conference](https://sites.google.com/view/gscc2024) at CMU; March 15 - 17, 2024; Pittsburgh, PA
-* [Southern California Discrete Mathematics Symposium](https://www.jpswanson.org/socaldm23/index.html) at CSULA; November 5, 2023; Los Angeles, CA
+* [Southern California Discrete Mathematics Symposium](https://www.jpswanson.org/socaldm23/index.html) at CSULA; November 5, 2023; Los Angeles, CA-->

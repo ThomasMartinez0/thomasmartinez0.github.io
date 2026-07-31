@@ -27,9 +27,9 @@ Past Teaching
 
 Directed Reading Program (DRP)
 ====
-I have also been deeply involved in the [Directed Reading Program](https://sites.google.com/g.ucla.edu/uclamathdrp/) (DRP) at UCLA. Below is a list of students I have advised, along with topics. If you are interested, please send me an email!
+I have also been involved in the [Directed Reading Program](https://sites.google.com/g.ucla.edu/uclamathdrp/) (DRP) at UCLA. Below is a list of students I have advised, along with topics. If you are interested, please send me an email!
 
-* Brendan Connelly, Hayk Gargaloyan, Kacey Yang, Ezekiel Ito (Fall 2025): TBD   
+* Brendan Connelly, Ezekiel Ito, Kacey Yang (co-advised with Olha Shevchenko) (Fall 2025 - Spring 2026): _q_-Fibonomial Coefficients. See our [paper!](https://arxiv.org/abs/2605.12822)
 * Arjun Mittha (Spring and Fall 2025): Combinatorial optimization
 * Darsh Verma (Spring 2025): The art of the combinatorial proof
 * Thomas Slavonia (Winter and Spring 2024): (1) Representation theory of the symmetric group (2) Schubert polynomials and pipe Dreams 
