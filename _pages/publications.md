@@ -34,9 +34,3 @@ You can also find my articles on <u><a href="https://scholar.google.com/citation
 *Fibonacci Quarterly.* **58**(5), 30-33. 2020.
 
 <sup>\*</sup> Indicates an undergraduate author (and I was no longer an undergraduate)
-<!--{% include base_path %}
-
-{% for post in site.publications reversed %}
-  {% include archive-single.html %}
-{% endfor %}
--->
