@@ -2,7 +2,7 @@
 layout: archive
 title: "Presentations and Travel"
 permalink: /presentations/
-author_profile: false
+author_profile: true
 ---
 
 {% include base_path %}
