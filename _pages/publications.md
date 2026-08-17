@@ -12,8 +12,8 @@ You can also find my articles on [Google Scholar](https://scholar.google.com/cit
 **Parking on Positroids**  
 *In preparation.*
 
-**Slice Links and Tori** 
-with M. J. Tyler. 
+**Slice Links and Tori**
+with M. J. Tyler.
 *In preparation.*
 
 **The Combinatorics of Affine Deodhar Diagrams**  
