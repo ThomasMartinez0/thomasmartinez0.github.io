@@ -7,6 +7,10 @@ author_profile: true
 
 You can also find my articles on <u><a href="https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en">my Google Scholar profile</a>.</u>
 
+Parking on Positroids. In preparation.
+
+Slice Links and Tori. In preparation.
+
 [The Combinatorics of Affine Deodhar Diagrams.](https://arxiv.org/abs/2607.15672) 2026.
 
 [Unimodality of _q_-Fibonomial coefficients for small cases.](https://arxiv.org/abs/2605.12822)\
