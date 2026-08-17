@@ -7,7 +7,7 @@ author_profile: true
 
 You can also find my articles on [Google Scholar](https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en).
 
-## Preprints and manuscripts
+## Preprints
 
 **Parking on Positroids**  
 *In preparation.*
