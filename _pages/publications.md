@@ -5,36 +5,50 @@ permalink: /publications/
 author_profile: true
 ---
 
-You can also find my articles on <u><a href="https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en">my Google Scholar profile</a>.</u>
+You can also find my articles on [Google Scholar](https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en).
 
-Parking on Positroids. In preparation.
+## Preprints and manuscripts
 
-Slice Links and Tori. In preparation.
+**Parking on Positroids**  
+*In preparation.*
 
-[The Combinatorics of Affine Deodhar Diagrams.](https://arxiv.org/abs/2607.15672) 2026.
+**Slice Links and Tori**  
+*In preparation.*
 
-[Unimodality of _q_-Fibonomial coefficients for small cases.](https://arxiv.org/abs/2605.12822)\
-(with B. B. Connelly<sup>\*</sup>, E. Ito<sup>\*</sup>, O. Shevchenko and K. Yang<sup>\*</sup>).\
-2026.
+**The Combinatorics of Affine Deodhar Diagrams**  
+2026.  
+[arXiv](https://arxiv.org/abs/2607.15672)
 
-[On Class Numbers, Torsion Subgroups, and Quadratic Twists of Elliptic Curves.](https://arxiv.org/abs/2007.08756)\
-(with T. Blum, C. Choi, A. Hoey, J. Iskander and K. Lakein).\
-*Trans. Amer. Math. Soc.* **375**(1), 351-368. 2022.
-	    
-[Generalizing the Distribution of Missing Sums in Sumsets.](https://arxiv.org/abs/2005.07981)\
-(with H. V. Chu, D. King, N. Luntzlara, S. J. Miller, L. Shao, C. Sun, and V. Xu).\
-*The Journal of Number Theory.* **239**(10), 402-444. 2022.
-  
-[Generalizing Zeckendorf's Theorem to Homogeneous Linear Recurrences, II.](https://arxiv.org/abs/2009.07891)\
-(with S. J. Miller, C. Mizgerd, J. Murphy, and C. Sun).\
-*Fibonacci Quarterly.* **60**(5), 220-230. 2022.
-  
-[Generalizing Zeckendorf's Theorem to Homogeneous Linear Recurrences, I.](https://arxiv.org/abs/2001.08455)\
-(with S. J. Miller, C. Mizgerd, and C. Sun).\
-*Fibonacci Quarterly.* **60**(5), 231-254. 2022.
+**Unimodality of $q$-Fibonomial coefficients for small cases**  
+with B. B. Connelly<sup>\*</sup>, E. Ito<sup>\*</sup>, O. Shevchenko, and K. Yang<sup>\*</sup>.  
+2026.  
+[arXiv](https://arxiv.org/abs/2605.12822)
 
-[Counting on Euler and Bernoulli Number Identities.](https://arxiv.org/abs/2007.12295)\
-(with A. T. Benjamin and J. Lentfer).\
-*Fibonacci Quarterly.* **58**(5), 30-33. 2020.
+## Published articles
 
-<sup>\*</sup> Indicates an undergraduate author (and I was no longer an undergraduate)
+**On Class Numbers, Torsion Subgroups, and Quadratic Twists of Elliptic Curves**  
+with T. Blum, C. Choi, A. Hoey, J. Iskander, and K. Lakein.  
+*Trans. Amer. Math. Soc.* **375** (2022), 351–368.  
+[arXiv](https://arxiv.org/abs/2007.08756)
+
+**Generalizing the Distribution of Missing Sums in Sumsets**  
+with H. V. Chu, D. King, N. Luntzlara, S. J. Miller, L. Shao, C. Sun, and V. Xu.  
+*J. Number Theory* **239** (2022), 402–444.  
+[arXiv](https://arxiv.org/abs/2005.07981)
+
+**Generalizing Zeckendorf's Theorem to Homogeneous Linear Recurrences, II**  
+with S. J. Miller, C. Mizgerd, J. Murphy, and C. Sun.  
+*Fibonacci Quarterly* **60** (2022), 220–230.  
+[arXiv](https://arxiv.org/abs/2009.07891)
+
+**Generalizing Zeckendorf's Theorem to Homogeneous Linear Recurrences, I**  
+with S. J. Miller, C. Mizgerd, and C. Sun.  
+*Fibonacci Quarterly* **60** (2022), 231–254.  
+[arXiv](https://arxiv.org/abs/2001.08455)
+
+**Counting on Euler and Bernoulli Number Identities**  
+with A. T. Benjamin and J. Lentfer.  
+*Fibonacci Quarterly* **58** (2020), 30–33.  
+[arXiv](https://arxiv.org/abs/2007.12295)
+
+<sup>\*</sup> Undergraduate coauthor.
