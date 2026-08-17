@@ -12,16 +12,17 @@ You can also find my articles on [Google Scholar](https://scholar.google.com/cit
 **Parking on Positroids**  
 *In preparation.*
 
-**Slice Links and Tori**  
+**Slice Links and Tori** 
+with M. J. Tyler. 
 *In preparation.*
 
 **The Combinatorics of Affine Deodhar Diagrams**  
-2026.  
+2026\.  
 [arXiv](https://arxiv.org/abs/2607.15672)
 
 **Unimodality of $q$-Fibonomial coefficients for small cases**  
 with B. B. Connelly<sup>\*</sup>, E. Ito<sup>\*</sup>, O. Shevchenko, and K. Yang<sup>\*</sup>.  
-2026.  
+2026\.  
 [arXiv](https://arxiv.org/abs/2605.12822)
 
 ## Published articles
