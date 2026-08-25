@@ -197,7 +197,7 @@ button:focus-visible {
 
 .home-intro h1 {
   margin: 0 0 1.1rem;
-  font-size: clamp(2.75rem, 7vw, 5.1rem);
+  font-size: clamp(2.55rem, 5.5vw, 4.35rem);
   font-weight: 600;
   line-height: 0.98;
 }
@@ -330,14 +330,6 @@ button:focus-visible {
   margin: 0;
   color: $muted-ink;
   font-size: 0.86rem;
-}
-
-.featured-item--award {
-  padding-right: 1rem;
-  padding-left: 1rem;
-  background: rgba($gold, 0.07);
-  border-bottom: 0;
-  border-radius: 0.65rem;
 }
 
 .featured-actions {

@@ -51,14 +51,6 @@ redirect_from:
       </div>
       <a class="paper-link" href="https://arxiv.org/abs/2605.12822">arXiv</a>
     </article>
-    <article class="featured-item featured-item--award">
-      <div>
-        <p class="item-meta">Recognition · March 2025</p>
-        <h3>Outstanding Poster Award, LatMath 2025</h3>
-        <p>For <em>Affine Deodhar Diagrams and Rational Dyck Paths</em>.</p>
-      </div>
-      <a class="paper-link" href="/files/LatMathPoster.pdf">Poster</a>
-    </article>
   </div>
 </section>
 
