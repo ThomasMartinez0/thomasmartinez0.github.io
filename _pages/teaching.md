@@ -5,8 +5,6 @@ permalink: /teaching/
 author_profile: true
 ---
 
-<p class="page-deck">My teaching spans discrete mathematics, combinatorics, graph theory, linear algebra, calculus, and differential equations. I also mentor undergraduate reading and research projects.</p>
-
 ## Courses taught
 
 <div class="timeline-list">

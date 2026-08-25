@@ -5,8 +5,6 @@ permalink: /organizing/
 author_profile: true
 ---
 
-<p class="page-deck">I contribute to the mathematical community through undergraduate mentoring, seminar organization, pedagogy, and conference service.</p>
-
 <div class="service-list">
   <article class="service-item">
     <p class="item-meta">September 2025–present</p>
@@ -16,7 +14,7 @@ author_profile: true
   <article class="service-item">
     <p class="item-meta">September 2024–September 2025</p>
     <h2>UCLA Learning Assistant Program</h2>
-    <p>Math Learning Assistant Coordinator. I facilitated discussions on mathematical pedagogy, supported course-specific content questions, and helped oversee collaborative learning in weekly discussion sections.</p>
+    <p>Math Learning Assistant Coordinator.</p>
   </article>
   <article class="service-item">
     <p class="item-meta">Winter–Spring 2024</p>

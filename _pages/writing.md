@@ -5,8 +5,6 @@ permalink: /writing/
 author_profile: true
 ---
 
-<p class="page-deck">Expository writing, seminar notes, and study materials. These resources are freely available for students and instructors.</p>
-
 <div class="resource-grid">
   <article class="resource-card">
     <p class="item-meta">Study guide · 2023</p>
