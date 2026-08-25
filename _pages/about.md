@@ -17,4 +17,4 @@ I am currently on the job market.
 **Office Hours:** TBD\
 **Pronouns:** he/him
 
-Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated September 23, 2025)
+Find my [CV here!](http://thomasmartinez0.github.io/files/TMartinezCV.pdf) (last updated August 25, 2026)
