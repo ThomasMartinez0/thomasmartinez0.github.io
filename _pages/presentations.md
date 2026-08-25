@@ -1,41 +1,101 @@
 ---
-layout: archive
-title: "Presentations and Travel"
+layout: single
+title: "Talks & presentations"
 permalink: /presentations/
 author_profile: true
 ---
 
-{% include base_path %}
+<p class="page-deck">Selected invited talks, conference presentations, posters, and seminar talks. Dates are shown by month and year.</p>
 
-Presentations
-======
-<!--* **Affine Deodhar Diagrams and Rational Dyck Paths**
-    * CanaDAM at University of Ottawa - May 2025 [(Slides)](http://thomasmartinez0.github.io/files/CANADAM.pdf)
-    * UCLA Combinatorics Forum - April 2025 [(Slides)](http://thomasmartinez0.github.io/files/UCLA_Forum.pdf)
-    * Graduate Student Combinatorics Conference at USC - March 2025 [(Slides)](http://thomasmartinez0.github.io/files/GSCC.pdf)
-    * Poster Session - LatMath Conference at IPAM - March 2025 [(Poster)](http://thomasmartinez0.github.io/files/LatMathPoster.pdf) (awarded 'Outstanding Poster')
-    * UCLA Combinatorics Seminar - February 2025\
-**Abstract:** Given a bounded affine permutation f, we introduce affine Deodhar diagrams for f, similar to affine pipe dreams introduced by Snider. We explore combinatorial moves between these diagrams, and, as an application, use these moves to establish a bijection between Deodhar diagrams and rational Dyck paths for a special class of bounded affine permutations. This resolves an open problem posed by Galashin and Lam.-->
-
-* **Miscellaneous Presentations at the UCLA Combinatorics Seminar**
-    * Les Transformations Fondamentales de Foata et Rényi - November 2024
-    * Complex weighted tilings and Kasteleyn's Theorem - April 2024
-    * The Slice Rank Polynomial Method - May 2023
-
-<!--Conferences and Travel
-======
-
-* [Category Theory, Combinatorics, and Machine Learning Workshop](https://icerm.brown.edu/program/semester_program_workshop/sp-f25-w1) at ICERM; September 15 - 19, 2025; Providence, Rhode Island
-* [Graduate Summer School](https://sites.google.com/view/ssac2025/home) at KIAS; July 28 - 31, 2025; Seoul, Korea
-* [Formal Power Series and Algebraic Combinatorics](https://www.math.sci.hokudai.ac.jp/sympo/fpsac2025/) at Hokkaido University; July 21 - 25, 2025; Sapporo, Japan
-* [Graduate Summer School](https://www.slmath.org/summer-schools/1121#overview_summer_graduate_school) at SLMath; June 23 - July 3, 2025; Berkeley, CA
-* [CanaDAM](https://canadam.ca/2025) at University of Ottawa; May 20 - 25; Ottawa, Canada
-* [Graduate Student Combinatorics Conference](https://sites.google.com/usc.edu/gscc-2025/home) at USC; March 15 - 17, 2025; Los Angeles, CA
-* [LatMath](https://www.ipam.ucla.edu/programs/special-events-and-conferences/latmath-2025/) at IPAM; March 6 - 8, 2025; Los Angeles, CA
-* [Formal Power Series and Algebraic Combinatorics](https://fpsac2024.rub.de/) at Ruhr-Universität Bochum; July 22 - 26, 2024; Bochum, Germany
-* [Summer School in Algebraic Combinatorics](https://www.mis.mpg.de/events/series/summer-school-in-algebraic-combinatorics) at MPI Leipzig; July 15 - 19, 2024; Leipzig, Germany
-* [21st International Fibonacci Conference](https://21stinternationalfibonacciconference.wordpress.com/) at Harvey Mudd College; July 8 - 12, 2024; Claremont, CA
-* [Integrability and Algebraic Combinatorics Workshop](https://www.ipam.ucla.edu/programs/workshops/workshop-ii-integrability-and-algebraic-combinatorics/) at IPAM; April 15 - 19, 2024; Los Angeles, CA
-* [Southern California Discrete Mathematics Symposium](https://sites.google.com/view/socaldm2024/home) at UCLA; April 14, 2024; Los Angeles, CA
-* [Graduate Student Combinatorics Conference](https://sites.google.com/view/gscc2024) at CMU; March 15 - 17, 2024; Pittsburgh, PA
-* [Southern California Discrete Mathematics Symposium](https://www.jpswanson.org/socaldm23/index.html) at CSULA; November 5, 2023; Los Angeles, CA-->
+<ol class="talk-list">
+  <li class="talk-item">
+    <div class="talk-date">July 2026</div>
+    <div class="talk-content">
+      <p class="item-meta">Lightning talk · CMND 2026: Algebraic Combinatorics and Applications</p>
+      <h3>Affine Patches of Open Positroid Varieties</h3>
+      <p>University of Notre Dame · Notre Dame, Indiana</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">March 2026</div>
+    <div class="talk-content">
+      <p class="item-meta">Combinatorics Seminar</p>
+      <h3>The Combinatorics of Affine Deodhar Diagrams</h3>
+      <p>Binghamton University · Binghamton, New York</p>
+      <div class="publication-links"><a href="/files/AffineDeodharDiagramsSlides.pdf">Slides</a></div>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">February 2026</div>
+    <div class="talk-content">
+      <p class="item-meta">Discrete Geometry and Combinatorics Seminar</p>
+      <h3>The Combinatorics of Affine Deodhar Diagrams</h3>
+      <p>Cornell University · Ithaca, New York</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">May 2025</div>
+    <div class="talk-content">
+      <p class="item-meta">Invited minisymposium talk · CanaDAM 2025</p>
+      <h3>Affine Deodhar Diagrams and Rational Dyck Paths</h3>
+      <p>University of Ottawa · Ottawa, Ontario</p>
+      <div class="publication-links"><a href="/files/CANADAM.pdf">Slides</a></div>
+    </div>
+  </li>
+  <li class="talk-item talk-item--award">
+    <div class="talk-date">March 2025</div>
+    <div class="talk-content">
+      <p class="item-meta"><span class="award-badge">Outstanding Poster Award</span> · LatMath 2025</p>
+      <h3>Affine Deodhar Diagrams and Rational Dyck Paths</h3>
+      <p>Institute for Pure &amp; Applied Mathematics · Los Angeles, California</p>
+      <div class="publication-links"><a href="/files/LatMathPoster.pdf">Poster</a></div>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">June 2024</div>
+    <div class="talk-content">
+      <p class="item-meta">UCLA Combinatorics Learning Seminar</p>
+      <h3>The (Strong and Weak) Bruhat Order</h3>
+      <p>Los Angeles, California</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">April 2024</div>
+    <div class="talk-content">
+      <p class="item-meta">UCLA Combinatorics Research Seminar</p>
+      <h3>Complex Weighted Tilings and Kasteleyn's Theorem</h3>
+      <p>Los Angeles, California</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">April 2024</div>
+    <div class="talk-content">
+      <p class="item-meta">UCLA Combinatorics Learning Seminar</p>
+      <h3>Introduction to Root Systems and Reflection Groups</h3>
+      <p>Los Angeles, California</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">February 2024</div>
+    <div class="talk-content">
+      <p class="item-meta">UCLA Combinatorics Research Seminar</p>
+      <h3>Deograms and Dyck Paths</h3>
+      <p>Los Angeles, California</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">May 2023</div>
+    <div class="talk-content">
+      <p class="item-meta">UCLA Combinatorics Research Seminar</p>
+      <h3>The Slice Rank Polynomial Method</h3>
+      <p>Los Angeles, California</p>
+    </div>
+  </li>
+  <li class="talk-item">
+    <div class="talk-date">July 2020</div>
+    <div class="talk-content">
+      <p class="item-meta">19th International Fibonacci Conference · Virtual</p>
+      <h3>Generalizing Zeckendorf's Theorem to Homogeneous Linear Recurrences</h3>
+    </div>
+  </li>
+</ol>

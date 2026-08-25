@@ -10,7 +10,7 @@ locale                   : "en-US"
 title                    : "Thomas C. Martinez"
 title_separator          : "-"
 name                     : &name "Thomas C. Martinez"
-description              : &description "Math Phd Student at UCLA"
+description              : &description "Mathematics PhD candidate at UCLA working in algebraic and enumerative combinatorics"
 url                      : https://thomasmartinez0.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 #baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "thomasmartinez0/thomasmartinez0.github.io"
@@ -66,14 +66,16 @@ og_image                 :  # Open Graph/Twitter default site image
 # For specifying social profiles
 # - https://developers.google.com/structured-data/customize/social-profiles
 social:
-  type                   : # Person or Organization (defaults to Person)
-  name                   : # If the user or organization name differs from the site's name
-  links: # An array of links to social media profiles
+  type                   : Person
+  name                   : "Thomas C. Martinez"
+  links:
+    - "https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en"
+    - "https://orcid.org/0000-0002-5752-2470"
 
 
 # Analytics
 analytics:
-  provider               :  "google-universal" # false (default), "google", "google-universal", "custom"
+  provider               : false # false (default), "google", "google-universal", "custom"
   google:
     tracking_id          :
 
@@ -82,8 +84,8 @@ analytics:
 author:
   name             : "Thomas C. Martinez"
   avatar           : "profile.png"
-  bio              : "Mathematics PhD Student"
-  location         : "UC Los Angeles"
+  bio              : "PhD candidate in algebraic combinatorics"
+  location         : "UCLA"
   employer         :
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=6Vt6nZYAAAAJ&hl=en"
@@ -96,14 +98,14 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : 
+  github           :
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
   linkedin         :
-  orcid            : #"http://orcid.org/yourorcidurl"
+  orcid            : "https://orcid.org/0000-0002-5752-2470"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username

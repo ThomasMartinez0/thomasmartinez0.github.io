@@ -1,22 +1,29 @@
 ---
-layout: archive
-title: "Writing"
+layout: single
+title: "Notes & resources"
 permalink: /writing/
 author_profile: true
 ---
-  
-UCLA Geometry Qualifying Exam
-======
-* [This](http://thomasmartinez0.github.io/files/GeometryStudyGuide.pdf) is a study guide created by myself and many of my peers in the summer of 2023 in preparation for the UCLA Fall 2023 Geometry Qualifying Exam. It includes solutions from the Fall 2020 to Spring 2023 Exams. 
 
-<!--Math 61 -- Introduction to Discrete Structures
-======
-* [These](http://thomasmartinez0.github.io/files/Math61MiscellaneousNotes.pdf) are some notes I created for my Math 61 Discussion sections, which I plan to expand.-->
+<p class="page-deck">Expository writing, seminar notes, and study materials. These resources are freely available for students and instructors.</p>
 
-UCLA Combinatorics Learning Seminars
-======
-* In Spring 2024, I organized a learning seminar on Coxeter Groups and Root Systems. See [here](http://thomasmartinez0.github.io/files/Coxeter_Groups_Syllabus_Website.pdf) for a syllabus, and [here](http://thomasmartinez0.github.io/files/CoxeterNotes.pdf) for notes, written collectively by those in the course.
-
-The Slice Rank Polynomial Method
-======
-* [The Slice Rank Polynomial Method](https://scholarship.claremont.edu/cgi/viewcontent.cgi?article=1247&context=hmc_theses) is my Harvey Mudd College senior thesis, where I wrote it under the mentorship of Mohamed Omar. It is an expositorial thesis, focusing on the development and application of the Slice Rank Polynomial Method.
+<div class="resource-grid">
+  <article class="resource-card">
+    <p class="item-meta">Study guide · 2023</p>
+    <h2>UCLA Geometry Qualifying Exam</h2>
+    <p>A collaborative study guide with solutions to UCLA geometry qualifying exams from Fall 2020 through Spring 2023.</p>
+    <a class="text-link" href="/files/GeometryStudyGuide.pdf">Read the study guide <span aria-hidden="true">→</span></a>
+  </article>
+  <article class="resource-card">
+    <p class="item-meta">Learning seminar · 2024</p>
+    <h2>Coxeter Groups &amp; Root Systems</h2>
+    <p>Materials from the UCLA Combinatorics Learning Seminar, including a syllabus and collaboratively written notes.</p>
+    <div class="resource-links"><a href="/files/Coxeter_Groups_Syllabus_Website.pdf">Syllabus</a><a href="/files/CoxeterNotes.pdf">Notes</a></div>
+  </article>
+  <article class="resource-card">
+    <p class="item-meta">Senior thesis · 2021</p>
+    <h2>The Slice Rank Polynomial Method</h2>
+    <p>An expository introduction to the development and applications of the slice rank polynomial method, written at Harvey Mudd under Mohamed Omar.</p>
+    <a class="text-link" href="https://scholarship.claremont.edu/hmc_theses/244/">Read the thesis <span aria-hidden="true">→</span></a>
+  </article>
+</div>

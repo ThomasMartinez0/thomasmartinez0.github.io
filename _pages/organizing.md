@@ -1,24 +1,36 @@
 ---
-layout: archive
-title: "Organizing"
+layout: single
+title: "Service & organizing"
 permalink: /organizing/
 author_profile: true
 ---
 
-{% include base_path %}
+<p class="page-deck">I contribute to the mathematical community through undergraduate mentoring, seminar organization, pedagogy, and conference service.</p>
 
-Below is a list of activities I am organizing and a part of!
-
-**Fall 2025**: I am now a co-organizer of UCLA's [Directed Reading Program](https://sites.google.com/g.ucla.edu/uclamathdrp//) (DRP). I have also started a mini research group mentoring 3 UCLA undergradates.
-
-**Fall 2024**: I started my role as the Learning Assistant Coordinator for the Math Department. We also began having weekly Combinatorics lunches this quarter!
-
-**Summer 2024**: I am co-organizing the [21st International Fibonacci Conference](https://21stinternationalfibonacciconference.wordpress.com/), which will be held July 8 - 12 at Harvey Mudd College, in Claremont, CA.
-
-**Spring 2024**: I am co-organizing the UCLA Combinatorics Learning Seminar (the topic is Coxeter Groups and Root Systems, see the Writing tab for a syllabus and some notes). Additionally, along with [Olha Shevchenko](https://sites.google.com/g.ucla.edu/shevchenko), I am co-organizing the UCLA Combinatorics Research Seminar.
-
-**Winter 2024**: I am organizing the UCLA Combinatorics Research Seminar this quarter.
-
-**Summer 2020 and 2022**: I am co-organizing the 19th and 20th International Fibonacci Conference. The first of which, due to the COVID-19 Pandemic, was held virtually, and the second of which, was held July 20 - 25 at the University of Sarajevo, in Sarajevo, Bosnia & Herzegovina.
-
-
+<div class="service-list">
+  <article class="service-item">
+    <p class="item-meta">September 2025–present</p>
+    <h2>UCLA Directed Reading Program Committee</h2>
+    <p>Co-organizer of the department's <a href="https://sites.google.com/g.ucla.edu/uclamathdrp/">Directed Reading Program</a>, which pairs graduate mentors with undergraduate students for quarter-long mathematical reading projects.</p>
+  </article>
+  <article class="service-item">
+    <p class="item-meta">September 2024–September 2025</p>
+    <h2>UCLA Learning Assistant Program</h2>
+    <p>Math Learning Assistant Coordinator. I facilitated discussions on mathematical pedagogy, supported course-specific content questions, and helped oversee collaborative learning in weekly discussion sections.</p>
+  </article>
+  <article class="service-item">
+    <p class="item-meta">Winter–Spring 2024</p>
+    <h2>UCLA Combinatorics Seminars</h2>
+    <p>Co-organized the Combinatorics Research Seminar and a learning seminar on Coxeter groups and root systems. The latter produced a public <a href="/files/Coxeter_Groups_Syllabus_Website.pdf">syllabus</a> and <a href="/files/CoxeterNotes.pdf">collaborative notes</a>.</p>
+  </article>
+  <article class="service-item">
+    <p class="item-meta">July 2024</p>
+    <h2>21st International Fibonacci Conference</h2>
+    <p>Co-organizer for the conference hosted at Harvey Mudd College in Claremont, California.</p>
+  </article>
+  <article class="service-item">
+    <p class="item-meta">July 2020 &amp; July 2022</p>
+    <h2>International Fibonacci Conferences</h2>
+    <p>Co-organizer for the 19th conference, held virtually, and the 20th conference at the University of Sarajevo in Bosnia and Herzegovina.</p>
+  </article>
+</div>
