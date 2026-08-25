@@ -12,10 +12,12 @@ $gold: #b57a20;
 $warm-border: #ded7c8;
 
 html {
+  background: $paper;
   scroll-behavior: smooth;
 }
 
 body {
+  min-height: 100vh;
   color: $ink;
   background: $paper;
   font-size: 17px;
