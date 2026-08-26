@@ -11,7 +11,7 @@ redirect_from:
 <section class="home-intro">
   <p class="eyebrow">Algebraic &amp; enumerative combinatorics</p>
   <p class="home-intro__lead">I am a mathematics PhD candidate at UCLA, advised by <a href="https://www.math.ucla.edu/~galashin/">Pavel Galashin</a>. I study the combinatorics and geometry of positroid varieties, with an emphasis on affine Deodhar diagrams, Richardson links, plabic graphs, and Catalan combinatorics.Before UCLA, I earned a B.S. in mathematics with High Distinction and Honors from Harvey Mudd College in 2021. In my free time, I enjoy <a href="https://letterboxd.com/rottnTM/">movies</a> and taking <a href="https://www.flickr.com/people/thomasmart/">photos</a>, primarily on film.</p>
-  <p class="contact-line">The best way to reach me is at <a href="mailto:tmartinez@math.ucla.edu">tmartinez@math.ucla.edu</a>. My pronouns are he/him.</p></p>
+  <p class="contact-line">The best way to reach me is at <a href="mailto:tmartinez@math.ucla.edu">tmartinez@math.ucla.edu</a>. My pronouns are he/him.</p>
   <div class="button-row">
     <a class="site-button" href="/files/TMartinezCV.pdf">Download CV</a>
     <a class="site-button site-button--secondary" href="/publications/">View research</a>
