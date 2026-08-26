@@ -57,6 +57,6 @@ redirect_from:
 <section class="content-section about-section">
   <p class="eyebrow">Background</p>
   <h2>About me</h2>
-  <p>Before UCLA, I earned a B.S. in mathematics with High Distinction and Honors from Harvey Mudd College in 2021. Alongside research, I enjoy teaching and mentoring undergraduates through UCLA's Directed Reading Program.</p>
+  <p>Before UCLA, I earned a B.S. in mathematics with High Distinction and Honors from Harvey Mudd College in 2021. Alongside research, I enjoy teaching and mentoring undergraduates through UCLA's Directed Reading Program. In my free time, I enjoy <a href="https://letterboxd.com/rottnTM/">movies</a> and taking <a href="https://www.flickr.com/people/thomasmart/">photos</a>, primarily on film.</p>
   <p class="contact-line">The best way to reach me is at <a href="mailto:tmartinez@math.ucla.edu">tmartinez@math.ucla.edu</a>. My pronouns are he/him.</p>
 </section>

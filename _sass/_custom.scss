@@ -106,19 +106,24 @@ button:focus-visible {
 
 .page__title {
   margin-bottom: 1.25rem;
-  font-size: clamp(2.15rem, 4vw, 3.35rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.95rem);
   line-height: 1.05;
 }
 
 .page__content h2 {
   margin-top: 3.3rem;
   padding-bottom: 0.55rem;
-  font-size: clamp(1.55rem, 2.7vw, 2rem);
+  font-size: clamp(1.15rem, 2.15vw, 1.55rem);
   border-bottom-color: $warm-border;
+}
+
+.page__content {
+  font-size: 0.67rem;
 }
 
 .page__content h3 {
   margin-top: 0;
+  font-size: 0.82rem;
 }
 
 .page__content a {
@@ -137,7 +142,7 @@ button:focus-visible {
   margin: -0.25rem 0 2.6rem;
   color: $muted-ink;
   font-family: $serif;
-  font-size: 1.16rem;
+  font-size: 0.68rem;
   line-height: 1.6;
 }
 
@@ -184,7 +189,7 @@ button:focus-visible {
 .page__content .eyebrow {
   margin-bottom: 0.55rem;
   color: $teal;
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   font-weight: 750;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -195,19 +200,12 @@ button:focus-visible {
   padding: 1.4rem 0 2.5rem;
 }
 
-.home-intro h1 {
-  margin: 0 0 1.1rem;
-  font-size: clamp(2.05rem, 4.1vw, 3.35rem);
-  font-weight: 600;
-  line-height: 0.98;
-}
-
 .page__content .home-intro__lead {
   max-width: 47rem;
   margin-bottom: 1.8rem;
   color: #33434b;
   font-family: $serif;
-  font-size: clamp(1rem, 1.75vw, 1.28rem);
+  font-size: clamp(0.66rem, 1.05vw, 0.8rem);
   line-height: 1.55;
 }
 
@@ -226,7 +224,7 @@ button:focus-visible {
   background: $teal;
   border: 1px solid $teal;
   border-radius: 999px;
-  font-size: 0.82rem;
+  font-size: 0.68rem;
   font-weight: 750;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -263,7 +261,7 @@ button:focus-visible {
   border: 1px solid $warm-border;
   border-radius: 0.8rem;
   color: #3c494e;
-  font-size: 0.92rem;
+  font-size: 0.68rem;
 }
 
 .status-dot {
@@ -323,13 +321,13 @@ button:focus-visible {
 .featured-item h3 {
   margin: 0.2rem 0 0.25rem;
   font-family: $serif;
-  font-size: 1.18rem;
+  font-size: 0.82rem;
 }
 
 .featured-item p {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.86rem;
+  font-size: 0.67rem;
 }
 
 .featured-actions {
@@ -342,7 +340,7 @@ button:focus-visible {
 .page__content .item-meta {
   margin: 0 0 0.3rem;
   color: $teal;
-  font-size: 0.71rem;
+  font-size: 0.6rem;
   font-weight: 750;
   letter-spacing: 0.06em;
   line-height: 1.5;
@@ -352,7 +350,7 @@ button:focus-visible {
 .page__content .text-link,
 .page__content .paper-link {
   color: $teal;
-  font-size: 0.79rem;
+  font-size: 0.65rem;
   font-weight: 750;
   text-decoration: none;
 }
@@ -402,21 +400,21 @@ button:focus-visible {
   color: $teal;
   content: counter(publications, decimal-leading-zero);
   font-family: $monospace;
-  font-size: 0.7rem;
+  font-size: 0.58rem;
   font-weight: 700;
 }
 
 .publication-item h3 {
   margin: 0.1rem 0 0.42rem;
   font-family: $serif;
-  font-size: 1.09rem;
+  font-size: 0.78rem;
   line-height: 1.35;
 }
 
 .publication-item .coauthors {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.81rem;
+  font-size: 0.64rem;
   line-height: 1.55;
 }
 
@@ -435,7 +433,7 @@ button:focus-visible {
   color: $teal;
   border: 1px solid $warm-border;
   border-radius: 999px;
-  font-size: 0.72rem;
+  font-size: 0.58rem;
   font-weight: 750;
   text-decoration: none;
 }
@@ -447,7 +445,7 @@ button:focus-visible {
 .footnote-note {
   margin-top: 1.3rem;
   color: $muted-ink;
-  font-size: 0.78rem;
+  font-size: 0.62rem;
 }
 
 .talk-list {
@@ -466,7 +464,7 @@ button:focus-visible {
 .timeline-term {
   color: $muted-ink;
   font-family: $monospace;
-  font-size: 0.73rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -474,13 +472,13 @@ button:focus-visible {
 .talk-content h3 {
   margin: 0.15rem 0 0.25rem;
   font-family: $serif;
-  font-size: 1.12rem;
+  font-size: 0.78rem;
 }
 
 .talk-content p {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.82rem;
+  font-size: 0.64rem;
 }
 
 .talk-item--award {
@@ -518,7 +516,7 @@ button:focus-visible {
 .mentoring-item h3 {
   margin: 0 0 0.25rem;
   font-family: $serif;
-  font-size: 1rem;
+  font-size: 0.72rem;
 }
 
 .timeline-item p,
@@ -526,7 +524,7 @@ button:focus-visible {
 .service-item p {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.84rem;
+  font-size: 0.64rem;
 }
 
 .mentoring-list {
@@ -552,14 +550,14 @@ button:focus-visible {
   margin: 0.15rem 0 0.55rem;
   padding: 0;
   font-family: $serif;
-  font-size: 1.18rem;
+  font-size: 0.78rem;
   line-height: 1.3;
   border: 0;
 }
 
 .resource-card p {
   color: $muted-ink;
-  font-size: 0.84rem;
+  font-size: 0.64rem;
 }
 
 .resource-card:nth-child(3) {
