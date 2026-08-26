@@ -36,7 +36,7 @@ author_profile: true
   <article class="mentoring-item">
     <p class="item-meta">Fall 2025–Spring 2026 · Co-advised with Olha Shevchenko</p>
     <h3>Brendan Connelly, Ezekiel Ito, and Kacey Yang</h3>
-    <p><em>q</em>-Fibonomial coefficients · <a href="https://arxiv.org/abs/2605.12822">Joint preprint</a></p>
+    <p><em>q</em>-Fibonomial coefficients · <a href="https://arxiv.org/abs/2605.12822">Preprint</a></p>
   </article>
   <article class="mentoring-item">
     <p class="item-meta">Spring–Fall 2025</p>
