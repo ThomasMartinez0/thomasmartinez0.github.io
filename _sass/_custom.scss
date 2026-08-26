@@ -106,24 +106,24 @@ button:focus-visible {
 
 .page__title {
   margin-bottom: 1.25rem;
-  font-size: clamp(1.8rem, 3.5vw, 2.95rem);
+  font-size: clamp(1.73rem, 3.4vw, 2.88rem);
   line-height: 1.05;
 }
 
 .page__content h2 {
   margin-top: 3.3rem;
   padding-bottom: 0.55rem;
-  font-size: clamp(1.15rem, 2.15vw, 1.55rem);
+  font-size: clamp(1.08rem, 2.05vw, 1.48rem);
   border-bottom-color: $warm-border;
 }
 
 .page__content {
-  font-size: 0.67rem;
+  font-size: 0.74rem;
 }
 
 .page__content h3 {
   margin-top: 0;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
 }
 
 .page__content a {
@@ -142,7 +142,7 @@ button:focus-visible {
   margin: -0.25rem 0 2.6rem;
   color: $muted-ink;
   font-family: $serif;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   line-height: 1.6;
 }
 
@@ -205,7 +205,7 @@ button:focus-visible {
   margin-bottom: 1.8rem;
   color: #33434b;
   font-family: $serif;
-  font-size: clamp(0.66rem, 1.05vw, 0.8rem);
+  font-size: clamp(0.73rem, 1.15vw, 0.87rem);
   line-height: 1.55;
 }
 
@@ -224,7 +224,7 @@ button:focus-visible {
   background: $teal;
   border: 1px solid $teal;
   border-radius: 999px;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 750;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -261,7 +261,7 @@ button:focus-visible {
   border: 1px solid $warm-border;
   border-radius: 0.8rem;
   color: #3c494e;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
 }
 
 .status-dot {
@@ -321,13 +321,13 @@ button:focus-visible {
 .featured-item h3 {
   margin: 0.2rem 0 0.25rem;
   font-family: $serif;
-  font-size: 0.82rem;
+  font-size: 0.75rem;
 }
 
 .featured-item p {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.67rem;
+  font-size: 0.74rem;
 }
 
 .featured-actions {
@@ -340,7 +340,7 @@ button:focus-visible {
 .page__content .item-meta {
   margin: 0 0 0.3rem;
   color: $teal;
-  font-size: 0.6rem;
+  font-size: 0.67rem;
   font-weight: 750;
   letter-spacing: 0.06em;
   line-height: 1.5;
@@ -350,7 +350,7 @@ button:focus-visible {
 .page__content .text-link,
 .page__content .paper-link {
   color: $teal;
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 750;
   text-decoration: none;
 }
@@ -383,39 +383,56 @@ button:focus-visible {
 
 .publication-list {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.55rem;
 }
 
 .publication-item {
   position: relative;
-  padding: 1.15rem 1.25rem 1.1rem 3.6rem;
+  padding: 0.78rem 0.95rem 0.72rem 2.9rem;
   counter-increment: publications;
 }
 
 .publication-item::before {
   position: absolute;
-  top: 1.2rem;
-  left: 1.1rem;
+  top: 0.84rem;
+  left: 0.85rem;
   width: 1.7rem;
   color: $teal;
   content: counter(publications, decimal-leading-zero);
   font-family: $monospace;
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   font-weight: 700;
 }
 
 .publication-item h3 {
-  margin: 0.1rem 0 0.42rem;
+  margin: 0.05rem 0 0.2rem;
   font-family: $serif;
-  font-size: 0.78rem;
+  font-size: 0.71rem;
   line-height: 1.35;
 }
 
 .publication-item .coauthors {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.64rem;
+  font-size: 0.71rem;
   line-height: 1.55;
+}
+
+.publication-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.8rem;
+}
+
+.publication-footer--links-only {
+  justify-content: flex-start;
+}
+
+.publication-footer .publication-links {
+  flex: 0 0 auto;
+  margin-top: 0;
 }
 
 .publication-links,
@@ -433,7 +450,7 @@ button:focus-visible {
   color: $teal;
   border: 1px solid $warm-border;
   border-radius: 999px;
-  font-size: 0.58rem;
+  font-size: 0.65rem;
   font-weight: 750;
   text-decoration: none;
 }
@@ -445,7 +462,7 @@ button:focus-visible {
 .footnote-note {
   margin-top: 1.3rem;
   color: $muted-ink;
-  font-size: 0.62rem;
+  font-size: 0.69rem;
 }
 
 .talk-list {
@@ -464,7 +481,7 @@ button:focus-visible {
 .timeline-term {
   color: $muted-ink;
   font-family: $monospace;
-  font-size: 0.6rem;
+  font-size: 0.67rem;
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -472,13 +489,13 @@ button:focus-visible {
 .talk-content h3 {
   margin: 0.15rem 0 0.25rem;
   font-family: $serif;
-  font-size: 0.78rem;
+  font-size: 0.71rem;
 }
 
 .talk-content p {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.64rem;
+  font-size: 0.71rem;
 }
 
 .talk-item--award {
@@ -516,7 +533,7 @@ button:focus-visible {
 .mentoring-item h3 {
   margin: 0 0 0.25rem;
   font-family: $serif;
-  font-size: 0.72rem;
+  font-size: 0.65rem;
 }
 
 .timeline-item p,
@@ -524,7 +541,7 @@ button:focus-visible {
 .service-item p {
   margin: 0;
   color: $muted-ink;
-  font-size: 0.64rem;
+  font-size: 0.71rem;
 }
 
 .mentoring-list {
@@ -533,6 +550,37 @@ button:focus-visible {
 
 .mentoring-item {
   padding: 1.05rem 1.15rem;
+}
+
+.course-history {
+  max-width: 48rem;
+}
+
+.course-history h3 {
+  margin: 1.4rem 0 0.4rem;
+  font-family: $serif;
+}
+
+.course-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid $warm-border;
+}
+
+.course-list li {
+  display: grid;
+  grid-template-columns: 7rem minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 0.58rem 0;
+  border-bottom: 1px solid $warm-border;
+}
+
+.course-term {
+  color: $muted-ink;
+  font-family: $monospace;
+  font-size: 0.67rem;
+  font-weight: 700;
 }
 
 .resource-grid {
@@ -550,14 +598,14 @@ button:focus-visible {
   margin: 0.15rem 0 0.55rem;
   padding: 0;
   font-family: $serif;
-  font-size: 0.78rem;
+  font-size: 0.71rem;
   line-height: 1.3;
   border: 0;
 }
 
 .resource-card p {
   color: $muted-ink;
-  font-size: 0.64rem;
+  font-size: 0.71rem;
 }
 
 .resource-card:nth-child(3) {
@@ -609,7 +657,8 @@ button:focus-visible {
 
   .featured-item,
   .talk-item,
-  .timeline-item {
+  .timeline-item,
+  .course-list li {
     grid-template-columns: 1fr;
     gap: 0.45rem;
   }

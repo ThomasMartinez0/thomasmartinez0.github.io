@@ -7,20 +7,30 @@ author_profile: true
 
 ## Courses taught
 
-<div class="timeline-list">
-  <article class="timeline-item">
-    <div class="timeline-term">Spring 2026</div>
-    <div><h3>Cornell University</h3><p>Math 2930 · Differential Equations for Engineers</p></div>
-  </article>
-  <article class="timeline-item">
-    <div class="timeline-term">2022–2025</div>
-    <div><h3>University of California, Los Angeles</h3><p>Enumerative Combinatorics · Graph Theory · Introduction to Discrete Structures · Linear Algebra · Multivariable Differential Calculus · Integration and Infinite Series</p></div>
-  </article>
+<div class="course-history">
+  <h3>Cornell University</h3>
+  <ul class="course-list">
+    <li><span class="course-term">Spring 2026</span><span>Math 2930 · Differential Equations for Engineers</span></li>
+  </ul>
+
+  <h3>University of California, Los Angeles</h3>
+  <ul class="course-list">
+    <li><span class="course-term">Fall 2025</span><span>Math 61 · Introduction to Discrete Structures; Math 31B · Integration and Infinite Series</span></li>
+    <li><span class="course-term">Spring 2025</span><span>Math 184 · Enumerative Combinatorics</span></li>
+    <li><span class="course-term">Winter 2025</span><span>Math 61 · Introduction to Discrete Structures</span></li>
+    <li><span class="course-term">Fall 2024</span><span>Math 180 · Graph Theory</span></li>
+    <li><span class="course-term">Spring 2024</span><span>Math 61 · Introduction to Discrete Structures; Math 32A · Multivariable Differential Calculus</span></li>
+    <li><span class="course-term">Winter 2024</span><span>Math 31B · Integration and Infinite Series; Math 115A · Linear Algebra</span></li>
+    <li><span class="course-term">Fall 2023</span><span>Math 61 · Introduction to Discrete Structures; Math 32A · Multivariable Differential Calculus</span></li>
+    <li><span class="course-term">Spring 2023</span><span>Math 61 · Introduction to Discrete Structures</span></li>
+    <li><span class="course-term">Winter 2023</span><span>Math 61 · Introduction to Discrete Structures</span></li>
+    <li><span class="course-term">Fall 2022</span><span>Math 61 · Introduction to Discrete Structures</span></li>
+  </ul>
 </div>
 
 ## Undergraduate mentoring
 
-<p>Through UCLA's <a href="https://sites.google.com/g.ucla.edu/uclamathdrp/">Directed Reading Program</a>, I have advised students on semester-long projects ranging from introductory combinatorics to research that led to a joint preprint.</p>
+<p>Through UCLA's <a href="https://sites.google.com/g.ucla.edu/uclamathdrp/">Directed Reading Program</a>, I have advised students on semester-long projects ranging from introductory combinatorics to research that led to a preprint.</p>
 
 <div class="mentoring-list">
   <article class="mentoring-item">
