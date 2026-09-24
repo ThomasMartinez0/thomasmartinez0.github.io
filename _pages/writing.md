@@ -10,7 +10,7 @@ author_profile: true
     <p class="item-meta">Study guide · 2023</p>
     <h2>UCLA Geometry Qualifying Exam</h2>
     <p>A collaborative study guide with solutions to UCLA geometry qualifying exams from Fall 2020 through Spring 2023.</p>
-    <a class="text-link" href="/files/GeometryStudyGuide.pdf">Read the study guide <span aria-hidden="true">→</span></a>
+    <a class="text-link" href="/files/GeometryStudyGuide.pdf">the study guide</a>
   </article>
   <article class="resource-card">
     <p class="item-meta">Learning seminar · 2024</p>
@@ -22,6 +22,6 @@ author_profile: true
     <p class="item-meta">Senior thesis · 2021</p>
     <h2>The Slice Rank Polynomial Method</h2>
     <p>An expository introduction to the development and applications of the slice rank polynomial method, written at Harvey Mudd under Mohamed Omar.</p>
-    <a class="text-link" href="https://scholarship.claremont.edu/hmc_theses/244/">Read the thesis <span aria-hidden="true">→</span></a>
+    <a class="text-link" href="https://scholarship.claremont.edu/hmc_theses/244/">the thesis</a>
   </article>
 </div>
