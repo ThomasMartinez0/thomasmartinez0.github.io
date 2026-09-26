@@ -16,6 +16,8 @@ redirect_from:
   <p>I am on the academic job market and expect to complete my PhD in 2027.</p>
 
   <p><strong>Email:</strong> <a href="mailto:tmartinez@math.ucla.edu">tmartinez@math.ucla.edu</a><br>
+  <strong>Office:</strong> MS 6146<br>
+  <strong>Office Hours:</strong> Wednesdays 3–5pm<br>
   <strong>Pronouns:</strong> he/him</p>
 
   <p class="home-cv"><a href="/files/TMartinezCV.pdf"><strong>Curriculum vitae (PDF)</strong></a></p>

@@ -12,6 +12,11 @@ author_profile: true
 <ol class="publication-list">
   <li class="publication-item">
     <p class="item-meta">2026 · Preprint</p>
+    <h3>Toric Richardson Varieties and Slice Links</h3>
+    <div class="publication-footer"><p class="coauthors">with M. J. Tyler</p><div class="publication-links"><a href="https://arxiv.org/abs/2609.28536">arXiv</a></div></div>
+  </li>
+  <li class="publication-item">
+    <p class="item-meta">2026 · Preprint</p>
     <div class="publication-title-row"><h3>The Combinatorics of Affine Deodhar Diagrams</h3><div class="publication-links"><a href="https://arxiv.org/abs/2607.15672">arXiv</a><a href="/files/AffineDeodharDiagramsSlides.pdf">Slides</a></div></div>
   </li>
   <li class="publication-item">
@@ -27,11 +32,6 @@ author_profile: true
   <li class="publication-item">
     <p class="item-meta">In preparation</p>
     <h3>Parking on Positroids</h3>
-  </li>
-  <li class="publication-item">
-    <p class="item-meta">In preparation</p>
-    <h3>Slice Links and Tori</h3>
-    <p class="coauthors">with M. J. Tyler</p>
   </li>
 </ol>
 

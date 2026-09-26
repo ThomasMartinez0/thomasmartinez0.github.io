@@ -15,6 +15,7 @@ author_profile: true
 
   <h3>University of California, Los Angeles</h3>
   <ul class="course-list">
+    <li><span class="course-term">Fall 2026</span><span>Math 33A · Linear Algebra and Applications (TA)</span></li>
     <li><span class="course-term">Fall 2025</span><span>Math 61 · Introduction to Discrete Structures; Math 31B · Integration and Infinite Series</span></li>
     <li><span class="course-term">Spring 2025</span><span>Math 184 · Enumerative Combinatorics</span></li>
     <li><span class="course-term">Winter 2025</span><span>Math 61 · Introduction to Discrete Structures</span></li>
