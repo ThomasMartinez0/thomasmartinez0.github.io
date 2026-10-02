@@ -199,6 +199,11 @@ collections:
 
 # Defaults
 defaults:
+  # Keep letter-writer PDFs out of the generated XML sitemap.
+  - scope:
+      path: "files/letter-writers/*.pdf"
+    values:
+      sitemap: false
   # _posts
   - scope:
       path: ""
