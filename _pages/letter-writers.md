@@ -27,7 +27,7 @@ I have attached my application materials here and will update them throughout th
 ### PPFP
 
 - [Thesis abstract (PDF)](/files/letter-writers/Thesis_Abstract_Thomas_Martinez.pdf)
-- [Research proposal (PDF)](/files/letter-writers/Martinez_Thomas_PPFP_Revised.pdf)
+- [Research proposal (PDF)](/files/letter-writers/Martinez_Thomas_PPFP.pdf)
 - [Education and background statement (PDF)](/files/letter-writers/Martinez_Thomas_PPFP_Education_and_Background_Statement.pdf)
 
 ### General research statements
