@@ -13,7 +13,8 @@ author_profile: true
   <li class="publication-item">
     <p class="item-meta">2026 · Preprint</p>
     <h3>Toric Richardson Varieties and Slice Links</h3>
-    <div class="publication-footer"><p class="coauthors">with M. J. Tyler</p><div class="publication-links"><a href="https://arxiv.org/abs/2609.28536">arXiv</a></div></div>
+    <div class="publication-footer"><p class="coauthors">with <a href=
+    "https://sites.google.com/view/matthewjtyler/">M. J. Tyler</a></p><div class="publication-links"><a href="https://arxiv.org/abs/2609.28536">arXiv</a></div></div>
   </li>
   <li class="publication-item">
     <p class="item-meta">2026 · Preprint</p>
