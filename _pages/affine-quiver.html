@@ -27,7 +27,7 @@ sitemap: false
 .frame-caption{align-items:baseline;gap:5px 11px}.frame-caption strong{font-size:14px;color:var(--deep)}.frame-caption span{font-size:12px;color:var(--muted)}
 .letter-sequence{gap:3px;margin:6px 0 1px;color:var(--ink);font:11px var(--mono)}.letter-sequence .word-label{font:11px var(--sans);margin-right:6px;color:var(--muted)}
 .letter-sequence .token{border:1px solid #d8dfd3;background:var(--paper);padding:1px 5px;border-radius:4px}.letter-sequence .moving{background:#d9ece2;color:#1b574d;border-color:#639f89}.letter-sequence .bar{background:#f5e6d9;color:#884724;border-color:#c7916d}
-.match-tag[data-state=playing]{color:#285e59;background:#e0eee9}.walking #quiverViews,.walking #ffLabel,.walking .film-select,.walking .cut-line,.walking #traceMode{display:none!important}
+.match-tag[data-state=playing]{color:#285e59;background:#e0eee9}.walking .film-select,.walking .cut-line,.walking #traceMode{display:none!important}
 .walking .q-counts{margin-left:auto}.walking .film-section{padding:9px 16px}.walking #quiver{min-height:190px}
 @media(max-width:550px){.player{padding:8px}.player-buttons{gap:4px}.playbtn,.replaybtn{padding:4px 7px}.frame-caption{align-items:start;display:grid;gap:3px}}
 .diagram-player{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--paper);border:1px solid #cbdad0;border-radius:6px;padding:5px 9px;margin-bottom:8px;box-shadow:0 2px 5px #294d3d13}
@@ -63,12 +63,12 @@ sitemap: false
  <p id="moveInfo" class="step-info"></p><div id="mutSites" class="mut-sites" aria-label="Mutable vertices"></div><p id="lastAction" class="step-info" aria-live="polite"></p></section>
  <section id="recPanel" class="timeline panel" aria-labelledby="recTitle">
   <div class="timeline-line"><div class="row"><span class="tiny-icon" aria-hidden="true">⇄</span><h2 id="recTitle">Bao–Ye recursion</h2><span id="stageCount" class="chip"></span></div>
-   <div class="timeline-actions"><button id="firstStep" class="iconbtn" title="Initial seed" aria-label="Go to initial seed">⇤ <small>Start</small></button><button id="prevStep" class="iconbtn" title="Previous frame" aria-label="Previous animation frame">←</button><button id="nextStep" class="nextbtn" aria-label="Next animation frame">Next frame <span aria-hidden="true">→</span></button><button id="lastStep" class="iconbtn" title="Final seed" aria-label="Go to final seed">⇥</button></div></div>
+   <div class="timeline-actions"><button id="firstStep" class="iconbtn" title="Initial seed" aria-label="Go to initial seed">⇤ <small>Start</small></button><button id="prevStep" class="iconbtn" title="Previous move" aria-label="Previous move">←</button><button id="nextStep" class="nextbtn" aria-label="Next move">Next move <span aria-hidden="true">→</span></button><button id="lastStep" class="iconbtn" title="Final seed" aria-label="Go to final seed">⇥</button></div></div>
   <div class="timeline-info"><label class="step-picker"><span id="stepCount"></span><select id="stepList" aria-label="Choose recursion step"></select></label><input type="range" id="stepRange" aria-label="Bao–Ye recursion step" min="0" max="1" value="0"></div>
   <p id="stepInfo" class="step-info"></p>
-  <section class="player" aria-label="Bao–Ye animation">
+  <section class="player" aria-label="Bao–Ye move playback">
     <div class="player-top"><div class="player-buttons"><button type="button" class="playbtn" id="playRec" aria-label="Play recursion">▶ Play</button><button type="button" class="replaybtn" id="replayOp" title="Replay this operation">↺ Replay operation</button><button type="button" id="finishOp" class="replaybtn" title="Jump to the verified result of this operation">Show result</button><label class="speed-label">Speed <select id="playSpeed" aria-label="Animation speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div><span id="frameCount" class="frame-count"></span></div>
-    <div class="frame-timeline"><input type="range" id="frameRange" aria-label="Frame within this operation" min="0" max="0" value="0"></div>
+    <div class="frame-timeline"><input type="range" id="frameRange" aria-label="Move within this operation" min="0" max="0" value="0"></div>
     <div class="frame-caption" aria-live="polite" aria-atomic="true"><strong id="frameTitle"></strong><span id="frameDetail"></span></div>
     <div class="letter-sequence" id="letterSequence" hidden aria-label="Moving letters in the local signed word"></div>
   </section>
@@ -79,7 +79,7 @@ sitemap: false
  </section>
  <div class="diagram-player" id="diagramPlayer" role="group" aria-label="Animation controls for the diagrams" hidden>
   <div class="diagram-caption"><span id="diagramFrameCount" class="frame-count"></span><strong id="diagramFrameTitle"></strong></div>
-  <div class="diagram-buttons"><button type="button" id="diagramPrev" aria-label="Previous frame from the diagram" title="Previous frame">←</button><button type="button" id="diagramPlay" class="playbtn"></button><button type="button" id="diagramNext" aria-label="Next frame from the diagram" title="Next frame">→</button></div>
+  <div class="diagram-buttons"><button type="button" id="diagramPrev" aria-label="Previous move from the diagram" title="Previous move">←</button><button type="button" id="diagramPlay" class="playbtn"></button><button type="button" id="diagramNext" aria-label="Next move from the diagram" title="Next move">→</button></div>
  </div>
  <div class="workspace">
  <section class="panel wire-card" aria-labelledby="wireTitle">
@@ -112,7 +112,8 @@ sitemap: false
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
 <h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
 <p>Top and Bottom show the two projections. Lifts shows integer heights before reducing modulo <i>n</i>. Several heights can cover the same face, so a film can contribute more than once. The 3D view shows the periodic strand diagram schematically, with film coverage on the two coordinate walls.</p>
-<h3>Step through Bao–Ye</h3><p>Next frame advances one action within an operation. Play runs the walkthrough, Pause holds the current frame, and Replay operation plays just the selected operation. Use the lower slider to inspect its frames and the upper menu to jump to a different operation. During a mutation, follow each two-arrow path, add its contribution, reverse the arrows incident to the pivot, then cancel opposite arrows. The local diagram animates individual commutations and the signed square move. Frozen–frozen half-arrows appear in the arithmetic frames so you can follow their exact weights.</p><p>At the result of a mutation, choose Full graph cycles to see the changed basis in the preceding graph. Show result takes you directly there. The cycle being mutated reverses sign. A neighboring cycle can acquire an integer multiple of it. Each colored component represents a constituent film with its signed coefficient. The resulting relative homology class can have several terms.</p>
+<h3>Step through Bao–Ye</h3><p><b>Next move</b> advances one commutation, square move, freeze or deletion. A commutation moves the barred letter past its neighbor and preserves the seed up to relabeling. A square move swaps the matching generators and mutates the quiver in the same step. Freezing updates the neighboring vertices together. Deletion removes the marked vertex and shows the graph for the new partial target.</p>
+<p>Choose <b>Play</b> to follow the moves in order or <b>Replay operation</b> to watch just the selected Bao–Ye operation. The lower slider selects one of its moves. After a square move, <b>Before swap</b> and <b>After swap</b> let you compare the diagrams and quivers. <b>Full graph cycles</b> shows how the pivot boundary reverses and how its neighbors change in that same mutation.</p>
 <p>Local signed word shows the moving barred generator on the auxiliary word for the current stage. The displayed square move acts on this local chart. Positive word becomes available when a verified sequence of adjacent positive moves from the stage’s starting word realizes the current mutation. The full-graph view checks the entire ice quiver against the paper. After deletion the explorer independently rebuilds the plabic graph at the new partial target.</p>
 <p>In Leftmost mode, native label (<i>i,k</i>) corresponds at each completed stage to the <i>k</i>th omitted <i>i</i> from the left. In Rightmost mode, count from the right instead. The marker highlights the chosen word position in either convention.</p>
 <p><b>Match</b> checks the same word positions, frozen vertices and weighted arrows incident to a mutable vertex. On the paper view, Frozen edges also shows the frozen–frozen entries, including halves, retained during mutation. Agreement is checked for the displayed input and stage.</p>
@@ -1597,177 +1598,6 @@ sitemap: false
   globalThis.QuiverCycles=Object.freeze({compute,localGraphs});
 })();
 </script>
-<script>/*
- * Arithmetic frames for one Bao–Ye operation. All edge arrays use the
- * graph engine's raw orientation and exact weights in ordinary units.
- * leftmost changes the arrows in the explanatory text only. The renderer
- * reverses the raw edge endpoints once for that reading convention.
- *
- * A frame between the two seeds is an illustration of the quiver rule.
- * In particular, opposite arrows coexist until the cancellation frames.
- */
-(() => {
-  'use strict';
-
-  const label = id => '(' + id + ')';
-  function halfUnits(value) {
-    const match = /^(\d+)(\/2)?$/.exec(String(value));
-    if (!match) throw new Error('Expected an integer or half-integer arrow weight.');
-    const result = BigInt(match[1]) * (match[2] ? 1n : 2n);
-    if (result <= 0n) throw new Error('Arrow weights must be positive.');
-    return result;
-  }
-  const weight = doubled => doubled % 2n === 0n ? String(doubled / 2n) : String(doubled) + '/2';
-  const sameSet = (a,b) => a.length === b.length && a.every(x => b.includes(x));
-
-  // Store both directions separately. Netting these at insertion time would
-  // hide the actual two-cycle that the last part of mutation cancels.
-  class Arrows {
-    constructor(edges) {
-      this.rows = new Map();
-      for (const [a,b,w] of edges) this.add(a,b,halfUnits(w));
-    }
-    read(a,b) { return this.rows.get(a)?.get(b) ?? 0n; }
-    add(a,b,delta) {
-      if (a === b) throw new Error('A loop cannot occur in this mutation.');
-      const value = this.read(a,b) + delta;
-      if (value < 0n) throw new Error('Attempted to remove more arrows than present.');
-      if (!this.rows.has(a)) this.rows.set(a,new Map());
-      if (value) this.rows.get(a).set(b,value);
-      else this.rows.get(a).delete(b);
-    }
-    edges(ids) {
-      const result = [];
-      for (const a of ids) for (const b of ids) {
-        const value = this.read(a,b);
-        if (value) result.push([a,b,weight(value)]);
-      }
-      return result;
-    }
-  }
-
-  function plan(before,after,{leftmost=false}={}) {
-    if (!before || !after || !['mutate','freeze','delete'].includes(after.type)) {
-      throw new Error('Playback requires adjacent snapshots ending in a Bao–Ye operation.');
-    }
-    let active = before.active.slice();
-    const frozen = new Set(before.frozen), pivot = after.focus, operation = after.type;
-    if (!active.includes(pivot)) throw new Error('The operation vertex is missing from the starting seed.');
-    const arrows = new Arrows(before.edges), frames = [];
-    const arrowName = (a,b) => leftmost ? label(b)+' → '+label(a) : label(a)+' → '+label(b);
-    const pathName = (a,b,c) => (leftmost ? [c,b,a] : [a,b,c]).map(label).join(' → ');
-    function emit(phase,title,detail,other={}) {
-      frames.push({
-        phase, title, detail, operation, focus:pivot, active:active.slice(),
-        frozen:active.filter(id=>frozen.has(id)), edges:arrows.edges(active),
-        highlightNodes:[pivot], highlightEdges:[], paths:[], addedEdges:[], removedEdges:[],
-        ready:phase==='result', completeSeed:phase==='select'||phase==='result', ...other
-      });
-    }
-    function mutation() {
-      if (frozen.has(pivot)) throw new Error('Mutation requires a mutable vertex.');
-      const incoming = before.edges.filter(e=>e[1]===pivot);
-      const outgoing = before.edges.filter(e=>e[0]===pivot);
-      const incident = before.edges.filter(e=>e[0]===pivot||e[1]===pivot);
-      emit('select','Select the pivot','Mutate at the mutable vertex '+label(pivot)+'.',
-        {highlightEdges:incident.map(([a,b])=>[a,b])});
-      const paths = [];
-      for (const [a,,w] of incoming) for (const [,c,z] of outgoing) {
-        // Incidence at a mutable vertex is integral, so the product is exact
-        // in half-units. Frozen–frozen arrows can themselves be fractional.
-        const fourUnits = halfUnits(w) * halfUnits(z);
-        if (fourUnits % 2n) throw new Error('The path product is not half-integral.');
-        paths.push({source:a,via:pivot,target:c,weight:weight(fourUnits/2n),
-          incomingWeight:String(w),outgoingWeight:String(z)});
-      }
-      if (!paths.length) {
-        emit('paths','Inspect two-step paths','There is no directed two-step path through '+label(pivot)+'.');
-        emit('add','Add path contributions','This pivot creates no new arrows.');
-      }
-      for (const path of paths) {
-        const {source:a,target:c,incomingWeight:w,outgoingWeight:z,weight:delta} = path;
-        const terms = leftmost ? [z,w] : [w,z];
-        emit('paths','Follow a two-step path',
-          pathName(a,pivot,c)+' contributes '+terms.join(' × ')+' = '+delta+'.',
-          {highlightNodes:[a,pivot,c],highlightEdges:[[a,pivot],[pivot,c]],paths:[path]});
-        arrows.add(a,c,halfUnits(delta));
-        const bothFrozen = frozen.has(a)&&frozen.has(c);
-        emit('add','Add the path contribution','Add weight '+delta+' on '+arrowName(a,c)+'.'+
-          (bothFrozen?' Both endpoints are frozen.':''),
-          {highlightNodes:[a,pivot,c],highlightEdges:[[a,c]],paths:[path],addedEdges:[[a,c,delta]]});
-      }
-      if (!incident.length) emit('reverse','Reverse incident arrows','The pivot is isolated.');
-      for (const [a,b,w] of incident) {
-        const x = halfUnits(w);
-        arrows.add(a,b,-x); arrows.add(b,a,x);
-        emit('reverse','Reverse an incident arrow',arrowName(a,b)+' reverses to '+arrowName(b,a)+' (weight '+w+').',
-          {highlightNodes:[a,b],highlightEdges:[[b,a]],addedEdges:[[b,a,w]],removedEdges:[[a,b,w]]});
-      }
-      let cancelled = false;
-      for (let i=0;i<active.length;i++) for (let j=i+1;j<active.length;j++) {
-        const a=active[i], b=active[j], x=arrows.read(a,b), y=arrows.read(b,a);
-        if (!x || !y) continue;
-        cancelled=true;
-        const amount=x<y?x:y;
-        arrows.add(a,b,-amount); arrows.add(b,a,-amount);
-        emit('cancel','Cancel opposite arrows','Cancel weight '+weight(amount)+' in both directions between '+
-          label(a)+' and '+label(b)+'.',
-          {highlightNodes:[a,b],highlightEdges:[[a,b],[b,a]],
-           removedEdges:[[a,b,weight(amount)],[b,a,weight(amount)]]});
-      }
-      if (!cancelled) emit('cancel','Check opposite arrows','There are no opposite arrows to cancel.');
-    }
-    function freeze() {
-      if (!frozen.has(pivot)) throw new Error('The deletion target should already be frozen.');
-      const neighbors=active.filter(id=>arrows.read(id,pivot)||arrows.read(pivot,id));
-      const newly=neighbors.filter(id=>!frozen.has(id));
-      if (!sameSet(newly,after.newlyFrozen)) throw new Error('Playback found a different set of neighbors to freeze.');
-      emit('select','Find the neighbors','Inspect the neighbors of the deletion vertex '+label(pivot)+'.',
-        {highlightNodes:[pivot,...neighbors],
-         highlightEdges:before.edges.filter(([a,b])=>a===pivot||b===pivot).map(([a,b])=>[a,b])});
-      if (!newly.length) emit('freeze','Check the neighbors','Every neighbor is already frozen.');
-      for (const id of newly) {
-        frozen.add(id);
-        const edge = arrows.read(id,pivot) ? [id,pivot] : [pivot,id];
-        emit('freeze','Freeze '+label(id),label(id)+' becomes frozen because it is adjacent to '+label(pivot)+'.',
-          {highlightNodes:[pivot,id],highlightEdges:[edge]});
-      }
-    }
-    function remove() {
-      if (!frozen.has(pivot)) throw new Error('Only a frozen deletion vertex can be removed.');
-      const incident=before.edges.filter(([a,b])=>a===pivot||b===pivot);
-      emit('select','Select the deletion vertex','Remove the frozen vertex '+label(pivot)+' from the seed.',
-        {highlightEdges:incident.map(([a,b])=>[a,b])});
-      if (!incident.length) emit('detach','Check incident arrows','The deletion vertex is already isolated.');
-      for (const [a,b,w] of incident) {
-        arrows.add(a,b,-halfUnits(w));
-        emit('detach','Remove an incident arrow','Remove '+arrowName(a,b)+' of weight '+w+'.',
-          {highlightNodes:[a,b],removedEdges:[[a,b,w]]});
-      }
-      active=active.filter(x=>x!==pivot); frozen.delete(pivot);
-    }
-    if (operation==='mutate') mutation();
-    else if (operation==='freeze') freeze();
-    else remove();
-
-    const finalEdges = arrows.edges(active);
-    const expected = new Arrows(after.edges).edges(active);
-    if (!sameSet(active,after.active) || !sameSet([...frozen],after.frozen) ||
-        JSON.stringify(finalEdges)!==JSON.stringify(expected)) {
-      throw new Error('The playback calculation disagrees with the Bao–Ye seed after '+operation+'.');
-    }
-    const finalText = {
-      mutate:'The mutation at '+label(pivot)+' is complete.',
-      freeze:'Every neighbor of '+label(pivot)+' is frozen. All seed weights are retained.',
-      delete:label(pivot)+' and its incident arrows have been removed.'
-    };
-    emit('result',operation==='mutate'?'Mutated seed':operation==='freeze'?'Frozen seed':'Reduced seed',
-      finalText[operation],{highlightNodes:active.includes(pivot)?[pivot]:[]});
-    return frames;
-  }
-  globalThis.QuiverPlayback = Object.freeze({plan});
-})();
-</script>
 <script>/* Elementary moves in the signed local chart for one Bao–Ye operation.
    Positions always use the existing rightmost graph engine, even when the
    interface reflects the timeline into its leftmost reading convention.
@@ -1940,61 +1770,58 @@ sitemap: false
   globalThis.QuiverChartPlayback=Object.freeze({plan,inspect});
 })();
 </script>
-<script>/* A single cursor traverses the original operations and their explanatory
-   frames. The two mathematical engines provide the exact endpoints. */
+<script>/* Move-by-move transport for signed chart interchanges, freezes and deletions. */
 (() => {
   'use strict';
   const id=name=>document.getElementById(name);
   const native=x=>'('+x+')';
   const reversed=a=>[...a].reverse();
 
-  function storyboard(model,i,leftmost) {
-    const paper=model.paper,s=paper.snapshots[i],prior=paper.snapshots[i-1];
+  // A stop is an adjacent signed interchange or a prescribed operation on the
+  // seed. Use the paper snapshots as endpoints so the quiver changes atomically.
+  function storyboard(model,index,leftmost) {
+    const paper=model.paper, prior=paper.snapshots[index-1], next=paper.snapshots[index];
     if(!prior)return [];
     model.frames??=QuiverCycles.compute(paper,model.stages);
-    const alg=QuiverPlayback.plan(prior,s,{leftmost}),begin=alg[0],end=alg.at(-1);
-    let events=[],issue='';
-    try{events=QuiverChartPlayback.plan(paper,model.frames,model.stages,i);}
-    catch(err){issue=err.message||String(err);}
-    const main=events.find(e=>e.kind!=='commute'),slides=events.filter(e=>e.kind==='commute');
-    const rawWord=w=>leftmost?reversed(w):w;
-    const frames=[];
-    function add(state,title=state.title,detail=state.detail,extra={}) {
-      frames.push({state,title,detail,issue,event:main||events[0],side:'before',motion:false,
-        terms:null,complete:false,...extra});
+    let events, issue='';
+    try {
+      events=QuiverChartPlayback.plan(paper,model.frames,model.stages,index);
+    } catch(err) {
+      // The paper operation can still be inspected when its chart is unavailable.
+      issue=err.message||String(err);
+      events=[null];
     }
-    if(s.stage!==prior.stage && events[0]) {
-      const t=events[0],slot=leftmost?1:t.sourcePrefixLength;
-      add(begin,'Locate the selected generator','The new local chart starts from the positive word on this section of β. The selected letter is at chart slot '+slot+'.',{event:t,ordinaryChart:true});
-      add(begin,'Introduce the barred generator','Reflect generator '+s.letter+' to the opposite projection to open the auxiliary chart for stage '+s.stage+'.',{event:t});
-    }
-    for(const e of slides) {
-      const positions=e.positions.map(p=>leftmost?e.beforeWord.length+1-p:p).sort((a,b)=>a-b);
-      const from=rawWord(e.beforeWord.slice(e.positions[0]-1,e.positions[1])).join(' ');
-      const to=rawWord(e.afterWord.slice(e.positions[0]-1,e.positions[1])).join(' ');
-      add(begin,'Slide the barred letter','Local slots '+positions.join('–')+' change from '+from+' to '+to+'. This commutation preserves the quiver after relabeling.',{event:e,motion:true});
-    }
-    add(begin);
-    for(const f of alg.slice(1,-1))add(f);
-    if(main?.kind==='square') {
-      add(end,'Perform the signed square move','The two highlighted generators trade places. The two diagrams realize the mutation on this chart at '+native(s.focus)+'.',{event:main,motion:true});
-    }
-    if(s.type==='mutate') {
-      const frame=model.frames[i],old=model.frames[i-1],k=s.focus;
-      add(end,'Reverse the pivot cycle','The disk boundary for '+native(k)+' changes orientation.',{terms:frame.basis[k],basisId:k,side:'after'});
-      for(const {id:j,weight} of frame.affected) {
-        add(end,'Update cycle '+native(j),'Add '+weight+' × the old pivot cycle '+native(k)+' to '+native(j)+'.',{
-          terms:frame.basis[j],oldTerms:old.basis[j],basisId:j,side:'after'});
+    const display=w=>(leftmost?reversed(w):w).join(' ').replace(/-/g,'−');
+    return events.map(event=>{
+      const moveKind=event?.kind??(next.type==='mutate'?'square':next.type);
+      const complete=moveKind!=='commute';
+      const pivot=native(next.focus);
+      let title,detail;
+      if(moveKind==='commute'||moveKind==='square') {
+        title=complete?'Square move at '+pivot:'Commute the barred letter';
+        let local='';
+        if(event) {
+          const [a,b]=event.positions;
+          const slots=leftmost?[event.beforeWord.length+1-b,event.beforeWord.length+1-a]:[a,b];
+          local='Chart slots '+slots.join('–')+' • '+display(event.beforeWord.slice(a-1,b))+
+            ' → '+display(event.afterWord.slice(a-1,b))+'. ';
+        }
+        detail=local+(complete?'Mutate the quiver at '+pivot+'.':'The two letters trade places and the quiver agrees after relabeling.');
+      }else if(moveKind==='freeze'){
+        title='Freeze neighbors of '+pivot;
+        detail=next.newlyFrozen.length?'Newly frozen: '+next.newlyFrozen.map(native).join(', ')+'.':'All neighbors are already frozen.';
+      }else{
+        title='Delete '+pivot;
+        detail='Remove the frozen vertex and its incident arrows. The remaining graph gives the next partial target.';
       }
-    }else if(s.type==='delete'){
-      add(end,'Delete vertex '+native(s.focus),'The vertex leaves the seed. The remaining cycles are identified with the next partial target.',{side:'after',ghost:s.focus});
-    }
-    add(end,end.title,end.detail,{side:'after',complete:true});
-    return frames;
+      if(!event)detail+=' Local chart unavailable: '+issue;
+      return {event,moveKind,title,detail,issue,beforeState:prior,state:complete?next:prior,
+        side:'after',motion:!!event&&(moveKind==='commute'||moveKind==='square'),complete};
+    });
   }
 
-  function create({model,operation,navigate,leftmost,enabled,redraw,paint,fail}) {
-    let at=0,elapsed=0,playing=false,moving=false,stopAt=null,request=0,stamp=null,lastPaint=0,speed=1;
+  function create({model,operation,navigate,leftmost,enabled,redraw,paint,fail,viewBefore=()=>false}) {
+    let at=0,elapsed=0,playing=false,moving=false,paused=false,stopAt=null,request=0,stamp=null,lastPaint=0,speed=1;
     let cachedModel=null,cachedIndex=null,cachedFrames=[];
     const reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
     function frames() {
@@ -2009,18 +1836,22 @@ sitemap: false
     function last(){return operation()===model().paper.snapshots.length-1&&(!operation()||at===frames().length-1);}
     function duration(){const e=current();return e?.motion?2300:e?.complete?1550:1900;}
     function progress(){
-      if(reduce.matches)return 1;
-      return Math.min(1,elapsed/(current()?.motion?1100:750));
+      if(reduce.matches||!current()?.motion)return 1;
+      return Math.min(1,elapsed/1100);
     }
     function stop(){
-      playing=false;moving=false;stopAt=null;stamp=null;
+      playing=false;moving=false;paused=false;stopAt=null;stamp=null;
       if(request)cancelAnimationFrame(request);
       request=0;
+    }
+    function pause(){
+      if(!playing&&!moving)return;
+      const limit=stopAt;stop();stopAt=limit;paused=true;
     }
     function reset(){stop();at=0;elapsed=0;cachedModel=null;cachedIndex=null;cachedFrames=[];}
     function jump(i,end=false) {
       stop();navigate(i);const all=frames();at=end?Math.max(0,all.length-1):0;
-      elapsed=0;redraw();
+      elapsed=duration();redraw();
     }
     function step(sign){
       const i=operation(),all=frames(),max=model().paper.snapshots.length-1;
@@ -2040,7 +1871,7 @@ sitemap: false
       request=0;
       if(!playing&&!moving)return;
       try{
-        if(!enabled()||document.hidden){stop();redraw();return;}
+        if(!enabled()||document.hidden){pause();redraw();return;}
         if(stamp!==null)elapsed+=Math.min(160,now-stamp)*speed;
         stamp=now;
         if(playing&&elapsed>=duration()){
@@ -2054,41 +1885,43 @@ sitemap: false
     function manual(sign) {
       stop();if(!step(sign)){controls();return;}
       if(sign<0)elapsed=duration();
-      else if(current()&&!current().complete&&!reduce.matches){moving=true;queue();}
+      else if(current()?.motion&&!reduce.matches){moving=true;queue();}
       redraw();
     }
     function play(replay=false){
       if(!model()?.paper||!enabled()||model().paper.snapshots.length<2)return;
-      if((playing||moving)&&!replay){stop();controls();return;}
-      stop();
+      if((playing||moving)&&!replay){pause();controls();return;}
+      const resume=paused&&!replay;
+      if(!resume)stop();
+      paused=false;
       if(replay){if(!operation())navigate(1);at=0;elapsed=0;stopAt=operation();}
-      else if(last()||!operation()){navigate(last()?1:operation()+1);at=0;elapsed=0;}
+      else if(!resume&&(last()||!operation())){navigate(1);at=0;elapsed=0;}
       playing=true;redraw();queue();
     }
     function scrub(v){stop();at=Math.max(0,Math.min(frames().length-1,Number(v)))||0;elapsed=duration();redraw();}
     function controls() {
       if(!enabled()||!model()?.paper)return;
       const all=frames(),e=all[at],totalOps=model().paper.snapshots.length-1;
-      id('frameCount').textContent=!operation()?'Initial seed':'Frame '+(at+1)+' / '+all.length;
+      id('frameCount').textContent=!operation()?'Initial seed':'Move '+(at+1)+' / '+all.length;
       id('frameRange').max=Math.max(0,all.length-1);id('frameRange').value=at;id('frameRange').disabled=all.length<2;
       id('prevStep').disabled=!operation();id('nextStep').disabled=last();
       id('firstStep').disabled=!operation();id('lastStep').disabled=last();
       const busy=playing||moving;
-      id('playRec').disabled=totalOps===0;id('playRec').textContent=busy?'Ⅱ Pause':last()&&totalOps?'▶ Play again':'▶ Play';
-      id('playRec').setAttribute('aria-label',busy?'Pause animation':last()&&totalOps?'Play again from the start':'Play recursion');
+      id('playRec').disabled=totalOps===0;id('playRec').textContent=busy?'Ⅱ Pause':last()&&!paused&&totalOps?'▶ Play again':'▶ Play';
+      id('playRec').setAttribute('aria-label',busy?'Pause animation':last()&&!paused&&totalOps?'Play again from the start':'Play recursion');
       id('replayOp').disabled=totalOps===0||!operation();
       id('finishOp').disabled=!operation()||!!e?.complete;
       id('frameTitle').textContent=e?e.title:'Initial seed';
-      id('frameDetail').textContent=e?e.detail:totalOps?'Use Next frame for one action, or Play to follow the recursion.':'The initial seed is already the final seed for this input.';
-      const strip=id('letterSequence');strip.replaceChildren();strip.hidden=!e?.event||e.complete||!!e.terms;
+      id('frameDetail').textContent=e?e.detail:totalOps?'Choose Next move to follow the signed word and quiver together.':'The initial seed is already the final seed for this input.';
+      const strip=id('letterSequence');strip.replaceChildren();strip.hidden=!e?.event;
       if(!strip.hidden) {
-        const t=e.event,isMotion=e.motion,after=e.side==='after'||(isMotion&&progress()===1);
-        const raw=e.ordinaryChart?t.beforeWord.map(Math.abs):(after?t.afterWord:t.beforeWord),letters=leftmost()?reversed(raw):raw;
+        const t=e.event,after=progress()===1&&!(e.complete&&viewBefore());
+        const raw=after?t.afterWord:t.beforeWord,letters=leftmost()?reversed(raw):raw;
         const label=document.createElement('span');label.className='word-label';
-        label.textContent=e.ordinaryChart?'Positive chart':isMotion?'Signed word · '+(after?'after':'before'):'Local word';strip.append(label);
+        label.textContent='Chart word · '+(after?'after':'before');strip.append(label);
         letters.forEach((letter,j)=>{
           const p=leftmost()?letters.length-j:j+1,token=document.createElement('span');
-          const highlighted=e.ordinaryChart?p===t.sourcePrefixLength:t.positions.includes(p);
+          const highlighted=t.kind!=='delete'&&t.positions.includes(p);
           token.className='token'+(highlighted?' moving':'')+(letter<0?' bar':'');
           token.textContent=String(letter).replace('-','−');strip.append(token);
         });
@@ -2099,7 +1932,7 @@ sitemap: false
       id('playSpeed').onchange=e=>{speed=Number(e.target.value);};
       id('frameRange').oninput=e=>scrub(e.target.value);
       id('prevStep').onclick=()=>manual(-1);id('nextStep').onclick=()=>manual(1);
-      document.addEventListener('visibilitychange',()=>{if(document.hidden){stop();if(enabled())controls();}});
+      document.addEventListener('visibilitychange',()=>{if(document.hidden){pause();if(enabled())controls();}});
       window.addEventListener('pagehide',stop);
     }
     return {current,progress,controls,bind,reset,stop,jump,manual,play,scrub};
@@ -2467,113 +2300,90 @@ sitemap: false
     $('qNote').textContent=preview?'One-step algebraic mutation of the current graph. Apply a verified relation to update β.':check?(check.matches?(micro?'The full graph cycle intersections agree with this Bao–Ye seed.':'The two quivers agree on vertices, frozen labels, and weighted arrows.'):'Differences in '+check.diff.join(', ')+'.'):'The figure shows the signed plabic quiver.';
   }
 
-  // Intermediate arrow lists can contain a two-cycle. Keep both directions
-  // visible until the explicit cancellation frame.
-  function stepQuiver(e,amount) {
-    const f=e.state,previous=model.paper.snapshots[index-1];
-    const markKind={select:'path',paths:'path',add:'add',reverse:'reverse',cancel:'cancel',freeze:'path',detach:'cancel'}[f.phase]||'path';
-    const directed=(a,b)=>leftmost?[b,a]:[a,b];
-    const marks=f.highlightEdges.map(([a,b])=>{
-      const [from,to]=directed(a,b);return {from,to,kind:markKind};
-    });
-    for(const [a,b,w] of f.removedEdges){
-      const [from,to]=directed(a,b);marks.push({from,to,kind:f.phase==='reverse'?'reverse':'cancel',weight:w});
-    }
-    const focus=e.terms?e.basisId:f.focus;
-    const nodes=f.active.map(i=>({id:i,label:native(i),frozen:f.frozen.includes(i),
-      highlight:e.terms?i===focus:f.highlightNodes.includes(i)}));
-    const ghosts=e.ghost?[{id:e.ghost,label:native(e.ghost),frozen:true}]:[];
-    QuiverDraw.quiver($('quiver'),{nodes,edges:orient(f.edges),layoutOrder:previous.active,
-      ghostNodes:ghosts,edgeMarks:marks,progress:amount,ariaLabel:'Illustrated quiver frame · '+e.title});
+  function moveSeed(e,after,paperMode) {
+    const offset=after&&e.complete?index:index-1;
+    const seed=paperMode?(after?e.state:e.beforeState):model.frames[offset];
+    const frozen=new Set(seed.frozen);
+    const marked=e.moveKind==='commute'&&e.event
+      ?e.event.positions.map(p=>e.event.beforeLabels[p-1])
+      :[e.event?.focus??model.paper.snapshots[index].focus];
+    const nodes=seed.active.map(id=>({id,label:native(id),frozen:frozen.has(id),highlight:marked.includes(id)}));
+    const edges=paperMode&&!$('showFF').checked?seed.edges.filter(([a,b])=>!(frozen.has(a)&&frozen.has(b))):seed.edges;
+    return {nodes,edges:orient(edges),layoutOrder:e.beforeState.active,ariaLabel:'Exchange quiver · '+e.title};
   }
-  function stepWiring(e,amount){
-    const t=e.event,base=model.stages.get(model.paper.snapshots[index].stage-1);
-    if(walkLast!==e){walkLast=e;walkStaticDrawn=false;walkEndPainted=false;}
-    if(e.terms){
-      if(walkStaticDrawn)return;
-      const first=e.terms[0]?.[0]??base.graph.solid[0]??null;
-      QuiverDraw.wiring($('wiring'),base.graph,{leftmost,projection,showFilm:$('showFilm').checked,showLabels:$('labels').checked,
-        lifted:$('lift').checked,birth:first,cut:Math.max(0,(first||1)-1),
-        cycleTerms:e.terms.map(([birth,coefficient])=>({birth,coefficient})),activeBirth:first});
-      walkStaticDrawn=true;
-      $('wireTarget').textContent='Stage '+base.snapshot.stage+' · full relative-cycle basis';
-      $('filmInfo').textContent=(e.oldTerms?cycleText(e.oldTerms)+'  →  ':'')+cycleText(e.terms)+'. Coefficients refer to the oriented disk boundaries.';
-      return;
-    }
-    if(e.ordinaryChart&&t) {
-      if(walkStaticDrawn)return;
-      e.positiveBase??=QuiverFilm.compute(t.n,t.beforeWord.map(Math.abs),[]);
-      const p=t.sourcePrefixLength;
-      QuiverDraw.wiring($('wiring'),e.positiveBase,{leftmost,projection,birth:p,cut:p-1,activeBirth:p,
-        showFilm:$('showFilm').checked,showLabels:$('labels').checked,lifted:$('lift').checked});
-      $('wireTarget').textContent='Positive word of the new local chart · target e';
-      $('filmInfo').textContent='Global β position '+pos(p)+' is generator '+model.beta[p-1]+'. Next, follow this letter in the reflected chart.';
-      walkStaticDrawn=true;return;
-    }
-    const q=t?QuiverChartPlayback.inspect(t,model.paper):null;
-    if(!q?.before||!q.after){
-      if(walkStaticDrawn)return;
-      const p=base.snapshot.mapping[e.state.focus]??base.graph.solid[0]??null;
-      QuiverDraw.wiring($('wiring'),base.graph,{leftmost,projection,birth:p,cut:Math.max(0,(p||1)-1),
-        lifted:$('lift').checked,showFilm:$('showFilm').checked,activeBirth:p,showLabels:$('labels').checked});
-      $('wireTarget').textContent='Full graph · stage '+base.snapshot.stage;
-      $('filmInfo').textContent='Local chart unavailable. '+(q?.differences?.join(', ')||e.issue||'The full seed arithmetic is shown on the right.');
-      walkStaticDrawn=true;return;
-    }
-    const before=e.side!=='after',g=before?q.before:q.after;
-    const atAfter=!before||(e.motion&&amount===1);
-    const chartWord=atAfter?t.afterWord:t.beforeWord;
-    const barSlot=chartWord.findIndex(letter=>letter<0)+1;
-    const p=t.kind==='square'?t.positions[1]:(barSlot||t.positions[0]);
-    const options={leftmost,projection,lifted:$('lift').checked,showFilm:$('showFilm').checked,
-      showLabels:$('labels').checked,cut:Math.max(0,p-1),birth:p,activeBirth:p,activePosition:p};
-    if(e.motion){
-      if(walkEndPainted&&amount===1)return;
-      QuiverDraw.swap($('wiring'),q.before,q.after,{...options,positions:t.positions,progress:amount,
-        labels:t.beforeLabels,action:t.kind==='square'?'square':'commute'});
-      if(amount===1){walkEndPainted=true;walk.controls();}
-    }else if(!walkStaticDrawn){
-      // After a deletion the barred slot is absent from the new positive chart.
-      const available=g.solid.includes(p)?p:g.solid[0]??null;
-      QuiverDraw.wiring($('wiring'),g,{...options,birth:available,activeBirth:available,cut:Math.max(0,(available||1)-1)});
-      walkStaticDrawn=true;
-    }
+  function showMoveQuiver(e,after) {
+    const paper=qView==='paper',graph=moveSeed(e,after,paper);
+    QuiverDraw.quiver($('quiver'),graph);
+    $('quiverSubtitle').textContent=(paper?'Bao–Ye seed':'Full graph · relative-cycle intersections')+
+      (e.moveKind==='square'?(after?' · after square':' · before square'):'');
+    const frozen=graph.nodes.filter(n=>n.frozen).length;
+    $('qCounts').textContent=(graph.nodes.length-frozen)+' mutable · '+frozen+' frozen';
+    for(const b of $('quiverViews').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.q===qView));
+    $('quiverViews').querySelector('[data-q="paper"]').disabled=false;
+    $('ffLabel').hidden=!paper;
+  }
+  function showMoveChart(e,amount,chart) {
+    const t=e.event,bar=(amount===1?t.afterWord:t.beforeWord).findIndex(letter=>letter<0)+1;
+    const p=t.kind==='square'?t.positions[1]:bar;
+    QuiverDraw.swap($('wiring'),chart.before,chart.after,{leftmost,projection,positions:t.positions,
+      labels:t.beforeLabels,action:t.kind,progress:amount,birth:p,cut:p-1,activeBirth:p,activePosition:p,
+      lifted:$('lift').checked,showFilm:$('showFilm').checked,showLabels:$('labels').checked});
     $('wireTarget').textContent='Auxiliary signed chart · target e';
     const interval=leftmost?(model.beta.length-t.sourcePrefixLength+1)+'–'+model.beta.length:'1–'+t.sourcePrefixLength;
-    const evidence=q.verified?'Chart endpoints verified.':'Chart check differs: '+q.differences.join(', ')+'.';
-    $('filmInfo').textContent='Chart for β positions '+interval+'. '+evidence;
+    $('filmInfo').textContent='Chart for β positions '+interval+'. '+
+      (chart.verified?'Both signed diagrams match the restriction of the Bao–Ye seed.':'Chart differences: '+chart.differences.join(', ')+'.');
   }
-  let walkLast=null,walkStaticDrawn=false,walkEndPainted=false,lastMotionPaint=null;
-  function paintWalk(){
+  let paintedMove=null,selectedChartMove=null;
+  function paintWalk() {
     const e=walk.current();
-    if(!e||e.complete||mode!=='recursion')return;
-    const t=walk.progress();
-    // Once motion has settled, keep the drawing intact for reading.
-    if(lastMotionPaint?.entry===e&&lastMotionPaint?.amount===t)return;
-    lastMotionPaint={entry:e,amount:t};
-    stepWiring(e,t);stepQuiver(e,t);
+    if(!e||!document.querySelector('main').classList.contains('walking'))return;
+    const amount=walk.progress();
+    if(e.complete&&amount===1){
+      render();return;
+    }
+    if(paintedMove?.entry===e&&paintedMove.amount===amount)return;
+    const fresh=paintedMove?.entry!==e,after=amount===1;
+    if(fresh||paintedMove.after!==after)showMoveQuiver(e,after);
+    paintedMove={entry:e,amount,after};
+    const chart=e.event?QuiverChartPlayback.inspect(e.event,model.paper):null;
+    if(chart?.before&&chart.after)showMoveChart(e,amount,chart);
+    else if(fresh){
+      const base=model.stages.get(model.paper.snapshots[index].stage-1),p=base.snapshot.mapping[e.event?.focus]??null;
+      QuiverDraw.wiring($('wiring'),base.graph,{leftmost,projection,birth:p,cut:Math.max(0,(p||1)-1),
+        lifted:$('lift').checked,showFilm:$('showFilm').checked,showLabels:$('labels').checked});
+      $('wireTarget').textContent='Full graph · stage '+base.snapshot.stage;
+      $('filmInfo').textContent='Local chart unavailable. '+(chart?.differences?.join(', ')||e.issue||'');
+    }
+    const check=model.frames[index-1],ok=chart?.verified&&check.matches;
+    $('matchTag').dataset.state=!chart?'playing':ok?'match':'mismatch';
+    $('matchTag').textContent=!chart?'Graph move':ok?'✓ Chart match':'Mismatch';
+    $('qNote').textContent=!chart?'Showing the full quiver before the move.':!ok?
+      'Differences in '+[...chart.differences,...check.differences].join(', ')+'.':
+      e.moveKind==='commute'?'The two signed letters trade places. Their native vertex labels identify the same full quiver.':
+      'The quiver switches to the mutated seed as the square move finishes.';
+    if(after)walk.controls();
   }
-  function renderWalk(ctx,e){
-    walkLast=null;walkStaticDrawn=false;walkEndPainted=false;lastMotionPaint=null;
+  function renderWalk(ctx,e) {
+    paintedMove=null;
     $('geometryPanel').hidden=true;
-    $('stepInfo').textContent=describeStep(ctx.s)+' · stage '+ctx.s.stage+
-      ' at β position '+pos(ctx.s.selectedPosition)+'.';
-    $('quiverSubtitle').textContent='Native vertices · full seed arithmetic';
-    $('matchTag').dataset.state='playing';$('matchTag').textContent=e.motion?'Graph move':'Walkthrough';
-    $('qCounts').textContent=(e.state.active.length-e.state.frozen.length)+' mutable · '+e.state.frozen.length+' frozen';
-    $('qNote').textContent='Highlighted arrows show the current action. Dashed arrows between frozen vertices are included. The result frame checks the completed seed.';
+    $('stepInfo').textContent='Stage '+ctx.s.stage+' · β position '+pos(ctx.s.selectedPosition)+' · '+describeStep(ctx.s)+'.';
     paintWalk();renderData(ctx);
   }
-  function walkData(e){
+  function inspectingBefore(ctx) {
+    const e=walk.current();
+    return e?.complete&&e.moveKind==='square'&&chartSide==='before'&&
+      ((geometry==='chart'&&ctx.local?.before)||(geometry==='positive'&&ctx.positive?.matches));
+  }
+  function walkData(e,after) {
     const box=$('dataBody');box.replaceChildren(el('h3',e.title),el('p',e.detail));
-    const table=el('table'),head=el('tr');
-    for(const h of ['From','To','Weight'])head.append(el('th',h));
-    table.append(head);
-    for(const [a,b,w] of orient(e.state.edges)){
-      const row=el('tr');for(const x of [native(a),native(b),w])row.append(el('td',String(x)));
-      table.append(row);
+    const panels=el('div',undefined,'matrix-pair');
+    for(const paper of [false,true]) {
+      const view=moveSeed(e,after,paper),section=el('div');
+      section.append(el('h3',paper?'Bao–Ye exchange matrix':'Full relative-cycle exchange matrix'),
+        matrixTable(view.nodes,view.edges,paper&&$('showFF').checked));
+      panels.append(section);
     }
-    const scroll=el('div',undefined,'table-wrap');scroll.append(table);box.append(scroll);
+    box.append(panels);
   }
 
   function matrixTable(nodes,edges,full=false) {
@@ -2593,7 +2403,10 @@ sitemap: false
   }
   function renderData(ctx) {
     if(!$('dataPanel').open)return;
-    const action=walk.current();if(action&&!action.complete){walkData(action);return;}
+    const action=walk.current();
+    if(action&&(!action.complete||(action.motion&&walk.progress()<1)||inspectingBefore(ctx))){
+      walkData(action,!inspectingBefore(ctx)&&walk.progress()===1);return;
+    }
     const {g,s,prev,check,frame}=ctx,micro=mode==='recursion'&&s&&!s.boundary;
     const box=$('dataBody');box.replaceChildren();
     if(s){
@@ -2630,7 +2443,10 @@ sitemap: false
     if(!model)return;
     $('wordTab').setAttribute('aria-pressed',String(mode==='words'));$('recTab').setAttribute('aria-pressed',String(mode==='recursion'));
     $('recTab').disabled=!model.paper;$('wordPanel').hidden=mode!=='words';$('recPanel').hidden=mode!=='recursion';
-    const ctx=context(),action=walk.current(),within=!!(action&&!action.complete);
+    const ctx=context(),action=walk.current(),within=!!(action&&(!action.complete||(action.motion&&walk.progress()<1)));
+    if(action!==selectedChartMove){
+      selectedChartMove=action;chartSide='after';
+    }
     document.querySelector('main').classList.toggle('walking',within);
     renderSubword(within?{...ctx,g:model.stages.get(ctx.s.stage-1).graph}:ctx);
     if(mode==='words')renderWordPanel();
@@ -2639,10 +2455,25 @@ sitemap: false
       if(within){renderWalk(ctx,action);return;}
       renderGeometry(ctx);
     }
-    renderFilm(ctx);renderQuiver(ctx);renderData(ctx);
+    renderFilm(ctx);renderQuiver(ctx);
+    if(inspectingBefore(ctx)) {
+      showMoveQuiver(action,false);
+      const prior=model.frames[index-1];
+      $('matchTag').dataset.state=prior.matches?'match':'mismatch';
+      $('matchTag').textContent=prior.matches?'✓ Cycle match':'Mismatch';
+      $('qNote').textContent=prior.matches?'The full graph cycles agree with the Bao–Ye seed before the square move.':
+        'Differences before the square in '+prior.differences.join(', ')+'.';
+    }
+    if(action?.complete) {
+      const chart=action.event?QuiverChartPlayback.inspect(action.event,model.paper):null;
+      if(!chart?.verified)$('qNote').textContent+=' '+(chart?'Local chart differs: '+chart.differences.join(', ')+'.':
+        'Local chart unavailable. '+(action.issue||''));
+    }
+    renderData(ctx);
   }
   const walk=QuiverWalk.create({model:()=>model,operation:()=>index,navigate:navigateOperation,
-    leftmost:()=>leftmost,enabled:()=>mode==='recursion',redraw:render,paint:paintWalk,fail});
+    leftmost:()=>leftmost,enabled:()=>mode==='recursion',redraw:render,paint:paintWalk,fail,
+    viewBefore:()=>inspectingBefore(context())});
   function bindDiagramPlayer() {
     const source=document.querySelector('.player'),bar=$('diagramPlayer');
     const buttons=[['diagramPrev','prevStep'],['diagramPlay','playRec'],['diagramNext','nextStep']];
