@@ -1,0 +1,1167 @@
+---
+layout: none
+title: "Affine quiver explorer"
+permalink: /affine-quiver/
+sitemap: false
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="color-scheme" content="light">
+<title>Affine quiver explorer</title>
+<style>:root{--ink:#233230;--muted:#56645f;--teal:#21665c;--deep:#214e47;--sand:#f6f5ef;--paper:#fffefa;--line:#d8ded3;--soft:#edf3ec;--terra:#a45132;--serif:Georgia,"Times New Roman",serif;--sans:"DM Sans","Helvetica Neue",Arial,sans-serif;--mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-family:var(--sans);color:var(--ink);background:var(--sand);font-size:15px;line-height:1.45}
+*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit;color:inherit}button,select{cursor:pointer}button:disabled,input:disabled,select:disabled{cursor:default;opacity:.43}button{border:0}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid #c0814d;outline-offset:3px}button:not(:disabled):hover{filter:brightness(.96)}[hidden]{display:none!important}select{background:#fffefa;border:1px solid var(--line);border-radius:6px;padding:7px 28px 7px 10px;max-width:100%}input[type=checkbox],input[type=range]{accent-color:var(--teal)}input[type=range]{cursor:pointer;width:100%;min-width:0;height:26px;margin:0}input[type=checkbox]{width:15px;height:15px;margin:0;flex:none}.mast{background:#fcfcf7;border-bottom:1px solid var(--line)}.mast-inner,main{width:min(1440px,100%);margin:auto;padding-left:clamp(16px,4.2vw,70px);padding-right:clamp(16px,4.2vw,70px)}.mast-inner{height:61px;display:flex;align-items:center;justify-content:space-between}.brand,.help,.row,.checks,.timeline-actions,.quiver-tools,.wire-legend,.quiver-foot{display:flex;align-items:center}.brand{gap:11px;font-family:var(--serif);font-size:20px;letter-spacing:-.75px;font-weight:600}.brand-mark{box-shadow:0 2px 3px #23323012;border-radius:7px}.plain{background:transparent}.help{font-size:13px;color:var(--muted);gap:7px}.help-icon{display:grid;place-content:center;width:16px;height:16px;border:1.4px solid var(--muted);border-radius:50%;font-size:11px;font-weight:bold}.intro{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:30px 0 19px}h1,h2,h3,p{margin:0}h1,h2{font-family:var(--serif);font-weight:500}h1{font-size:clamp(36px,4.3vw,58px);letter-spacing:-.055em;line-height:1.06}.intro p{color:var(--muted);font-size:14px;margin-top:8px}.example-label,.field{display:grid;gap:5px}.example-label>span,.field>span,.film-select>span{font-size:12px;color:var(--muted);font-weight:650;letter-spacing:.01em}.example-label{min-width:178px;align-self:end}.example-label select{font-size:13px;font-weight:550;background:transparent}.field i{font:italic 16px var(--serif);margin-left:4px;color:var(--teal)}.word-form{display:grid;grid-template-columns:88px minmax(120px,1.65fr) minmax(110px,1fr) auto;gap:14px;align-items:end;background:var(--paper);border:1px solid var(--line);padding:15px 18px 17px;border-radius:10px}.field input{width:100%;height:38px;padding:7px 12px;border:1px solid #ccd4ca;border-radius:5px;font-family:var(--mono);font-size:14px;background:#fff}.primary{color:#fff;background:var(--deep);border-radius:5px;height:38px;padding:8px 16px;font-weight:650;font-size:14px}.build span{padding-left:8px}.error{padding:10px 16px;background:#fff1e8;color:#803d2b;border:1px solid #e7c3ac;border-radius:6px;margin:10px 0 0}.panel{background:var(--paper);border:1px solid var(--line);border-radius:11px}.timeline{margin:15px 0;padding:14px 18px 12px;border-left:3px solid #689489}.timeline-line,.card-head,.film-tool-row{display:flex;align-items:center;justify-content:space-between;gap:14px}.row{gap:9px;flex-wrap:wrap}h2{font-size:23px;letter-spacing:-.038em;line-height:1.2}.timeline h2{font-size:20px}.tiny-icon{color:var(--teal);font-weight:bold;font-size:18px}.chip{font-size:11px;color:var(--teal);border:1px solid #cbded0;background:var(--soft);padding:3px 8px;border-radius:20px;white-space:nowrap}.timeline-actions{gap:4px}.iconbtn,.smallbtn,.nextbtn{display:inline-flex;align-items:center;justify-content:center;background:#fafbf7;border:1px solid var(--line);border-radius:5px;height:30px;min-width:32px}.iconbtn{font-size:18px}.nextbtn{height:30px;padding:0 11px;font-size:13px;font-weight:650;gap:9px}.timeline-info{display:flex;align-items:center;gap:18px;margin-top:9px}.step-picker{display:flex;align-items:center;gap:7px;flex:none}.step-picker>span{color:var(--muted);font:11px var(--mono)}.step-picker select{background:var(--soft);border:0;font-size:12px;font-weight:650;padding:4px 6px;max-width:265px;height:27px}.timeline-info input[type=range]{height:19px}.step-info{font-size:12px;color:var(--muted);margin-top:5px}.workspace{display:grid;grid-template-columns:minmax(0,1.52fr) minmax(0,1fr);align-items:stretch;gap:14px}.card-head{align-items:start;padding:17px 17px 10px}.subtle{font:12px var(--mono);color:var(--muted);margin-top:5px}.seg{display:flex;background:#eff1eb;padding:3px;border-radius:6px;align-self:start;gap:1px;flex:none}.seg button{background:transparent;color:var(--muted);border-radius:4px;padding:4px 9px;font-size:12px;line-height:1.5;font-weight:600}.seg button[aria-pressed=true]{background:#fffefa;color:var(--deep);box-shadow:0 1px 3px #283c351c}.diagram-box{overflow:auto;min-width:0}.wire-card,.quiver-card{overflow:hidden}.wire-card{display:flex;flex-direction:column}.wire-card .diagram-box{flex:1;display:flex;align-items:center;background-color:#fbfcf8;background-image:radial-gradient(#a9bbae90 .8px,transparent 1px);background-size:16px 16px;border-block:1px solid #e2e8de;min-height:224px;max-height:430px;padding:4px 10px}.diagram-box svg{display:block}.wire-legend,.quiver-foot{flex-wrap:wrap;gap:14px;padding:9px 16px;color:var(--muted);font-size:11px}.wire-legend>span,.quiver-foot>span,.checks label,.fflabel{display:inline-flex;align-items:center;gap:6px}.line-symbol{display:inline-block;width:16px;height:10px;position:relative}.line-symbol.bridge:before,.line-symbol.bridge:after{content:"";position:absolute;background:#285f55;left:7px;top:0;width:2px;height:10px}.line-symbol.bridge:after{width:5px;height:5px;border-radius:50%;left:5.5px;top:5px}.line-symbol.cross:before,.line-symbol.cross:after{content:"";position:absolute;left:1px;top:4px;width:14px;height:1px;transform:rotate(30deg);background:#707e76}.line-symbol.cross:after{transform:rotate(-30deg)}.film-swatch{width:11px;height:10px;background:#a4d3c4;border:1px solid #519884;border-radius:2px}.film-section{padding:10px 16px 14px;border-top:1px solid var(--line);background:#f9fbf6}.film-tool-row{align-items:center;flex-wrap:wrap;gap:8px}.film-select{display:flex;align-items:center;gap:8px}.film-select select{font-size:12px;padding:4px 5px}.checks{gap:11px;flex-wrap:wrap;font-size:12px}.cut-line{display:flex;align-items:center;gap:8px;margin:9px 0 4px}.cut-line>span{font:12px var(--mono);min-width:56px;color:var(--teal);font-weight:650}.smallbtn{min-width:27px;height:25px;font-size:13px}.film-info,.quiver-note{font-size:12px;color:var(--muted)}.film-info b,.quiver-note b{color:var(--ink)}.quiver-card{display:flex;flex-direction:column}.quiver-tools{justify-content:space-between;gap:6px;margin:0 16px 5px}.fflabel{font-size:11px;color:var(--muted)}#quiver{min-height:150px;flex:1;display:flex;align-items:center;justify-content:safe center;max-height:410px}.quiver-foot{border-top:1px solid var(--line);font-size:11px;padding-top:8px;padding-bottom:7px}.q-counts{margin-left:auto;font:10px var(--mono)}.node-symbol{height:11px;width:11px;border:1.6px solid #43675b;background:#fff}.node-symbol.circle{border-radius:50%}.node-symbol.square{border-radius:1px;background:#ece8dd;border-color:#998e72}.quiver-note{padding:8px 16px 12px;min-height:43px;background:#fafaf5}.match-tag{font-size:11px;font-weight:700;letter-spacing:.01em;background:#e8f4e9;color:#366946;white-space:nowrap;border-radius:20px;padding:4px 8px}.match-tag[data-state=intermediate],.match-tag[data-state=signed]{color:#77603b;background:#f6efdf}.match-tag[data-state=mismatch]{color:#853b31;background:#ffebe6}.data-panel{margin-top:15px}.data-panel summary{padding:13px 17px;font-size:14px;font-weight:650;cursor:pointer;display:flex;align-items:center;justify-content:space-between;list-style:none}.data-panel summary::-webkit-details-marker{display:none}.data-panel[open] summary{border-bottom:1px solid var(--line)}.data-panel[open] summary span{transform:rotate(45deg)}.data-body{padding:16px;display:grid;gap:15px}.data-body p{font-size:13px;color:var(--muted)}.data-body h3,.guide-body h3{font-size:14px;font-weight:700}.table-wrap{overflow:auto;max-width:100%;max-height:320px}.matrix-pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;min-width:0}.matrix-pair>div{min-width:0}.matrix-pair h3{margin:0 0 5px}table{border-collapse:collapse;min-width:140px;font-size:12px;text-align:left}th,td{padding:4px 10px;border-bottom:1px solid var(--line);font-family:var(--mono);white-space:nowrap}th{background:#f3f6ef;font-weight:600}.map-row{display:flex;gap:7px;flex-wrap:wrap}.map-chip{font:12px var(--mono);padding:4px 7px;border-radius:4px;background:#edf3ec;border:1px solid #dce7dc}.mismatch-text{color:#963d32!important}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}footer{padding:17px 1px 24px;display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted)}footer a{color:var(--teal);text-decoration:none}footer a:hover{text-decoration:underline}dialog{color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;width:min(600px,92vw);padding:0;max-height:86vh;box-shadow:0 16px 70px #19382d33}dialog::backdrop{background:#162d2466}.guide-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);padding:16px 22px}.guide-body{padding:17px 22px 24px}.guide-body p{font-size:14px;margin:6px 0 12px;color:var(--muted)}.guide-body h3{margin-top:12px}.empty{padding:40px 12px;text-align:center;color:var(--muted)}
+@media(min-width:1550px){.workspace{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}}@media(max-width:900px){.workspace{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}.card-head{flex-wrap:wrap}.quiver-tools{flex-wrap:wrap}.intro{gap:15px}h1{font-size:43px}.checks{gap:7px}.wire-legend{gap:8px}}@media(max-width:700px){.mast-inner{height:50px}.intro{align-items:start;flex-wrap:wrap;padding:20px 0 13px;gap:12px}.intro p{font-size:13px}.example-label{display:flex;align-items:center;gap:8px;align-self:auto}.example-label select{padding:3px 6px}.word-form{grid-template-columns:68px minmax(0,1fr);gap:9px;padding:12px}.field.target{grid-column:1/3}.build{grid-column:1/3}.workspace{grid-template-columns:minmax(0,1fr)}.timeline{padding:11px 12px}.timeline-info{gap:5px;flex-wrap:wrap}.timeline-info input[type=range]{flex:1 1 75px}.timeline-line{flex-wrap:wrap;gap:8px}.wire-card .diagram-box{min-height:185px}.quiver-card .diagram-box{min-height:160px}.card-head{align-items:center;flex-wrap:wrap}.matrix-pair{grid-template-columns:1fr}.mast-inner,main{padding-left:13px;padding-right:13px}.brand{font-size:18px}.brand-mark{width:28px;height:28px}.step-picker select{max-width:205px}.quiver-note{min-height:0}.film-section{padding:9px 12px}.help{font-size:12px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+
+.brand span,.help{white-space:nowrap}.help-icon{flex:none}#firstStep{gap:4px;padding:0 7px}#firstStep small{font:600 12px var(--sans)}.step-picker{max-width:100%;min-width:0}.step-picker>span{white-space:nowrap}.step-picker select{min-width:0;text-overflow:ellipsis}.diagram-box{align-items:safe center}.trace-line{display:flex;align-items:start;justify-content:space-between;gap:7px}.trace-line button{font-size:11px;white-space:nowrap;background:transparent;color:var(--teal);text-decoration:underline;text-underline-offset:2px;padding:0}.recipe{border-left:2px solid #b3cbbe;padding:1px 9px 1px 12px}.recipe p+p{margin-top:4px}@media(max-width:390px){h1{font-size:36px}.brand{gap:6px;font-size:16px}.help{gap:4px;font-size:11px}.trace-line{flex-wrap:wrap}.step-picker{width:100%}.step-picker select{flex:1}.timeline-info input[type=range]{flex-basis:100%}}
+</style>
+</head>
+<body>
+<header class="mast">
+ <div class="mast-inner">
+ <div class="brand"><svg class="brand-mark" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#205a53"/><path d="M5 8H11L21 23H27M5 16H12L19 8H27M5 24H10L17 16H27" stroke="#eff5e7" stroke-width="1.4" fill="none"/><g fill="#f7ba89"><circle cx="11" cy="8" r="2"/><circle cx="17" cy="16" r="2"/><circle cx="21" cy="23" r="2"/></g></svg><span>Quiver notebook</span></div>
+ <button id="guideOpen" class="plain help"><span class="help-icon" aria-hidden="true">?</span> Reading guide</button>
+ </div>
+</header>
+<main>
+ <div class="intro"><div><h1>Affine quiver explorer</h1><p>Trace a soap film through the wiring and follow the Bao–Ye recursion on the same words.</p></div>
+ <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
+ <form id="wordForm" class="word-form" novalidate>
+  <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
+  <label class="field beta"><span>Braid word <i>β</i></span><input id="beta" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2 3 1 2 3" aria-describedby="formatHint"></label>
+  <label class="field target"><span>Target word <i>v</i></span><input id="target" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2" aria-describedby="formatHint"></label>
+  <button class="primary build" type="submit">Build quiver <span aria-hidden="true">↗</span></button>
+  <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
+ </form>
+ <p id="inputError" class="error" role="alert" hidden></p>
+ <section class="timeline panel" aria-labelledby="recTitle">
+  <div class="timeline-line"><div class="row"><span class="tiny-icon" aria-hidden="true">⇄</span><h2 id="recTitle">Bao–Ye recursion</h2><span id="stageCount" class="chip"></span></div>
+   <div class="timeline-actions"><button id="firstStep" class="iconbtn" title="Initial seed" aria-label="Go to initial seed">⇤ <small>Start</small></button><button id="prevStep" class="iconbtn" title="Previous step" aria-label="Previous recursion step">←</button><button id="nextStep" class="nextbtn" aria-label="Next recursion step">Next step <span aria-hidden="true">→</span></button><button id="lastStep" class="iconbtn" title="Final seed" aria-label="Go to final seed">⇥</button></div></div>
+  <div class="timeline-info"><label class="step-picker"><span id="stepCount"></span><select id="stepList" aria-label="Choose recursion step"></select></label><input type="range" id="stepRange" aria-label="Bao–Ye recursion step" min="0" max="1" value="0"></div>
+  <p id="stepInfo" class="step-info"></p>
+ </section>
+ <div class="workspace">
+ <section class="panel wire-card" aria-labelledby="wireTitle">
+  <div class="card-head"><div><h2 id="wireTitle">Plabic diagram</h2><div class="subtle" id="wireTarget"></div></div>
+   <div class="seg" id="projections" aria-label="Diagram projection"><button type="button" data-view="top" aria-pressed="true">Top</button><button type="button" data-view="bottom" aria-pressed="false">Bottom</button><button type="button" data-view="space" aria-pressed="false">3D</button></div></div>
+  <div class="diagram-box" id="wiring" tabindex="0" aria-label="Periodic wiring diagram"></div>
+  <div class="wire-legend"><span><i class="line-symbol bridge"></i>Solid bridge</span><span><i class="line-symbol cross"></i>Hollow crossing</span><span><i class="film-swatch"></i>Selected film</span></div>
+  <div class="film-section"><div class="film-tool-row"><label class="film-select"><span>Soap film</span><select id="filmSelect" aria-label="Select a soap film"></select></label>
+   <div class="checks"><label><input type="checkbox" id="showFilm" checked> Film</label><label><input type="checkbox" id="lift"> Lifts</label><label><input type="checkbox" id="labels" checked> Labels</label></div></div>
+   <div class="cut-line"><span id="cutLabel">Cut</span><button class="smallbtn" id="cutBack" aria-label="Trace film one cut to the left">←</button><input type="range" id="cutRange" min="0" max="1" aria-label="Film cut, number of braid letters processed"><button class="smallbtn" id="cutForward" aria-label="Trace film one cut to the right">→</button></div>
+   <div class="trace-line"><p id="filmInfo" class="film-info"></p><button type="button" id="traceMode" aria-pressed="false">Trace from birth</button></div>
+  </div>
+ </section>
+ <section class="panel quiver-card" aria-labelledby="quiverTitle">
+  <div class="card-head"><div><h2 id="quiverTitle">Exchange quiver</h2><div class="subtle" id="quiverSubtitle"></div></div><span class="match-tag" id="matchTag"></span></div>
+  <div class="quiver-tools"><div class="seg" id="quiverViews" aria-label="Quiver construction"><button data-q="plabic" type="button" aria-pressed="true">Plabic</button><button data-q="paper" type="button" aria-pressed="false">Bao–Ye</button></div><label id="ffLabel" class="fflabel"><input type="checkbox" id="showFF"> Frozen edges</label></div>
+  <div class="diagram-box" id="quiver" tabindex="0" aria-label="Directed, weighted quiver"></div>
+  <div class="quiver-foot"><span><i class="node-symbol circle"></i>Mutable</span><span><i class="node-symbol square"></i>Frozen</span><span id="qCounts" class="q-counts"></span></div>
+  <div class="quiver-note" id="qNote"></div>
+ </section>
+ </div>
+ <details class="panel data-panel" id="dataPanel"><summary>Stage details, vertex map &amp; exchange matrices <span aria-hidden="true">+</span></summary><div class="data-body" id="dataBody"></div></details>
+ <footer><span>Constructions</span><a href="https://arxiv.org/html/2210.04778v3#S3.SS6" target="_blank" rel="noopener noreferrer">GLSBS, §§3.6–3.7 ↗</a><a href="https://arxiv.org/html/2506.10382v2#S5.SS3" target="_blank" rel="noopener noreferrer">Bao–Ye, §5 ↗</a></footer>
+</main>
+<dialog id="guide"><div class="guide-head"><h2>Reading the explorer</h2><button id="guideClose" class="iconbtn" aria-label="Close reading guide">×</button></div>
+<div class="guide-body">
+<h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
+<p>The target <i>v</i> must be reduced and feasible in <i>β</i>. Positive <i>β</i> enables both constructions, including nonreduced braids. Negative letters in <i>β</i> switch to the signed plabic diagram.</p>
+<h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to start at cut <i>d−1</i>, then step left to build the film one crossing at a time. A cut numbered <i>c</i> lies after the first <i>c</i> letters. The film is frozen when it reaches cut 0.</p>
+<p>Top and Bottom show the two projections. Lifts shows integer heights before reducing modulo <i>n</i>. Several heights can cover the same face, so a film can contribute more than once. The 3D view shows the periodic strand diagram schematically, with film coverage on the two coordinate walls.</p>
+<h3>Step through Bao–Ye</h3><p>Build opens the final quiver. Use the first-step arrow to return to the initial seed, then advance through individual mutations, freezes, and deletions. At the initial seed and after each deletion, the explorer computes the plabic quiver independently for that stage’s partial target. During mutations and freezes, the diagram shows the preceding completed stage.</p>
+<p>The paper reads the reversed words and chooses a leftmost subexpression. The plabic diagram reads the entered words using a rightmost subexpression. Arrow directions are reversed once to align conventions. After each deletion, native vertex (<i>i,k</i>) corresponds to the <i>k</i>th omitted <i>i</i> in reversed <i>β</i>, reflected back to its original word position.</p>
+<p><b>Match</b> checks the same word positions, frozen vertices and weighted arrows incident to a mutable vertex. On the paper view, Frozen edges also shows the frozen–frozen entries, including halves, retained during mutation. Agreement is checked for the displayed input and stage.</p>
+</div></dialog>
+<noscript>This explorer needs JavaScript to compute the two quivers.</noscript>
+<script>/* Periodic type-A plabic quiver, using one lifted disk per solid bridge.
+   A browser port of affine_quiver_films.py. This calculation uses the graph
+   word in its original orientation, independently of the Bao–Ye recursion. */
+(() => {
+  'use strict';
+
+  function mod(x, n) { return ((x % n) + n) % n; }
+  function residue(h, n) { return mod(h - 1, n) + 1; }
+
+  // p(x+n) = p(x)+n. Windows store [p(1), ..., p(n)].
+  function at(window, x) {
+    const n = window.length;
+    return window[mod(x - 1, n)] + n * Math.floor((x - 1) / n);
+  }
+
+  function inverse(window) {
+    const n = window.length, result = Array(n);
+    window.forEach((value, index) => {
+      result[mod(value - 1, n)] = index + 1 - n * Math.floor((value - 1) / n);
+    });
+    return result;
+  }
+
+  function rightReflection(window, i) {
+    const n = window.length, next = window.slice();
+    if (i === n) {
+      next[0] = window[n - 1] - n;
+      next[n - 1] = window[0] + n;
+    } else {
+      next[i - 1] = window[i];
+      next[i] = window[i - 1];
+    }
+    return next;
+  }
+
+  function checkInputs(n, beta, v) {
+    if (!Number.isSafeInteger(n) || n < 3 || n > 128) {
+      throw new Error('Use an integer n from 3 to 128.');
+    }
+    if (!Array.isArray(beta) || !Array.isArray(v)) throw new Error('Enter β and v as words.');
+    if (beta.length > 256 || v.length > 256) throw new Error('Use words of at most 256 letters.');
+    if (!beta.every(x => Number.isSafeInteger(x) && Math.abs(x) >= 1 && Math.abs(x) <= n)) {
+      throw new Error(`β must use nonzero letters with absolute value at most ${n}.`);
+    }
+    if (!v.every(x => Number.isSafeInteger(x) && x >= 1 && x <= n)) {
+      throw new Error(`v must use positive integer letters from 1 to ${n}.`);
+    }
+  }
+
+  function distinguishedPath(n, beta, v) {
+    const m = beta.length, last = Array.from({length: n}, (_, i) => i + 1);
+    let target = last;
+    for (const i of v) {
+      if (at(target, i) > at(target, i + 1)) throw new Error('The input word v is not reduced.');
+      target = rightReflection(target, i);
+    }
+    const top = Array(m + 1), bottom = Array(m + 1), solid = [], hollow = [];
+    top[m] = target;
+    bottom[m] = inverse(target);
+    for (let c = m - 1; c >= 0; c--) {
+      const i = Math.abs(beta[c]), positive = beta[c] > 0;
+      let window = (positive ? top : bottom)[c + 1];
+      if (at(window, i) > at(window, i + 1)) {
+        hollow.push(c + 1);
+        window = rightReflection(window, i);
+      } else {
+        solid.push(c + 1);
+      }
+      top[c] = positive ? window : inverse(window);
+      bottom[c] = positive ? inverse(window) : window;
+    }
+    if (top[0].some((value, i) => value !== i + 1)) {
+      throw new Error('The word β has no distinguished subexpression for this v.');
+    }
+    return {solid: solid.reverse(), hollow: hollow.reverse(), top, bottom};
+  }
+
+  // Only finitely many rows differ between the disturbed lift Q and P.
+  // Transposing those rows provides Q inverse relative to P inverse.
+  function transpose(changes) {
+    return new Map(Array.from(changes, ([row, value]) => [value, row]));
+  }
+
+  function coveredHeights(window, changes) {
+    if (!changes.size) return [];
+    const rows = [...changes.keys()].sort((a, b) => a - b);
+    const imbalance = new Map(), heights = [];
+    function adjust(value, count) {
+      const total = (imbalance.get(value) || 0) + count;
+      if (total) imbalance.set(value, total);
+      else imbalance.delete(value);
+    }
+    // Equal contributions from rows below the first change cancel. Height
+    // h is covered precisely when the images of (-∞, h] differ as sets.
+    for (let h = rows[0]; h <= rows[rows.length - 1]; h++) {
+      if (changes.has(h)) {
+        adjust(at(window, h), 1);
+        adjust(changes.get(h), -1);
+      }
+      if (imbalance.size) heights.push(h);
+    }
+    if (imbalance.size) throw new Error('The lifted film has inconsistent strand labels.');
+    return heights;
+  }
+
+  function precedingLayer(after, before, changes, i) {
+    const n = after.length, touched = new Set(), result = new Map(changes);
+    for (const h of changes.keys()) {
+      const offset = mod(h - i, n);
+      if (offset === 0) touched.add(h);
+      if (offset === 1) touched.add(h - 1);
+    }
+    function put(row, value) {
+      if (value === at(before, row)) result.delete(row);
+      else result.set(row, value);
+    }
+    // All translated comparator pairs commute. Untouched pairs agree with
+    // the known periodic baseline and require no update to its finite defect.
+    for (const left of touched) {
+      const a = changes.get(left) ?? at(after, left);
+      const b = changes.get(left + 1) ?? at(after, left + 1);
+      put(left, Math.min(a, b));
+      put(left + 1, Math.max(a, b));
+    }
+    return result;
+  }
+
+  function traceFilm(n, beta, birth, path, topFaces, bottomFaces) {
+    const last = birth - 1, i = Math.abs(beta[last]);
+    const initial = (beta[last] > 0 ? path.top : path.bottom)[last];
+    const a = at(initial, i), b = at(initial, i + 1);
+    if (a >= b) throw new Error(`Solid bridge ${birth} is not an ascent.`);
+    let changes = new Map([[i, b], [i + 1, a]]);
+    if (beta[last] < 0) changes = transpose(changes);
+    const cuts = Array.from({length: beta.length + 1}, () => ({top: [], bottom: [], changes: []}));
+    for (let c = last; c >= 0 && changes.size; c--) {
+      const transposed = transpose(changes);
+      const top = coveredHeights(path.top[c], changes);
+      const bottom = coveredHeights(path.bottom[c], transposed);
+      cuts[c] = {top, bottom, changes: [...changes].sort(([x], [y]) => x - y)};
+      for (const h of top) topFaces[c][residue(h, n)].push(birth);
+      for (const h of bottom) bottomFaces[c][residue(h, n)].push(birth);
+      if (c === 0) break;
+      const letter = beta[c - 1];
+      changes = letter > 0
+        ? precedingLayer(path.top[c], path.top[c - 1], changes, letter)
+        : transpose(precedingLayer(path.bottom[c], path.bottom[c - 1], transposed, -letter));
+    }
+    return {birth, frozen: cuts[0].changes.length !== 0, cuts};
+  }
+
+  function countArrows(n, beta, frozen, topFaces, bottomFaces) {
+    const m = beta.length, half = Array.from({length: m + 1}, () => Array(m + 1).fill(0));
+    for (let c = 0; c < m; c++) {
+      const letter = beta[c], i = Math.abs(letter), sign = Math.sign(letter);
+      const faces = sign > 0 ? topFaces : bottomFaces;
+      const L = faces[c][i], R = faces[c + 1][i];
+      const U = faces[c][residue(i + 1, n)], D = faces[c][residue(i - 1, n)];
+      for (const h of [residue(i + 1, n), residue(i - 1, n)]) {
+        const here = faces[c][h], there = faces[c + 1][h];
+        if (here.length !== there.length || here.some((value, k) => value !== there[k])) {
+          throw new Error(`Inconsistent side face at crossing ${c + 1}.`);
+        }
+      }
+      for (const [sources, targets] of [[L,U],[U,R],[L,D],[D,R],[R,L],[R,L]]) {
+        for (const x of sources) for (const y of targets) if (x !== y) {
+          half[x][y] += sign;
+          half[y][x] -= sign;
+        }
+      }
+    }
+    const isFrozen = new Set(frozen), arrows = [];
+    for (let x = 1; x <= m; x++) for (let y = 1; y <= m; y++) {
+      const count = half[x][y];
+      if (count <= 0 || (isFrozen.has(x) && isFrozen.has(y))) continue;
+      if (count % 2) throw new Error(`Odd half-arrow count at ${x} → ${y}.`);
+      arrows.push([x, y, count / 2]);
+    }
+    return arrows;
+  }
+
+  function compute(n, beta, v = []) {
+    checkInputs(n, beta, v);
+    const path = distinguishedPath(n, beta, v);
+    // Height 0 is unused so a Dynkin letter indexes its face directly.
+    const faces = () => Array.from({length: beta.length + 1}, () =>
+      Array.from({length: n + 1}, () => []));
+    const topFaces = faces(), bottomFaces = faces(), frozen = [], films = {};
+    for (const birth of path.solid) {
+      const film = traceFilm(n, beta, birth, path, topFaces, bottomFaces);
+      films[birth] = film;
+      if (film.frozen) frozen.push(birth);
+    }
+    return {n, beta: beta.slice(), v: v.slice(), solid: path.solid, hollow: path.hollow,
+      frozen, arrows: countArrows(n, beta, frozen, topFaces, bottomFaces),
+      topWindows: path.top, bottomWindows: path.bottom, films, topFaces, bottomFaces};
+  }
+
+  globalThis.QuiverFilm = Object.freeze({compute});
+})();
+</script>
+<script>/* Bao–Ye, arXiv:2506.10382v2, §§2.7, 5.1, 5.3. Positive affine A words.
+ * Input follows the ThomasM graph convention. The paper reads both words
+ * backwards. Seeds below retain the paper's FULL native exchange matrix.
+ * Snapshots reverse all arrows to match the graph's display convention.
+ */
+(function () {
+  'use strict';
+
+  function validate(n, word, name) {
+    if (!Array.isArray(word) || word.some(i => !Number.isInteger(i) || i < 1 || i > n)) {
+      throw new Error(`${name} must use positive letters 1 through ${n}.`);
+    }
+    if (word.length > 256) throw new Error('Use words of at most 256 letters.');
+  }
+
+  function identity(n) {
+    return Array.from({ length: n }, (_, k) => k + 1);
+  }
+
+  function at(window, position) {
+    const rank = window.length;
+    const offset = position - 1;
+    return window[((offset % rank) + rank) % rank] + Math.floor(offset / rank) * rank;
+  }
+
+  function reflectRight(window, i) {
+    const n = window.length;
+    if (i === n) {
+      [window[0], window[n - 1]] = [window[n - 1] - n, window[0] + n];
+    } else {
+      [window[i - 1], window[i]] = [window[i], window[i - 1]];
+    }
+  }
+
+  function leftmost(paperBeta, paperV, n) {
+    // A left descent of x is a right descent of x^{-1}. Maintain the
+    // inverse window, whose descents are visible in adjacent entries.
+    const inverse = identity(n);
+    for (const i of [...paperV].reverse()) {
+      if (at(inverse, i) > at(inverse, i + 1)) {
+        throw new Error('The expression for v must be reduced.');
+      }
+      reflectRight(inverse, i);
+    }
+    const selected = [];
+    paperBeta.forEach((i, p) => {
+      if (at(inverse, i) > at(inverse, i + 1)) {
+        selected.push(p);
+        reflectRight(inverse, i);
+      }
+    });
+    if (inverse.some((x, k) => x !== k + 1)) {
+      throw new Error('No reduced subexpression for v exists in β.');
+    }
+    return selected;
+  }
+
+  class Seed {
+    constructor(word, n) {
+      this.counts = Array(n + 1).fill(0);
+      for (const i of word) this.counts[i]++;
+      this.active = [];
+      this.labels = [];
+      this.levels = [];
+      this.indices = new Map();
+      this.frozen = new Set();
+      for (let i = 1; i <= n; i++) {
+        for (let k = 1; k <= this.counts[i]; k++) {
+          const index = this.active.length;
+          const label = `${i},${k}`;
+          this.active.push(index);
+          this.labels.push(label);
+          this.levels.push([i, k]);
+          this.indices.set(label, index);
+          if (k === this.counts[i]) this.frozen.add(index);
+        }
+      }
+      // Keep 2*epsilon as BigInt. Elementary half-arrows are integers on
+      // this scale. Arrows between frozen vertices propagate through mutations.
+      this.matrix = this.active.map(() => Array(word.length).fill(0n));
+      const current = Array(n + 1).fill(0);
+      for (const i of word) {
+        const left = this.index(i, current[i]);
+        const right = this.index(i, current[i] + 1);
+        this.add(right, left, 2n);
+        for (const j of [i % n + 1, (i + n - 2) % n + 1]) {
+          const endpoint = this.index(j, current[j]);
+          this.add(left, endpoint, 1n);
+          this.add(right, endpoint, -1n);
+        }
+        current[i]++;
+      }
+    }
+
+    index(i, k) {
+      return this.indices.get(`${i},${k}`);
+    }
+
+    add(source, target, weight) {
+      // Definition 5.11 starts after all (i,0) boundary vertices have
+      // been deleted. Contributions with a boundary endpoint vanish.
+      if (source === undefined || target === undefined) return;
+      this.matrix[source][target] += weight;
+      this.matrix[target][source] -= weight;
+    }
+
+    mutate(k) {
+      if (!this.active.includes(k) || this.frozen.has(k)) {
+        throw new Error('Bao–Ye attempted to mutate a nonmutable vertex.');
+      }
+      const M = this.matrix;
+      // Only nonzero length-two paths through k create new arrows.
+      // Leave the row and column at k intact until the path sums finish.
+      for (const x of this.active) {
+        const incoming = M[x][k];
+        if (incoming <= 0n) continue;
+        for (const y of this.active) {
+          const outgoing = M[k][y];
+          if (outgoing <= 0n) continue;
+          const product = incoming * outgoing;
+          if (product % 2n !== 0n) throw new Error('Nonintegral mutation on doubled matrix.');
+          this.add(x, y, product / 2n);
+        }
+      }
+      for (const x of this.active) {
+        M[x][k] = -M[x][k];
+        M[k][x] = -M[k][x];
+      }
+    }
+
+    freezeNeighbors(k) {
+      if (!this.active.includes(k) || !this.frozen.has(k)) {
+        throw new Error('Bao–Ye expected a frozen deletion vertex.');
+      }
+      const newlyFrozen = this.active.filter(x => this.matrix[k][x] !== 0n && !this.frozen.has(x));
+      newlyFrozen.forEach(x => this.frozen.add(x));
+      return newlyFrozen.map(x => this.labels[x]);
+    }
+
+    remove(k) {
+      this.active = this.active.filter(x => x !== k);
+      this.frozen.delete(k);
+    }
+
+    displayEdges() {
+      const edges = [];
+      for (const x of this.active) {
+        for (const y of this.active) {
+          const doubledWeight = -this.matrix[x][y];
+          if (doubledWeight <= 0n) continue;
+          const weight = doubledWeight % 2n === 0n
+            ? String(doubledWeight / 2n) : `${doubledWeight}/2`;
+          edges.push([this.labels[x], this.labels[y], weight]);
+        }
+      }
+      return edges;
+    }
+
+    mapPositions(word, processed) {
+      const positions = Array.from({ length: this.counts.length }, () => []);
+      word.forEach((letter, p) => {
+        if (!processed.has(p)) positions[letter].push(word.length - p);
+      });
+      const mapping = {};
+      for (const x of this.active) {
+        const [i, k] = this.levels[x];
+        const position = positions[i][k - 1];
+        if (position === undefined) throw new Error('A surviving paper label has no graph position.');
+        mapping[this.labels[x]] = position;
+      }
+      return mapping;
+    }
+  }
+
+  function immutable(object) {
+    if (object && typeof object === 'object' && !Object.isFrozen(object)) {
+      for (const value of Object.values(object)) immutable(value);
+      Object.freeze(object);
+    }
+    return object;
+  }
+
+  function compute(n, beta, v = []) {
+    if (!Number.isSafeInteger(n) || n < 3 || n > 128) {
+      throw new Error('Use an integer n from 3 to 128.');
+    }
+    validate(n, beta, 'β');
+    validate(n, v, 'v');
+    const paperBeta = [...beta].reverse();
+    const paperV = [...v].reverse();
+    const selected = leftmost(paperBeta, paperV, n);
+    const selectedSet = new Set(selected);
+    const selectedPositions = selected.map(p => beta.length - p);
+    const seed = new Seed(paperBeta, n);
+    const processed = new Set();
+    const chosen = Array(n + 1).fill(0);
+    const omitted = Array(n + 1).fill(0);
+    const snapshots = [];
+    const stages = [];
+    let stage = 0;
+    let context = { selectedPosition: null, selectedPaperPosition: null, letter: null,
+      a: null, b: null, deleteVertex: null, mutations: [] };
+
+    function snapshot(type, focus = null, newlyFrozen = []) {
+      const boundary = type === 'initial' || type === 'delete';
+      const target = boundary ? [...processed].reverse().map(p => paperBeta[p]) : null;
+      snapshots.push(immutable({
+        type, stage, boundary, focus, newlyFrozen, ...context,
+        active: seed.active.map(x => seed.labels[x]),
+        frozen: seed.active.filter(x => seed.frozen.has(x)).map(x => seed.labels[x]),
+        edges: seed.displayEdges(),
+        mapping: boundary ? seed.mapPositions(paperBeta, processed) : null,
+        target
+      }));
+    }
+
+    snapshot('initial');
+    paperBeta.forEach((i, p) => {
+      if (!selectedSet.has(p)) {
+        omitted[i]++;
+        return;
+      }
+      stage++;
+      const a = ++chosen[i];
+      const b = omitted[i];
+      const mutations = [];
+      for (let k = b + 1; k <= seed.counts[i] - a; k++) mutations.push(`${i},${k}`);
+      const deleteVertex = `${i},${seed.counts[i] - a + 1}`;
+      context = { selectedPosition: beta.length - p, selectedPaperPosition: p + 1,
+        letter: i, a, b, deleteVertex, mutations };
+      for (const label of mutations) {
+        seed.mutate(seed.indices.get(label));
+        snapshot('mutate', label);
+      }
+      const deletedIndex = seed.indices.get(deleteVertex);
+      const newlyFrozen = seed.freezeNeighbors(deletedIndex);
+      snapshot('freeze', deleteVertex, newlyFrozen);
+      seed.remove(deletedIndex);
+      processed.add(p);
+      snapshot('delete', deleteVertex);
+      stages.push({ stage, ...context, newlyFrozen });
+    });
+    return immutable({ snapshots, final: snapshots[snapshots.length - 1], stages,
+      selectedPositions, paperBeta, paperV });
+  }
+
+  globalThis.QuiverPaper = Object.freeze({ compute });
+})();
+</script>
+<script>/* Affine strand and disk projections, and weighted ice quivers.
+   Crossing coordinates and bridge colors follow GLSBS Definition 3.4.
+   Filmed cells use the actual lifted heights provided by the graph engine. */
+(() => {
+  "use strict";
+  const NS = "http://www.w3.org/2000/svg";
+  const P = {ink:"#253637", wire:"#526768", faint:"#c5ceca", grid:"#e4e7df",
+             paper:"#f9faf5", teal:"#137c73", pale:"#d4eae0", rust:"#b65a3c",
+             muted:"#62716e", gray:"#85928e", white:"#fcfdf8"};
+  const sans = "system-ui, -apple-system, sans-serif";
+  const mono = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+  let serial = 0;
+
+  function el(parent, tag, attrs={}, value) {
+    const node=document.createElementNS(NS,tag);
+    for(const [key,val] of Object.entries(attrs)) if(val != null) node.setAttribute(key,String(val));
+    if(value != null) node.textContent=String(value);
+    parent.appendChild(node); return node;
+  }
+  const line=(p,x1,y1,x2,y2,a={})=>el(p,"line",{x1,y1,x2,y2,...a});
+  const txt=(p,x,y,v,a={})=>el(p,"text",{x,y,fill:P.muted,"font-family":sans,"font-size":10,...a},v);
+  const points=a=>a.map(p=>p.map(v=>Number(v.toFixed(2))).join(",")).join(" ");
+  const mid=(u,v)=>[(u[0]+v[0])/2,(u[1]+v[1])/2];
+  const mod=(v,n)=>((v%n)+n)%n;
+  const residue=(v,n)=>mod(v-1,n)+1;
+  const at=(w,k)=>w[mod(k-1,w.length)]+w.length*Math.floor((k-1)/w.length);
+
+  function surface(container,width,height,aria,minWidth=0) {
+    container.replaceChildren();
+    container.style.overflowX="auto";
+    const svg=el(container,"svg",{"xmlns":NS,viewBox:`0 0 ${width} ${height}`,role:"group",
+      "aria-label":aria, preserveAspectRatio:"xMidYMid meet"});
+    svg.style.display="block"; svg.style.width="100%"; svg.style.height="auto";
+    if(minWidth) svg.style.minWidth=minWidth+"px";
+    el(svg,"title",{},aria);
+    return svg;
+  }
+  function activate(node,label,handler) {
+    el(node,"title",{},label);
+    if(typeof handler!=="function") return;
+    node.setAttribute("role","button");
+    node.setAttribute("tabindex","0");
+    node.setAttribute("aria-label",label);
+    node.style.cursor="pointer";
+    node.addEventListener("click",handler);
+    node.addEventListener("keydown",e=>{
+      if(e.key==="Enter"||e.key===" ") { e.preventDefault(); handler(); }
+    });
+  }
+
+  function filmInfo(g,o) {
+    const f=g.films[o.birth];
+    return {film:f, cut:Math.min(g.beta.length,Math.max(0,Number(o.cut)||0))};
+  }
+  function heightRange(g,o,projection,film) {
+    let lo=1, hi=g.n+1;
+    if(o.lifted && film) {
+      for(const cut of film.cuts) for(const h of cut?.[projection]||[]) {
+        lo=Math.min(lo,h); hi=Math.max(hi,h+1);
+      }
+    }
+    return [lo,hi];
+  }
+  function coverage(f,c,projection,n,folded) {
+    const m=new Map();
+    for(const raw of f?.cuts[c]?.[projection]||[]) {
+      const h=folded?residue(raw,n):raw;
+      m.set(h,(m.get(h)||0)+1);
+    }
+    return m;
+  }
+  function brush(svg) {
+    const id="film-hatch-"+(++serial);
+    const defs=el(svg,"defs");
+    const hatch=el(defs,"pattern",{id,patternUnits:"userSpaceOnUse",width:5,height:5,patternTransform:"rotate(36)"});
+    line(hatch,0,0,0,5,{stroke:P.teal,"stroke-width":1.35,opacity:0.6});
+    return id;
+  }
+
+  function eventEndpoints(g,index,projection,lo,hi) {
+    // The generator exchanges adjacent rows (positive) or columns (negative).
+    // In the opposite projection a bridge can span several visible heights.
+    const letter=g.beta[index], a=Math.abs(letter), own=(letter>0)===(projection==="top");
+    const w=letter>0?g.topWindows[index]:g.bottomWindows[index];
+    const a0=own?a:at(w,a), a1=own?a+1:at(w,a+1);
+    const left=Math.ceil((lo-Math.max(a0,a1))/g.n),right=Math.floor((hi-Math.min(a0,a1))/g.n);
+    return Array.from({length:Math.max(0,right-left+1)},(_,i)=>[a0+(left+i)*g.n,a1+(left+i)*g.n]);
+  }
+
+  function drawProjection(container,g,o) {
+    const projection=o.projection==="bottom"?"bottom":"top";
+    const {film, cut}=filmInfo(g,o), [lo,hi]=heightRange(g,o,projection,film);
+    const m=g.beta.length, W=Math.max(360,container.clientWidth||640,78+m*34);
+    const pad=39, end=W-21, top=37, row=Math.min(47,Math.max(23,172/Math.max(3,hi-lo)));
+    const bottom=top+row*(hi-lo), H=bottom+42;
+    const svg=surface(container,W,H,`${projection==="top"?"Row":"Column"} projection of the affine wiring diagram`,Math.min(W,Math.max(344,m*29+62)));
+    const draw=el(svg,"g"), hatch=brush(svg), defs=el(svg,"defs"), clipId="wiring-clip-"+(++serial);
+    const clip=el(defs,"clipPath",{id:clipId}); el(clip,"rect",{x:pad,y:top-5,width:end-pad,height:bottom-top+10});
+    const x=t=>m?pad+(end-pad)*t/m:(pad+end)/2, y=h=>bottom-row*(h-lo);
+    const solid=new Set(g.solid), spans=el(draw,"g",{"clip-path":`url(#${clipId})`});
+    const initial=el(spans,"g");
+    for(let c=0;c<=m;c++) line(initial,x(c),top-4,x(c),bottom+3,{stroke:P.grid,"stroke-width":1,"stroke-dasharray":"2 5"});
+    const active=Number(o.activePosition);
+    if(active>=1&&active<=m) el(initial,"rect",{x:x(active-1),y:top-4,width:x(active)-x(active-1),height:bottom-top+8,fill:P.rust,opacity:0.065});
+
+    const projected=el(spans,"g"), notes=[];
+    function midpointLevel(h,index,own,hollow) {
+      if(!own||!hollow) return h;
+      const r=mod(h-Math.abs(g.beta[index]),g.n);
+      return r===0?h+0.5:r===1?h-0.5:h;
+    }
+    for(let c=0;c<m;c++) {
+      const own=(g.beta[c]>0)===(projection==="top"), hollow=!solid.has(c+1);
+      const xm=(x(c)+x(c+1))/2;
+      if(o.showFilm && film && (!o.trace || c>=cut)) {
+        const A=coverage(film,c,projection,g.n,!o.lifted);
+        const B=coverage(film,c+1,projection,g.n,!o.lifted);
+        for(let h=lo;h<hi;h++) {
+          const k=o.lifted?h:residue(h,g.n);
+          const lm=midpointLevel(h,c,own,hollow),um=midpointLevel(h+1,c,own,hollow);
+          for(const [count,corner,half,start] of [[A.get(k)||0,x(c),xm,true],[B.get(k)||0,x(c+1),xm,false]]) {
+            if(!count) continue;
+            const corners=[[corner,y(h)],[half,y(lm)],[half,y(um)],[corner,y(h+1)]];
+            el(projected,"polygon",{points:points(corners),fill:P.teal,opacity:Math.min(.36,.14+.072*(count-1))});
+            if(count>1) {
+              el(projected,"polygon",{points:points(corners),fill:`url(#${hatch})`});
+              if(o.showLabels && ((start&&c===cut)||(!start&&c+1===cut))) {
+                notes.push([(corner+2*half)/3,y(h+.48),count]);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Draw true line segments between adjacent time sections. A hollow crossing
+    // transposes two wires only in the projection on which its letter acts.
+    const rails=el(spans,"g",{fill:"none",stroke:P.wire,"stroke-linecap":"round"});
+    if(!m) for(let h=lo;h<=hi;h++) line(rails,pad,y(h),end,y(h),{stroke:P.faint});
+    for(let c=0;c<m;c++) {
+      const own=(g.beta[c]>0)===(projection==="top"), hollow=!solid.has(c+1);
+      for(let h=lo-1;h<=hi+1;h++) {
+        const next=2*midpointLevel(h,c,own,hollow)-h;
+        if(Math.max(h,next)<lo||Math.min(h,next)>hi) continue;
+        const ghost=h<1||h>g.n;
+        line(rails,x(c),y(h),x(c+1),y(next),{"stroke-width":1.55,opacity:ghost?.56:.84,
+          "stroke-dasharray":ghost?"4 3":null});
+      }
+    }
+
+    const cutColor=P.teal, cx=x(cut);
+    line(draw,cx,top-9,cx,bottom+8,{stroke:cutColor,"stroke-width":1.35,"stroke-dasharray":"3 3",opacity:.9});
+    const cutLabel=`t = ${cut}`, capWidth=39+Math.max(0,String(cut).length-1)*6;
+    const capX=Math.min(W-capWidth-1,Math.max(1,cx-capWidth/2));
+    el(draw,"rect",{x:capX,y:4,width:capWidth,height:18,rx:9,fill:"#e2efe7"});
+    txt(draw,capX+capWidth/2,17,cutLabel,{fill:cutColor,"font-family":mono,"text-anchor":"middle","font-size":10});
+    for(let h=lo;h<=hi;h++) {
+      const ghost=h<1||h>g.n;
+      if(!o.lifted && h===g.n+1) txt(draw,pad-8,y(h)+3,"1′",{"text-anchor":"end",fill:P.gray,"font-family":mono});
+      else txt(draw,pad-8,y(h)+3,h,{"text-anchor":"end",fill:ghost?P.gray:P.muted,"font-family":mono});
+    }
+    for(const [nx,ny,n] of notes) txt(draw,nx,ny+3,"×"+n,{"font-size":10,fill:P.teal,"font-weight":"700",
+      "text-anchor":"middle","paint-order":"stroke","stroke":P.paper,"stroke-width":2.4});
+
+    for(let c=0;c<m;c++) {
+      const p=c+1, center=(x(c)+x(c+1))/2, isSolid=solid.has(p), isBirth=p===o.birth, isActive=p===active;
+      const label=`Position ${p}, generator ${g.beta[c]}${isSolid?", solid bridge":", hollow crossing"}`;
+      const z=el(draw,"g",{"data-position":p});
+      el(z,"rect",{x:x(c)+1,y:top-3,width:Math.max(1,x(c+1)-x(c)-2),height:bottom-top+28,fill:"transparent"});
+      if(isSolid) {
+        const bridges=el(z,"g",{"clip-path":`url(#${clipId})`});
+        for(const [l,r] of eventEndpoints(g,c,projection,lo,hi)) {
+          const clr=isBirth?P.teal:isActive?P.rust:P.ink;
+          line(bridges,center,y(l),center,y(r),{stroke:clr,"stroke-width":isBirth?3.9:2.2,"stroke-linecap":"round"});
+          for(const [h,black] of [[l,g.beta[c]>0],[r,g.beta[c]<0]]) {
+            if(h<lo||h>hi) continue;
+            el(bridges,"circle",{cx:center,cy:y(h),r:isBirth?4.2:3.4,fill:black?clr:P.white,stroke:clr,"stroke-width":1.6});
+          }
+        }
+      }
+      if(o.showLabels!==false) {
+        if(isBirth||isActive) el(z,"rect",{x:center-10,y:bottom+10,width:20,height:17,rx:5,fill:isBirth?P.teal:P.rust});
+        txt(z,center,bottom+22,p,{"font-family":mono,"font-size":11,"text-anchor":"middle",fill:isBirth||isActive?P.white:isSolid?P.ink:P.muted});
+      }
+      activate(z,label,isSolid&&o.onBirth?()=>o.onBirth(p):o.onPosition?()=>o.onPosition(p):null);
+    }
+    return svg;
+  }
+
+  // Axonometric coordinates are (time, column, row). Projected disk coverage
+  // appears on the row/column walls, where it is determined by the engine.
+  function drawSpace(container,g,o) {
+    const m=g.beta.length, n=g.n, {film,cut}=filmInfo(g,o);
+    let [yl,yh]=heightRange(g,o,"top",film), [xl,xh]=heightRange(g,o,"bottom",film);
+    const segs=[], bridges=[], solid=new Set(g.solid);
+    function strand(t,h) {return [t,at(g.topWindows[t],h),h];}
+    const boundary=[];
+    for(let c=0;c<=m;c++) {
+      for(let h=yl;h<=yh;h++) {
+        const p=strand(c,h); xl=Math.min(xl,p[1]); xh=Math.max(xh,p[1]);
+        if(c===0||c===m) boundary.push(p);
+      }
+    }
+    for(let c=0;c<m;c++) {
+      const letter=g.beta[c],j=Math.abs(letter), isHollow=!solid.has(c+1);
+      for(let h=yl-1;h<=yh+1;h++) {
+        const r=mod(h-j,n), next=isHollow&&letter>0?(r===0?h+1:r===1?h-1:h):h;
+        if(Math.max(h,next)<yl||Math.min(h,next)>yh) continue;
+        let left=strand(c,h), right=strand(c+1,next);
+        // No finite padding is implied by the view. Only the displayed strip
+        // is clipped; the graph calculation is infinite and independent.
+        if(h<yl||h>yh||next<yl||next>yh) continue;
+        segs.push([left,right,h===n+1]);
+      }
+      if(solid.has(c+1)) {
+        const endpoints=eventEndpoints(g,c,"top",yl,yh);
+        for(const [a,b] of endpoints) {
+          if(a<yl||b>yh) continue;
+          bridges.push({p:c+1,sign:Math.sign(letter),lo:[c+.5,at(g.topWindows[c],a),a],
+            hi:[c+.5,at(g.topWindows[c],b),b]});
+        }
+      }
+    }
+    const wallX=xl-0.8, wallY=yl-.8, data=[];
+    const raw=(t,x,y)=>[t*2.9+(x-xl)*.49, -(y-yl)*.94-(x-xl)*.34];
+    for(const t of [0,Math.max(m,1)]) for(const x of [wallX,xh]) for(const y of [wallY,yh]) data.push(raw(t,x,y));
+    const xvals=data.map(p=>p[0]), yvals=data.map(p=>p[1]);
+    const xmin=Math.min(...xvals), xmax=Math.max(...xvals), ymin=Math.min(...yvals), ymax=Math.max(...yvals);
+    const W=Math.max(360,container.clientWidth||640,m*30+100), scale=Math.min((W-65)/Math.max(1,xmax-xmin),40);
+    const H=Math.max(180,(ymax-ymin)*scale+74), l=(W-(xmax-xmin)*scale)/2;
+    const proj=p=>{const [x,y]=raw(...p);return [l+(x-xmin)*scale,(H-28-(ymax-ymin)*scale)/2+(y-ymin)*scale];};
+    const svg=surface(container,W,H,"Axonometric affine strands and bridges with soap-film projections on the coordinate walls",Math.min(W,Math.max(344,m*27+75)));
+    const hatch=brush(svg);
+    function polygon(parent,coords,attrs) {return el(parent,"polygon",{points:points(coords.map(proj)),...attrs});}
+    const walls=el(svg,"g");
+    for(const [projection,range,toPoint] of [
+      ["top",[yl,yh],(t,h)=>[t,wallX,h]],["bottom",[xl,xh],(t,h)=>[t,h,wallY]]]) {
+      const [low,high]=range;
+      polygon(walls,[toPoint(0,low),toPoint(m,low),toPoint(m,high),toPoint(0,high)],{fill:projection==="top"?"#eef2eb":"#f3f3ed",stroke:P.grid,"stroke-width":1});
+      for(let h=low;h<=high;h++) {
+        const [x1,y1]=proj(toPoint(0,h)),[x2,y2]=proj(toPoint(m,h));
+        line(walls,x1,y1,x2,y2,{stroke:"#dbe1d7","stroke-width":.7});
+      }
+      if(o.showFilm&&film) {
+        // Each half-slab is a projected face. At a hollow crossing the two
+        // participating levels share their midpoint in that projection.
+        for(let c=0;c<m;c++) {
+          if(o.trace && c<cut) continue;
+          const own=(g.beta[c]>0)===(projection==="top"), hollow=!solid.has(c+1);
+          const ym=h=>{const r=mod(h-Math.abs(g.beta[c]),n);return own&&hollow?h+(r===0?.5:r===1?-.5:0):h;};
+          for(const [side, t] of [[c,c],[c+1,c+1]]) {
+            const counts=coverage(film,side,projection,n,!o.lifted);
+            for(let h=low;h<high;h++) {
+              const count=counts.get(o.lifted?h:residue(h,n))||0;
+              if(!count)continue;
+              const coords=[toPoint(t,h),toPoint(c+.5,ym(h)),toPoint(c+.5,ym(h+1)),toPoint(t,h+1)];
+              polygon(walls,coords,{fill:P.teal,opacity:Math.min(.4,.19+.07*(count-1))});
+              if(count>1) polygon(walls,coords,{fill:`url(#${hatch})`});
+            }
+          }
+        }
+      }
+    }
+    polygon(svg,[[cut,xl,yl],[cut,xh,yl],[cut,xh,yh],[cut,xl,yh]],{fill:P.teal,"fill-opacity":.045,stroke:P.teal,"stroke-width":.9,"stroke-dasharray":"3 4"});
+    const geom=el(svg,"g");
+    segs.sort((a,b)=>a[0][1]-b[0][1]);
+    for(const [p,q,ghost] of segs) {
+      const [x1,y1]=proj(p),[x2,y2]=proj(q);
+      line(geom,x1,y1,x2,y2,{stroke:P.paper,"stroke-width":3.7});
+      line(geom,x1,y1,x2,y2,{stroke:P.wire,"stroke-width":1.6,"stroke-dasharray":ghost?"4 3":null,opacity:ghost?.7:.91});
+    }
+    for(const p of boundary) {
+      const [x,y]=proj(p);el(geom,"circle",{cx:x,cy:y,r:2.1,fill:P.paper,stroke:P.wire,"stroke-width":.9});
+    }
+    for(const bridge of bridges) {
+      const {lo,hi,p,sign}=bridge, a=proj(lo),b=proj(hi), clr=p===o.birth?P.teal:p===o.activePosition?P.rust:P.ink;
+      const z=el(svg,"g",{"data-position":p});
+      line(z,...a,...b,{stroke:"transparent","stroke-width":13});
+      line(z,...a,...b,{stroke:clr,"stroke-width":p===o.birth?3.7:2.2});
+      for(const [point,filled] of [[a,sign>0],[b,sign<0]]) el(z,"circle",{cx:point[0],cy:point[1],r:3.4,fill:filled?clr:P.paper,stroke:clr,"stroke-width":1.5});
+      if(o.showLabels!==false) {const label=mid(a,b); txt(z,label[0]+5,label[1]-3,p,{"font-family":mono,fill:clr,"font-size":10,"paint-order":"stroke",stroke:P.paper,"stroke-width":2.8});}
+      activate(z,`Bridge at position ${p}`,o.onBirth?()=>o.onBirth(p):null);
+    }
+    txt(svg,13,H-9,o.showFilm&&film?"Film coverage on the row and column walls":"Strands in (time, column, row)",{"font-size":10});
+    txt(svg,W-12,H-9,`t = ${cut}`,{"text-anchor":"end","font-family":mono,fill:P.teal});
+    return svg;
+  }
+
+  function wiring(container,graph,options={}) {
+    const o={projection:"top",lifted:false,showFilm:true,showLabels:true,...options};
+    return o.projection==="space"?drawSpace(container,graph,o):drawProjection(container,graph,o);
+  }
+
+  function nodePositions(count,W,H) {
+    if(count===1)return [[W/2,H/2]];
+    if(count===2)return [[W*.27,H/2],[W*.73,H/2]];
+    const rx=Math.max(0,W/2-37),ry=Math.max(0,H/2-29);
+    return Array.from({length:count},(_,i)=>{
+      const angle=Math.PI*2*i/count-Math.PI/2;
+      return [W/2+rx*Math.cos(angle),H/2+ry*Math.sin(angle)];
+    });
+  }
+
+  function quiver(container,{nodes=[],edges=[],onSelect,ariaLabel="Directed weighted ice quiver"}={}) {
+    const size=nodes.length, W=Math.max(270,container.clientWidth||430,size*20+70);
+    const radii=nodes.map(n=>Math.max(13.5,Math.min(28,5+String(n.label??n.id).length*3.1)));
+    // At the ends of a wide ellipse the spacing is controlled by its height.
+    // Leave room for each native (i,k) label even with long input words.
+    const minGap=2*Math.max(13.5,...radii)+(nodes.some(n=>n.caption)?15:6);
+    const H=Math.max(152,Math.min(340,W*.48),size*minGap/Math.PI+58);
+    const svg=surface(container,W,H,ariaLabel,Math.min(W,Math.max(250,size*17+50)));
+    if(!size) {
+      txt(svg,W/2,H/2,"No vertices",{"text-anchor":"middle","font-size":14});
+      return svg;
+    }
+    const xy=nodePositions(size,W,H), byId=new Map(nodes.map((node,i)=>[String(node.id),i]));
+    const arrowGroup=el(svg,"g");
+    for(const [source,target,weight] of edges) {
+      const i=byId.get(String(source)), j=byId.get(String(target));
+      if(i==null||j==null||i===j) continue;
+      const [ax,ay]=xy[i],[bx,by]=xy[j], l=Math.hypot(bx-ax,by-ay);
+      if(!l) continue;
+      const dx=(bx-ax)/l,dy=(by-ay)/l;
+      const distance=(i)=>radii[i]*(nodes[i].frozen?1/Math.max(Math.abs(dx),Math.abs(dy)):1)+2;
+      const x1=ax+dx*distance(i), y1=ay+dy*distance(i), x2=bx-dx*distance(j),y2=by-dy*distance(j);
+      const ff=nodes[i].frozen&&nodes[j].frozen, hot=nodes[i].highlight||nodes[j].highlight;
+      const color=hot?P.teal:ff?"#929c98":P.wire;
+      const z=el(arrowGroup,"g");
+      el(z,"title",{},`${nodes[i].label??source} → ${nodes[j].label??target}, weight ${weight}`);
+      const length=7, breadth=3.35;
+      line(z,x1,y1,x2-length*.65*dx,y2-length*.65*dy,{stroke:color,"stroke-width":hot?2:1.45,"stroke-dasharray":ff?"3 2":null});
+      el(z,"polygon",{points:points([[x2,y2],[x2-length*dx+breadth*dy,y2-length*dy-breadth*dx],[x2-length*dx-breadth*dy,y2-length*dy+breadth*dx]]),fill:color});
+      if(String(weight)!=="1") {
+        const str=String(weight).replace(/^1\/2$/,"½");
+        // Slightly off midpoint to prevent a weight sitting at an edge crossing.
+        txt(z,x1+.57*(x2-x1)-dy*7,y1+.57*(y2-y1)+dx*7+3,str,{"text-anchor":"middle","font-family":mono,
+          "font-size":10,"font-weight":"650",fill:color,"paint-order":"stroke",stroke:P.paper,"stroke-width":4});
+      }
+    }
+    for(let i=0;i<size;i++) {
+      const node=nodes[i], [x,y]=xy[i], r=radii[i], hot=!!node.highlight;
+      const clr=hot?P.teal:node.frozen?P.muted:P.ink, fill=hot?"#e0eee5":node.frozen?"#eff0e9":P.white;
+      const group=el(svg,"g",{"data-node":String(node.id)});
+      if(hot) el(group,"circle",{cx:x,cy:y,r:r+4,fill:"none",stroke:"#a9ccc0","stroke-width":1.6});
+      if(node.frozen) el(group,"rect",{x:x-r,y:y-r,width:r*2,height:r*2,rx:2.5,fill,stroke:clr,"stroke-width":hot?2:1.45});
+      else el(group,"circle",{cx:x,cy:y,r,fill,stroke:clr,"stroke-width":hot?2:1.55});
+      txt(group,x,y+3.9,node.label??node.id,{"text-anchor":"middle",fill:clr,"font-size":11,"font-family":mono,"font-weight":hot?"700":"550"});
+      if(node.caption) txt(group,x,y+r+11,node.caption,{"text-anchor":"middle","font-family":mono,"font-size":8.5,"paint-order":"stroke",stroke:P.paper,"stroke-width":2.8});
+      activate(group,`${node.label??node.id}, ${node.frozen?"frozen":"mutable"}${node.caption?" · "+node.caption:""}`,
+        onSelect?()=>onSelect(node.id):null);
+    }
+    return svg;
+  }
+
+  globalThis.QuiverDraw=Object.freeze({wiring,quiver});
+})();
+</script>
+<script>/* Interface for the two independent engines. All correspondence verdicts
+   compare computed vertices, frozen flags and oriented, weighted ice arrows. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const presets = [
+    {name:'Winding film', n:3, beta:[1,2,3,1,2,3,1,2,3], v:[1,2,3,1,2], cut:2},
+    {name:'Double arrow', n:3, beta:[1,2,3,1,2,3], v:[1]},
+    {name:'Frozen boundary', n:4, beta:[1,2,3,2,1], v:[2]},
+    {name:'Bao–Ye example 5.3', n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1].reverse(), v:[2,1,3,5,4,2].reverse()},
+    {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]}
+  ];
+  let model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
+  const word = letters => letters.length ? letters.join(' ') : 'e';
+  const native = id => '(' + id + ')';
+  const compareNumbers = (a,b) => a-b;
+  const opt = (text,value) => new Option(text,String(value));
+  function el(tag,text,cls) {
+    const node=document.createElement(tag);
+    if(text!==undefined) node.textContent=text;
+    if(cls) node.className=cls;
+    return node;
+  }
+  function parseWord(input,n,name,allowSigns) {
+    let s=input.trim().toLowerCase();
+    if(['','e','id','identity','[]','()','∅'].includes(s)) return [];
+    s=s.replace(/−/g,'-').replace(/s_?\{?(\d+)\}?/g,' $1 ').trim();
+    if(s.startsWith('[')&&s.endsWith(']') || s.startsWith('(')&&s.endsWith(')')) s=s.slice(1,-1).trim();
+    let tokens=/^\d+$/.test(s)&&n<=9&&s.length>1 ? s.split('') : s.split(/[\s,]+/);
+    if(tokens.length>48) throw new Error(name+' may have at most 48 letters in this explorer.');
+    return tokens.map(t => {
+      if(!/^-?\d+$/.test(t)) throw new Error('Separate the letters of '+name+' with spaces or commas.');
+      const magnitude=Math.abs(Number(t)) || n;
+      if(!Number.isSafeInteger(magnitude)||magnitude>n) throw new Error('Each generator of '+name+' must be in 1…'+n+' (0 also denotes s₀).');
+      if(t.startsWith('-')&&!allowSigns) throw new Error('The reduced target v uses positive generators.');
+      return t.startsWith('-')?-magnitude:magnitude;
+    });
+  }
+
+  function verdict(graph,step) {
+    const positions=step.active.map(id=>step.mapping[id]).sort(compareNumbers);
+    const frozen=step.frozen.map(id=>step.mapping[id]).sort(compareNumbers);
+    const frozenIds=new Set(step.frozen);
+    const paperArrows=step.edges.filter(([x,y])=>!(frozenIds.has(x)&&frozenIds.has(y)))
+      .map(([x,y,w])=>[step.mapping[x],step.mapping[y],String(w)]);
+    const signatures=arrows=>arrows.map(([x,y,w])=>x+'>'+y+'@'+w).sort().join('|');
+    const diff=[];
+    if(positions.join()!==graph.solid.join()) diff.push('vertex positions');
+    if(frozen.join()!==graph.frozen.join()) diff.push('frozen vertices');
+    if(signatures(paperArrows)!==signatures(graph.arrows)) diff.push('weighted arrows');
+    return {matches:!diff.length,diff};
+  }
+
+  function createModel(n,beta,v) {
+    const graph=QuiverFilm.compute(n,beta,v);
+    const paper=beta.every(x=>x>0)?QuiverPaper.compute(n,beta,v):null;
+    const stages=new Map(),boundaries=[];
+    if(paper) {
+      paper.snapshots.forEach((s,i)=>{
+        if(!s.boundary) return;
+        const g=i===paper.snapshots.length-1 ? graph : QuiverFilm.compute(n,beta,s.target);
+        stages.set(s.stage,{graph:g,snapshot:s,check:verdict(g,s)});
+        boundaries.push(i);
+      });
+    }
+    return {n,beta,v,graph,paper,stages,boundaries};
+  }
+  function context() {
+    const p=model.paper;
+    if(!p) return {g:model.graph,s:null,prev:null,check:null};
+    const s=p.snapshots[index],stage=model.stages.get(s.boundary?s.stage:s.stage-1);
+    return {g:stage.graph,s,prev:stage.snapshot,check:s.boundary?stage.check:null};
+  }
+  function describeStep(s) {
+    if(s.type==='initial') return 'Initial seed';
+    if(s.type==='mutate') return 'Mutate '+native(s.focus);
+    if(s.type==='freeze') return 'Freeze neighbors of '+native(s.focus);
+    return 'Delete '+native(s.focus);
+  }
+  function setIndex(i,selectPaper=true) {
+    if(!model.paper) return;
+    index=Math.max(0,Math.min(i,model.paper.snapshots.length-1));
+    activeCross=null;
+    if(selectPaper) qView='paper';
+    render();
+  }
+  function build(preset) {
+    try {
+      const n=Number($('rank').value);
+      if(!Number.isInteger(n)||n<3||n>24) throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
+      const beta=parseWord($('beta').value,n,'β',true), v=parseWord($('target').value,n,'v',false);
+      const next=createModel(n,beta,v);
+      model=next; index=model.paper?model.paper.snapshots.length-1:0;
+      birth=model.graph.solid.at(-1)??null;
+      cut=birth===null?0:Math.min(preset?.cut??birth-1,birth-1);
+      activeCross=null;qView='plabic';trace=false;
+      $('inputError').hidden=true;
+      if(!preset) $('examples').value='custom';
+      $('stepList').replaceChildren(...(model.paper?model.paper.snapshots.map((s,i)=>opt(i+' · '+describeStep(s),i)):[]));
+      render();
+    } catch(err) {
+      $('inputError').textContent=(err.message||String(err))+(model?' The diagram still shows the last valid input.':'');
+      $('inputError').hidden=false;
+    }
+  }
+  function loadPreset(i) {
+    const p=presets[i];
+    $('rank').value=p.n; $('beta').value=word(p.beta); $('target').value=word(p.v); $('examples').value=String(i);
+    build(p);
+  }
+  function renderTimeline({s,prev}) {
+    const controls=['stepList','stepRange','firstStep','prevStep','nextStep','lastStep'];
+    if(!s) {
+      $('stageCount').textContent='Signed braid';
+      $('stepCount').textContent='Plabic construction';
+      controls.forEach(id=>$(id).disabled=true);
+      $('stepInfo').textContent='The Bao–Ye comparison in this explorer uses positive braid words. The signed plabic diagram and its quiver are shown below.';
+      return;
+    }
+    controls.forEach(id=>$(id).disabled=false);
+    const end=model.paper.snapshots.length-1;
+    $('stageCount').textContent='Stage '+s.stage+' / '+model.paper.stages.length;
+    $('stepCount').textContent='Step '+index+' / '+end;
+    $('stepList').value=String(index);$('stepRange').max=end;$('stepRange').value=index;$('stepRange').disabled=end===0;
+    $('firstStep').disabled=$('prevStep').disabled=index===0;
+    $('nextStep').disabled=$('lastStep').disabled=index===end;
+    let msg;
+    if(s.type==='initial') msg='Start with the amalgamated word seed for target e. Each word position is a vertex.';
+    else {
+      const pos='β position '+s.selectedPosition+' (generator '+s.letter+')';
+      if(s.type==='mutate') msg='For '+pos+', mutate native vertex '+native(s.focus)+'. The diagram stays at the completed target '+word(prev.target)+'.';
+      if(s.type==='freeze') msg='For '+pos+', freeze neighbors of '+native(s.focus)+'. Newly frozen: '+(s.newlyFrozen.map(native).join(', ')||'none')+'.';
+      if(s.type==='delete') msg='Removed '+native(s.focus)+' for '+pos+'. Compare both constructions at target '+word(s.target)+'.';
+    }
+    $('stepInfo').textContent=msg;
+  }
+  function pickBirth(p) {
+    const {g}=context();
+    if(!g.solid.includes(Number(p))) return;
+    birth=Number(p);cut=birth-1;activeCross=null;render();
+  }
+  function selectCross(p) {
+    const i=model.paper?.snapshots.findIndex(s=>s.type==='delete'&&s.selectedPosition===p)??-1;
+    if(i>=0) setIndex(i); else {activeCross=p;render();}
+  }
+  function renderFilm({g,s,prev}) {
+    const sel=$('filmSelect');
+    if(!g.solid.includes(birth)){birth=g.solid.at(-1)??null;cut=birth===null?0:birth-1;}
+    const end=birth===null?0:birth-1;
+    cut=Math.max(0,Math.min(cut,end));
+    sel.replaceChildren(...(g.solid.length?g.solid.map(p=>opt('Position '+p+(g.frozen.includes(p)?' · frozen':' · mutable'),p)):[opt('No solid bridges','')]));
+    sel.disabled=birth===null;if(birth!==null) sel.value=String(birth);
+    $('cutLabel').textContent='Cut '+cut;$('cutRange').max=end;$('cutRange').value=cut;$('cutRange').disabled=end===0;
+    $('cutBack').disabled=cut===0;$('cutForward').disabled=cut>=end;
+    const target=prev?word(prev.target):word(model.v);
+    $('wireTarget').textContent=(s&&!s.boundary?'Previous stage':'Graph target')+' · v = '+target;
+    const config={projection, trace, lifted:$('lift').checked, showFilm:$('showFilm').checked,showLabels:$('labels').checked,birth,cut,activePosition:trace&&birth!==null?cut+1:(activeCross??s?.selectedPosition??null),onBirth:pickBirth,onPosition:selectCross};
+    QuiverDraw.wiring($('wiring'),g,config);
+    $('traceMode').disabled=birth===null; $('traceMode').textContent=trace?'Show full film':'Trace from birth'; $('traceMode').setAttribute('aria-pressed',String(trace));
+    if(birth===null){$('filmInfo').textContent='There are no solid bridges for this target.';return;}
+    const c=g.films[birth].cuts[cut], side=projection==='bottom'?'bottom':'top';
+    const hs=c[side], counts=new Map();
+    for(const h of hs){const r=((h-1)%model.n+model.n)%model.n+1;counts.set(r,(counts.get(r)||0)+1);}
+    const folded=[...counts.entries()].sort((x,y)=>x[0]-y[0]).map(([h,k])=>k===1?String(h):h+' × '+k).join(', ');
+    let note=hs.length?'Lifted heights '+hs.join(', ')+' · Folded heights '+folded+'.':'The disk has closed by this cut.';
+    if(projection==='space') note='Top projection · '+note;
+    if(trace) {
+      if(cut===birth-1) note='Born at solid bridge '+birth+'. '+note;
+      else {
+        const earlier=g.films[birth].cuts[cut+1][side];
+        const gained=hs.filter(h=>!earlier.includes(h)), lost=earlier.filter(h=>!hs.includes(h));
+        const change=[gained.length?'gained '+gained.join(', '):'',lost.length?'lost '+lost.join(', '):''].filter(Boolean).join(' and ');
+        note='Across '+(g.solid.includes(cut+1)?'solid':'hollow')+' position '+(cut+1)+', the projection '+(change||'kept the same heights')+'. '+note;
+      }
+    }
+    $('filmInfo').textContent='Film '+birth+' at cut '+cut+'. '+note;
+  }
+  function graphView(g) {
+    return {nodes:g.solid.map(p=>({id:p,label:String(p),frozen:g.frozen.includes(p),highlight:p===birth})),edges:g.arrows,onSelect:pickBirth,ariaLabel:'Weighted plabic exchange quiver'};
+  }
+  function paperView(s) {
+    const f=new Set(s.frozen);
+    let edges=s.edges;
+    if(!$('showFF').checked) edges=edges.filter(([x,y])=>!(f.has(x)&&f.has(y)));
+    return {nodes:s.active.map(id=>({id,label:s.boundary?String(s.mapping[id]):native(id),
+      caption:s.boundary?native(id):'',frozen:f.has(id),highlight:s.boundary?s.mapping[id]===birth:s.focus===id||s.newlyFrozen.includes(id)})),edges,
+      onSelect:(id)=>{if(s.boundary) pickBirth(s.mapping[id]);else $('qNote').textContent='Native vertex '+native(id)+' is '+(f.has(id)?'frozen':'mutable')+' in this paper seed.';},
+      ariaLabel:'Weighted Bao–Ye seed in the aligned arrow convention'};
+  }
+  function renderQuiver({g,s,check}) {
+    const paperButton=$('quiverViews').querySelector('[data-q="paper"]');
+    paperButton.disabled=!s;
+    const paperMode=qView==='paper'&&s;
+    for(const b of $('quiverViews').querySelectorAll('button')) b.setAttribute('aria-pressed',String(b.dataset.q===qView));
+    $('ffLabel').hidden=!paperMode;
+    const tag=$('matchTag');
+    const state=check?(check.matches?'match':'mismatch'):(s?'intermediate':'signed');
+    tag.dataset.state=state;
+    tag.textContent={match:'✓ Match',mismatch:'Mismatch',intermediate:'In progress',signed:'Plabic only'}[state];
+    const graph=paperMode?paperView(s):graphView(g);
+    $('quiverSubtitle').textContent=paperMode?(s.boundary?'β positions · native labels below':'Native vertices (i,k)'):'Original β positions';
+    QuiverDraw.quiver($('quiver'),graph);
+    const totalFrozen=graph.nodes.filter(x=>x.frozen).length;
+    $('qCounts').textContent=(graph.nodes.length-totalFrozen)+' mutable · '+totalFrozen+' frozen';
+    $('qNote').textContent=check?(check.matches?'The two quivers agree on positions, frozen vertices, and weighted arrows.':'Differences in '+check.diff.join(', ')+'. Open the matrices to inspect them.')
+      :s?'The paper is between completed stages. After deletion, the explorer checks the next plabic quiver.':'The figure shows the signed plabic quiver.';
+  }
+  function matrixTable(nodes,edges,full=false) {
+    const wrap=el('div',undefined,'table-wrap'), table=el('table'), header=el('tr');
+    const cols=full?nodes:nodes.filter(x=>!x.frozen);
+    if(!cols.length){wrap.append(el('p','Matrix dimensions '+nodes.length+' × 0. No mutable columns.'));return wrap;}
+    header.append(el('th','row / col'));
+    cols.forEach(x=>header.append(el('th',x.label)));table.append(header);
+    const vals=new Map();
+    for(const [a,b,w] of edges){vals.set(a+'>'+b,String(w));vals.set(b+'>'+a,'−'+w);}
+    for(const row of nodes){
+      const tr=el('tr');tr.append(el('th',row.label));
+      for(const col of cols)tr.append(el('td',vals.get(row.id+'>'+col.id)??'0'));
+      table.append(tr);
+    }
+    wrap.append(table);return wrap;
+  }
+  function renderData({g,s,prev,check}) {
+    if(!$('dataPanel').open)return;
+    const box=$('dataBody');box.replaceChildren();
+    if(s){
+      const recipe=el('div',undefined,'recipe');
+      recipe.append(el('h3','Stage '+s.stage));
+      recipe.append(el('p','Paper input β (reversed): '+word(model.paper.paperBeta)+'. Selected original β positions in recursion order: '+(model.paper.selectedPositions.join(', ')||'none')+'.'));
+      if(s.stage) recipe.append(el('p','At paper position '+s.selectedPaperPosition+', generator '+s.letter+' has a = '+s.a+' selected occurrence'+(s.a===1?'':'s')+' through this letter and b = '+s.b+' earlier omissions. Mutations: '+(s.mutations.map(native).join(' → ')||'none')+'. Freeze neighbors of '+native(s.deleteVertex)+', then delete it.'));
+      box.append(recipe);
+      if(s.boundary) {
+        box.append(el('h3','Paper vertex → original β position'));
+        const chips=el('div',undefined,'map-row');for(const id of s.active){
+          const b=el('button',native(id)+' → '+s.mapping[id],'map-chip');b.addEventListener('click',()=>pickBirth(s.mapping[id]));chips.append(b);
+        }
+        box.append(chips);
+      }else box.append(el('p','The graph matrix is for the previous completed target '+word(prev.target)+'. The native paper matrix shows the current operation.'));
+      if(check&&!check.matches)box.append(el('p','Differences in '+check.diff.join(', ')+'.','mismatch-text'));
+    }
+    const panels=el('div',undefined,'matrix-pair'),left=el('div');
+    left.append(el('h3','Plabic exchange matrix'),matrixTable(graphView(g).nodes,g.arrows));panels.append(left);
+    if(s){
+      const view=paperView(s), right=el('div');
+      if(s.boundary) view.nodes.sort((a,b)=>s.mapping[a.id]-s.mapping[b.id]);
+      const full=qView==='paper'&&$('showFF').checked;
+      right.append(el('h3',full?'Bao–Ye full seed matrix':'Bao–Ye exchange matrix'),matrixTable(view.nodes,s.edges,full));panels.append(right);
+    }
+    box.append(panels,el('p','Positive entry in row p and column q means p → q. Exchange matrices have all vertices as rows and mutable vertices as columns.'));
+  }
+  function render() {
+    if(!model)return;
+    const ctx=context();
+    renderTimeline(ctx);renderFilm(ctx);renderQuiver(ctx);renderData(ctx);
+  }
+  for(let i=0;i<presets.length;i++) $('examples').append(opt(presets[i].name,i));
+  const custom=opt('Custom words','custom');custom.disabled=true;$('examples').append(custom);
+  $('examples').addEventListener('change',e=>loadPreset(Number(e.target.value)));
+  $('wordForm').addEventListener('submit',e=>{e.preventDefault();build(null);});
+  $('wordForm').addEventListener('input',()=>{$('inputError').textContent='Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;});
+  $('firstStep').onclick=()=>setIndex(0);$('lastStep').onclick=()=>setIndex(model.paper.snapshots.length-1);
+  $('prevStep').onclick=()=>setIndex(index-1);$('nextStep').onclick=()=>setIndex(index+1);
+  $('stepRange').oninput=$('stepList').onchange=e=>setIndex(Number(e.target.value));
+  $('filmSelect').onchange=e=>pickBirth(Number(e.target.value));
+  $('cutBack').onclick=()=>{cut--;render();};$('cutForward').onclick=()=>{cut++;render();};
+  $('cutRange').oninput=e=>{cut=Number(e.target.value);render();};
+  $('traceMode').onclick=()=>{trace=!trace;if(trace&&birth!==null){cut=birth-1;$('showFilm').checked=true;} render();};
+  for(const id of ['showFilm','labels','lift','showFF']) $(id).onchange=render;
+  for(const b of $('projections').querySelectorAll('button'))b.onclick=()=>{
+    projection=b.dataset.view;for(const btn of $('projections').querySelectorAll('button'))btn.setAttribute('aria-pressed',String(btn===b));render();
+  };
+  for(const b of $('quiverViews').querySelectorAll('button'))b.onclick=()=>{qView=b.dataset.q;render();};
+  $('dataPanel').addEventListener('toggle',()=>{if(model)renderData(context());});
+  $('guideOpen').onclick=()=>$('guide').showModal();$('guideClose').onclick=()=>$('guide').close();
+  $('guide').addEventListener('click',e=>{if(e.target===$('guide'))$('guide').close();});
+  let resizeToken;window.addEventListener('resize',()=>{clearTimeout(resizeToken);resizeToken=setTimeout(render,100);});
+  loadPreset(0);
+})();
+</script>
+</body>
+</html>
