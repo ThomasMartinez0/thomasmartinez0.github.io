@@ -17,6 +17,7 @@ sitemap: false
 @media(min-width:1550px){.workspace{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}}@media(max-width:900px){.workspace{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}.card-head{flex-wrap:wrap}.quiver-tools{flex-wrap:wrap}.intro{gap:15px}h1{font-size:43px}.checks{gap:7px}.wire-legend{gap:8px}}@media(max-width:700px){.mast-inner{height:50px}.intro{align-items:start;flex-wrap:wrap;padding:20px 0 13px;gap:12px}.intro p{font-size:13px}.example-label{display:flex;align-items:center;gap:8px;align-self:auto}.example-label select{padding:3px 6px}.word-form{grid-template-columns:68px minmax(0,1fr);gap:9px;padding:12px}.field.target{grid-column:1/3}.build{grid-column:1/3}.workspace{grid-template-columns:minmax(0,1fr)}.timeline{padding:11px 12px}.timeline-info{gap:5px;flex-wrap:wrap}.timeline-info input[type=range]{flex:1 1 75px}.timeline-line{flex-wrap:wrap;gap:8px}.wire-card .diagram-box{min-height:185px}.quiver-card .diagram-box{min-height:160px}.card-head{align-items:center;flex-wrap:wrap}.matrix-pair{grid-template-columns:1fr}.mast-inner,main{padding-left:13px;padding-right:13px}.brand{font-size:18px}.brand-mark{width:28px;height:28px}.step-picker select{max-width:205px}.quiver-note{min-height:0}.film-section{padding:9px 12px}.help{font-size:12px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
 .brand span,.help{white-space:nowrap}.help-icon{flex:none}#firstStep{gap:4px;padding:0 7px}#firstStep small{font:600 12px var(--sans)}.step-picker{max-width:100%;min-width:0}.step-picker>span{white-space:nowrap}.step-picker select{min-width:0;text-overflow:ellipsis}.diagram-box{align-items:safe center}.trace-line{display:flex;align-items:start;justify-content:space-between;gap:7px}.trace-line button{font-size:11px;white-space:nowrap;background:transparent;color:var(--teal);text-decoration:underline;text-underline-offset:2px;padding:0}.recipe{border-left:2px solid #b3cbbe;padding:1px 9px 1px 12px}.recipe p+p{margin-top:4px}@media(max-width:390px){h1{font-size:36px}.brand{gap:6px;font-size:16px}.help{gap:4px;font-size:11px}.trace-line{flex-wrap:wrap}.step-picker{width:100%}.step-picker select{flex:1}.timeline-info input[type=range]{flex-basis:100%}}
+.modebar,.move-options,.mut-sites,.geom-head,.subword-strip,.reading,#cycleControls,#chartControls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.modebar{justify-content:space-between;margin:14px 0 7px}.modes{background:#e6ebe1}.modes button{padding:6px 14px;font-size:13px}.reading,.move-options label,#cycleControls label{font-size:12px;color:var(--muted)}.reading select,.move-options select,#cycleControls select{font-size:12px;padding:5px 7px}.subword-strip{gap:4px;padding:4px 0 9px;font:12px var(--mono)}.subword-strip .ss-label{font:12px var(--sans);color:var(--muted);margin-right:4px}.subword-strip .token{padding:1px 5px;border:1px solid #d7ddd2;background:#fcfcf8;border-radius:4px}.subword-strip .chosen{color:#174f47;background:#d8ece3;border-color:#85b4a5;font-weight:700}.subword-strip .token.now{outline:2px solid #b57346}.action-panel{padding:14px 18px 12px;border-left:3px solid #6a978d;margin:0 0 15px}.action-panel h2{font-size:20px}.move-options{margin-top:10px;gap:8px}.move-options select{max-width:min(450px,76vw)}.move-options .primary{font-size:12px;height:30px;padding:4px 12px}.mut-sites{margin-top:9px;font-size:12px;color:var(--muted);gap:5px}.mut-sites button{padding:2px 7px;border:1px solid var(--line);border-radius:4px;background:#f5f6ef;font:12px var(--mono)}.mut-sites button[aria-pressed=true]{background:#dcece3;border-color:#79aa9d}.geometry{border-top:1px solid var(--line);padding-top:9px;margin-top:9px}.geom-head{justify-content:space-between}.geom-head b{font-size:13px}#cycleControls,#chartControls{margin-top:7px}.formula{font:12px var(--mono);overflow-wrap:anywhere;color:var(--deep)}.timeline{margin-top:0}.ss-label:last-child{margin-left:6px}.geometry p{line-height:1.5}.geom-head .seg button{font-size:11px}.match-tag[data-state=preview]{color:#6e5b37;background:#f1eddf}.body-note{font-size:12px;color:var(--muted)}@media(max-width:550px){.move-options label{width:100%}.move-options select{max-width:100%}.modebar{gap:7px}.reading{gap:4px}.modes button{padding:5px 7px}.geometry .seg{flex-wrap:wrap}.action-panel{padding:11px 12px}.subword-strip{row-gap:5px}}
 </style>
 </head>
 <body>
@@ -27,7 +28,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine quiver explorer</h1><p>Trace a soap film through the wiring and follow the Bao–Ye recursion on the same words.</p></div>
+ <div class="intro"><div><h1>Affine quiver explorer</h1><p>Apply a braid move, follow its soap films, and compare each mutation with the Bao–Ye recursion.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -37,11 +38,21 @@ sitemap: false
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
  <p id="inputError" class="error" role="alert" hidden></p>
- <section class="timeline panel" aria-labelledby="recTitle">
+ <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="wordTab" aria-pressed="true">Word moves</button><button type="button" id="recTab" aria-pressed="false">Bao–Ye steps</button></div>
+ <label class="reading">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
+ <div id="subwordStrip" aria-label="Selected subexpression of beta" class="subword-strip"></div>
+ <section id="wordPanel" class="panel action-panel" aria-labelledby="moveTitle"><div class="timeline-line"><div class="row"><h2 id="moveTitle">Change the braid word</h2><span id="moveCount" class="chip"></span></div><button id="undoMove" class="nextbtn" disabled>↶ Undo move</button></div>
+ <div class="move-options"><label><span>Adjacent relation</span> <select id="moveSelect" aria-label="Preview a word relation"></select></label><button id="applyMove" class="primary">Apply move</button></div>
+ <p id="moveInfo" class="step-info"></p><div id="mutSites" class="mut-sites" aria-label="Mutable vertices"></div><p id="lastAction" class="step-info" aria-live="polite"></p></section>
+ <section id="recPanel" class="timeline panel" aria-labelledby="recTitle">
   <div class="timeline-line"><div class="row"><span class="tiny-icon" aria-hidden="true">⇄</span><h2 id="recTitle">Bao–Ye recursion</h2><span id="stageCount" class="chip"></span></div>
    <div class="timeline-actions"><button id="firstStep" class="iconbtn" title="Initial seed" aria-label="Go to initial seed">⇤ <small>Start</small></button><button id="prevStep" class="iconbtn" title="Previous step" aria-label="Previous recursion step">←</button><button id="nextStep" class="nextbtn" aria-label="Next recursion step">Next step <span aria-hidden="true">→</span></button><button id="lastStep" class="iconbtn" title="Final seed" aria-label="Go to final seed">⇥</button></div></div>
   <div class="timeline-info"><label class="step-picker"><span id="stepCount"></span><select id="stepList" aria-label="Choose recursion step"></select></label><input type="range" id="stepRange" aria-label="Bao–Ye recursion step" min="0" max="1" value="0"></div>
   <p id="stepInfo" class="step-info"></p>
+  <div id="geometryPanel" class="geometry" hidden><div class="geom-head"><b>Graph realization</b><div class="seg" id="geomChoices"><button type="button" data-geom="cycles">Full graph cycles</button><button type="button" data-geom="chart">Local signed word</button><button type="button" data-geom="positive">Positive word</button></div></div>
+  <div id="cycleControls"><label>Relative cycle <select id="cycleSelect" aria-label="Relative cycle"></select></label> <span id="cycleFormula" class="formula"></span></div>
+  <div id="chartControls"><span class="seg" id="chartChoices"><button type="button" data-chart="before">Before swap</button><button type="button" data-chart="after">After swap</button></span><span id="chartWord" class="formula"></span></div>
+  <p id="geometryInfo" class="step-info"></p></div>
  </section>
  <div class="workspace">
  <section class="panel wire-card" aria-labelledby="wireTitle">
@@ -64,16 +75,19 @@ sitemap: false
  </section>
  </div>
  <details class="panel data-panel" id="dataPanel"><summary>Stage details, vertex map &amp; exchange matrices <span aria-hidden="true">+</span></summary><div class="data-body" id="dataBody"></div></details>
- <footer><span>Constructions</span><a href="https://arxiv.org/html/2210.04778v3#S3.SS6" target="_blank" rel="noopener noreferrer">GLSBS, §§3.6–3.7 ↗</a><a href="https://arxiv.org/html/2506.10382v2#S5.SS3" target="_blank" rel="noopener noreferrer">Bao–Ye, §5 ↗</a></footer>
+ <footer><span>Constructions</span><a href="https://arxiv.org/html/2210.04778v3#S3.SS6" target="_blank" rel="noopener noreferrer">GLSBS, §3 ↗</a><a href="https://arxiv.org/html/2210.04778v3#S4.SS3" target="_blank" rel="noopener noreferrer">Square moves ↗</a><a href="https://arxiv.org/html/2506.10382v2#S4.SS3" target="_blank" rel="noopener noreferrer">Signed chart ↗</a><a href="https://arxiv.org/html/2506.10382v2#S5.SS3" target="_blank" rel="noopener noreferrer">Bao–Ye, §5 ↗</a></footer>
 </main>
 <dialog id="guide"><div class="guide-head"><h2>Reading the explorer</h2><button id="guideClose" class="iconbtn" aria-label="Close reading guide">×</button></div>
 <div class="guide-body">
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>The target <i>v</i> must be reduced and feasible in <i>β</i>. Positive <i>β</i> enables both constructions, including nonreduced braids. Negative letters in <i>β</i> switch to the signed plabic diagram.</p>
-<h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to start at cut <i>d−1</i>, then step left to build the film one crossing at a time. A cut numbered <i>c</i> lies after the first <i>c</i> letters. The film is frozen when it reaches cut 0.</p>
+<h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. Rightmost mode restores the earlier convention. Switching modes recomputes the seed for the words in the form.</p>
+<p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
+<h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
 <p>Top and Bottom show the two projections. Lifts shows integer heights before reducing modulo <i>n</i>. Several heights can cover the same face, so a film can contribute more than once. The 3D view shows the periodic strand diagram schematically, with film coverage on the two coordinate walls.</p>
-<h3>Step through Bao–Ye</h3><p>Build opens the final quiver. Use the first-step arrow to return to the initial seed, then advance through individual mutations, freezes, and deletions. At the initial seed and after each deletion, the explorer computes the plabic quiver independently for that stage’s partial target. During mutations and freezes, the diagram shows the preceding completed stage.</p>
-<p>The paper reads the reversed words and chooses a leftmost subexpression. The plabic diagram reads the entered words using a rightmost subexpression. Arrow directions are reversed once to align conventions. After each deletion, native vertex (<i>i,k</i>) corresponds to the <i>k</i>th omitted <i>i</i> in reversed <i>β</i>, reflected back to its original word position.</p>
+<h3>Step through Bao–Ye</h3><p>Open Bao–Ye steps and advance from the initial seed. At a mutation, choose Full graph cycles to see the changed basis in the preceding graph. The cycle being mutated reverses sign. A neighboring cycle can acquire an integer multiple of it. Each colored component represents a constituent film with its signed coefficient; the resulting relative homology class can have several terms.</p>
+<p>Local signed word shows the moving barred generator on the auxiliary word for the current stage. The displayed square move acts on this local chart. Positive word becomes available when a verified sequence of adjacent positive moves from the stage’s starting word realizes the current mutation. The full-graph view checks the entire ice quiver against the paper. After deletion the explorer independently rebuilds the plabic graph at the new partial target.</p>
+<p>In Leftmost mode, native label (<i>i,k</i>) corresponds at each completed stage to the <i>k</i>th omitted <i>i</i> from the left. In Rightmost mode, count from the right instead. The marker highlights the chosen word position in either convention.</p>
 <p><b>Match</b> checks the same word positions, frozen vertices and weighted arrows incident to a mutable vertex. On the paper view, Frozen edges also shows the frozen–frozen entries, including halves, retained during mutation. Agreement is checked for the displayed input and stage.</p>
 </div></dialog>
 <noscript>This explorer needs JavaScript to compute the two quivers.</noscript>
@@ -553,6 +567,12 @@ sitemap: false
   const mod=(v,n)=>((v%n)+n)%n;
   const residue=(v,n)=>mod(v-1,n)+1;
   const at=(w,k)=>w[mod(k-1,w.length)]+w.length*Math.floor((k-1)/w.length);
+  // All mathematics and callbacks use raw positions. Mirroring only the time
+  // axis presents the leftmost input word and the film extending to its right.
+  const position=(g,o,p)=>o.leftmost?g.beta.length+1-p:p;
+  const time=(g,o,t)=>o.leftmost?g.beta.length-t:t;
+  const readableInt=n=>n<0n?"−"+(-n):n>0n?"+"+n:"0";
+  const compact=s=>s.length>9?s.slice(0,7)+"…":s;
 
   function surface(container,width,height,aria,minWidth=0) {
     container.replaceChildren();
@@ -581,10 +601,11 @@ sitemap: false
     const f=g.films[o.birth];
     return {film:f, cut:Math.min(g.beta.length,Math.max(0,Number(o.cut)||0))};
   }
-  function heightRange(g,o,projection,film) {
+  function heightRange(g,o,projection,film,cycle) {
     let lo=1, hi=g.n+1;
-    if(o.lifted && film) {
-      for(const cut of film.cuts) for(const h of cut?.[projection]||[]) {
+    if(o.lifted) {
+      const films=cycle?cycle.map(t=>t.film):(film?[film]:[]);
+      for(const f of films) for(const cut of f.cuts) for(const h of cut?.[projection]||[]) {
         lo=Math.min(lo,h); hi=Math.max(hi,h+1);
       }
     }
@@ -598,12 +619,120 @@ sitemap: false
     }
     return m;
   }
-  function brush(svg) {
+  function brush(svg,color=P.teal,angle=36) {
     const id="film-hatch-"+(++serial);
     const defs=el(svg,"defs");
-    const hatch=el(defs,"pattern",{id,patternUnits:"userSpaceOnUse",width:5,height:5,patternTransform:"rotate(36)"});
-    line(hatch,0,0,0,5,{stroke:P.teal,"stroke-width":1.35,opacity:0.6});
+    const hatch=el(defs,"pattern",{id,patternUnits:"userSpaceOnUse",width:5,height:5,patternTransform:`rotate(${angle})`});
+    line(hatch,0,0,0,5,{stroke:color,"stroke-width":1.35,opacity:0.6});
     return id;
+  }
+
+  // A relative cycle may be an integral linear combination of the disk
+  // boundaries. Keep coefficients exact and retain canceling face terms.
+  function cycleInfo(g,o) {
+    if(!Array.isArray(o.cycleTerms)) return null;
+    const byBirth=new Map();
+    for(const term of o.cycleTerms) {
+      const birth=Number(term.birth),coefficient=BigInt(term.coefficient);
+      if(!g.films[birth])throw new Error("Cycle term has no disk at position "+birth+".");
+      byBirth.set(birth,(byBirth.get(birth)||0n)+coefficient);
+    }
+    return [...byBirth].filter(([,n])=>n!==0n).map(([birth,coefficient])=>
+      ({birth,coefficient,film:g.films[birth]}));
+  }
+  function faceCoverage(g,o,film,cycle,c,projection) {
+    if(!cycle)return coverage(film,c,projection,g.n,!o.lifted);
+    const faces=new Map();
+    for(const term of cycle) {
+      for(const [h,sheets] of coverage(term.film,c,projection,g.n,!o.lifted)) {
+        if(!faces.has(h))faces.set(h,{sum:0n,parts:[]});
+        const f=faces.get(h);
+        f.sum+=term.coefficient*BigInt(sheets);
+        f.parts.push({birth:term.birth,coefficient:term.coefficient,sheets});
+      }
+    }
+    return faces;
+  }
+  function faceTextures(svg,cycle) {
+    const plus=brush(svg);
+    return cycle?{plus,minus:brush(svg,P.rust,-36),zero:brush(svg,P.gray,0)}:{plus};
+  }
+  function paintFace(parent,shape,entry,textures,g,o) {
+    if(typeof entry==="number") {
+      el(parent,"polygon",{...shape,fill:P.teal,opacity:Math.min(.36,.14+.072*(entry-1))});
+      if(entry>1)el(parent,"polygon",{...shape,fill:`url(#${textures.plus})`});
+      return;
+    }
+    const {sum,parts}=entry, clr=sum>0n?P.teal:sum<0n?P.rust:P.gray;
+    const group=el(parent,"g",{"data-formal-sum":String(sum)});
+    el(group,"title",{},"Signed projection "+readableInt(sum)+". "+
+      parts.map(p=>readableInt(p.coefficient)+" C"+position(g,o,p.birth)+" × "+p.sheets).join(", ")+".");
+    el(group,"polygon",{...shape,fill:clr,"fill-opacity":sum===0n?.055:.24,stroke:clr,
+      "stroke-opacity":.38,"stroke-width":.55,"stroke-dasharray":sum===0n?"2 3":null});
+    if(parts.length>1||sum<0n||sum>1n||sum===0n) {
+      const pattern=sum>0n?textures.plus:sum<0n?textures.minus:textures.zero;
+      el(group,"polygon",{...shape,fill:`url(#${pattern})`});
+    }
+  }
+  function moveRange(move) {
+    return move && Number.isInteger(move.start) && Number.isInteger(move.end) && move.start>=1 && move.end>=move.start;
+  }
+  function selectedMove(o) {
+    return typeof o.selectedMove==="object"?o.selectedMove:(o.moves||[]).find(m=>m.id===o.selectedMove);
+  }
+  function moveWord(g,o,word) {
+    const a=o.leftmost?[...word].reverse():word;
+    return a.every(x=>x>0&&x<10)?a.join(""):a.join(" ");
+  }
+  // Place overlapping brackets in separate tracks, including when the
+  // reflected axis has reversed the chronological order of raw positions.
+  function annotateWiring(svg,g,o,W,H,x,cycle) {
+    const moves=(o.moves||[]).filter(moveRange), selected=selectedMove(o);
+    if(!moves.length && !cycle) return;
+    const lanes=[],boxes=moves.map(m=>({
+      m,left:Math.min(x(m.start-1),x(m.end)),right:Math.max(x(m.start-1),x(m.end))
+    })).sort((a,b)=>a.left-b.left||a.right-b.right);
+    for(const box of boxes) {
+      let lane=lanes.findIndex(last=>last<=box.left);
+      if(lane<0)lane=lanes.length;
+      lanes[lane]=box.right;
+      box.lane=lane;
+    }
+    const band=lanes.length?lanes.length*27+7:0;
+    for(const {m,left,right,lane} of boxes) {
+      const x0=left+2,x1=Math.max(x0+2,right-2),y=-band+3+lane*27;
+      const picked=selected?.id===m.id,usable=m.verified!==false;
+      const clr=usable?(m.mutation!=null?P.teal:P.muted):P.gray;
+      const [p,q]=[position(g,o,m.start),position(g,o,m.end)].sort((a,b)=>a-b);
+      const before=moveWord(g,o,m.before||g.beta.slice(m.start-1,m.end));
+      const after=moveWord(g,o,m.after||[]), action=m.mutation!=null?"Mutation at "+position(g,o,m.mutation):"Word move";
+      const long=before+" → "+after,short=m.mutation!=null?"μ"+position(g,o,m.mutation):p+"–"+q;
+      const z=el(svg,"g",{"data-move":m.id,"aria-pressed":String(picked),"aria-disabled":String(!usable)});
+      el(z,"rect",{x:x0,y,width:x1-x0,height:22,rx:4,fill:picked?P.teal:"#eff3eb",stroke:picked?P.teal:P.faint,"stroke-dasharray":usable?null:"2 3"});
+      txt(z,(x0+x1)/2,y+13,long.length*6+7<x1-x0?long:short,{"text-anchor":"middle",fill:picked?P.white:clr,"font-family":mono,"font-weight":630});
+      el(z,"path",{d:`M${x0},${y+18}v5h${x1-x0}v-5`,stroke:picked?P.rust:clr,fill:"none","stroke-width":picked?2:1});
+      const label=action+", positions "+p+"–"+q+". "+long+(usable?"":". Unverified");
+      activate(z,label,usable&&typeof o.onMove==="function"?()=>o.onMove(m.id):null);
+    }
+    let footer=0;
+    if(cycle) {
+      const group=el(svg,"g",{"aria-label":"Formal relative-cycle combination"});
+      txt(group,13,H+8,"Formal cycle",{"font-size":10,"font-weight":650,fill:P.ink});
+      let tx=83,ty=H+8;
+      for(const t of [...cycle].sort((a,b)=>position(g,o,a.birth)-position(g,o,b.birth))) {
+        const label=readableInt(t.coefficient)+" C"+position(g,o,t.birth);
+        const visible=compact(readableInt(t.coefficient))+" C"+position(g,o,t.birth), width=visible.length*6.3+16;
+        if(tx+width>W-10){tx=13;ty+=20;}
+        const z=el(group,"g",{"data-component-birth":t.birth});
+        el(z,"title",{},label);
+        el(z,"rect",{x:tx,y:ty-12,width,height:17,rx:4,fill:t.coefficient>0n?"#deeee5":"#f7e8dd"});
+        txt(z,tx+width/2,ty,visible,{"font-family":mono,"text-anchor":"middle",fill:t.coefficient>0n?P.teal:P.rust});
+        tx+=width+4;
+      }
+      if(!cycle.length)txt(group,tx,ty,"0",{"font-family":mono});
+      footer=ty-H+12;
+    }
+    svg.setAttribute("viewBox",`0 ${-band} ${W} ${H+band+footer}`);
   }
 
   function eventEndpoints(g,index,projection,lo,hi) {
@@ -618,19 +747,23 @@ sitemap: false
 
   function drawProjection(container,g,o) {
     const projection=o.projection==="bottom"?"bottom":"top";
-    const {film, cut}=filmInfo(g,o), [lo,hi]=heightRange(g,o,projection,film);
+    const {film,cut}=filmInfo(g,o),cycle=cycleInfo(g,o),[lo,hi]=heightRange(g,o,projection,film,cycle);
     const m=g.beta.length, W=Math.max(360,container.clientWidth||640,78+m*34);
     const pad=39, end=W-21, top=37, row=Math.min(47,Math.max(23,172/Math.max(3,hi-lo)));
     const bottom=top+row*(hi-lo), H=bottom+42;
     const svg=surface(container,W,H,`${projection==="top"?"Row":"Column"} projection of the affine wiring diagram`,Math.min(W,Math.max(344,m*29+62)));
-    const draw=el(svg,"g"), hatch=brush(svg), defs=el(svg,"defs"), clipId="wiring-clip-"+(++serial);
+    const draw=el(svg,"g"), textures=faceTextures(svg,cycle), defs=el(svg,"defs"), clipId="wiring-clip-"+(++serial);
     const clip=el(defs,"clipPath",{id:clipId}); el(clip,"rect",{x:pad,y:top-5,width:end-pad,height:bottom-top+10});
-    const x=t=>m?pad+(end-pad)*t/m:(pad+end)/2, y=h=>bottom-row*(h-lo);
+    const x=t=>m?pad+(end-pad)*time(g,o,t)/m:(pad+end)/2, y=h=>bottom-row*(h-lo);
     const solid=new Set(g.solid), spans=el(draw,"g",{"clip-path":`url(#${clipId})`});
     const initial=el(spans,"g");
     for(let c=0;c<=m;c++) line(initial,x(c),top-4,x(c),bottom+3,{stroke:P.grid,"stroke-width":1,"stroke-dasharray":"2 5"});
     const active=Number(o.activePosition);
-    if(active>=1&&active<=m) el(initial,"rect",{x:x(active-1),y:top-4,width:x(active)-x(active-1),height:bottom-top+8,fill:P.rust,opacity:0.065});
+    if(active>=1&&active<=m) el(initial,"rect",{x:Math.min(x(active-1),x(active)),y:top-4,width:Math.abs(x(active)-x(active-1)),height:bottom-top+8,fill:P.rust,opacity:.065});
+    const selected=selectedMove(o);
+    if(moveRange(selected)) el(initial,"rect",{x:Math.min(x(selected.start-1),x(selected.end)),y:top-4,
+      width:Math.abs(x(selected.start-1)-x(selected.end)),height:bottom-top+8,fill:P.teal,"fill-opacity":.075,
+      stroke:P.teal,"stroke-opacity":.5,"stroke-dasharray":"3 3"});
 
     const projected=el(spans,"g"), notes=[];
     function midpointLevel(h,index,own,hollow) {
@@ -641,21 +774,19 @@ sitemap: false
     for(let c=0;c<m;c++) {
       const own=(g.beta[c]>0)===(projection==="top"), hollow=!solid.has(c+1);
       const xm=(x(c)+x(c+1))/2;
-      if(o.showFilm && film && (!o.trace || c>=cut)) {
-        const A=coverage(film,c,projection,g.n,!o.lifted);
-        const B=coverage(film,c+1,projection,g.n,!o.lifted);
+      if(o.showFilm && (film||cycle) && (!o.trace || c>=cut)) {
+        const A=faceCoverage(g,o,film,cycle,c,projection);
+        const B=faceCoverage(g,o,film,cycle,c+1,projection);
         for(let h=lo;h<hi;h++) {
           const k=o.lifted?h:residue(h,g.n);
           const lm=midpointLevel(h,c,own,hollow),um=midpointLevel(h+1,c,own,hollow);
-          for(const [count,corner,half,start] of [[A.get(k)||0,x(c),xm,true],[B.get(k)||0,x(c+1),xm,false]]) {
-            if(!count) continue;
+          for(const [entry,corner,half,start] of [[A.get(k),x(c),xm,true],[B.get(k),x(c+1),xm,false]]) {
+            if(entry==null)continue;
             const corners=[[corner,y(h)],[half,y(lm)],[half,y(um)],[corner,y(h+1)]];
-            el(projected,"polygon",{points:points(corners),fill:P.teal,opacity:Math.min(.36,.14+.072*(count-1))});
-            if(count>1) {
-              el(projected,"polygon",{points:points(corners),fill:`url(#${hatch})`});
-              if(o.showLabels && ((start&&c===cut)||(!start&&c+1===cut))) {
-                notes.push([(corner+2*half)/3,y(h+.48),count]);
-              }
+            paintFace(projected,{points:points(corners)},entry,textures,g,o);
+            if(o.showLabels && ((start&&c===cut)||(!start&&c+1===cut)) && (cycle||entry>1)) {
+              const label=cycle?readableInt(entry.sum):"×"+entry;
+              notes.push([(corner+2*half)/3,y(h+.48),label,cycle&&entry.sum<0n?P.rust:P.teal]);
             }
           }
         }
@@ -679,7 +810,7 @@ sitemap: false
 
     const cutColor=P.teal, cx=x(cut);
     line(draw,cx,top-9,cx,bottom+8,{stroke:cutColor,"stroke-width":1.35,"stroke-dasharray":"3 3",opacity:.9});
-    const cutLabel=`t = ${cut}`, capWidth=39+Math.max(0,String(cut).length-1)*6;
+    const shownCut=time(g,o,cut),cutLabel=`t = ${shownCut}`,capWidth=39+Math.max(0,String(shownCut).length-1)*6;
     const capX=Math.min(W-capWidth-1,Math.max(1,cx-capWidth/2));
     el(draw,"rect",{x:capX,y:4,width:capWidth,height:18,rx:9,fill:"#e2efe7"});
     txt(draw,capX+capWidth/2,17,cutLabel,{fill:cutColor,"font-family":mono,"text-anchor":"middle","font-size":10});
@@ -688,19 +819,21 @@ sitemap: false
       if(!o.lifted && h===g.n+1) txt(draw,pad-8,y(h)+3,"1′",{"text-anchor":"end",fill:P.gray,"font-family":mono});
       else txt(draw,pad-8,y(h)+3,h,{"text-anchor":"end",fill:ghost?P.gray:P.muted,"font-family":mono});
     }
-    for(const [nx,ny,n] of notes) txt(draw,nx,ny+3,"×"+n,{"font-size":10,fill:P.teal,"font-weight":"700",
+    for(const [nx,ny,label,clr] of notes) txt(draw,nx,ny+3,compact(label),{"font-size":10,fill:clr,"font-weight":"700",
       "text-anchor":"middle","paint-order":"stroke","stroke":P.paper,"stroke-width":2.4});
 
     for(let c=0;c<m;c++) {
-      const p=c+1, center=(x(c)+x(c+1))/2, isSolid=solid.has(p), isBirth=p===o.birth, isActive=p===active;
-      const label=`Position ${p}, generator ${g.beta[c]}${isSolid?", solid bridge":", hollow crossing"}`;
+      const p=c+1,display=position(g,o,p),center=(x(c)+x(c+1))/2, isSolid=solid.has(p);
+      const term=cycle?.find(t=>t.birth===p),isBirth=p===(o.activeBirth??(cycle?null:o.birth)),isActive=p===active;
+      const termColor=term?(term.coefficient<0n?P.rust:P.teal):null;
+      const label=`Position ${display}, generator ${g.beta[c]}${isSolid?", solid bridge":", hollow crossing"}${term?", cycle coefficient "+readableInt(term.coefficient):""}`;
       const z=el(draw,"g",{"data-position":p});
-      el(z,"rect",{x:x(c)+1,y:top-3,width:Math.max(1,x(c+1)-x(c)-2),height:bottom-top+28,fill:"transparent"});
+      el(z,"rect",{x:Math.min(x(c),x(c+1))+1,y:top-3,width:Math.max(1,Math.abs(x(c+1)-x(c))-2),height:bottom-top+28,fill:"transparent"});
       if(isSolid) {
         const bridges=el(z,"g",{"clip-path":`url(#${clipId})`});
         for(const [l,r] of eventEndpoints(g,c,projection,lo,hi)) {
-          const clr=isBirth?P.teal:isActive?P.rust:P.ink;
-          line(bridges,center,y(l),center,y(r),{stroke:clr,"stroke-width":isBirth?3.9:2.2,"stroke-linecap":"round"});
+          const clr=termColor||(isBirth?P.teal:isActive?P.rust:P.ink);
+          line(bridges,center,y(l),center,y(r),{stroke:clr,"stroke-width":isBirth||term?3.9:2.2,"stroke-linecap":"round"});
           for(const [h,black] of [[l,g.beta[c]>0],[r,g.beta[c]<0]]) {
             if(h<lo||h>hi) continue;
             el(bridges,"circle",{cx:center,cy:y(h),r:isBirth?4.2:3.4,fill:black?clr:P.white,stroke:clr,"stroke-width":1.6});
@@ -708,19 +841,20 @@ sitemap: false
         }
       }
       if(o.showLabels!==false) {
-        if(isBirth||isActive) el(z,"rect",{x:center-10,y:bottom+10,width:20,height:17,rx:5,fill:isBirth?P.teal:P.rust});
-        txt(z,center,bottom+22,p,{"font-family":mono,"font-size":11,"text-anchor":"middle",fill:isBirth||isActive?P.white:isSolid?P.ink:P.muted});
+        if(isBirth||isActive||term)el(z,"rect",{x:center-10,y:bottom+10,width:20,height:17,rx:5,fill:termColor||(isBirth?P.teal:P.rust)});
+        txt(z,center,bottom+22,display,{"font-family":mono,"font-size":11,"text-anchor":"middle",fill:isBirth||isActive||term?P.white:isSolid?P.ink:P.muted});
       }
       activate(z,label,isSolid&&o.onBirth?()=>o.onBirth(p):o.onPosition?()=>o.onPosition(p):null);
     }
+    annotateWiring(svg,g,o,W,H,x,cycle);
     return svg;
   }
 
   // Axonometric coordinates are (time, column, row). Projected disk coverage
   // appears on the row/column walls, where it is determined by the engine.
   function drawSpace(container,g,o) {
-    const m=g.beta.length, n=g.n, {film,cut}=filmInfo(g,o);
-    let [yl,yh]=heightRange(g,o,"top",film), [xl,xh]=heightRange(g,o,"bottom",film);
+    const m=g.beta.length, n=g.n, {film,cut}=filmInfo(g,o),cycle=cycleInfo(g,o);
+    let [yl,yh]=heightRange(g,o,"top",film,cycle), [xl,xh]=heightRange(g,o,"bottom",film,cycle);
     const segs=[], bridges=[], solid=new Set(g.solid);
     function strand(t,h) {return [t,at(g.topWindows[t],h),h];}
     const boundary=[];
@@ -751,7 +885,7 @@ sitemap: false
       }
     }
     const wallX=xl-0.8, wallY=yl-.8, data=[];
-    const raw=(t,x,y)=>[t*2.9+(x-xl)*.49, -(y-yl)*.94-(x-xl)*.34];
+    const raw=(t,x,y)=>[time(g,o,t)*2.9+(x-xl)*.49, -(y-yl)*.94-(x-xl)*.34];
     for(const t of [0,Math.max(m,1)]) for(const x of [wallX,xh]) for(const y of [wallY,yh]) data.push(raw(t,x,y));
     const xvals=data.map(p=>p[0]), yvals=data.map(p=>p[1]);
     const xmin=Math.min(...xvals), xmax=Math.max(...xvals), ymin=Math.min(...yvals), ymax=Math.max(...yvals);
@@ -759,18 +893,21 @@ sitemap: false
     const H=Math.max(180,(ymax-ymin)*scale+74), l=(W-(xmax-xmin)*scale)/2;
     const proj=p=>{const [x,y]=raw(...p);return [l+(x-xmin)*scale,(H-28-(ymax-ymin)*scale)/2+(y-ymin)*scale];};
     const svg=surface(container,W,H,"Axonometric affine strands and bridges with soap-film projections on the coordinate walls",Math.min(W,Math.max(344,m*27+75)));
-    const hatch=brush(svg);
+    const textures=faceTextures(svg,cycle);
     function polygon(parent,coords,attrs) {return el(parent,"polygon",{points:points(coords.map(proj)),...attrs});}
     const walls=el(svg,"g");
     for(const [projection,range,toPoint] of [
       ["top",[yl,yh],(t,h)=>[t,wallX,h]],["bottom",[xl,xh],(t,h)=>[t,h,wallY]]]) {
       const [low,high]=range;
       polygon(walls,[toPoint(0,low),toPoint(m,low),toPoint(m,high),toPoint(0,high)],{fill:projection==="top"?"#eef2eb":"#f3f3ed",stroke:P.grid,"stroke-width":1});
+      const selected=selectedMove(o);
+      if(moveRange(selected))polygon(walls,[toPoint(selected.start-1,low),toPoint(selected.end,low),toPoint(selected.end,high),toPoint(selected.start-1,high)],{
+        fill:P.teal,"fill-opacity":.065,stroke:P.teal,"stroke-opacity":.5,"stroke-dasharray":"3 3"});
       for(let h=low;h<=high;h++) {
         const [x1,y1]=proj(toPoint(0,h)),[x2,y2]=proj(toPoint(m,h));
         line(walls,x1,y1,x2,y2,{stroke:"#dbe1d7","stroke-width":.7});
       }
-      if(o.showFilm&&film) {
+      if(o.showFilm&&(film||cycle)) {
         // Each half-slab is a projected face. At a hollow crossing the two
         // participating levels share their midpoint in that projection.
         for(let c=0;c<m;c++) {
@@ -778,13 +915,12 @@ sitemap: false
           const own=(g.beta[c]>0)===(projection==="top"), hollow=!solid.has(c+1);
           const ym=h=>{const r=mod(h-Math.abs(g.beta[c]),n);return own&&hollow?h+(r===0?.5:r===1?-.5:0):h;};
           for(const [side, t] of [[c,c],[c+1,c+1]]) {
-            const counts=coverage(film,side,projection,n,!o.lifted);
+            const counts=faceCoverage(g,o,film,cycle,side,projection);
             for(let h=low;h<high;h++) {
-              const count=counts.get(o.lifted?h:residue(h,n))||0;
-              if(!count)continue;
+              const entry=counts.get(o.lifted?h:residue(h,n));
+              if(entry==null)continue;
               const coords=[toPoint(t,h),toPoint(c+.5,ym(h)),toPoint(c+.5,ym(h+1)),toPoint(t,h+1)];
-              polygon(walls,coords,{fill:P.teal,opacity:Math.min(.4,.19+.07*(count-1))});
-              if(count>1) polygon(walls,coords,{fill:`url(#${hatch})`});
+              paintFace(walls,{points:points(coords.map(proj))},entry,textures,g,o);
             }
           }
         }
@@ -802,16 +938,20 @@ sitemap: false
       const [x,y]=proj(p);el(geom,"circle",{cx:x,cy:y,r:2.1,fill:P.paper,stroke:P.wire,"stroke-width":.9});
     }
     for(const bridge of bridges) {
-      const {lo,hi,p,sign}=bridge, a=proj(lo),b=proj(hi), clr=p===o.birth?P.teal:p===o.activePosition?P.rust:P.ink;
+      const {lo,hi,p,sign}=bridge, a=proj(lo),b=proj(hi),display=position(g,o,p);
+      const term=cycle?.find(t=>t.birth===p),isBirth=p===(o.activeBirth??(cycle?null:o.birth));
+      const clr=term?(term.coefficient<0n?P.rust:P.teal):isBirth?P.teal:p===o.activePosition?P.rust:P.ink;
       const z=el(svg,"g",{"data-position":p});
       line(z,...a,...b,{stroke:"transparent","stroke-width":13});
-      line(z,...a,...b,{stroke:clr,"stroke-width":p===o.birth?3.7:2.2});
+      line(z,...a,...b,{stroke:clr,"stroke-width":isBirth||term?3.7:2.2});
       for(const [point,filled] of [[a,sign>0],[b,sign<0]]) el(z,"circle",{cx:point[0],cy:point[1],r:3.4,fill:filled?clr:P.paper,stroke:clr,"stroke-width":1.5});
-      if(o.showLabels!==false) {const label=mid(a,b); txt(z,label[0]+5,label[1]-3,p,{"font-family":mono,fill:clr,"font-size":10,"paint-order":"stroke",stroke:P.paper,"stroke-width":2.8});}
-      activate(z,`Bridge at position ${p}`,o.onBirth?()=>o.onBirth(p):null);
+      if(o.showLabels!==false) {const label=mid(a,b); txt(z,label[0]+5,label[1]-3,display,{"font-family":mono,fill:clr,"font-size":10,"paint-order":"stroke",stroke:P.paper,"stroke-width":2.8});}
+      activate(z,`Bridge at position ${display}${term?", cycle coefficient "+readableInt(term.coefficient):""}`,o.onBirth?()=>o.onBirth(p):null);
     }
-    txt(svg,13,H-9,o.showFilm&&film?"Film coverage on the row and column walls":"Strands in (time, column, row)",{"font-size":10});
-    txt(svg,W-12,H-9,`t = ${cut}`,{"text-anchor":"end","font-family":mono,fill:P.teal});
+    txt(svg,13,H-9,o.showFilm&&(film||cycle)?(cycle?"Signed disk projections on both walls":"Film coverage on the row and column walls"):"Strands in (time, column, row)",{"font-size":10});
+    txt(svg,W-12,H-9,`t = ${time(g,o,cut)}`,{"text-anchor":"end","font-family":mono,fill:P.teal});
+    const axisX=t=>proj([t,(xl+xh)/2,(yl+yh)/2])[0];
+    annotateWiring(svg,g,o,W,H,axisX,cycle);
     return svg;
   }
 
@@ -884,12 +1024,422 @@ sitemap: false
   globalThis.QuiverDraw=Object.freeze({wiring,quiver});
 })();
 </script>
+<script>/* Local braid-word moves on an affine A plabic graph. See GLSBS (2210.04778),
+   §§4.2–4.4. Every candidate is checked against independently recomputed
+   periodic films, using a geometric correspondence fixed before comparing arrows. */
+(() => {
+  'use strict';
+
+  const mod = (x, n) => ((x % n) + n) % n;
+  function adjacent(i, j, n) {
+    return mod(i - j, n) === 1 || mod(j - i, n) === 1;
+  }
+  function at(window, row) {
+    const n = window.length;
+    return window[mod(row - 1, n)] + n * Math.floor((row - 1) / n);
+  }
+
+  // Return an ice quiver on the original labels. The frozen–frozen block
+  // plays no role in mutation at a mutable vertex or in the comparison.
+  function mutateIce(graph, k) {
+    if (!graph.solid.includes(k) || graph.frozen.includes(k)) {
+      throw new Error('Choose a mutable bridge for quiver mutation.');
+    }
+    const entries = new Map();
+    const key = (a,b) => a + ',' + b;
+    const read = (a,b) => entries.get(key(a,b)) || 0;
+    for (const [a,b,w] of graph.arrows) {
+      if (!Number.isSafeInteger(w) || w < 1) throw new Error('Expected integer arrow weights.');
+      entries.set(key(a,b), w);
+      entries.set(key(b,a), -w);
+    }
+    const frozen = new Set(graph.frozen), arrows = [];
+    for (let i = 0; i < graph.solid.length; i++) {
+      const a = graph.solid[i];
+      for (const b of graph.solid.slice(i + 1)) {
+        if (frozen.has(a) && frozen.has(b)) continue;
+        const u = read(a,k), v = read(k,b);
+        const value = a === k || b === k ? -read(a,b) :
+          read(a,b) + Math.max(u,0) * Math.max(v,0) - Math.max(-u,0) * Math.max(-v,0);
+        if (!Number.isSafeInteger(value)) throw new Error('Mutation exceeds exact integer range.');
+        if (value) arrows.push(value > 0 ? [a,b,value] : [b,a,-value]);
+      }
+    }
+    return {solid:graph.solid.slice(), frozen:graph.frozen.slice(), arrows};
+  }
+
+  // Identify a lifted film by its disturbed permutation at the left cut.
+  // All ordinary permutations agree there by the braid relation. A different
+  // choice of bridge lift translates both coordinates of every changed dot
+  // by the same multiple of n; choose the representative with first row 1…n.
+  function cutSignature(graph, position, cut) {
+    const changes = graph.films[position].cuts[cut].changes;
+    if (!changes.length) return 'closed';
+    const offset = graph.n * Math.floor((changes[0][0] - 1) / graph.n);
+    return changes.map(([row,value]) => (row - offset) + ':' + (value - offset)).join(',');
+  }
+
+  function matchBridges(oldGraph, newGraph, start, end) {
+    const mapping = {};
+    if (oldGraph.topWindows[start - 1].join() !== newGraph.topWindows[start - 1].join()) {
+      return {mapping,error:'The ordinary permutations differ at the left cut.'};
+    }
+    const candidates = new Map();
+    for (const p of newGraph.solid.filter(p => p >= start && p <= end)) {
+      const signature = cutSignature(newGraph,p,start-1);
+      if (candidates.has(signature)) return {mapping,error:'The local film correspondence is ambiguous.'};
+      candidates.set(signature,p);
+    }
+    for (const p of oldGraph.solid) {
+      if (p < start || p > end) {
+        mapping[p] = p;
+      } else {
+        const signature = cutSignature(oldGraph,p,start-1);
+        if (!candidates.has(signature)) return {mapping,error:'A bridge has no matching film at the left cut.'};
+        mapping[p] = candidates.get(signature);
+        candidates.delete(signature);
+      }
+    }
+    return {mapping,error:candidates.size ? 'A bridge of the new word has no preimage.' : ''};
+  }
+
+  function specialMixedSwap(graph,start,a,b) {
+    const positive = Math.max(a,b), negative = -Math.min(a,b);
+    const top = graph.topWindows[start]; // the cut between the two letters
+    const x = at(top,positive), y = at(top,positive+1);
+    return Math.abs(x-y) === 1 && mod(Math.min(x,y)-negative,graph.n) === 0;
+  }
+
+  function compareMappedIce(expected,actual,mapping) {
+    const sort = arr => arr.slice().sort((a,b) => a-b).join(',');
+    if (sort(expected.solid.map(p=>mapping[p])) !== sort(actual.solid)) return 'Vertex sets differ.';
+    if (sort(expected.frozen.map(p=>mapping[p])) !== sort(actual.frozen)) return 'Frozen vertices differ.';
+    const predicted = expected.arrows.map(([p,q,w])=>[mapping[p],mapping[q],w].join(',')).sort();
+    const observed = actual.arrows.map(edge=>edge.join(',')).sort();
+    if (predicted.length !== observed.length || predicted.some((s,i)=>s!==observed[i])) {
+      return 'Weighted directed arrows differ.';
+    }
+    return '';
+  }
+
+  function candidate(graph,start,kind,after,v) {
+    const end = start + after.length - 1;
+    const before = graph.beta.slice(start-1,end);
+    const beta = [...graph.beta.slice(0,start-1),...after,...graph.beta.slice(end)];
+    const fullySolid = before.every((_,i)=>graph.solid.includes(start+i));
+    const special = kind==='mixed' && specialMixedSwap(graph,start,...before);
+    const mutation = fullySolid && (kind==='braid' || special) ? end : null;
+    const data = {id:kind+'-'+start,kind,start,end,before,after,beta,mutation,fullySolid,special,
+      mapping:{},verified:false,reason:'',graph:null};
+    try {
+      data.graph = QuiverFilm.compute(graph.n,beta,v);
+      const {mapping,error} = matchBridges(graph,data.graph,start,end);
+      data.mapping = mapping;
+      data.reason = error || compareMappedIce(mutation===null ? graph : mutateIce(graph,mutation),data.graph,mapping);
+      data.verified = !data.reason;
+    } catch (err) {
+      data.reason = err.message || String(err);
+    }
+    return data;
+  }
+
+  // B1 opposite signs commute as operations on opposite sides of the
+  // permutation. B2 same-sign non-neighbors commute; B3 same-sign adjacent
+  // generators obey iji=jij. No inverse cancellations of a positive braid.
+  function enumerate(n,beta,v=[],current=null) {
+    const graph=current || QuiverFilm.compute(n,beta,v), moves=[];
+    for (let t=0; t+1<beta.length; t++) {
+      const a=beta[t], b=beta[t+1], i=Math.abs(a), j=Math.abs(b);
+      if (Math.sign(a)!==Math.sign(b)) {
+        moves.push(candidate(graph,t+1,'mixed',[b,a],v));
+      } else if (i!==j && !adjacent(i,j,n)) {
+        moves.push(candidate(graph,t+1,'commutation',[b,a],v));
+      } else if (beta[t+2]===a && adjacent(i,j,n)) {
+        moves.push(candidate(graph,t+1,'braid',[b,a,b],v));
+      }
+    }
+    return moves;
+  }
+
+  // The snapshots use exact string weights, including halves between frozen
+  // vertices. The full ice comparison retains every mutable-incident arrow.
+  function checkPaperSnapshot(snapshot,graph,mapping) {
+    const positions=snapshot.active.map(id=>mapping[id]);
+    const frozen=snapshot.frozen.map(id=>mapping[id]);
+    const sorted=values=>[...values].sort((a,b)=>a-b).join(',');
+    const samePositions=(x,y)=>x.length===y.length && sorted(x)===sorted(y);
+    if(!samePositions(positions,graph.solid)) return 'The paper and graph vertex positions differ.';
+    if(!samePositions(frozen,graph.frozen)) return 'The paper and graph frozen positions differ.';
+    const frozenIds=new Set(snapshot.frozen);
+    const paperEdges=snapshot.edges.filter(([x,y])=>!(frozenIds.has(x)&&frozenIds.has(y)))
+      .map(([x,y,w])=>[mapping[x],mapping[y],w].join(',')).sort();
+    const graphEdges=graph.arrows.map(edge=>edge.join(',')).sort();
+    if(paperEdges.length!==graphEdges.length || paperEdges.some((e,i)=>e!==graphEdges[i])){
+      return 'The paper and graph weighted arrows differ.';
+    }
+    return '';
+  }
+
+  // Follow only a sequence of DIRECT positive B3 mutations from the last
+  // completed stage. At a fixed raw pivot d there is at most one candidate:
+  // its interval must be [d-2,d]. No word search or graph isomorphism is used.
+  function positiveWitness(paper,stages,index) {
+    const step=paper?.snapshots[index];
+    if(!step || step.type!=='mutate') return null;
+    const base=stages.get(step.stage-1);
+    if(!base || !base.graph.beta.every(i=>i>0)) return null;
+    let graph=base.graph, mapping={...base.snapshot.mapping};
+    let first=index;
+    while(first>0 && paper.snapshots[first-1].stage===step.stage) first--;
+    for(let j=first;j<=index;j++) {
+      const action=paper.snapshots[j],pivot=mapping[action.focus],start=pivot-2;
+      if(action.type!=='mutate'||start<1||!Number.isInteger(pivot)) return null;
+      const [a,b,c]=graph.beta.slice(start-1,pivot);
+      if(a!==c||!adjacent(a,b,graph.n)||![start,start+1,pivot].every(p=>graph.solid.includes(p))) return null;
+      const move=candidate(graph,start,'braid',[b,a,b],graph.v);
+      const newMap=Object.fromEntries(Object.entries(mapping).map(([id,p])=>[id,move.mapping[p]]));
+      const reason=move.reason || checkPaperSnapshot(paper.snapshots[j-1],graph,mapping)
+        || checkPaperSnapshot(action,move.graph,newMap);
+      if(reason || j===index) return {before:graph,after:move.graph,move,beforeMapping:mapping,
+        afterMapping:newMap,matches:!reason,reason,stepIndex:j};
+      graph=move.graph; mapping=newMap;
+    }
+    return null;
+  }
+
+  globalThis.QuiverMoves=Object.freeze({enumerate,mutateIce,compareMappedIce,positiveWitness});
+})();
+</script>
+<script>/* Graph-side evidence for the individual Bao–Ye operations.
+   All positions are in the original, rightmost plabic convention. Native
+   paper snapshots supply the prescribed pivot and the expected comparison,
+   never the initial film intersections or coefficients of the cycle basis.
+
+   GLSBS (3.4), Lemma 3.14: negate the pivot cycle, adding its positive
+   intersection multiple to each incoming cycle. Section 4.3.1 supplies
+   the local solid-special signed square. The signed local word is the
+   reversed suffix configuration of Bao–Ye Proposition 4.15. */
+(() => {
+  'use strict';
+  function bump(map,id,amount) {
+    const sum=(map.get(id)||0n)+amount;
+    if(sum===0n) map.delete(id); else map.set(id,sum);
+  }
+  function edgeKeys(active,frozen,edges) {
+    const ids=new Set(active), ice=new Set(frozen);
+    return edges.filter(([a,b])=>ids.has(a)&&ids.has(b)&&!(ice.has(a)&&ice.has(b)))
+      .map(([a,b,w])=>a+'>'+b+'@'+String(w)).sort().join('|');
+  }
+  function sameIds(a,b) {
+    return a.length===b.length && a.every(x=>b.includes(x));
+  }
+  function compareState(computed,expected) {
+    const diff=[];
+    if(!sameIds(computed.active,expected.active)) diff.push('vertices');
+    if(!sameIds(computed.frozen,expected.frozen)) diff.push('frozen vertices');
+    if(edgeKeys(computed.active,computed.frozen,computed.edges)!==
+       edgeKeys(expected.active,expected.frozen,expected.edges)) diff.push('weighted arrows');
+    return diff;
+  }
+  class CycleBasis {
+    constructor(graph,boundary) {
+      this.baseStage=boundary.stage;
+      const nativeAt=new Map(Object.entries(boundary.mapping).map(([id,p])=>[p,id]));
+      this.ids=graph.solid.map(p=>nativeAt.get(p));
+      if(this.ids.some(id=>id===undefined)) throw new Error('Missing film-to-paper vertex correspondence.');
+      this.frozen=new Set(graph.frozen.map(p=>nativeAt.get(p)));
+      this.vectors=new Map(this.ids.map(id=>[id,new Map([[boundary.mapping[id],1n]])]));
+      // GLSBS pairs a closed cycle with any relative cycle. Zero-completing
+      // the frozen–frozen block serves only to keep a skew form in memory.
+      // Every later mutable cycle is a linear combination of originally
+      // mutable cycles, so every displayed ice entry is independent of this
+      // arbitrary completion.
+      this.form=new Map(graph.solid.map(p=>[p,new Map()]));
+      for(const [p,q,w] of graph.arrows) {
+        this.form.get(p).set(q,BigInt(w));this.form.get(q).set(p,-BigInt(w));
+      }
+    }
+    dual(vector) {
+      const dual=new Map();
+      for(const [p,a] of vector) for(const [q,w] of this.form.get(p)) bump(dual,q,a*w);
+      return dual;
+    }
+    pair(dual,vector) {
+      let result=0n;
+      for(const [p,a] of vector) result+=(dual.get(p)||0n)*a;
+      return result;
+    }
+    mutate(k) {
+      if(!this.vectors.has(k)||this.frozen.has(k))throw new Error('Invalid graph cycle pivot '+k);
+      const old=this.vectors.get(k), key=this.dual(old), affected=[];
+      for(const j of this.ids) {
+        if(j===k) continue;
+        const v=this.vectors.get(j);
+        const weight=-this.pair(key,v); // <C_j,C_k>
+        if(weight<=0n) continue;
+        affected.push({id:j,weight:String(weight)});
+        for(const [p,a] of old) bump(v,p,weight*a);
+      }
+      this.vectors.set(k,new Map([...old].map(([p,a])=>[p,-a])));
+      return affected;
+    }
+    freeze(k) {
+      if(!this.frozen.has(k)) throw new Error('Expected frozen deletion target '+k);
+      const dual=this.dual(this.vectors.get(k)), newly=[];
+      for(const j of this.ids) if(!this.frozen.has(j)&&this.pair(dual,this.vectors.get(j))!==0n) {
+        this.frozen.add(j);newly.push(j);
+      }
+      return newly;
+    }
+    remove(k) {
+      this.ids=this.ids.filter(id=>id!==k);
+      this.vectors.delete(k);this.frozen.delete(k);
+    }
+    frame(s,affected=[],newlyFrozen=[]) {
+      const edges=[], basis={};
+      for(const id of this.ids) {
+        const vector=this.vectors.get(id), dual=this.dual(vector);
+        basis[id]=[...vector].sort(([p],[q])=>p-q).map(([p,a])=>[p,String(a)]);
+        for(const j of this.ids) {
+          if(id===j||this.frozen.has(id)&&this.frozen.has(j))continue;
+          const w=this.pair(dual,this.vectors.get(j));
+          if(w>0n)edges.push([id,j,String(w)]);
+        }
+      }
+      const frame={stage:s.stage,baseStage:this.baseStage,active:[...this.ids],frozen:[...this.frozen],edges,
+        basis,focus:s.focus,affected,newlyFrozen};
+      frame.differences=compareState(frame,s);
+      frame.matches=frame.differences.length===0;
+      return frame;
+    }
+  }
+
+  /* For a selected crossing p, the PDS of the previous stage has no hollow
+     crossings in [1,p]. Only that prefix is the configuration-space chart.
+     Start there with the selected +i drawn on the opposite projection as −i.
+     Sliding −i through +j (j≠i) interchanges positions/labels. At +i,−i the
+     right-hand slot is the square-move pivot, and both slot labels stay put.
+     Previously processed spectators to the right of p remain in the global
+     cycle calculation above. */
+  class SignedSweep {
+    constructor(graph,boundary,s) {
+      this.n=graph.n;
+      this.p=s.selectedPosition;
+      this.i=s.letter;
+      this.word=graph.beta.slice(0,this.p);
+      if(this.word[this.p-1]!==this.i||graph.hollow.some(x=>x<=this.p)) {
+        throw new Error('Expected an all-solid prefix for this selected letter.');
+      }
+      this.word[this.p-1]=-this.i;
+      const nativeAt=new Map(Object.entries(boundary.mapping).map(([id,p])=>[p,id]));
+      this.labels=Array.from({length:this.p},(_,p)=>nativeAt.get(p+1));
+      this.at=this.p-1;
+    }
+    commuteUntilSquare() {
+      const crossed=[];
+      while(this.at>0&&this.word[this.at-1]!==this.i) {
+        const r=this.at;
+        crossed.push(this.word[r-1]);
+        [this.word[r-1],this.word[r]]=[this.word[r],this.word[r-1]];
+        [this.labels[r-1],this.labels[r]]=[this.labels[r],this.labels[r-1]];
+        this.at--;
+      }
+      return crossed;
+    }
+    square(s) {
+      const slides=this.commuteUntilSquare(), r=this.at;
+      if(r===0||this.labels[r]!==s.focus) throw new Error('Signed square pivot differs from the Bao–Ye mutation at '+s.focus);
+      const beforeWord=[...this.word],labels=[...this.labels];
+      this.word[r-1]=-this.i;this.word[r]=this.i;this.at--;
+      return {n:this.n,prefixLength:this.p,pivot:s.focus,pivotPosition:r+1,positions:[r,r+1],
+        commutedLetters:slides,beforeWord,afterWord:[...this.word],labels};
+    }
+  }
+  function restrictSnapshot(s,labels) {
+    const set=new Set(labels);
+    return {active:s.active.filter(x=>set.has(x)),frozen:s.frozen.filter(x=>set.has(x)),
+      edges:s.edges.filter(([a,b])=>set.has(a)&&set.has(b))};
+  }
+  function checkLocal(g,labels,s) {
+    const frame={active:g.solid.map(p=>labels[p-1]),frozen:g.frozen.map(p=>labels[p-1]),
+      edges:g.arrows.map(([a,b,w])=>[labels[a-1],labels[b-1],String(w)])};
+    return compareState(frame,restrictSnapshot(s,labels));
+  }
+
+  function localGraphs(local,before,after) {
+    let g0=null,g1=null;
+    try {
+      g0=QuiverFilm.compute(local.n,local.beforeWord,[]);
+      g1=QuiverFilm.compute(local.n,local.afterWord,[]);
+      const d0=checkLocal(g0,local.labels,before),d1=checkLocal(g1,local.labels,after);
+      const squareDifferences=[];
+      if(globalThis.QuiverMoves) {
+        // The two adjacent letters have the same level and opposite signs.
+        // Hence this all-solid B1 square keeps slot labels and mutates the
+        // right-hand slot. Verify this directly on the two geometric graphs.
+        const expected=QuiverMoves.mutateIce(g0,local.pivotPosition);
+        const identity=Object.fromEntries(g0.solid.map(p=>[p,p]));
+        const issue=QuiverMoves.compareMappedIce(expected,g1,identity);
+        if(issue) squareDifferences.push(issue);
+      }
+      return {before:g0,after:g1,matches:!d0.length&&!d1.length&&!squareDifferences.length,
+        beforeDifferences:d0,afterDifferences:d1,squareDifferences,squareChecked:!!globalThis.QuiverMoves,error:null};
+    } catch(error) {
+      return {before:g0,after:g1,matches:false,beforeDifferences:[],afterDifferences:[],
+        squareDifferences:[],squareChecked:false,error:error.message||String(error)};
+    }
+  }
+  function compute(paper,stages) {
+    if(!paper) return [];
+    let cycles, chart, chartError, stage=0;
+    const frames=[];
+    for(let i=0;i<paper.snapshots.length;i++) {
+      const s=paper.snapshots[i];
+      if(s.type==='initial') {
+        cycles=new CycleBasis(stages.get(0).graph,s);
+        frames.push(cycles.frame(s)); continue;
+      }
+      if(stage!==s.stage) {
+        stage=s.stage;
+        const start=stages.get(stage-1);
+        chart=null;chartError=null;
+        try { chart=new SignedSweep(start.graph,start.snapshot,s); }
+        catch(error) { chartError=error.message||String(error); }
+      }
+      if(s.type==='mutate') {
+        const affected=cycles.mutate(s.focus),frame=cycles.frame(s,affected);
+        if(chart) {
+          try { frame.local=chart.square(s); }
+          catch(error) { chart=null;chartError=error.message||String(error); }
+        }
+        if(chartError) frame.localUnavailable=chartError;
+        frames.push(frame);
+      } else if(s.type==='freeze') {
+        const newly=cycles.freeze(s.focus);
+        frames.push(cycles.frame(s,[],newly));
+      } else if(s.type==='delete') {
+        cycles.remove(s.focus);
+        const transported=cycles.frame(s);
+        cycles=new CycleBasis(stages.get(stage).graph,s);
+        const reset=cycles.frame(s);
+        reset.differences.push(...transported.differences.map(x=>'transported '+x));
+        reset.matches=!reset.differences.length;
+        frames.push(reset);
+      } else throw new Error('Unknown operation '+s.type);
+    }
+    return frames;
+  }
+
+  globalThis.QuiverCycles=Object.freeze({compute,localGraphs});
+})();
+</script>
 <script>/* Interface for the two independent engines. All correspondence verdicts
    compare computed vertices, frozen flags and oriented, weighted ice arrows. */
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
   const presets = [
+    {name:'Braid move and mutation', n:3, beta:[1,2,1,3,1], v:[1]},
     {name:'Winding film', n:3, beta:[1,2,3,1,2,3,1,2,3], v:[1,2,3,1,2], cut:2},
     {name:'Double arrow', n:3, beta:[1,2,3,1,2,3], v:[1]},
     {name:'Frozen boundary', n:4, beta:[1,2,3,2,1], v:[2]},
@@ -897,6 +1447,13 @@ sitemap: false
     {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]}
   ];
   let model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
+  let leftmost=true, mode='words', selectedMove=null, previewPivot=null, history=[], lastChange='';
+  let geometry='chart', chartSide='after', cycleId=null;
+  const reverse=w=>[...w].reverse();
+  const readWord=w=>leftmost?reverse(w):[...w];
+  const pos=(p,m=model.beta.length)=>leftmost?m+1-p:p;
+  const time=(c,m=model.beta.length)=>leftmost?m-c:c;
+  const orient=edges=>leftmost?edges.map(([a,b,w])=>[b,a,w]):edges;
   const word = letters => letters.length ? letters.join(' ') : 'e';
   const native = id => '(' + id + ')';
   const compareNumbers = (a,b) => a-b;
@@ -937,160 +1494,302 @@ sitemap: false
     return {matches:!diff.length,diff};
   }
 
-  function createModel(n,beta,v) {
-    const graph=QuiverFilm.compute(n,beta,v);
+  function createModel(n,inputBeta,inputV) {
+    const beta=readWord(inputBeta),v=readWord(inputV),graph=QuiverFilm.compute(n,beta,v);
     const paper=beta.every(x=>x>0)?QuiverPaper.compute(n,beta,v):null;
-    const stages=new Map(),boundaries=[];
-    if(paper) {
-      paper.snapshots.forEach((s,i)=>{
-        if(!s.boundary) return;
-        const g=i===paper.snapshots.length-1 ? graph : QuiverFilm.compute(n,beta,s.target);
-        stages.set(s.stage,{graph:g,snapshot:s,check:verdict(g,s)});
-        boundaries.push(i);
-      });
-    }
-    return {n,beta,v,graph,paper,stages,boundaries};
+    const stages=new Map();
+    if(paper) paper.snapshots.forEach((s,i)=>{
+      if(!s.boundary) return;
+      const g=i===paper.snapshots.length-1?graph:QuiverFilm.compute(n,beta,s.target);
+      stages.set(s.stage,{graph:g,snapshot:s,check:verdict(g,s)});
+    });
+    return {n,beta,v,inputBeta:[...inputBeta],inputV:[...inputV],graph,paper,stages,
+      moves:null,frames:null,localCache:new Map(),positiveCache:new Map()};
   }
+  function moves() {
+    return model.moves??(model.moves=QuiverMoves.enumerate(model.n,model.beta,model.v,model.graph)
+      .sort((a,b)=>Math.min(pos(a.start),pos(a.end))-Math.min(pos(b.start),pos(b.end))));
+  }
+  function currentMove(){return moves().find(m=>m.id===selectedMove)||null;}
   function context() {
-    const p=model.paper;
-    if(!p) return {g:model.graph,s:null,prev:null,check:null};
-    const s=p.snapshots[index],stage=model.stages.get(s.boundary?s.stage:s.stage-1);
-    return {g:stage.graph,s,prev:stage.snapshot,check:s.boundary?stage.check:null};
+    if(!model.paper) return {g:model.graph,s:null,prev:null,check:null,frame:null};
+    const paper=model.paper, i=mode==='words'?paper.snapshots.length-1:index;
+    const s=paper.snapshots[i],stage=model.stages.get(s.boundary?s.stage:s.stage-1);
+    const ctx={g:stage.graph,s,prev:stage.snapshot,check:s.boundary?stage.check:null,frame:null};
+    if(mode==='recursion') {
+      model.frames??=QuiverCycles.compute(paper,model.stages);
+      ctx.frame=model.frames[i];
+      if(!ctx.check)ctx.check={matches:ctx.frame.matches,diff:ctx.frame.differences};
+      else if(!ctx.frame.matches)ctx.check={matches:false,diff:ctx.frame.differences};
+      if(s.type==='mutate') {
+        if(!model.positiveCache.has(i))model.positiveCache.set(i,QuiverMoves.positiveWitness(paper,model.stages,i));
+        ctx.positive=model.positiveCache.get(i);
+      }
+      if(ctx.frame.local) {
+        if(!model.localCache.has(i)) model.localCache.set(i,QuiverCycles.localGraphs(ctx.frame.local,paper.snapshots[i-1],s));
+        ctx.local=model.localCache.get(i);
+      }
+    }
+    return ctx;
   }
   function describeStep(s) {
-    if(s.type==='initial') return 'Initial seed';
-    if(s.type==='mutate') return 'Mutate '+native(s.focus);
-    if(s.type==='freeze') return 'Freeze neighbors of '+native(s.focus);
+    if(s.type==='initial')return 'Initial seed';
+    if(s.type==='mutate')return 'Mutate '+native(s.focus);
+    if(s.type==='freeze')return 'Freeze neighbors of '+native(s.focus);
     return 'Delete '+native(s.focus);
   }
-  function setIndex(i,selectPaper=true) {
-    if(!model.paper) return;
-    index=Math.max(0,Math.min(i,model.paper.snapshots.length-1));
-    activeCross=null;
-    if(selectPaper) qView='paper';
-    render();
+  function setIndex(i) {
+    if(!model.paper)return;
+    mode='recursion'; index=Math.max(0,Math.min(i,model.paper.snapshots.length-1));
+    activeCross=null;cycleId=null;chartSide='after';birth=null;trace=false;qView='plabic';render();
   }
-  function build(preset) {
+  function activate(next,preset) {
+    model=next;mode='words';index=0;geometry='chart';chartSide='after';cycleId=null;
+    selectedMove=moves().find(m=>m.verified&&m.mutation!==null)?.id??moves()[0]?.id??null;
+    previewPivot=null;birth=currentMove()?.mutation??model.graph.solid.at(-1)??null;
+    cut=birth===null?0:Math.min(preset?.cut??birth-1,birth-1);
+    activeCross=null;qView='plabic';trace=false;
+    $('inputError').hidden=true;
+    $('stepList').replaceChildren(...(model.paper?model.paper.snapshots.map((s,i)=>opt(i+' · '+describeStep(s),i)):[]));
+  }
+  function build(preset=null) {
     try {
       const n=Number($('rank').value);
-      if(!Number.isInteger(n)||n<3||n>24) throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
-      const beta=parseWord($('beta').value,n,'β',true), v=parseWord($('target').value,n,'v',false);
+      if(!Number.isInteger(n)||n<3||n>24)throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
+      const beta=parseWord($('beta').value,n,'β',true),v=parseWord($('target').value,n,'v',false);
       const next=createModel(n,beta,v);
-      model=next; index=model.paper?model.paper.snapshots.length-1:0;
-      birth=model.graph.solid.at(-1)??null;
-      cut=birth===null?0:Math.min(preset?.cut??birth-1,birth-1);
-      activeCross=null;qView='plabic';trace=false;
-      $('inputError').hidden=true;
-      if(!preset) $('examples').value='custom';
-      $('stepList').replaceChildren(...(model.paper?model.paper.snapshots.map((s,i)=>opt(i+' · '+describeStep(s),i)):[]));
-      render();
-    } catch(err) {
-      $('inputError').textContent=(err.message||String(err))+(model?' The diagram still shows the last valid input.':'');
-      $('inputError').hidden=false;
-    }
+      history=[];lastChange='';activate(next,preset);
+      if(!preset)$('examples').value='custom';
+      render();return true;
+    }catch(err){fail(err);return false;}
+  }
+  function fail(err) {
+    $('inputError').textContent=(err.message||String(err))+(model?' The last computed words remain available.':'');
+    $('inputError').hidden=false;
   }
   function loadPreset(i) {
     const p=presets[i];
-    $('rank').value=p.n; $('beta').value=word(p.beta); $('target').value=word(p.v); $('examples').value=String(i);
+    $('rank').value=p.n;$('beta').value=word(readWord(p.beta));$('target').value=word(readWord(p.v));$('examples').value=String(i);
     build(p);
   }
+  function changeMode(next) {
+    if(next==='recursion'&&!model.paper)return;
+    mode=next;activeCross=null;birth=null;trace=false;previewPivot=null;qView='plabic';render();
+  }
+  function labelMap(m) {
+    return Object.entries(m.mapping).filter(([p])=>Number(p)>=m.start&&Number(p)<=m.end)
+      .sort(([a],[b])=>pos(+a)-pos(+b)).map(([p,q])=>pos(+p)+'→'+pos(q)).join(', ');
+  }
+  function moveName(m) {
+    const bounds=[pos(m.start),pos(m.end)].sort(compareNumbers);
+    return bounds.join('–')+' · '+word(readWord(m.before))+' → '+word(readWord(m.after))+
+      (m.mutation!==null?' · μ at '+pos(m.mutation):' · relabel');
+  }
+  function updateWords(nextBeta,text,remember=true) {
+    const next=createModel(model.n,nextBeta,model.inputV);
+    if(remember)history.push({beta:[...model.inputBeta]});
+    $('beta').value=word(nextBeta);$('examples').value='custom';lastChange=text;activate(next);render();
+  }
+  function applyWordMove(id) {
+    try {
+      const m=moves().find(x=>x.id===id);
+      if(!m||!m.verified)return;
+      const text='Applied '+moveName(m)+'. Previous β = '+word(model.inputBeta)+'.';
+      updateWords(readWord(m.beta),text);
+    }catch(err){fail(err);}
+  }
+  function previewMutation(p) {
+    previewPivot=previewPivot===p?null:p;
+    const m=moves().find(x=>x.verified&&x.mutation===previewPivot);
+    selectedMove=m?.id??null;birth=p;cut=p-1;qView='plabic';render();
+  }
+  function renderWordPanel() {
+    const all=moves(), move=currentMove();
+    $('moveCount').textContent=all.length+' local relation'+(all.length===1?'':'s');
+    const select=$('moveSelect');
+    select.replaceChildren(opt('Choose a location',''),...all.map(m=>{
+      const op=opt(moveName(m)+(m.verified?'':' · verification failed'),m.id);op.disabled=!m.verified;return op;
+    }));
+    select.value=move?.id??'';select.disabled=!all.length;
+    $('applyMove').disabled=!move?.verified;$('undoMove').disabled=!history.length;
+    const text=move?(move.verified?'Verified new β = '+word(readWord(move.beta))+'. '+
+      (move.mutation!==null?'Its recomputed graph agrees with mutation at vertex '+pos(move.mutation)+'.':'The quiver agrees after relabeling.'):'Verification failed: '+move.reason):
+      (previewPivot!==null?'No adjacent relation realizes μ at position '+pos(previewPivot)+' in this word. The quiver shows its algebraic mutation.':
+       all.length?'Choose a relation, or click its bracket on the wiring to apply it.':'This word has no adjacent braid relation or commutation.');
+    $('moveInfo').textContent=text+(move?.verified?' Local bridge labels: '+(labelMap(move)||'none')+'.':'');
+    const sites=$('mutSites');sites.replaceChildren(el('span','Preview a mutation'));
+    const ps=model.graph.solid.filter(x=>!model.graph.frozen.includes(x)).sort((a,b)=>pos(a)-pos(b));
+    for(const p of ps){const b=el('button','μ '+pos(p));b.setAttribute('aria-pressed',String(p===previewPivot));b.onclick=()=>previewMutation(p);sites.append(b);}
+    if(!ps.length)sites.append(el('span','No mutable vertices.'));
+    if(previewPivot!==null){const b=el('button','Clear preview');b.onclick=()=>{previewPivot=null;render();};sites.append(b);}
+    $('lastAction').textContent=lastChange;
+  }
+  function renderSubword({g,s}) {
+    const box=$('subwordStrip');box.replaceChildren(el('span',leftmost?'Leftmost subexpression':'Rightmost subexpression','ss-label'));
+    if(!g.beta.length){box.append(el('span','e','token'));return;}
+    const hollow=new Set(g.hollow);
+    readWord(g.beta).forEach((letter,i)=>{
+      const rp=leftmost?g.beta.length-i:i+1;
+      const chip=el('span',String(letter),'token'+(hollow.has(rp)?' chosen':'')+(s?.selectedPosition===rp&&mode==='recursion'?' now':''));
+      chip.title='Position '+(i+1)+' · '+(hollow.has(rp)?'selected':'omitted');box.append(chip);
+    });
+    const selected=g.hollow.map(p=>pos(p)).sort(compareNumbers);
+    box.append(el('span','selected positions '+(selected.join(', ')||'∅'),'ss-label'));
+  }
   function renderTimeline({s,prev}) {
-    const controls=['stepList','stepRange','firstStep','prevStep','nextStep','lastStep'];
-    if(!s) {
-      $('stageCount').textContent='Signed braid';
-      $('stepCount').textContent='Plabic construction';
-      controls.forEach(id=>$(id).disabled=true);
-      $('stepInfo').textContent='The Bao–Ye comparison in this explorer uses positive braid words. The signed plabic diagram and its quiver are shown below.';
-      return;
-    }
-    controls.forEach(id=>$(id).disabled=false);
     const end=model.paper.snapshots.length-1;
     $('stageCount').textContent='Stage '+s.stage+' / '+model.paper.stages.length;
     $('stepCount').textContent='Step '+index+' / '+end;
     $('stepList').value=String(index);$('stepRange').max=end;$('stepRange').value=index;$('stepRange').disabled=end===0;
     $('firstStep').disabled=$('prevStep').disabled=index===0;
     $('nextStep').disabled=$('lastStep').disabled=index===end;
-    let msg;
-    if(s.type==='initial') msg='Start with the amalgamated word seed for target e. Each word position is a vertex.';
-    else {
-      const pos='β position '+s.selectedPosition+' (generator '+s.letter+')';
-      if(s.type==='mutate') msg='For '+pos+', mutate native vertex '+native(s.focus)+'. The diagram stays at the completed target '+word(prev.target)+'.';
-      if(s.type==='freeze') msg='For '+pos+', freeze neighbors of '+native(s.focus)+'. Newly frozen: '+(s.newlyFrozen.map(native).join(', ')||'none')+'.';
-      if(s.type==='delete') msg='Removed '+native(s.focus)+' for '+pos+'. Compare both constructions at target '+word(s.target)+'.';
+    let msg='Start with the word seed at target e.';
+    if(s.selectedPosition) {
+      const at='β position '+pos(s.selectedPosition)+' (generator '+s.letter+')';
+      if(s.type==='mutate')msg='For '+at+', mutate '+native(s.focus)+'. Compare the square move with the change in the graph’s relative cycles.';
+      if(s.type==='freeze')msg='For '+at+', freeze neighbors of '+native(s.focus)+'. Newly frozen: '+(s.newlyFrozen.map(native).join(', ')||'none')+'.';
+      if(s.type==='delete')msg='Deleted '+native(s.focus)+' for '+at+'. Both constructions now use target '+word(readWord(s.target))+'.';
     }
     $('stepInfo').textContent=msg;
   }
+  function cycleText(terms) {
+    if(!terms?.length)return '0';
+    return terms.map(([p,co],j)=>{
+      const w=BigInt(co),abs=w<0n?-w:w;
+      return (w<0n?(j?' − ':'−'):(j?' + ':''))+(abs===1n?'':abs+'·')+'C['+pos(p)+']';
+    }).join('');
+  }
+  function renderGeometry(ctx) {
+    const {s,frame,local}=ctx;
+    const micro=mode==='recursion'&&s&&!s.boundary;
+    $('geometryPanel').hidden=!micro;
+    if(!micro)return;
+    const chartAvailable=!!local?.before && !!local?.after,positiveAvailable=!!ctx.positive?.matches;
+    const chart=geometry==='chart'&&chartAvailable,positive=geometry==='positive'&&positiveAvailable;
+    const drawn=chart?'chart':positive?'positive':'cycles';
+    for(const b of $('geomChoices').querySelectorAll('button')){
+      b.disabled=(b.dataset.geom==='chart'&&!chartAvailable)||(b.dataset.geom==='positive'&&!positiveAvailable);
+      b.setAttribute('aria-pressed',String(b.dataset.geom===drawn));
+    }
+    $('chartControls').hidden=!chart&&!positive;$('cycleControls').hidden=chart||positive;
+    if(!frame.active.includes(cycleId))cycleId=frame.active.includes(frame.focus)?frame.focus:frame.active[0];
+    $('cycleSelect').replaceChildren(...frame.active.map(id=>opt(native(id),id)));
+    $('cycleSelect').value=cycleId??'';
+    $('cycleFormula').textContent=cycleId?native(cycleId)+' = '+cycleText(frame.basis[cycleId]):'No surviving cycle';
+    if(positive) {
+      const w=ctx.positive;
+      for(const b of $('chartChoices').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.chart===chartSide));
+      $('chartWord').textContent=word(readWord(w.before.beta))+' → '+word(readWord(w.after.beta));
+      $('geometryInfo').textContent='Verified positive braid move at displayed position '+pos(w.move.mutation)+'. With target '+word(readWord(w.before.v))+', the entire word realizes this Bao–Ye mutation. Both full film quivers match the paper before and after the move.';
+    }else if(chart) {
+      const l=frame.local,p=l.prefixLength,interval=leftmost?(model.beta.length-p+1)+'–'+model.beta.length:'1–'+p;
+      for(const b of $('chartChoices').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.chart===chartSide));
+      $('chartWord').textContent=word(readWord(l.beforeWord))+' → '+word(readWord(l.afterWord));
+      const localSlots=l.positions.map(x=>pos(x,p)).sort(compareNumbers).join('–');
+      $('geometryInfo').textContent='Local chart from β positions '+interval+', target e. Square at chart slots '+localSlots+', pivot '+native(l.pivot)+'. '+
+        (local.matches?'Both signed diagrams match the corresponding restriction of the paper seed.':'Local check differs: '+[...local.beforeDifferences,...local.afterDifferences].join(', ')+'.');
+    }else{
+      const changes=s.type==='mutate'?'The pivot changes sign. '+(frame.affected.length?'Updated neighbors: '+frame.affected.map(a=>native(a.id)+' (+'+a.weight+' pivot)').join(', ')+'.':'No neighboring cycle acquires a positive multiple of the pivot.'):'Newly frozen from graph intersections: '+(frame.newlyFrozen.map(native).join(', ')||'none')+'.';
+      $('geometryInfo').textContent=changes+' C[p] denotes the oriented disk boundary at β position p in stage '+frame.baseStage+'.';
+    }
+    if(s.type==='mutate'&&positiveAvailable&&!positive)$('geometryInfo').textContent+=' Positive word also realizes this step on the full braid.';
+    if(s.type==='mutate'&&!positiveAvailable)$('geometryInfo').textContent+=' '+(ctx.positive&&!ctx.positive.matches?'Positive-word check differs: '+ctx.positive.reason+'.':'No direct positive braid path was found from this stage’s starting word.');
+    if(frame.localUnavailable||local?.error)$('geometryInfo').textContent+=' Signed chart unavailable: '+(frame.localUnavailable||local.error)+'.';
+  }
+  function wiringState(ctx) {
+    const chart=mode==='recursion'&&geometry==='chart'&&!!ctx.local?.[chartSide];
+    const positive=mode==='recursion'&&geometry==='positive'&&!!ctx.positive?.matches;
+    const g=chart?ctx.local[chartSide]:positive?ctx.positive[chartSide]:ctx.g;
+    const terms=!chart&&!positive&&mode==='recursion'&&ctx.s&&!ctx.s.boundary&&cycleId?
+      ctx.frame.basis[cycleId]?.map(([birth,coefficient])=>({birth,coefficient})):undefined;
+    return {chart:!!chart,positive:!!positive,g,terms};
+  }
   function pickBirth(p) {
-    const {g}=context();
-    if(!g.solid.includes(Number(p))) return;
-    birth=Number(p);cut=birth-1;activeCross=null;render();
+    const ctx=context(),{g}=wiringState(ctx);
+    if(!g.solid.includes(Number(p)))return;
+    birth=Number(p);cut=birth-1;activeCross=null;
+    if(mode==='recursion'&&ctx.s&&!ctx.s.boundary&&wiringState(ctx).terms){
+      const nativeAt=Object.keys(ctx.prev.mapping).find(id=>ctx.prev.mapping[id]===birth);
+      if(nativeAt&&ctx.frame.basis[nativeAt])cycleId=nativeAt;
+    }
+    render();
   }
   function selectCross(p) {
     const i=model.paper?.snapshots.findIndex(s=>s.type==='delete'&&s.selectedPosition===p)??-1;
-    if(i>=0) setIndex(i); else {activeCross=p;render();}
+    if(i>=0)setIndex(i);else{activeCross=p;render();}
   }
-  function renderFilm({g,s,prev}) {
-    const sel=$('filmSelect');
-    if(!g.solid.includes(birth)){birth=g.solid.at(-1)??null;cut=birth===null?0:birth-1;}
-    const end=birth===null?0:birth-1;
+  function renderFilm(ctx) {
+    const {s,prev,frame}=ctx,{g,chart,positive,terms}=wiringState(ctx);
+    const m=g.beta.length, sel=$('filmSelect');
+    if(!g.solid.includes(birth)){birth=chart?frame.local.pivotPosition:positive?(chartSide==='before'?ctx.positive.beforeMapping:ctx.positive.afterMapping)[s.focus]:g.solid.at(-1)??null;cut=birth===null?0:birth-1;}
+    const end=terms?m:birth===null?0:birth-1;
+    sel.parentElement.hidden=!!terms;
     cut=Math.max(0,Math.min(cut,end));
-    sel.replaceChildren(...(g.solid.length?g.solid.map(p=>opt('Position '+p+(g.frozen.includes(p)?' · frozen':' · mutable'),p)):[opt('No solid bridges','')]));
-    sel.disabled=birth===null;if(birth!==null) sel.value=String(birth);
-    $('cutLabel').textContent='Cut '+cut;$('cutRange').max=end;$('cutRange').value=cut;$('cutRange').disabled=end===0;
-    $('cutBack').disabled=cut===0;$('cutForward').disabled=cut>=end;
-    const target=prev?word(prev.target):word(model.v);
-    $('wireTarget').textContent=(s&&!s.boundary?'Previous stage':'Graph target')+' · v = '+target;
-    const config={projection, trace, lifted:$('lift').checked, showFilm:$('showFilm').checked,showLabels:$('labels').checked,birth,cut,activePosition:trace&&birth!==null?cut+1:(activeCross??s?.selectedPosition??null),onBirth:pickBirth,onPosition:selectCross};
+    sel.replaceChildren(...(g.solid.length?[...g.solid].sort((a,b)=>pos(a,m)-pos(b,m)).map(p=>opt('Position '+pos(p,m)+(g.frozen.includes(p)?' · frozen':' · mutable'),p)):[opt('No solid bridges','')]));
+    sel.disabled=birth===null;if(birth!==null)sel.value=String(birth);
+    const dispCut=time(cut,m);
+    $('cutLabel').textContent='Cut '+dispCut;
+    $('cutRange').min=leftmost?m-end:0;$('cutRange').max=leftmost?m:end;$('cutRange').value=dispCut;$('cutRange').disabled=end===0;
+    $('cutBack').disabled=leftmost?cut>=end:cut===0;$('cutForward').disabled=leftmost?cut===0:cut>=end;
+    const target=word(readWord(g.v)),base=prev?.stage??0;
+    $('wireTarget').textContent=chart?'Auxiliary chart · '+chartSide+' swap · v = e':positive?'Full positive word · '+chartSide+' move · v = '+target:(mode==='recursion'&&s&&!s.boundary?'Cycle basis on stage '+base:'Graph target')+' · v = '+target;
+    const localMove=chart?{id:'chart-square',start:frame.local.positions[0],end:frame.local.positions[1],mutation:frame.local.pivotPosition,verified:true}:positive?ctx.positive.move:null;
+    const active=chart?frame.local.pivotPosition:(trace&&birth!==null?cut+1:(activeCross??(mode==='recursion'?s?.selectedPosition:null)));
+    const ms=mode==='words'?moves():[];
+    const config={projection,leftmost,trace:terms?false:trace,lifted:$('lift').checked,showFilm:$('showFilm').checked,showLabels:$('labels').checked,birth,cut,
+      activePosition:active,activeBirth:chart?frame.local.pivotPosition:positive?(chartSide==='before'?ctx.positive.beforeMapping:ctx.positive.afterMapping)[s.focus]:(terms?ctx.prev.mapping[frame.focus]:null),cycleTerms:terms,
+      moves:ms,selectedMove:chart||positive?localMove:mode==='words'?currentMove():null,onMove:mode==='words'?applyWordMove:undefined,
+      onBirth:pickBirth,onPosition:chart||positive?()=>{}:selectCross};
     QuiverDraw.wiring($('wiring'),g,config);
-    $('traceMode').disabled=birth===null; $('traceMode').textContent=trace?'Show full film':'Trace from birth'; $('traceMode').setAttribute('aria-pressed',String(trace));
+    $('traceMode').disabled=birth===null||!!terms;$('traceMode').textContent=trace?'Show full film':'Trace from birth';$('traceMode').setAttribute('aria-pressed',String(trace));
     if(birth===null){$('filmInfo').textContent='There are no solid bridges for this target.';return;}
-    const c=g.films[birth].cuts[cut], side=projection==='bottom'?'bottom':'top';
-    const hs=c[side], counts=new Map();
-    for(const h of hs){const r=((h-1)%model.n+model.n)%model.n+1;counts.set(r,(counts.get(r)||0)+1);}
-    const folded=[...counts.entries()].sort((x,y)=>x[0]-y[0]).map(([h,k])=>k===1?String(h):h+' × '+k).join(', ');
+    if(terms){$('filmInfo').textContent='Signed components of '+native(cycleId)+' at cut '+dispCut+': '+cycleText(frame.basis[cycleId])+'. Colors distinguish positive and negative coefficients.';return;}
+    const side=projection==='bottom'?'bottom':'top',hs=g.films[birth].cuts[cut][side],counts=new Map();
+    for(const h of hs){const r=((h-1)%g.n+g.n)%g.n+1;counts.set(r,(counts.get(r)||0)+1);}
+    const folded=[...counts.entries()].sort((a,b)=>a[0]-b[0]).map(([h,k])=>k===1?String(h):h+' × '+k).join(', ');
     let note=hs.length?'Lifted heights '+hs.join(', ')+' · Folded heights '+folded+'.':'The disk has closed by this cut.';
-    if(projection==='space') note='Top projection · '+note;
-    if(trace) {
-      if(cut===birth-1) note='Born at solid bridge '+birth+'. '+note;
-      else {
-        const earlier=g.films[birth].cuts[cut+1][side];
-        const gained=hs.filter(h=>!earlier.includes(h)), lost=earlier.filter(h=>!hs.includes(h));
+    if(projection==='space')note='Top projection · '+note;
+    if(trace){
+      if(cut===birth-1)note='Born at solid bridge '+pos(birth,m)+'. '+note;
+      else{const earlier=g.films[birth].cuts[cut+1][side],gained=hs.filter(h=>!earlier.includes(h)),lost=earlier.filter(h=>!hs.includes(h));
         const change=[gained.length?'gained '+gained.join(', '):'',lost.length?'lost '+lost.join(', '):''].filter(Boolean).join(' and ');
-        note='Across '+(g.solid.includes(cut+1)?'solid':'hollow')+' position '+(cut+1)+', the projection '+(change||'kept the same heights')+'. '+note;
-      }
+        note='Across '+(g.solid.includes(cut+1)?'solid':'hollow')+' position '+pos(cut+1,m)+', the projection '+(change||'kept the same heights')+'. '+note;}
     }
-    $('filmInfo').textContent='Film '+birth+' at cut '+cut+'. '+note;
+    $('filmInfo').textContent=(chart?'Chart film ':'Film ')+pos(birth,m)+' at cut '+dispCut+'. '+note;
   }
-  function graphView(g) {
-    return {nodes:g.solid.map(p=>({id:p,label:String(p),frozen:g.frozen.includes(p),highlight:p===birth})),edges:g.arrows,onSelect:pickBirth,ariaLabel:'Weighted plabic exchange quiver'};
+  function graphView(g,preview=false) {
+    const q=preview&&previewPivot!==null?QuiverMoves.mutateIce(g,previewPivot):g;
+    return {nodes:[...q.solid].sort((a,b)=>pos(a)-pos(b)).map(p=>({id:p,label:String(pos(p)),frozen:q.frozen.includes(p),highlight:p===(previewPivot??birth)})),edges:orient(q.arrows),
+      onSelect:p=>{if(mode==='words'&&!g.frozen.includes(p))previewMutation(p);else pickBirth(p);},ariaLabel:'Weighted plabic exchange quiver'};
+  }
+  function cycleView(frame) {
+    return {nodes:frame.active.slice().sort((a,b)=>{const [i,k]=a.split(',').map(Number),[j,l]=b.split(',').map(Number);return i-j||k-l;}).map(id=>({id,label:native(id),frozen:frame.frozen.includes(id),highlight:id===cycleId})),edges:orient(frame.edges),
+      onSelect:id=>{cycleId=id;geometry='cycles';render();},ariaLabel:'Quiver from intersections of relative cycles'};
   }
   function paperView(s) {
     const f=new Set(s.frozen);
-    let edges=s.edges;
-    if(!$('showFF').checked) edges=edges.filter(([x,y])=>!(f.has(x)&&f.has(y)));
-    return {nodes:s.active.map(id=>({id,label:s.boundary?String(s.mapping[id]):native(id),
-      caption:s.boundary?native(id):'',frozen:f.has(id),highlight:s.boundary?s.mapping[id]===birth:s.focus===id||s.newlyFrozen.includes(id)})),edges,
-      onSelect:(id)=>{if(s.boundary) pickBirth(s.mapping[id]);else $('qNote').textContent='Native vertex '+native(id)+' is '+(f.has(id)?'frozen':'mutable')+' in this paper seed.';},
-      ariaLabel:'Weighted Bao–Ye seed in the aligned arrow convention'};
+    const edges=$('showFF').checked?s.edges:s.edges.filter(([a,b])=>!(f.has(a)&&f.has(b)));
+    const nodes=s.active.map(id=>({id,label:s.boundary?String(pos(s.mapping[id])):native(id),caption:s.boundary?native(id):'',frozen:f.has(id),
+      highlight:s.boundary?s.mapping[id]===birth:s.focus===id||s.newlyFrozen.includes(id)}));
+    if(s.boundary)nodes.sort((a,b)=>pos(s.mapping[a.id])-pos(s.mapping[b.id]));
+    return {nodes,edges:orient(edges),onSelect:id=>{if(s.boundary)pickBirth(s.mapping[id]);else{cycleId=id;geometry='cycles';render();}},ariaLabel:'Bao–Ye quiver at this operation'};
   }
-  function renderQuiver({g,s,check}) {
-    const paperButton=$('quiverViews').querySelector('[data-q="paper"]');
-    paperButton.disabled=!s;
-    const paperMode=qView==='paper'&&s;
-    for(const b of $('quiverViews').querySelectorAll('button')) b.setAttribute('aria-pressed',String(b.dataset.q===qView));
+  function renderQuiver(ctx) {
+    const {g,s,check,frame}=ctx,paperMode=qView==='paper'&&s,micro=mode==='recursion'&&s&&!s.boundary;
+    $('quiverViews').querySelector('[data-q="paper"]').disabled=!s;
+    for(const b of $('quiverViews').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.q===qView));
     $('ffLabel').hidden=!paperMode;
-    const tag=$('matchTag');
-    const state=check?(check.matches?'match':'mismatch'):(s?'intermediate':'signed');
-    tag.dataset.state=state;
-    tag.textContent={match:'✓ Match',mismatch:'Mismatch',intermediate:'In progress',signed:'Plabic only'}[state];
-    const graph=paperMode?paperView(s):graphView(g);
-    $('quiverSubtitle').textContent=paperMode?(s.boundary?'β positions · native labels below':'Native vertices (i,k)'):'Original β positions';
+    const preview=mode==='words'&&previewPivot!==null&&!paperMode,tag=$('matchTag');
+    const state=preview?'preview':check?(check.matches?'match':'mismatch'):'signed';
+    tag.dataset.state=state;tag.textContent={match:micro?'✓ Cycle match':'✓ Match',mismatch:'Mismatch',preview:'μ preview',signed:'Plabic only'}[state];
+    const graph=paperMode?paperView(s):micro?cycleView(frame):graphView(g,preview);
+    $('quiverSubtitle').textContent=paperMode?(s.boundary?'β positions · native labels below':'Native vertices (i,k)'):micro?'Full graph · relative-cycle intersections':preview?'After μ at position '+pos(previewPivot):'Displayed β positions';
     QuiverDraw.quiver($('quiver'),graph);
-    const totalFrozen=graph.nodes.filter(x=>x.frozen).length;
-    $('qCounts').textContent=(graph.nodes.length-totalFrozen)+' mutable · '+totalFrozen+' frozen';
-    $('qNote').textContent=check?(check.matches?'The two quivers agree on positions, frozen vertices, and weighted arrows.':'Differences in '+check.diff.join(', ')+'. Open the matrices to inspect them.')
-      :s?'The paper is between completed stages. After deletion, the explorer checks the next plabic quiver.':'The figure shows the signed plabic quiver.';
+    const frozen=graph.nodes.filter(n=>n.frozen).length;
+    $('qCounts').textContent=(graph.nodes.length-frozen)+' mutable · '+frozen+' frozen';
+    $('qNote').textContent=preview?'One-step algebraic mutation of the current graph. Apply a verified relation to update β.':check?(check.matches?(micro?'The full graph cycle intersections agree with this Bao–Ye seed.':'The two quivers agree on vertices, frozen labels, and weighted arrows.'):'Differences in '+check.diff.join(', ')+'.'):'The figure shows the signed plabic quiver.';
   }
+
   function matrixTable(nodes,edges,full=false) {
     const wrap=el('div',undefined,'table-wrap'), table=el('table'), header=el('tr');
     const cols=full?nodes:nodes.filter(x=>!x.frozen);
@@ -1106,61 +1805,82 @@ sitemap: false
     }
     wrap.append(table);return wrap;
   }
-  function renderData({g,s,prev,check}) {
+  function renderData(ctx) {
     if(!$('dataPanel').open)return;
+    const {g,s,prev,check,frame}=ctx,micro=mode==='recursion'&&s&&!s.boundary;
     const box=$('dataBody');box.replaceChildren();
     if(s){
-      const recipe=el('div',undefined,'recipe');
-      recipe.append(el('h3','Stage '+s.stage));
-      recipe.append(el('p','Paper input β (reversed): '+word(model.paper.paperBeta)+'. Selected original β positions in recursion order: '+(model.paper.selectedPositions.join(', ')||'none')+'.'));
-      if(s.stage) recipe.append(el('p','At paper position '+s.selectedPaperPosition+', generator '+s.letter+' has a = '+s.a+' selected occurrence'+(s.a===1?'':'s')+' through this letter and b = '+s.b+' earlier omissions. Mutations: '+(s.mutations.map(native).join(' → ')||'none')+'. Freeze neighbors of '+native(s.deleteVertex)+', then delete it.'));
+      const recipe=el('div',undefined,'recipe');recipe.append(el('h3','Stage '+s.stage));
+      recipe.append(el('p','Paper input β: '+word(model.paper.paperBeta)+'. Selected displayed positions in recursion order: '+(model.paper.selectedPositions.map(p=>pos(p)).join(', ')||'none')+'.'));
+      if(s.stage)recipe.append(el('p','At paper position '+s.selectedPaperPosition+', generator '+s.letter+' has a = '+s.a+' selected through this letter and b = '+s.b+' earlier omissions. Mutate '+(s.mutations.map(native).join(' → ')||'at no vertex')+', freeze neighbors of '+native(s.deleteVertex)+', then delete it.'));
       box.append(recipe);
-      if(s.boundary) {
-        box.append(el('h3','Paper vertex → original β position'));
-        const chips=el('div',undefined,'map-row');for(const id of s.active){
-          const b=el('button',native(id)+' → '+s.mapping[id],'map-chip');b.addEventListener('click',()=>pickBirth(s.mapping[id]));chips.append(b);
-        }
+      if(s.boundary){
+        box.append(el('h3','Paper vertex → displayed β position'));
+        const chips=el('div',undefined,'map-row');
+        for(const id of s.active){const b=el('button',native(id)+' → '+pos(s.mapping[id]),'map-chip');b.onclick=()=>pickBirth(s.mapping[id]);chips.append(b);}
         box.append(chips);
-      }else box.append(el('p','The graph matrix is for the previous completed target '+word(prev.target)+'. The native paper matrix shows the current operation.'));
+      }else{
+        box.append(el('h3','Relative cycles in the stage '+frame.baseStage+' disk basis'));
+        const chips=el('div',undefined,'map-row');
+        for(const id of frame.active){const b=el('button',native(id)+' = '+cycleText(frame.basis[id]),'map-chip');b.onclick=()=>{cycleId=id;geometry='cycles';render();};chips.append(b);}
+        box.append(chips);
+      }
       if(check&&!check.matches)box.append(el('p','Differences in '+check.diff.join(', ')+'.','mismatch-text'));
     }
     const panels=el('div',undefined,'matrix-pair'),left=el('div');
-    left.append(el('h3','Plabic exchange matrix'),matrixTable(graphView(g).nodes,g.arrows));panels.append(left);
+    const view=micro?cycleView(frame):graphView(g);
+    left.append(el('h3',micro?'Full relative-cycle exchange matrix':'Plabic exchange matrix'),matrixTable(view.nodes,view.edges));panels.append(left);
     if(s){
-      const view=paperView(s), right=el('div');
-      if(s.boundary) view.nodes.sort((a,b)=>s.mapping[a.id]-s.mapping[b.id]);
-      const full=qView==='paper'&&$('showFF').checked;
-      right.append(el('h3',full?'Bao–Ye full seed matrix':'Bao–Ye exchange matrix'),matrixTable(view.nodes,s.edges,full));panels.append(right);
+      const paper=paperView(s),right=el('div'),full=qView==='paper'&&$('showFF').checked;
+      right.append(el('h3',full?'Bao–Ye full seed matrix':'Bao–Ye exchange matrix'),matrixTable(paper.nodes,orient(s.edges),full));panels.append(right);
     }
-    box.append(panels,el('p','Positive entry in row p and column q means p → q. Exchange matrices have all vertices as rows and mutable vertices as columns.'));
+    if(mode==='words'&&previewPivot!==null) {
+      const pv=graphView(g,true),third=el('div');third.append(el('h3','Preview after μ at '+pos(previewPivot)),matrixTable(pv.nodes,pv.edges));panels.append(third);
+    }
+    box.append(panels,el('p','A positive entry in row p and column q gives p → q. Exchange matrices have all vertices as rows and mutable vertices as columns.'));
   }
   function render() {
     if(!model)return;
-    const ctx=context();
-    renderTimeline(ctx);renderFilm(ctx);renderQuiver(ctx);renderData(ctx);
+    $('wordTab').setAttribute('aria-pressed',String(mode==='words'));$('recTab').setAttribute('aria-pressed',String(mode==='recursion'));
+    $('recTab').disabled=!model.paper;$('wordPanel').hidden=mode!=='words';$('recPanel').hidden=mode!=='recursion';
+    const ctx=context();renderSubword(ctx);
+    if(mode==='words')renderWordPanel();else{renderTimeline(ctx);renderGeometry(ctx);}
+    renderFilm(ctx);renderQuiver(ctx);renderData(ctx);
   }
-  for(let i=0;i<presets.length;i++) $('examples').append(opt(presets[i].name,i));
+  for(let i=0;i<presets.length;i++)$('examples').append(opt(presets[i].name,i));
   const custom=opt('Custom words','custom');custom.disabled=true;$('examples').append(custom);
-  $('examples').addEventListener('change',e=>loadPreset(Number(e.target.value)));
-  $('wordForm').addEventListener('submit',e=>{e.preventDefault();build(null);});
-  $('wordForm').addEventListener('input',()=>{$('inputError').textContent='Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;});
+  $('examples').onchange=e=>loadPreset(Number(e.target.value));
+  $('wordForm').onsubmit=e=>{e.preventDefault();build();};
+  $('wordForm').oninput=()=>{$('inputError').textContent='Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
+  $('reading').onchange=e=>{
+    const was=leftmost;leftmost=e.target.value==='left';
+    if(!build()){leftmost=was;e.target.value=was?'left':'right';}
+  };
+  $('wordTab').onclick=()=>changeMode('words');$('recTab').onclick=()=>changeMode('recursion');
+  $('moveSelect').onchange=e=>{selectedMove=e.target.value||null;previewPivot=null;render();};
+  $('applyMove').onclick=()=>applyWordMove(selectedMove);
+  $('undoMove').onclick=()=>{const prev=history.pop();if(prev)updateWords(prev.beta,'Restored β = '+word(prev.beta)+'.',false);};
   $('firstStep').onclick=()=>setIndex(0);$('lastStep').onclick=()=>setIndex(model.paper.snapshots.length-1);
   $('prevStep').onclick=()=>setIndex(index-1);$('nextStep').onclick=()=>setIndex(index+1);
   $('stepRange').oninput=$('stepList').onchange=e=>setIndex(Number(e.target.value));
   $('filmSelect').onchange=e=>pickBirth(Number(e.target.value));
-  $('cutBack').onclick=()=>{cut--;render();};$('cutForward').onclick=()=>{cut++;render();};
-  $('cutRange').oninput=e=>{cut=Number(e.target.value);render();};
-  $('traceMode').onclick=()=>{trace=!trace;if(trace&&birth!==null){cut=birth-1;$('showFilm').checked=true;} render();};
-  for(const id of ['showFilm','labels','lift','showFF']) $(id).onchange=render;
+  $('cutBack').onclick=()=>{cut+=leftmost?1:-1;render();};$('cutForward').onclick=()=>{cut+=leftmost?-1:1;render();};
+  $('cutRange').oninput=e=>{cut=time(Number(e.target.value),wiringState(context()).g.beta.length);render();};
+  $('traceMode').onclick=()=>{trace=!trace;if(trace&&birth!==null){cut=birth-1;$('showFilm').checked=true;}render();};
+  for(const id of ['showFilm','labels','lift','showFF'])$(id).onchange=render;
   for(const b of $('projections').querySelectorAll('button'))b.onclick=()=>{
     projection=b.dataset.view;for(const btn of $('projections').querySelectorAll('button'))btn.setAttribute('aria-pressed',String(btn===b));render();
   };
   for(const b of $('quiverViews').querySelectorAll('button'))b.onclick=()=>{qView=b.dataset.q;render();};
+  for(const b of $('geomChoices').querySelectorAll('button'))b.onclick=()=>{geometry=b.dataset.geom;birth=null;trace=false;render();};
+  for(const b of $('chartChoices').querySelectorAll('button'))b.onclick=()=>{chartSide=b.dataset.chart;birth=null;trace=false;render();};
+  $('cycleSelect').onchange=e=>{cycleId=e.target.value;render();};
   $('dataPanel').addEventListener('toggle',()=>{if(model)renderData(context());});
   $('guideOpen').onclick=()=>$('guide').showModal();$('guideClose').onclick=()=>$('guide').close();
   $('guide').addEventListener('click',e=>{if(e.target===$('guide'))$('guide').close();});
   let resizeToken;window.addEventListener('resize',()=>{clearTimeout(resizeToken);resizeToken=setTimeout(render,100);});
   loadPreset(0);
+
 })();
 </script>
 </body>
