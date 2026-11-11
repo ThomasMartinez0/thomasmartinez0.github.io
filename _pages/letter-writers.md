@@ -9,7 +9,7 @@ noindex: true
 
 Hello! If you can see this, I've asked you to write a letter for me. Thank you for your time with this, it is greatly appreciated.
 
-I have attached my application materials here and will update them throughout the application process instead of emailing you a new version each time. If you have any questions, please don't hesitate to reach out
+I have attached my application materials here and will update them throughout the application process instead of emailing you a new version each time. If you have any questions, please don't hesitate to reach out.
 
 ## Application deadlines
 
@@ -34,3 +34,4 @@ I have attached my application materials here and will update them throughout th
 
 - [Short research statement (PDF)](/files/letter-writers/Research_Statement_Thomas_Martinez_Short.pdf)
 - [Full research statement (PDF)](/files/letter-writers/Research_Statement_Thomas_Martinez.pdf)
+- [Teaching Statement (PDF)](/files/letter-writers/TeachingStatement.pdf)
