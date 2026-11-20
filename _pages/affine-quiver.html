@@ -140,7 +140,7 @@ sitemap: false
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
   <label class="field beta"><span>Braid word <i>β</i></span><input id="beta" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2 3 1 2 3" aria-describedby="formatHint"></label>
-  <label class="field target"><span>Selected target <i>v</i></span><input id="target" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2" aria-describedby="formatHint"></label>
+  <label class="field target"><span id="targetLabel">Selected target v</span><input id="target" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2" aria-describedby="formatHint"></label>
   <button class="primary build" type="submit">Build quiver <span aria-hidden="true">↗</span></button>
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
@@ -198,12 +198,12 @@ sitemap: false
 <dialog id="guide"><div class="guide-head"><h2>Reading the explorer</h2><button id="guideClose" class="iconbtn" aria-label="Close reading guide">×</button></div>
 <div class="guide-body">
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
-<p>The target <i>v</i> must be reduced and feasible in <i>β</i>. Positive <i>β</i> enables both constructions, including nonreduced braids. Negative letters in <i>β</i> switch to the signed plabic diagram.</p>
+<p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. For a signed word, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
 <h3>Induction walkthrough</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
 <p>Each stage shows the Bao–Ye selected product <i>u</i> and the film pair (initial boundary <i>c</i>, signed word), where <i>c = u⁻¹</i>. In Leftmost mode, selecting <i>i</i> gives <i>u sᵢ</i>. Inserting the hollow bar takes (c, β) to (sᵢ c, (−i)β). The boundary stays sᵢ c as the bar slides right. The selected crossing gives its label to the bar, and each later matching color gives a square mutation. Freeze the mutable neighbors of the terminal vertex and delete it to reach (sᵢ c, β).</p>
 <p>In Rightmost mode the film is shown in its native word order. Bao–Ye reads the displayed word from the right, so its product <i>u</i> is the inverse of the selected product written in displayed order. The new bar starts at the right end and the film boundary grows by the same left multiplication.</p>
 <p>The preset “Bao–Ye example 5.3” uses the published positive word and target in Leftmost mode. Example 5.3 lists its mutations. Definition 5.11 adds the freezing and deletion for the Richardson quiver.</p>
-<p>For a signed word in Leftmost mode, start the endpoints at <i>a = e</i> and <i>b</i> equal to the target. The graph permutation is <i>ρ = b⁻¹a</i>. An unbarred <i>i</i> tests <i>asᵢ</i>, which gives <i>ρsᵢ</i>. A barred <i>i</i> tests <i>bsᵢ</i>, which gives <i>(bsᵢ)⁻¹a = sᵢρ</i>. Accept either candidate when it shortens the length of <i>ρ</i>.</p>
+<p>For a signed word the film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. Rightmost mode restores the earlier convention. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
 <h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
@@ -272,7 +272,7 @@ sitemap: false
     const m = beta.length, last = Array.from({length: n}, (_, i) => i + 1);
     let target = last;
     for (const i of v) {
-      if (hasRightDescent(target, i)) throw new Error('The input word v is not reduced.');
+      if (hasRightDescent(target, i)) throw new Error('Enter a reduced expression for the boundary permutation.');
       target = rightReflection(target, i);
     }
     const top = Array(m + 1), bottom = Array(m + 1), solid = [], hollow = [];
@@ -291,7 +291,7 @@ sitemap: false
       bottom[c] = positive ? inverse(window) : window;
     }
     if (top[0].some((value, i) => value !== i + 1)) {
-      throw new Error('The word β has no distinguished subexpression for this v.');
+      throw new Error('The word β has no distinguished subexpression for this boundary permutation.');
     }
     return {solid: solid.reverse(), hollow: hollow.reverse(), top, bottom};
   }
@@ -2546,6 +2546,10 @@ sitemap: false
   let geometry='chart', chartSide='after', cycleId=null;
   const reverse=w=>[...w].reverse();
   const readWord=w=>leftmost?reverse(w):[...w];
+  const isSigned=letters=>letters.some(i=>i<0);
+  // The signed-word input specifies the native boundary c. Positive words use
+  // a selected product in displayed order. This conversion is its own inverse.
+  const convertIndex=(beta,index)=>isSigned(beta)?[...index]:readWord(index);
   const pos=(p,m=model.beta.length)=>leftmost?m+1-p:p;
   const time=(c,m=model.beta.length)=>leftmost?m-c:c;
   const orient=edges=>leftmost?edges.map(([a,b,w])=>[b,a,w]):edges;
@@ -2562,7 +2566,9 @@ sitemap: false
   function parseWord(input,n,name,allowSigns) {
     let s=input.trim().toLowerCase();
     if(['','e','id','identity','[]','()','∅'].includes(s)) return [];
-    s=s.replace(/−/g,'-').replace(/s_?\{?(\d+)\}?/g,' $1 ').trim();
+    s=s.replace(/−/g,'-').replace(/[₀-₉]/g,ch=>String(ch.codePointAt(0)-0x2080))
+      .replace(/s_?(?:\{(\d+)\}|(\d+))/g,(_,braced,plain)=>' '+(braced??plain)+' ')
+      .replace(/\(\s*(-\d+)\s*\)/g,' $1 ').trim();
     if(s.startsWith('[')&&s.endsWith(']') || s.startsWith('(')&&s.endsWith(')')) s=s.slice(1,-1).trim();
     let tokens=/^\d+$/.test(s)&&n<=9&&s.length>1 ? s.split('') : s.split(/[\s,]+/);
     if(tokens.length>48) throw new Error(name+' may have at most 48 letters in this explorer.');
@@ -2570,9 +2576,12 @@ sitemap: false
       if(!/^-?\d+$/.test(t)) throw new Error('Separate the letters of '+name+' with spaces or commas.');
       const magnitude=Math.abs(Number(t)) || n;
       if(!Number.isSafeInteger(magnitude)||magnitude>n) throw new Error('Each generator of '+name+' must be in 1…'+n+' (0 also denotes s₀).');
-      if(t.startsWith('-')&&!allowSigns) throw new Error('The reduced target v uses positive generators.');
+      if(t.startsWith('-')&&!allowSigns) throw new Error('The expression for '+name+' uses positive generators.');
       return t.startsWith('-')?-magnitude:magnitude;
     });
+  }
+  function updateTargetLabel() {
+    $('targetLabel').textContent=/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
   }
 
   function verdict(graph,step) {
@@ -2590,7 +2599,7 @@ sitemap: false
   }
 
   function createModel(n,inputBeta,inputV) {
-    const beta=readWord(inputBeta),v=readWord(inputV),graph=QuiverFilm.compute(n,beta,v);
+    const beta=readWord(inputBeta),v=convertIndex(beta,inputV),graph=QuiverFilm.compute(n,beta,v);
     const paper=beta.every(x=>x>0)?QuiverPaper.compute(n,beta,v):null;
     const stages=new Map();
     if(paper) paper.snapshots.forEach((s,i)=>{
@@ -2598,7 +2607,7 @@ sitemap: false
       const g=i===paper.snapshots.length-1?graph:QuiverFilm.compute(n,beta,s.target);
       stages.set(s.stage,{graph:g,snapshot:s,check:verdict(g,s)});
     });
-    return {n,beta,v,inputBeta:[...inputBeta],inputV:[...inputV],graph,paper,stages,
+    return {n,beta,v,inputBeta:[...inputBeta],graph,paper,stages,
       moves:null,frames:null,localCache:new Map(),positiveCache:new Map()};
   }
   function moves() {
@@ -2650,12 +2659,19 @@ sitemap: false
     $('inputError').hidden=true;
     $('stepList').replaceChildren(...(model.paper?model.paper.snapshots.map((s,i)=>opt(i+' · '+describeStep(s),i)):[]));
   }
-  function build(preset=null) {
+  function build(preset=null,linkIndex=null) {
+    updateTargetLabel();
     try {
       const n=Number($('rank').value);
       if(!Number.isInteger(n)||n<3||n>24)throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
-      const beta=parseWord($('beta').value,n,'β',true),v=parseWord($('target').value,n,'v',false);
-      const next=createModel(n,beta,v);
+      const beta=parseWord($('beta').value,n,'β',true);
+      const v=parseWord($('target').value,n,linkIndex??(isSigned(beta)?'c':'v'),false);
+      // ?v= links historically used displayed product order even for signed β.
+      // ?c= always specifies the literal boundary, including for a positive β.
+      const translateLink=(linkIndex==='v'&&isSigned(beta))||(linkIndex==='c'&&!isSigned(beta));
+      const inputIndex=translateLink?readWord(v):v;
+      if(translateLink)$('target').value=word(inputIndex);
+      const next=createModel(n,beta,inputIndex);
       history=[];lastChange='';activate(next,preset);
       if(!preset)$('examples').value='custom';
       render();return true;
@@ -2667,7 +2683,7 @@ sitemap: false
   }
   function loadPreset(i) {
     const p=presets[i];
-    $('rank').value=p.n;$('beta').value=word(readWord(p.beta));$('target').value=word(readWord(p.v));$('examples').value=String(i);
+    $('rank').value=p.n;$('beta').value=word(readWord(p.beta));$('target').value=word(convertIndex(p.beta,p.v));$('examples').value=String(i);
     build(p);
   }
   function changeMode(next) {
@@ -2684,9 +2700,11 @@ sitemap: false
       (m.mutation!==null?' · μ at '+pos(m.mutation):' · relabel');
   }
   function updateWords(nextBeta,text,remember=true) {
-    const next=createModel(model.n,nextBeta,model.inputV);
+    const inputIndex=convertIndex(nextBeta,model.v);
+    const next=createModel(model.n,nextBeta,inputIndex);
     if(remember)history.push({beta:[...model.inputBeta]});
-    $('beta').value=word(nextBeta);$('examples').value='custom';lastChange=text;activate(next);render();
+    $('beta').value=word(nextBeta);$('target').value=word(inputIndex);updateTargetLabel();
+    $('examples').value='custom';lastChange=text;activate(next);render();
   }
   function applyWordMove(id) {
     try {
@@ -2729,10 +2747,16 @@ sitemap: false
     readWord(g.beta).forEach((letter,i)=>{
       const rp=leftmost?g.beta.length-i:i+1;
       const chip=el('span',String(letter),'token'+(hollow.has(rp)?' chosen':'')+(s?.selectedPosition===rp&&mode==='recursion'?' now':''));
-      chip.title='Position '+(i+1)+' · '+(hollow.has(rp)?'selected':'omitted');box.append(chip);
+      chip.title='Position '+(i+1)+' · '+letter+' · '+(hollow.has(rp)?'hollow (selected)':'solid (omitted)');
+      chip.setAttribute('role','img');chip.setAttribute('aria-label',chip.title);box.append(chip);
     });
     const selected=g.hollow.map(p=>pos(p)).sort(compareNumbers);
-    box.append(el('span','selected positions '+(selected.join(', ')||'∅'),'ss-label'));
+    box.append(el('span',(model.paper?'selected positions ':'hollow positions ')+(selected.join(', ')||'∅'),'ss-label'));
+    if(!model.paper) {
+      const first=g.beta.length;
+      const letter=g.beta[first-1], status=hollow.has(first)?'hollow':'solid';
+      box.append(el('span','First crossing read · position '+pos(first)+' · '+letter+' is '+status,'ss-label'));
+    }
   }
   function renderTimeline({s,prev}) {
     const end=model.paper.snapshots.length-1;
@@ -3103,7 +3127,7 @@ sitemap: false
   const custom=opt('Custom words','custom');custom.disabled=true;$('examples').append(custom);
   $('examples').onchange=e=>loadPreset(Number(e.target.value));
   $('wordForm').onsubmit=e=>{e.preventDefault();build();};
-  $('wordForm').oninput=()=>{walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent='Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
+  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent='Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
   $('reading').onchange=e=>{
     const was=leftmost;leftmost=e.target.value==='left';
     if(!build()){leftmost=was;e.target.value=was?'left':'right';}
@@ -3134,10 +3158,11 @@ sitemap: false
   let resizeToken;window.addEventListener('resize',()=>{clearTimeout(resizeToken);resizeToken=setTimeout(render,100);});
   loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
   const linkedWords=new URLSearchParams(location.search);
-  if(linkedWords.has('beta')&&linkedWords.has('v')){
+  if(linkedWords.has('beta')&&(linkedWords.has('c')||linkedWords.has('v'))){
+    const indexKey=linkedWords.has('c')?'c':'v';
     $('rank').value=linkedWords.get('n')??'3';
-    $('beta').value=linkedWords.get('beta');$('target').value=linkedWords.get('v');
-    build();
+    $('beta').value=linkedWords.get('beta');$('target').value=linkedWords.get(indexKey);
+    build(null,indexKey);
   }
   function openLinkedView(){
     if(location.hash==='#bao-ye'&&model.paper)changeMode('recursion');
