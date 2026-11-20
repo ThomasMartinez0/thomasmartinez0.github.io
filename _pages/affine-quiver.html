@@ -63,6 +63,22 @@ sitemap: false
 .sw-product[hidden] { display:none; }
 .sw-product-label { font-size:13px; color:var(--muted,#52665c); }
 .sw-product-equation { color:var(--deep,#214239); font:600 clamp(23px,3vw,32px)/1.25 Georgia,serif; overflow-wrap:anywhere; }
+.sw-pair-panel { margin:11px 0; border-block:1px solid var(--line,#d1dbd3); padding:10px 0; }
+.sw-pair-panel[hidden],.sw-pair-rule[hidden],.sw-pair-note[hidden] { display:none; }
+.sw-pair-title { margin:0 0 6px; font:600 14px/1.4 var(--sans,sans-serif); }
+.sw-pair-rule,.sw-pair-note { margin:4px 0; line-height:1.45; }
+.sw-pair-rule { font:italic 16px/1.5 Georgia,serif; }
+.sw-pair-row { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:10px; align-items:start; max-width:850px; }
+.sw-pair-row.sw-pair-single { grid-template-columns:minmax(0,1fr); }
+.sw-pair-side { min-width:0; }
+.sw-pair-label,.sw-pair-note { color:var(--muted,#52665c); font-size:13px; }
+.sw-pair-label { display:block; margin-bottom:2px; }
+.sw-pair-row .sw-pair-value { font:500 clamp(18px,2vw,24px)/1.5 Georgia,serif; color:var(--ink,#233830); }
+.sw-pair-value { overflow-wrap:anywhere; }
+.sw-pair-target { color:var(--deep,#214239); }
+.sw-pair-bar { color:#833f22; background:#fff0e4; padding:0 2px; border-radius:3px; white-space:nowrap; }
+.sw-pair-arrow { margin-top:1.1em; font-size:19px; color:var(--muted,#52665c); }
+.sw-pair-note { margin:7px 0 0; }
 .sw-explain { margin:6px 0 13px; font-size:14px; line-height:1.5; }
 .sw-stats { display:flex; flex-wrap:wrap; gap:8px 28px; margin:0; }
 .sw-datum { min-width:0; max-width:100%; }
@@ -100,6 +116,11 @@ sitemap: false
 }
 @media(max-width:440px) {
   .modebar .modes { max-width:100%; flex-wrap:wrap; }
+  .sw-pair-row { grid-template-columns:minmax(0,1fr); gap:4px; }
+  .sw-pair-arrow { display:none; }
+  .sw-pair-side { display:flex; align-items:baseline; gap:7px; }
+  .sw-pair-label { flex:0 0 3.3em; }
+  .sw-pair-value { min-width:0; }
   .sw-controls { grid-template-columns:minmax(0,1fr); }
   .sw-lesson,.sw-wordpanel { padding:12px; }
   .sw-token { min-width:42px; padding-inline:3px; }
@@ -179,7 +200,7 @@ sitemap: false
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>The target <i>v</i> must be reduced and feasible in <i>β</i>. Positive <i>β</i> enables both constructions, including nonreduced braids. Negative letters in <i>β</i> switch to the signed plabic diagram.</p>
 <h3>Induction walkthrough</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
-<p>Each selected letter gives one stage. To pass from <i>u</i> to <i>usᵢ</i>, insert a hollow barred <i>i</i> at the left. It takes the target endpoint back to <i>u</i>. Slide the bar across the whole word. At the selected crossing it picks up that vertex’s label. Each later matching color gives a square mutation. At the boundary, freeze the terminal vertex’s mutable neighbors and delete the vertex.</p>
+<p>Each stage shows the pair (target, signed word) before and after the move. In Leftmost mode, insertion takes (v, β) to (vsᵢ, (−i)β), with v the target at the start of this stage. As the bar moves right, the target stays vsᵢ and the positive letters keep their order. The selected crossing gives its label to the bar. Each later matching color gives a square mutation. Freezing changes the quiver with the same pair. Deletion removes the bar and leaves (vsᵢ, β).</p>
 <p>For a signed word in Leftmost mode, start the endpoints at <i>a = e</i> and <i>b</i> equal to the target. The graph permutation is <i>ρ = b⁻¹a</i>. An unbarred <i>i</i> tests <i>asᵢ</i>, which gives <i>ρsᵢ</i>. A barred <i>i</i> tests <i>bsᵢ</i>, which gives <i>(bsᵢ)⁻¹a = sᵢρ</i>. Accept either candidate when it shortens the length of <i>ρ</i>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. Rightmost mode restores the earlier convention. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
@@ -2030,6 +2051,7 @@ sitemap: false
     const beta = paper.paperBeta;
     const m = beta.length;
     const display = word => leftmost ? [...word] : [...word].reverse();
+    const displayedBeta = display(beta);
     const position = (p, length) => leftmost ? p : length + 1 - p;
     const selected = paper.stages.map(s => s.selectedPaperPosition);
     const selectedLetters = selected.map(p => beta[p - 1]);
@@ -2104,6 +2126,20 @@ sitemap: false
       add('delete',null,markerLabel);
     }
 
+    function stepAt(index) {
+      if (!Number.isInteger(index) || index < 0 || index >= steps.length) throw new RangeError('Unknown sweep step.');
+      return steps[index];
+    }
+
+    // A pair is determined by the stage target and marker slot alone.
+    // This also permits direct jumps without building the previous film.
+    function pair(index) {
+      const step = stepAt(index);
+      const word = displayedBeta.slice();
+      if (step.markerPosition !== null) word.splice(step.markerPosition - 1,0,-step.letter);
+      return {target:step.target.slice(), word};
+    }
+
     function slots(step) {
       if (step.cut === null) {
         const boundary = stages.get(step.stage).snapshot;
@@ -2147,9 +2183,9 @@ sitemap: false
     // the requested state and keep a short cache for playback/backtracking.
     const recent = new Map();
     function frame(index) {
-      if (!Number.isInteger(index) || index < 0 || index >= steps.length) throw new RangeError('Unknown sweep step.');
+      const step = stepAt(index);
       if (recent.has(index)) return recent.get(index);
-      const step = steps[index], wordSlots = slots(step), length = wordSlots.length;
+      const wordSlots = slots(step), length = wordSlots.length;
       const paperSnapshot = paper.snapshots[step.snapshotIndex];
       const mapping = {};
       wordSlots.forEach(({label},k) => { if (label !== null) mapping[label] = length-k; });
@@ -2177,7 +2213,7 @@ sitemap: false
       if (recent.size > 3) recent.delete(recent.keys().next().value);
       return result;
     }
-    return {scan,steps,length:steps.length,frame};
+    return {scan,steps,length:steps.length,pair,frame};
   }
   globalThis.QuiverGlobalSweep = Object.freeze({create});
 })();
@@ -2189,7 +2225,6 @@ sitemap: false
     transfer:'Transfer the bridge label', square:'Square mutation', freeze:'Freeze the neighbors',
     delete:'Delete the marker'};
   const sym = i => String(i).replace('-', '−');
-  const word = w => w && w.length ? w.map(sym).join(' ') : 'e';
   const generator = i => 's'+String(i).replace(/\d/g, digit => '₀₁₂₃₄₅₆₇₈₉'[Number(digit)]);
   const product = letters => letters.length ? letters.map(generator).join('') : 'e';
   const native = id => id == null ? '—' : '(' + id + ')';
@@ -2213,6 +2248,25 @@ sitemap: false
     const x = el('button','sw-nav',text);
     x.type = 'button'; x.setAttribute('aria-label',label); x.onclick = handler; return x;
   }
+  function pairValue(pair) {
+    const tuple=el('span','sw-pair-value'), signed=el('span','sw-pair-word');
+    pair.word.forEach((letter,i)=>{
+      if(i) signed.append(' ');
+      if(letter<0) signed.append(el('strong','sw-pair-bar','('+sym(letter)+')'));
+      else signed.append(sym(letter));
+    });
+    if(!pair.word.length) {
+      signed.textContent='ε'; signed.setAttribute('aria-label','empty word');
+    }
+    tuple.append('(',el('span','sw-pair-target',product(pair.target)),', ',signed,')');
+    return tuple;
+  }
+  function pairSide(key, label, pair) {
+    const side=el('div','sw-pair-side sw-pair-'+key);
+    if(label) side.append(el('span','sw-pair-label',label));
+    side.append(pairValue(pair));
+    return side;
+  }
 
   function create(container) {
     const status = el('p','sw-empty'), shell = el('div','sw-shell');
@@ -2229,7 +2283,10 @@ sitemap: false
     const transition = el('div','sw-product'), equation = el('strong','sw-product-equation');
     transition.append(el('span','sw-product-label','Selected product a'),equation);
     transition.setAttribute('role','status');
-    const stats = el('dl','sw-stats'); lesson.append(title,transition,text,stats);
+    const pairPanel=el('section','sw-pair-panel'), pairTitle=el('h4','sw-pair-title');
+    const pairRule=el('p','sw-pair-rule'), pairRow=el('div','sw-pair-row'), pairNote=el('p','sw-pair-note');
+    pairPanel.append(pairTitle,pairRule,pairRow,pairNote);
+    const stats = el('dl','sw-stats'); lesson.append(title,transition,pairPanel,text,stats);
     title.setAttribute('aria-live','polite');
     const wordPanel = el('section','sw-wordpanel'), stripTitle = el('h3'), strip = el('div','sw-strip');
     const legend = el('p','sw-legend');
@@ -2280,7 +2337,8 @@ sitemap: false
         if (!pages.length) { clear('No stages were returned for this word.'); return; }
         stageSelect.replaceChildren(...groups.map((g,i)=>option(i,g.label)));
         status.hidden=true; shell.hidden=false;
-        sub.textContent='β = '+word(display(model.beta))+'   ·   fixed target '+product(display(model.v));
+        sub.replaceChildren('Scan input (final target, original word)  ',
+          pairValue({target:display(model.v),word:display(model.beta)}));
         go(0);
       } catch(error) { clear('Walkthrough unavailable. '+error.message); }
     }
@@ -2293,6 +2351,12 @@ sitemap: false
       stepSelect.value=String(cursor);prev.disabled=cursor===0;next.disabled=cursor===pages.length-1;
       count.textContent=(cursor+1)+' / '+pages.length;
       try { render(); } catch(error) { status.textContent='This step could not be displayed. '+error.message;status.hidden=false; }
+    }
+    function goToStage(stageNumber) {
+      if(!trace) return false;
+      const group=groups.find(g=>g.key===stageNumber);
+      if(!group) return false;
+      go(group.items[0]); return true;
     }
     stageSelect.onchange=()=>go(groups[Number(stageSelect.value)].items[0]);
     stepSelect.onchange=()=>go(Number(stepSelect.value));
@@ -2308,7 +2372,7 @@ sitemap: false
     function renderScan(i) {
       const s=trace.scan[i], selected=trace.scan.slice(0,i+1).filter(x=>x.selected);
       title.textContent=(s.selected?'Select':'Skip')+' β['+s.position+'] = '+sym(s.letter);
-      transition.hidden=false;
+      transition.hidden=false; pairPanel.hidden=true;
       equation.textContent=product(s.productBefore)+' → '+product(s.productAfter);
       const action=(left?'Appending ':'Prepending ')+generator(s.letter)+(left?' on the right':' on the left');
       text.textContent=action+(s.selected?' brings the product closer to the target. Select this letter.':
@@ -2348,14 +2412,35 @@ sitemap: false
         default:return '';
       }
     }
+    function renderPair(i,kind) {
+      const current=trace.pair(i);
+      pairPanel.hidden=false;
+      pairTitle.textContent=i===0?'Starting pair (target, word)':'Diagram pair (target, signed word)';
+      pairRule.hidden=kind!=='insert';
+      if(kind==='insert') pairRule.textContent=left?'(v, β) → (v sᵢ, (−i)β)':'(v, β) → (sᵢ v, β(−i))';
+      pairRow.replaceChildren();
+      pairRow.classList.toggle('sw-pair-single',i===0);
+      if(i===0) {
+        pairRow.append(pairSide('initial','',current));
+        pairNote.hidden=true;
+        return;
+      }
+      const arrow=el('span','sw-pair-arrow','→');
+      arrow.setAttribute('aria-hidden','true');
+      pairRow.append(pairSide('before','Before',trace.pair(i-1)),arrow,pairSide('after','After',current));
+      pairNote.hidden=false;
+      if(kind==='insert') pairNote.textContent='Here v is the target before this stage. Insertion changes the target and adds the barred letter.';
+      else if(kind==='freeze') pairNote.textContent='The pair stays fixed while freezing the terminal vertex’s mutable neighbors.';
+      else if(kind==='delete') pairNote.textContent='The target stays fixed. Removing the bar restores the original positive word β.';
+      else pairNote.textContent='The target and the order of the positive letters stay fixed as the bar moves one slot '+(left?'right.':'left.');
+    }
     function renderStep(i) {
       const f=trace.frame(i);activeFrame=f;
-      const boundary=trace.steps.findIndex(s=>s.stage===f.stage);
-      const old=boundary>0?trace.steps[boundary-1].target:[];
+      const old=f.kind==='insert'?trace.steps[i-1].target:[];
       transition.hidden=true;
+      renderPair(i,f.kind);
       title.textContent=names[f.kind]||f.kind; text.textContent=sentence(f,old);
-      stats.replaceChildren(datum('Previous stage target',product(old)),datum('Stage target',product(f.target)),
-        datum('Selected position', f.stage?positionPhrase(f.selectedPosition):'∅'),
+      stats.replaceChildren(datum('Selected position', f.stage?positionPhrase(f.selectedPosition):'∅'),
         datum('Marker',f.markerPosition==null?'absent':'slot '+f.markerPosition+' · '+(f.markerHollow?'hollow':'solid')));
       if(f.kind==='insert'){
         const factor=generator(f.letter);
@@ -2430,7 +2515,7 @@ sitemap: false
       if(page.scan!=null)renderScan(page.scan);else renderStep(page.step);
     }
     clear();
-    return Object.freeze({set,clear,refresh:()=>{if(trace && !container.hidden)render();}});
+    return Object.freeze({set,clear,goToStage,refresh:()=>{if(trace && !container.hidden)render();}});
   }
   globalThis.QuiverSweepView=Object.freeze({create});
 })();
@@ -3047,7 +3132,11 @@ sitemap: false
   }
   function openLinkedView(){
     if(location.hash==='#bao-ye'&&model.paper)changeMode('recursion');
-    else if(location.hash==='#induction'&&model.paper)changeMode('sweep');
+    else if(location.hash==='#induction'&&model.paper){
+      changeMode('sweep');
+      const stage=linkedWords.get('stage');
+      if(stage!==null && /^\d+$/.test(stage))sweepView.goToStage(Number(stage));
+    }
     else if(location.hash==='#word-moves')changeMode('words');
   }
   openLinkedView();window.addEventListener('hashchange',openLinkedView);
