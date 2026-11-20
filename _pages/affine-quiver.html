@@ -35,6 +35,70 @@ sitemap: false
 .diagram-buttons{display:flex;align-items:center;gap:4px;flex:none}.diagram-buttons button{min-width:32px;min-height:32px;padding:3px 6px;border:1px solid var(--line);border-radius:5px;background:#f4f7f0;color:var(--deep)}
 .diagram-buttons .playbtn{min-width:64px;color:white;background:var(--deep);border-color:var(--deep)}
 @media(max-width:550px){.diagram-player{gap:5px;padding:4px 6px}.diagram-caption .frame-count{font-size:10px}.diagram-buttons button{min-height:36px;min-width:34px}.diagram-buttons .playbtn{min-width:60px}}
+
+.sw-shell > * { min-width:0; }
+.sw-shell { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; margin:16px 0 22px; }
+.sw-shell[hidden],.sw-empty[hidden],.sw-pictures[hidden],.sw-details[hidden] { display:none; }
+.sw-header,.sw-cardhead,.sw-controls,.sw-arrows { display:flex; align-items:center; gap:10px; }
+.sw-header,.sw-cardhead { justify-content:space-between; }
+.sw-header { padding:5px 1px 0; }
+.sw-header h2 { font-size:clamp(25px,3.1vw,34px); }
+.sw-sub,.sw-count,.sw-datum dd,.sw-token { font-family:var(--mono,monospace); }
+.sw-sub { margin:5px 0 0; font-size:13px; color:var(--muted,#52665c); overflow-wrap:anywhere; }
+.sw-count,.sw-checked { font-size:12px; color:var(--teal,#285e52); white-space:nowrap; }
+.sw-count { font-variant-numeric:tabular-nums; }
+.sw-controls,.sw-wordpanel,.sw-lesson,.sw-card,.sw-details { border:1px solid var(--line,#d1dbd3); background:var(--paper,#fffefa); border-radius:10px; }
+.sw-controls { padding:11px 14px; align-items:flex-end; flex-wrap:wrap; }
+.sw-control { display:grid; gap:3px; font-size:12px; color:var(--muted,#52665c); font-weight:600; min-width:0; }
+.sw-control select { background:#fffefa; color:var(--ink,#233830); width:100%; font-size:13px; min-height:35px; }
+.sw-control:nth-child(2) { flex:1; max-width:420px; }
+.sw-arrows { margin-left:auto; }
+.sw-nav { border:1px solid var(--line,#cbd2c9); border-radius:5px; background:#fafbf7; font-size:14px; min-height:35px; padding:4px 11px; }
+.sw-nav:last-child { background:var(--deep,#214239); border-color:transparent; color:white; }
+.sw-lesson,.sw-wordpanel { padding:14px 17px; }
+.sw-lesson { border-left:3px solid var(--teal,#285e52); }
+.sw-lesson h3 { font-size:clamp(21px,2.6vw,27px); }
+.sw-wordpanel h3,.sw-cardhead h3 { font-size:19px; }
+.sw-explain { margin:6px 0 13px; font-size:14px; line-height:1.5; }
+.sw-stats { display:flex; flex-wrap:wrap; gap:8px 28px; margin:0; }
+.sw-datum dt,.sw-legend,.sw-chain,.sw-picnote,.sw-nothing { color:var(--muted,#52665c); font-size:12px; line-height:1.45; }
+.sw-datum dd { margin:2px 0 0; font-size:13px; line-height:1.4; overflow-wrap:anywhere; }
+.sw-strip { display:flex; flex-wrap:wrap; align-items:flex-start; gap:5px; padding:10px 0 8px; }
+.sw-token { min-width:49px; display:grid; justify-items:center; gap:3px; background:#fbfcf8; border:1px solid #d7ded5; border-radius:6px; padding:5px 6px; }
+.sw-token small { font-size:10px; color:#54665e; line-height:1.22; }
+.sw-token b { font-size:17px; line-height:1.18; }
+.sw-token.sw-taken { background:#e9f3ec; border-color:#94b8a7; }
+.sw-token.sw-marker { background:#fff0e6; border-color:#bf845a; }
+.sw-token.sw-marker small,.sw-token.sw-marker b { color:#7e422a; }
+.sw-token.sw-current { outline:2px solid #285f55; outline-offset:0; }
+.sw-token.sw-crossed { border-bottom:3px solid #4b7970; padding-bottom:3px; }
+.sw-chain { margin:0 2px 2px; }
+.sw-pictures { display:grid; grid-template-columns:minmax(0,3fr) minmax(0,2fr); gap:12px; align-items:start; }
+.sw-card { min-width:0; overflow:hidden; }
+.sw-cardhead { padding:12px 14px; border-bottom:1px solid var(--line,#d1dbd3); min-height:48px; }
+.sw-cardhead select { font-size:12px; padding:4px 8px; }
+.sw-svg { min-width:0; max-height:420px; overflow:auto; }
+.sw-wire { background:#fbfcf8; }
+.sw-picnote { padding:7px 13px; border-top:1px solid var(--line,#d1dbd3); }
+.sw-checked { background:#e8f4e9; border-radius:20px; font-size:11px; font-weight:600; padding:4px 8px; }
+.sw-checked.sw-diff { color:#853b31; background:#ffebe6; }
+.sw-details summary { padding:10px 15px; font-size:14px; font-weight:600; cursor:pointer; }
+.sw-tablebox { overflow:auto; max-height:320px; }
+.sw-table { width:100%; }
+.sw-row-active { background:#e8f3ed; }
+.sw-empty { margin:15px 0; font-size:14px; }
+@media(max-width:760px) {
+  .sw-pictures { grid-template-columns:minmax(0,1fr); }
+  .sw-controls { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .sw-control:nth-child(2) { max-width:none; }
+  .sw-arrows { grid-column:1/-1; }
+}
+@media(max-width:440px) {
+  .modebar .modes { max-width:100%; flex-wrap:wrap; }
+  .sw-controls { grid-template-columns:minmax(0,1fr); }
+  .sw-lesson,.sw-wordpanel { padding:12px; }
+  .sw-token { min-width:42px; padding-inline:3px; }
+}
 </style>
 </head>
 <body>
@@ -45,7 +109,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine quiver explorer</h1><p>Apply a braid move, follow its soap films, and compare each mutation with the Bao–Ye recursion.</p></div>
+ <div class="intro"><div><h1>Affine quiver explorer</h1><p>Choose a subexpression and follow the signed braid moves that give the Bao–Ye quiver.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -55,8 +119,9 @@ sitemap: false
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
  <p id="inputError" class="error" role="alert" hidden></p>
- <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="wordTab" aria-pressed="true">Word moves</button><button type="button" id="recTab" aria-pressed="false">Bao–Ye steps</button></div>
+ <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="sweepTab" aria-controls="inductionWalk" aria-pressed="true">Induction walkthrough</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Bao–Ye steps</button></div>
  <label class="reading">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
+ <section id="inductionWalk" aria-label="Induction walkthrough" hidden></section>
  <div id="subwordStrip" aria-label="Selected subexpression of beta" class="subword-strip"></div>
  <section id="wordPanel" class="panel action-panel" aria-labelledby="moveTitle"><div class="timeline-line"><div class="row"><h2 id="moveTitle">Change the braid word</h2><span id="moveCount" class="chip"></span></div><button id="undoMove" class="nextbtn" disabled>↶ Undo move</button></div>
  <div class="move-options"><label><span>Adjacent relation</span> <select id="moveSelect" aria-label="Preview a word relation"></select></label><button id="applyMove" class="primary">Apply move</button></div>
@@ -81,7 +146,7 @@ sitemap: false
   <div class="diagram-caption"><span id="diagramFrameCount" class="frame-count"></span><strong id="diagramFrameTitle"></strong></div>
   <div class="diagram-buttons"><button type="button" id="diagramPrev" aria-label="Previous move from the diagram" title="Previous move">←</button><button type="button" id="diagramPlay" class="playbtn"></button><button type="button" id="diagramNext" aria-label="Next move from the diagram" title="Next move">→</button></div>
  </div>
- <div class="workspace">
+ <div class="workspace" id="originalDiagrams">
  <section class="panel wire-card" aria-labelledby="wireTitle">
   <div class="card-head"><div><h2 id="wireTitle">Plabic diagram</h2><div class="subtle" id="wireTarget"></div></div>
    <div class="seg" id="projections" aria-label="Diagram projection"><button type="button" data-view="top" aria-pressed="true">Top</button><button type="button" data-view="bottom" aria-pressed="false">Bottom</button><button type="button" data-view="space" aria-pressed="false">3D</button></div></div>
@@ -108,6 +173,7 @@ sitemap: false
 <div class="guide-body">
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>The target <i>v</i> must be reduced and feasible in <i>β</i>. Positive <i>β</i> enables both constructions, including nonreduced braids. Negative letters in <i>β</i> switch to the signed plabic diagram.</p>
+<h3>Induction walkthrough</h3><p>In Leftmost mode, the scan selects a positive letter when multiplying the remaining target on the left shortens it. Each selected letter contributes one stage. For a stage from <i>u</i> to <i>usᵢ</i>, insert a new hollow barred <i>i</i>. It acts on the right, so the rest of the word still sees <i>u</i>. Slide the bar across the whole word. The selected crossing takes its hollow status. Each later matching color gives a square mutation. At the boundary, freeze the terminal vertex’s mutable neighbors and delete the vertex. The full signed diagram keeps the earlier letters visible throughout.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. Rightmost mode restores the earlier convention. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
 <h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
@@ -1940,6 +2006,398 @@ sitemap: false
   globalThis.QuiverWalk=Object.freeze({create,storyboard});
 })();
 </script>
+<script>/* Full signed-word sweep. The graph engine reads the word from right to left.
+   We describe stages in paper order and convert slots only at the two APIs. */
+(() => {
+  'use strict';
+
+  function create(model, leftmost = true) {
+    if (!model?.paper || !model.stages || !model.graph) {
+      throw new Error('The global sweep requires a positive word and a feasible target.');
+    }
+    const {n, paper, stages} = model;
+    const beta = paper.paperBeta;
+    const m = beta.length;
+    const display = word => leftmost ? [...word] : [...word].reverse();
+    const position = (p, length) => leftmost ? p : length + 1 - p;
+    const selected = paper.stages.map(s => s.selectedPaperPosition);
+    const selectedLetters = selected.map(p => beta[p - 1]);
+    const windows = leftmost ? model.graph.bottomWindows : model.graph.topWindows;
+    let used = 0;
+    const scan = beta.map((letter, offset) => {
+      const p = offset + 1;
+      const before = display(selectedLetters.slice(used));
+      const take = selected[used] === p;
+      if (take) used++;
+      return {
+        position:position(p, m), letter, selected:take, before,
+        after:display(selectedLetters.slice(used)),
+        beforeWindow:windows[m - offset].slice(), afterWindow:windows[m - p].slice()
+      };
+    });
+
+    const steps = [], contexts = [];
+    let snapshotIndex = 0;
+    steps.push({kind:'initial',stage:0,letter:null,selectedPosition:null,crossedPosition:null,
+      crossedLetter:null,focus:null,snapshotIndex,target:[],markerPosition:null,markerHollow:null,
+      newlyFrozen:[],cut:null});
+    for (const s of paper.stages) {
+      const p = s.selectedPaperPosition, letter = s.letter;
+      const oldBoundary = stages.get(s.stage - 1).snapshot;
+      const baseLabels = Array(m).fill(null);
+      for (const [id, slot] of Object.entries(oldBoundary.mapping)) baseLabels[m - slot] = id;
+      const canonicalTarget = selectedLetters.slice(0, s.stage);
+      const target = display(canonicalTarget);
+      contexts[s.stage] = {baseLabels, rawTarget:[...canonicalTarget].reverse(), selected:p};
+
+      function add(kind, cut, focus = null, crossed = null) {
+        const marker = cut !== null;
+        steps.push({kind,stage:s.stage,letter,selectedPosition:position(p,m),
+          crossedPosition:crossed === null ? null : position(crossed,m),
+          crossedLetter:crossed === null ? null : beta[crossed-1],
+          focus,snapshotIndex,target,markerPosition:marker ? position(cut+1,m+1) : null,
+          markerHollow:marker ? cut < p : null,
+          newlyFrozen:kind === 'freeze' ? paper.snapshots[snapshotIndex].newlyFrozen : [],cut});
+      }
+      function advance(kind, id) {
+        const next = paper.snapshots[++snapshotIndex];
+        if (!next || next.stage !== s.stage || next.type !== kind || next.focus !== id) {
+          throw new Error('The signed sweep and the Bao–Ye operation labels disagree.');
+        }
+      }
+
+      add('insert',0);
+      let markerLabel = null;
+      for (let crossed = 1; crossed <= m; crossed++) {
+        if (crossed === p) {
+          markerLabel = baseLabels[p - 1];
+          add('transfer',crossed,markerLabel,crossed);
+        } else if (crossed > p && beta[crossed - 1] === letter) {
+          advance('mutate',markerLabel);
+          add('square',crossed,markerLabel,crossed);
+          markerLabel = baseLabels[crossed - 1];
+        } else {
+          add('commute',crossed,null,crossed);
+        }
+      }
+      advance('freeze',markerLabel);
+      add('freeze',m,markerLabel);
+      advance('delete',markerLabel);
+      add('delete',null,markerLabel);
+    }
+
+    function slots(step) {
+      if (step.cut === null) {
+        const boundary = stages.get(step.stage).snapshot;
+        const bySlot = new Map(Object.entries(boundary.mapping).map(([id,p]) => [p,id]));
+        return beta.map((letter,k) => ({letter,source:k+1,label:bySlot.get(m-k) || null}));
+      }
+      const {baseLabels,selected:p} = contexts[step.stage];
+      const word = beta.map((letter,k) => ({letter,source:k+1,label:baseLabels[k]}));
+      let markerLabel = null;
+      // At the selected positive slot the hollow crossing takes the marker's
+      // place. At each later square the two native labels stay in their slots.
+      for (let k = p-1; k < step.cut; k++) {
+        if (beta[k] !== step.letter) continue;
+        const next = word[k].label;
+        word[k].label = markerLabel;
+        markerLabel = next;
+      }
+      word.splice(step.cut,0,{letter:-step.letter,source:null,label:markerLabel});
+      return word;
+    }
+
+    function freezeNeighbors(g, terminal) {
+      if (!g.frozen.includes(terminal)) throw new Error('Expected a frozen terminal marker.');
+      const frozen = new Set(g.frozen);
+      for (const [a,b] of g.arrows) {
+        if (a === terminal) frozen.add(b);
+        if (b === terminal) frozen.add(a);
+      }
+      return {...g,intrinsicFrozen:g.frozen,frozen:[...frozen].sort((a,b) => a-b),
+        arrows:g.arrows.filter(([a,b]) => !(frozen.has(a) && frozen.has(b)))};
+    }
+    function compare(g, mapping, snapshot) {
+      const frozen = new Set(snapshot.frozen);
+      const expected = {solid:snapshot.active, frozen:snapshot.frozen,
+        arrows:snapshot.edges.filter(([a,b]) => !(frozen.has(a) && frozen.has(b)))};
+      const reason = QuiverMoves.compareMappedIce(expected,g,mapping);
+      return reason ? [reason] : [];
+    }
+
+    // Fully recomputed films can dominate memory for long words. Build only
+    // the requested state and keep a short cache for playback/backtracking.
+    const recent = new Map();
+    function frame(index) {
+      if (!Number.isInteger(index) || index < 0 || index >= steps.length) throw new RangeError('Unknown sweep step.');
+      if (recent.has(index)) return recent.get(index);
+      const step = steps[index], wordSlots = slots(step), length = wordSlots.length;
+      const paperSnapshot = paper.snapshots[step.snapshotIndex];
+      const mapping = {};
+      wordSlots.forEach(({label},k) => { if (label !== null) mapping[label] = length-k; });
+      let graph;
+      if (step.cut === null) {
+        graph = stages.get(step.stage).graph;
+      } else {
+        const previous = step.kind === 'freeze' ? recent.get(index-1) : null;
+        graph = previous ? previous.graph : QuiverFilm.compute(n,wordSlots.map(x=>x.letter).reverse(),contexts[step.stage].rawTarget);
+        if (step.kind === 'freeze') graph = freezeNeighbors(graph,mapping[step.focus]);
+      }
+      const hollow = new Set(graph.hollow), frozen = new Set(graph.frozen);
+      const tokens = display(wordSlots.map((slot,k) => ({
+        letter:slot.letter, marker:slot.source === null, hollow:hollow.has(length-k), frozen:frozen.has(length-k),
+        position:position(k+1,length), rawPosition:length-k, originalPosition:slot.source === null ? null : position(slot.source,m),
+        label:slot.label
+      })));
+      const differences = compare(graph,mapping,paperSnapshot);
+      if (tokens.some(t => t.hollow !== (t.label === null))) differences.push('Hollow slots and native labels disagree.');
+      const marker = tokens.find(t => t.marker);
+      if (marker && marker.hollow !== step.markerHollow) differences.push('The marker has the wrong crossing status.');
+      const result = {...step,graph,word:tokens.map(t=>t.letter),tokens,mapping,paperSnapshot,
+        verified:differences.length === 0,differences};
+      recent.set(index,result);
+      if (recent.size > 3) recent.delete(recent.keys().next().value);
+      return result;
+    }
+    return {scan,steps,length:steps.length,frame};
+  }
+  globalThis.QuiverGlobalSweep = Object.freeze({create});
+})();
+</script>
+<script>/* The induction view consumes the signed-word and film data computed by global-sweep.js. */
+(() => {
+  'use strict';
+  const names = {initial:'Base case', insert:'Insert a hollow marker', commute:'Commute the marker',
+    transfer:'Transfer the bridge label', square:'Square mutation', freeze:'Freeze the neighbors',
+    delete:'Delete the marker'};
+  const sym = i => String(i).replace('-', '−');
+  const word = w => w && w.length ? w.map(sym).join(' ') : 'e';
+  const native = id => id == null ? '—' : '(' + id + ')';
+  function el(tag, cls, text) {
+    const x = document.createElement(tag);
+    if (cls) x.className = cls;
+    if (text != null) x.textContent = text;
+    return x;
+  }
+  function option(v, text) {
+    const x = el('option', '', text); x.value = v; return x;
+  }
+  function control(label, input) {
+    const x = el('label','sw-control'); x.append(el('span','',label), input); return x;
+  }
+  function datum(label, value) {
+    const x = el('div','sw-datum');
+    x.append(el('dt','',label),el('dd','',value)); return x;
+  }
+  function button(text, label, handler) {
+    const x = el('button','sw-nav',text);
+    x.type = 'button'; x.setAttribute('aria-label',label); x.onclick = handler; return x;
+  }
+
+  function create(container) {
+    const status = el('p','sw-empty'), shell = el('div','sw-shell');
+    const header = el('header','sw-header'), intro = el('div');
+    const sub = el('p','sw-sub'); intro.append(el('h2','','Induction walkthrough'), sub);
+    const count = el('span','sw-count'); header.append(intro, count);
+    const stageSelect = el('select'), stepSelect = el('select');
+    const prev = button('←','Previous walkthrough step',() => go(cursor-1));
+    const next = button('Next →','Next walkthrough step',() => go(cursor+1));
+    const arrows = el('div','sw-arrows'); arrows.append(prev,next);
+    const controls = el('div','sw-controls');
+    controls.append(control('Stage',stageSelect), control('Step',stepSelect), arrows);
+    const lesson = el('section','sw-lesson'), title = el('h3'), text = el('p','sw-explain');
+    const stats = el('dl','sw-stats'); lesson.append(title,text,stats);
+    title.setAttribute('aria-live','polite');
+    const wordPanel = el('section','sw-wordpanel'), stripTitle = el('h3'), strip = el('div','sw-strip');
+    const legend = el('p','sw-legend');
+    wordPanel.append(stripTitle,strip,legend);
+    const selectionNote = el('p','sw-chain');
+    const pictures = el('div','sw-pictures'), wires = el('section','sw-card'), graph = el('section','sw-card');
+    const wirehead = el('div','sw-cardhead'), projection = el('select'); projection.setAttribute('aria-label','Diagram projection');
+    projection.append(option('top','Top'), option('bottom','Bottom'), option('space','3D'));
+    wirehead.append(el('h3','','Full signed diagram'),projection);
+    const wirebox = el('div','sw-svg sw-wire');
+    const qhead = el('div','sw-cardhead'), verified = el('span','sw-checked');
+    qhead.append(el('h3','','Exchange quiver'), verified);
+    const qbox = el('div','sw-svg');
+    const vertexNote = el('p','sw-picnote');
+    wires.append(wirehead,wirebox); graph.append(qhead,qbox,vertexNote); pictures.append(wires,graph);
+    const details = el('details','sw-details'), tableBox = el('div','sw-tablebox');
+    details.append(el('summary','','Positions and vertex labels'),tableBox);
+    shell.append(header, controls, lesson, wordPanel, selectionNote, pictures, details);
+    container.replaceChildren(status,shell);
+    let trace = null, priorModel = null, left = true, groups = [], pages = [], cursor = 0, selectedSlot = null;
+    let activeFrame = null;
+    const display = a => left ? [...a].reverse() : [...a];
+    function clear(msg) {
+      trace = null; priorModel = null; pages = []; activeFrame = null;
+      status.textContent = msg || 'Build a positive word and a feasible target to start the walkthrough.';
+      status.hidden = false; shell.hidden = true;
+    }
+    function set(model,leftmost=true) {
+      if (!model || !model.paper) { clear(); return; }
+      if (priorModel===model && left===leftmost && trace) return;
+      left=leftmost;
+      try {
+        trace=QuiverGlobalSweep.create(model,left); priorModel=model;
+        groups=[];pages=[];cursor=0; selectedSlot=null;
+        function add(key,label,page) {
+          let group=groups[groups.length-1];
+          if (!group || group.key!==key) { group={key,label,items:[]}; groups.push(group); }
+          page.group=groups.length-1; group.items.push(pages.length); pages.push(page);
+        }
+        for (const [i,s] of trace.scan.entries())
+          add('scan',left?'Leftmost scan':'Rightmost scan',{scan:i,label:'Position '+s.position+' · '+(s.selected?'select ':'skip ')+sym(s.letter)});
+        for (const [i,s] of trace.steps.entries()) {
+          const stage = s.stage || 0, group = stage?'Stage '+stage+' · β['+s.selectedPosition+'] = '+s.letter:'Base case · e';
+          let label=names[s.kind] || s.kind;
+          if (s.kind==='commute' || s.kind==='square' || s.kind==='transfer') label+=' · β['+s.crossedPosition+']';
+          add(stage,group,{step:i,label});
+        }
+        if (!pages.length) { clear('No stages were returned for this word.'); return; }
+        stageSelect.replaceChildren(...groups.map((g,i)=>option(i,g.label)));
+        status.hidden=true; shell.hidden=false;
+        sub.textContent=word(display(model.beta))+'   ·   target '+word(display(model.v));
+        go(0);
+      } catch(error) { clear('Walkthrough unavailable. '+error.message); }
+    }
+    function go(index) {
+      if (!trace || index<0 || index>=pages.length) return;
+      cursor=index;selectedSlot=null;
+      const page=pages[cursor],group=groups[page.group];
+      stageSelect.value=String(page.group);
+      stepSelect.replaceChildren(...group.items.map((k,j)=>option(k,(j+1)+'. '+pages[k].label)));
+      stepSelect.value=String(cursor);prev.disabled=cursor===0;next.disabled=cursor===pages.length-1;
+      count.textContent=(cursor+1)+' / '+pages.length;
+      try { render(); } catch(error) { status.textContent='This step could not be displayed. '+error.message;status.hidden=false; }
+    }
+    stageSelect.onchange=()=>go(groups[Number(stageSelect.value)].items[0]);
+    stepSelect.onchange=()=>go(Number(stepSelect.value));
+    projection.onchange=()=>{if(activeFrame)draw(activeFrame);};
+    function scanChip(s,index,current) {
+      const item=button('', 'Inspect original position '+s.position,()=>go(index));
+      item.className='sw-token';
+      if(index<=current && s.selected)item.classList.add('sw-taken');
+      if(index===current){item.classList.add('sw-current'); item.setAttribute('aria-current','step');}
+      item.append(el('small','','β['+s.position+']'),el('b','',sym(s.letter)),el('small','',index>current?'pending':s.selected?'selected':'skipped'));
+      return item;
+    }
+    function renderScan(i) {
+      const s=trace.scan[i], selected=trace.scan.slice(0,i+1).filter(x=>x.selected);
+      title.textContent=(s.selected?'Select':'Skip')+' β['+s.position+'] = '+sym(s.letter);
+      const product=left?'sᵢr':'rsᵢ';
+      text.textContent='Test '+product+' for the current residual r and i = '+s.letter+'. '+(s.selected?
+        'Its length is smaller, so select this position and use '+product+' as the next residual.':
+        'Its length is larger, so skip this position and keep r.');
+      stats.replaceChildren(datum('Residual before',word(s.before)),datum('Residual after',word(s.after)),
+        datum('Selected positions',selected.map(x=>x.position).join(', ')||'∅'));
+      stripTitle.textContent='Original word β';
+      const entries=trace.scan.map((x,j)=>({p:x.position,element:scanChip(x,j,i)})).sort((a,b)=>a.p-b.p);
+      strip.replaceChildren(...entries.map(x=>x.element));
+      legend.textContent='Choose a letter to inspect its greedy decision.';
+      selectionNote.textContent='Partial target '+word((left?selected:[...selected].reverse()).map(x=>x.letter))+
+        '   ·   Residual window ['+s.afterWindow.join(', ')+']';
+      pictures.hidden=true; details.hidden=true; activeFrame=null;
+    }
+    function positionPhrase(p) { return p==null?'the selected crossing':'β['+p+']'; }
+    function sentence(f) {
+      const dest=positionPhrase(f.crossedPosition), label=native(f.focus);
+      switch(f.kind) {
+        case 'initial':return 'Start at the identity target. Each letter of the positive word gives a solid bridge. The last occurrence of each color in the induction order is frozen.';
+        case 'insert':return 'Add a new barred '+f.letter+' at the '+(left?'left':'right')+' boundary. The hollow-insertion lemma lets us change the target from u to '+(left?'usᵢ':'sᵢu')+'. The bar consumes sᵢ on the '+(left?'right':'left')+', so the original word still sees u. Every old crossing keeps its label and the quiver stays the same. A first-letter sign change alone would preserve word length.';
+        case 'commute':return 'Slide the barred marker past '+dest+'. This mixed-sign interchange preserves the quiver under the displayed vertex labels.';
+        case 'transfer':return 'At '+dest+', the original positive crossing becomes hollow and the barred marker becomes solid. The bridge label moves onto the marker while the quiver stays the same.';
+        case 'square':return 'Slide the solid barred marker past the matching solid crossing at '+dest+'. This interchange is a square move. Mutate at '+label+' and carry the next bridge label on the marker.';
+        case 'freeze': {
+          const earlier=f.tokens.filter(t=>t.originalPosition!=null && f.newlyFrozen.includes(t.label) &&
+            (left?t.originalPosition<f.selectedPosition:t.originalPosition>f.selectedPosition));
+          const prefix=earlier.length?' The part of the word passed while the marker was hollow contributes '+earlier.map(t=>native(t.label)+' at β['+t.originalPosition+']').join(', ')+'.':'';
+          return 'The marker has reached the '+(left?'right':'left')+' boundary. Freeze the mutable neighbors of its terminal vertex '+label+'. '+(f.newlyFrozen.length?'Newly frozen '+f.newlyFrozen.map(native).join(', ')+'.':'There are no mutable neighbors to freeze.')+prefix;
+        }
+        case 'delete':return 'Delete the terminal marker and vertex '+label+'. The original positive word now carries the new partial target and the surviving native labels.';
+        default:return '';
+      }
+    }
+    function renderStep(i) {
+      const f=trace.frame(i);activeFrame=f;
+      const boundary=trace.steps.findIndex(s=>s.stage===f.stage);
+      const old=boundary>0?trace.steps[boundary-1].target:[];
+      title.textContent=names[f.kind]||f.kind; text.textContent=sentence(f);
+      stats.replaceChildren(datum('Previous target',word(old)),datum('New graph target',word(f.target)),
+        datum('Selected position', f.stage?positionPhrase(f.selectedPosition):'∅'),
+        datum('Marker',f.markerPosition==null?'absent':'slot '+f.markerPosition+' · '+(f.markerHollow?'hollow':'solid')));
+      stripTitle.textContent='Current signed word';
+      const selected=trace.scan.filter(s=>s.selected);
+      const chosen=selected.slice(0,f.stage||0).map(s=>s.position);
+      selectionNote.textContent='Completed earlier stages '+Math.max(0,(f.stage||0)-1)+(f.stage?
+        '   ·   Selected positions through this stage '+chosen.join(', '): '   ·   '+selected.length+' selected position'+(selected.length===1?'':'s')+' in the target');
+      legend.textContent='β[p] is the original position. The marker is the inserted letter. Select a slot to inspect it in both diagrams.';
+      pictures.hidden=false;details.hidden=false;
+      updateSlots(f); draw(f);
+    }
+    function pick(slot) {
+      selectedSlot=slot;
+      if(activeFrame){updateSlots(activeFrame);draw(activeFrame);}
+    }
+    function updateSlots(f) {
+      const tokens=f.tokens;
+      strip.replaceChildren(...tokens.map(t=>{
+        const btn=button('','Inspect slot '+t.position+', '+(t.marker?'marker':positionPhrase(t.originalPosition)),()=>pick(t.position));
+        btn.className='sw-token';
+        if(t.marker)btn.classList.add('sw-marker');
+        if(t.originalPosition!=null && t.originalPosition===f.crossedPosition)btn.classList.add('sw-crossed');
+        const chosen=selectedSlot===t.position;
+        if(chosen)btn.classList.add('sw-current');
+        btn.setAttribute('aria-pressed',String(chosen));
+        btn.append(el('small','',t.marker?'marker':'β['+t.originalPosition+']'),el('b','',sym(t.letter)),
+          el('small','',t.hollow?'hollow':native(t.label)));
+        return btn;
+      }));
+      if(!tokens.length)strip.append(el('span','sw-nothing','Empty word'));
+      const table=el('table','sw-table'),head=table.createTHead().insertRow(),body=table.createTBody();
+      for(const h of ['Slot','Origin','Letter','Crossing','Vertex','Status']){const th=el('th','',h);th.scope='col';head.append(th);}
+      for(const t of tokens){
+        const tr=body.insertRow(); if(t.position===selectedSlot)tr.className='sw-row-active';
+        for(const x of [t.position,t.marker?'Marker':positionPhrase(t.originalPosition),sym(t.letter),t.hollow?'Hollow':'Solid',
+          native(t.label),t.hollow?'—':t.frozen?'Frozen':'Mutable'])tr.insertCell().textContent=x;
+      }
+      tableBox.replaceChildren(table);
+    }
+    function draw(f) {
+      const g=f.graph,list=f.tokens, selected=list.find(t=>t.position===selectedSlot);
+      const focus=selected || list.find(t=>t.marker) || (f.focus!=null && list.find(t=>t.label===f.focus));
+      const raw=t=>t.rawPosition;
+      const rawActive=focus?raw(focus):null,film=focus && !focus.hollow?rawActive:null;
+      const getSlot=p=>left?g.beta.length+1-p:p;
+      QuiverDraw.wiring(wirebox,g,{leftmost:left,projection:projection.value,lifted:false,showFilm:film!=null,
+        showLabels:true,trace:false,birth:film,cut:rawActive?Math.max(0,rawActive-1):g.beta.length,
+        activeBirth:film,activePosition:rawActive,onBirth:p=>pick(getSlot(p)),onPosition:p=>pick(getSlot(p))});
+      const byRaw=new Map(list.filter(t=>t.label!=null).map(t=>[raw(t),t]));
+      const nodes=[...byRaw.values()].map(t=>({id:t.label,label:native(t.label),frozen:t.frozen,
+        highlight:t.label===(selected?.label??f.focus) || (f.kind==='freeze'&&f.newlyFrozen?.includes(t.label))}));
+      const edges=[];
+      for(const [a,b,w] of g.arrows){
+        const A=byRaw.get(a),B=byRaw.get(b);
+        if(A && B && !(A.frozen&&B.frozen))edges.push(left?[B.label,A.label,w]:[A.label,B.label,w]);
+      }
+      QuiverDraw.quiver(qbox,{nodes,edges,ariaLabel:'Full signed-word exchange quiver at '+names[f.kind],
+        onSelect:id=>{const t=list.find(x=>x.label===id);if(t)pick(t.position);}});
+      verified.textContent=f.verified?'Matches Bao–Ye':'Check differs';
+      verified.classList.toggle('sw-diff',!f.verified);
+      vertexNote.textContent=f.verified?(selected?'Slot '+selected.position+' · '+(selected.marker?'marker':positionPhrase(selected.originalPosition))+
+        ' · '+(selected.hollow?'hollow crossing':native(selected.label)+' · '+(selected.frozen?'frozen':'mutable')):'Circles are mutable vertices. Squares are frozen vertices.')
+        :'Differences: '+(f.differences||[]).join(', ');
+    }
+    function render() {
+      status.hidden=true; const page=pages[cursor];
+      if(page.scan!=null)renderScan(page.scan);else renderStep(page.step);
+    }
+    clear();
+    return Object.freeze({set,clear,refresh:()=>{if(trace && !container.hidden)render();}});
+  }
+  globalThis.QuiverSweepView=Object.freeze({create});
+})();
+</script>
 <script>/* Interface for the two independent engines. All correspondence verdicts
    compare computed vertices, frozen flags and oriented, weighted ice arrows. */
 (() => {
@@ -1951,10 +2409,11 @@ sitemap: false
     {name:'Double arrow', n:3, beta:[1,2,3,1,2,3], v:[1]},
     {name:'Frozen boundary', n:4, beta:[1,2,3,2,1], v:[2]},
     {name:'Bao–Ye example 5.3', n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1].reverse(), v:[2,1,3,5,4,2].reverse()},
-    {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]}
+    {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]},
+    {name:'Leftmost induction · 2112', n:3, beta:[2,1,1,2], v:[2,1]}
   ];
   let model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
-  let leftmost=true, mode='words', selectedMove=null, previewPivot=null, history=[], lastChange='';
+  let leftmost=true, mode='sweep', selectedMove=null, previewPivot=null, history=[], lastChange='';
   let geometry='chart', chartSide='after', cycleId=null;
   const reverse=w=>[...w].reverse();
   const readWord=w=>leftmost?reverse(w):[...w];
@@ -2083,7 +2542,7 @@ sitemap: false
     build(p);
   }
   function changeMode(next) {
-    if(next==='recursion'&&!model.paper)return;
+    if(next!=='words'&&!model.paper)return;
     walk.stop();mode=next;activeCross=null;birth=null;trace=false;previewPivot=null;qView='plabic';render();
   }
   function labelMap(m) {
@@ -2443,6 +2902,17 @@ sitemap: false
     if(!model)return;
     $('wordTab').setAttribute('aria-pressed',String(mode==='words'));$('recTab').setAttribute('aria-pressed',String(mode==='recursion'));
     $('recTab').disabled=!model.paper;$('wordPanel').hidden=mode!=='words';$('recPanel').hidden=mode!=='recursion';
+    const guided=mode==='sweep';
+    $('sweepTab').setAttribute('aria-pressed',String(guided));
+    $('sweepTab').disabled=!model.paper;
+    $('inductionWalk').hidden=!guided;
+    for(const id of ['subwordStrip','originalDiagrams','dataPanel']) $(id).hidden=guided;
+    if(guided) {
+      $('diagramPlayer').hidden=true;
+      document.querySelector('main').classList.remove('walking');
+      sweepView.set(model,leftmost);
+      return;
+    }
     const ctx=context(),action=walk.current(),within=!!(action&&(!action.complete||(action.motion&&walk.progress()<1)));
     if(action!==selectedChartMove){
       selectedChartMove=action;chartSide='after';
@@ -2471,6 +2941,7 @@ sitemap: false
     }
     renderData(ctx);
   }
+  const sweepView=QuiverSweepView.create($('inductionWalk'));
   const walk=QuiverWalk.create({model:()=>model,operation:()=>index,navigate:navigateOperation,
     leftmost:()=>leftmost,enabled:()=>mode==='recursion',redraw:render,paint:paintWalk,fail,
     viewBefore:()=>inspectingBefore(context())});
@@ -2506,6 +2977,7 @@ sitemap: false
     const was=leftmost;leftmost=e.target.value==='left';
     if(!build()){leftmost=was;e.target.value=was?'left':'right';}
   };
+  $('sweepTab').onclick=()=>changeMode('sweep');
   $('wordTab').onclick=()=>changeMode('words');$('recTab').onclick=()=>changeMode('recursion');
   $('moveSelect').onchange=e=>{selectedMove=e.target.value||null;previewPivot=null;render();};
   $('applyMove').onclick=()=>applyWordMove(selectedMove);
@@ -2525,18 +2997,22 @@ sitemap: false
   for(const b of $('geomChoices').querySelectorAll('button'))b.onclick=()=>{geometry=b.dataset.geom;birth=null;trace=false;render();};
   for(const b of $('chartChoices').querySelectorAll('button'))b.onclick=()=>{chartSide=b.dataset.chart;birth=null;trace=false;render();};
   $('cycleSelect').onchange=e=>{cycleId=e.target.value;render();};
-  $('dataPanel').addEventListener('toggle',()=>{if(model)renderData(context());});
+  $('dataPanel').addEventListener('toggle',()=>{if(model&&mode!=='sweep')renderData(context());});
   $('guideOpen').onclick=()=>{walk.stop();if(mode==='recursion')walk.controls();$('guide').showModal();};$('guideClose').onclick=()=>$('guide').close();
   $('guide').addEventListener('click',e=>{if(e.target===$('guide'))$('guide').close();});
   let resizeToken;window.addEventListener('resize',()=>{clearTimeout(resizeToken);resizeToken=setTimeout(render,100);});
-  loadPreset(0);
+  loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
   const linkedWords=new URLSearchParams(location.search);
   if(linkedWords.has('beta')&&linkedWords.has('v')){
     $('rank').value=linkedWords.get('n')??'3';
     $('beta').value=linkedWords.get('beta');$('target').value=linkedWords.get('v');
     build();
   }
-  function openLinkedView(){if(location.hash==='#bao-ye'&&model.paper)changeMode('recursion');}
+  function openLinkedView(){
+    if(location.hash==='#bao-ye'&&model.paper)changeMode('recursion');
+    else if(location.hash==='#induction'&&model.paper)changeMode('sweep');
+    else if(location.hash==='#word-moves')changeMode('words');
+  }
   openLinkedView();window.addEventListener('hashchange',openLinkedView);
 
 })();
