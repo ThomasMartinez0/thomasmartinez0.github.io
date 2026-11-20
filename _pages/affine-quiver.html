@@ -140,7 +140,7 @@ sitemap: false
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
   <label class="field beta"><span>Braid word <i>β</i></span><input id="beta" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2 3 1 2 3" aria-describedby="formatHint"></label>
-  <label class="field target"><span>Target word <i>v</i></span><input id="target" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2" aria-describedby="formatHint"></label>
+  <label class="field target"><span>Selected target <i>v</i></span><input id="target" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2" aria-describedby="formatHint"></label>
   <button class="primary build" type="submit">Build quiver <span aria-hidden="true">↗</span></button>
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
@@ -200,7 +200,9 @@ sitemap: false
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>The target <i>v</i> must be reduced and feasible in <i>β</i>. Positive <i>β</i> enables both constructions, including nonreduced braids. Negative letters in <i>β</i> switch to the signed plabic diagram.</p>
 <h3>Induction walkthrough</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
-<p>Each stage shows the pair (target, signed word) before and after the move. In Leftmost mode, insertion takes (v, β) to (vsᵢ, (−i)β), with v the target at the start of this stage. As the bar moves right, the target stays vsᵢ and the positive letters keep their order. The selected crossing gives its label to the bar. Each later matching color gives a square mutation. Freezing changes the quiver with the same pair. Deletion removes the bar and leaves (vsᵢ, β).</p>
+<p>Each stage shows the Bao–Ye selected product <i>u</i> and the film pair (initial boundary <i>c</i>, signed word), where <i>c = u⁻¹</i>. In Leftmost mode, selecting <i>i</i> gives <i>u sᵢ</i>. Inserting the hollow bar takes (c, β) to (sᵢ c, (−i)β). The boundary stays sᵢ c as the bar slides right. The selected crossing gives its label to the bar, and each later matching color gives a square mutation. Freeze the mutable neighbors of the terminal vertex and delete it to reach (sᵢ c, β).</p>
+<p>In Rightmost mode the film is shown in its native word order. Bao–Ye reads the displayed word from the right, so its product <i>u</i> is the inverse of the selected product written in displayed order. The new bar starts at the right end and the film boundary grows by the same left multiplication.</p>
+<p>The preset “Bao–Ye example 5.3” uses the published positive word and target in Leftmost mode. Example 5.3 lists its mutations. Definition 5.11 adds the freezing and deletion for the Richardson quiver.</p>
 <p>For a signed word in Leftmost mode, start the endpoints at <i>a = e</i> and <i>b</i> equal to the target. The graph permutation is <i>ρ = b⁻¹a</i>. An unbarred <i>i</i> tests <i>asᵢ</i>, which gives <i>ρsᵢ</i>. A barred <i>i</i> tests <i>bsᵢ</i>, which gives <i>(bsᵢ)⁻¹a = sᵢρ</i>. Accept either candidate when it shortens the length of <i>ρ</i>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. Rightmost mode restores the earlier convention. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
@@ -2078,6 +2080,7 @@ sitemap: false
 
     const steps = [], contexts = [];
     let snapshotIndex = 0;
+    contexts[0] = {paperProduct:[], boundary:[]};
     steps.push({kind:'initial',stage:0,letter:null,selectedPosition:null,crossedPosition:null,
       crossedLetter:null,focus:null,snapshotIndex,target:[],markerPosition:null,markerHollow:null,
       newlyFrozen:[],cut:null});
@@ -2088,7 +2091,8 @@ sitemap: false
       for (const [id, slot] of Object.entries(oldBoundary.mapping)) baseLabels[m - slot] = id;
       const canonicalTarget = selectedLetters.slice(0, s.stage);
       const target = display(canonicalTarget);
-      contexts[s.stage] = {baseLabels, rawTarget:[...canonicalTarget].reverse(), selected:p};
+      contexts[s.stage] = {baseLabels, paperProduct:canonicalTarget,
+        boundary:[...canonicalTarget].reverse(), selected:p};
 
       function add(kind, cut, focus = null, crossed = null) {
         const marker = cut !== null;
@@ -2131,13 +2135,14 @@ sitemap: false
       return steps[index];
     }
 
-    // A pair is determined by the stage target and marker slot alone.
-    // This also permits direct jumps without building the previous film.
+    // The native top-window boundary is the inverse of the selected product
+    // in paper order. Reflecting the picture changes the marker slot only.
     function pair(index) {
       const step = stepAt(index);
       const word = displayedBeta.slice();
       if (step.markerPosition !== null) word.splice(step.markerPosition - 1,0,-step.letter);
-      return {target:step.target.slice(), word};
+      const {paperProduct,boundary} = contexts[step.stage];
+      return {target:step.target.slice(), paperProduct:paperProduct.slice(), boundary:boundary.slice(), word};
     }
 
     function slots(step) {
@@ -2194,7 +2199,7 @@ sitemap: false
         graph = stages.get(step.stage).graph;
       } else {
         const previous = step.kind === 'freeze' ? recent.get(index-1) : null;
-        graph = previous ? previous.graph : QuiverFilm.compute(n,wordSlots.map(x=>x.letter).reverse(),contexts[step.stage].rawTarget);
+        graph = previous ? previous.graph : QuiverFilm.compute(n,wordSlots.map(x=>x.letter).reverse(),contexts[step.stage].boundary);
         if (step.kind === 'freeze') graph = freezeNeighbors(graph,mapping[step.focus]);
       }
       const hollow = new Set(graph.hollow), frozen = new Set(graph.frozen);
@@ -2248,23 +2253,23 @@ sitemap: false
     const x = el('button','sw-nav',text);
     x.type = 'button'; x.setAttribute('aria-label',label); x.onclick = handler; return x;
   }
-  function pairValue(pair) {
+  function pairValue(index,word) {
     const tuple=el('span','sw-pair-value'), signed=el('span','sw-pair-word');
-    pair.word.forEach((letter,i)=>{
+    word.forEach((letter,i)=>{
       if(i) signed.append(' ');
       if(letter<0) signed.append(el('strong','sw-pair-bar','('+sym(letter)+')'));
       else signed.append(sym(letter));
     });
-    if(!pair.word.length) {
+    if(!word.length) {
       signed.textContent='ε'; signed.setAttribute('aria-label','empty word');
     }
-    tuple.append('(',el('span','sw-pair-target',product(pair.target)),', ',signed,')');
+    tuple.append('(',el('span','sw-pair-target',product(index)),', ',signed,')');
     return tuple;
   }
   function pairSide(key, label, pair) {
     const side=el('div','sw-pair-side sw-pair-'+key);
     if(label) side.append(el('span','sw-pair-label',label));
-    side.append(pairValue(pair));
+    side.append(pairValue(pair.boundary,pair.word));
     return side;
   }
 
@@ -2281,7 +2286,8 @@ sitemap: false
     controls.append(control('Stage',stageSelect), control('Step',stepSelect), arrows);
     const lesson = el('section','sw-lesson'), title = el('h3'), text = el('p','sw-explain');
     const transition = el('div','sw-product'), equation = el('strong','sw-product-equation');
-    transition.append(el('span','sw-product-label','Selected product a'),equation);
+    const productLabel = el('span','sw-product-label');
+    transition.append(productLabel,equation);
     transition.setAttribute('role','status');
     const pairPanel=el('section','sw-pair-panel'), pairTitle=el('h4','sw-pair-title');
     const pairRule=el('p','sw-pair-rule'), pairRow=el('div','sw-pair-row'), pairNote=el('p','sw-pair-note');
@@ -2337,8 +2343,8 @@ sitemap: false
         if (!pages.length) { clear('No stages were returned for this word.'); return; }
         stageSelect.replaceChildren(...groups.map((g,i)=>option(i,g.label)));
         status.hidden=true; shell.hidden=false;
-        sub.replaceChildren('Scan input (final target, original word)  ',
-          pairValue({target:display(model.v),word:display(model.beta)}));
+        sub.replaceChildren('Scan input (final selected product, original word)  ',
+          pairValue(display(model.v),display(model.beta)));
         go(0);
       } catch(error) { clear('Walkthrough unavailable. '+error.message); }
     }
@@ -2373,6 +2379,7 @@ sitemap: false
       const s=trace.scan[i], selected=trace.scan.slice(0,i+1).filter(x=>x.selected);
       title.textContent=(s.selected?'Select':'Skip')+' β['+s.position+'] = '+sym(s.letter);
       transition.hidden=false; pairPanel.hidden=true;
+      productLabel.textContent='Selected product in displayed word order';
       equation.textContent=product(s.productBefore)+' → '+product(s.productAfter);
       const action=(left?'Appending ':'Prepending ')+generator(s.letter)+(left?' on the right':' on the left');
       text.textContent=action+(s.selected?' brings the product closer to the target. Select this letter.':
@@ -2390,14 +2397,12 @@ sitemap: false
       pictures.hidden=true; details.hidden=true; activeFrame=null;
     }
     function positionPhrase(p) { return p==null?'the selected crossing':'β['+p+']'; }
-    function sentence(f,oldTarget) {
+    function sentence(f) {
       const dest=positionPhrase(f.crossedPosition), label=native(f.focus);
       switch(f.kind) {
         case 'initial':return 'Start at the identity target. Each letter of the positive word gives a solid bridge. The last occurrence of each color in the induction order is frozen.';
         case 'insert': {
-          const target=product(f.target),old=product(oldTarget),factor=generator(f.letter);
-          const cancellation=left?target+' · '+factor:factor+' · '+target;
-          return 'Insert a hollow barred '+f.letter+' at the '+(left?'left':'right')+' boundary. It takes the target endpoint b back to '+old+' by '+cancellation+' = '+old+'. At this first crossing a = e, so the graph permutation starts at ρ = b⁻¹. The bar multiplies ρ on the '+(left?'left':'right')+'. The original word now sees '+old+' and keeps its labeled quiver.';
+          return 'Insert a hollow barred '+f.letter+' at the '+(left?'left':'right')+' boundary. Reading that bar returns the film to its preceding boundary permutation. Every crossing of the original word then gives the same labeled quiver as before insertion.';
         }
         case 'commute':return 'Slide the barred marker past '+dest+'. This mixed-sign interchange preserves the quiver under the displayed vertex labels.';
         case 'transfer':return 'At '+dest+', the original positive crossing becomes hollow and the barred marker becomes solid. The bridge label moves onto the marker while the quiver stays the same.';
@@ -2412,41 +2417,43 @@ sitemap: false
         default:return '';
       }
     }
-    function renderPair(i,kind) {
-      const current=trace.pair(i);
+    function renderPair(i,kind,current,previous) {
       pairPanel.hidden=false;
-      pairTitle.textContent=i===0?'Starting pair (target, word)':'Diagram pair (target, signed word)';
+      pairTitle.textContent='Film pair (initial boundary c, signed word)';
       pairRule.hidden=kind!=='insert';
-      if(kind==='insert') pairRule.textContent=left?'(v, β) → (v sᵢ, (−i)β)':'(v, β) → (sᵢ v, β(−i))';
+      if(kind==='insert') pairRule.textContent=left?'(c, β) → (sᵢ c, (−i)β)':'(c, β) → (sᵢ c, β(−i))';
       pairRow.replaceChildren();
       pairRow.classList.toggle('sw-pair-single',i===0);
       if(i===0) {
         pairRow.append(pairSide('initial','',current));
-        pairNote.hidden=true;
+        pairNote.hidden=false;
+        pairNote.textContent='The initial boundary is c = u⁻¹.';
         return;
       }
       const arrow=el('span','sw-pair-arrow','→');
       arrow.setAttribute('aria-hidden','true');
-      pairRow.append(pairSide('before','Before',trace.pair(i-1)),arrow,pairSide('after','After',current));
+      pairRow.append(pairSide('before','Before',previous),arrow,pairSide('after','After',current));
       pairNote.hidden=false;
-      if(kind==='insert') pairNote.textContent='Here v is the target before this stage. Insertion changes the target and adds the barred letter.';
+      if(kind==='insert') pairNote.textContent='The new initial boundary is (u sᵢ)⁻¹ = sᵢ c.';
       else if(kind==='freeze') pairNote.textContent='The pair stays fixed while freezing the terminal vertex’s mutable neighbors.';
-      else if(kind==='delete') pairNote.textContent='The target stays fixed. Removing the bar restores the original positive word β.';
-      else pairNote.textContent='The target and the order of the positive letters stay fixed as the bar moves one slot '+(left?'right.':'left.');
+      else if(kind==='delete') pairNote.textContent='Removing the terminal bar restores β at the same initial boundary.';
+      else pairNote.textContent='The initial boundary stays fixed as the bar moves one slot '+(left?'right.':'left.');
     }
     function renderStep(i) {
       const f=trace.frame(i);activeFrame=f;
-      const old=f.kind==='insert'?trace.steps[i-1].target:[];
-      transition.hidden=true;
-      renderPair(i,f.kind);
-      title.textContent=names[f.kind]||f.kind; text.textContent=sentence(f,old);
+      const current=trace.pair(i), previous=i?trace.pair(i-1):null;
+      transition.hidden=false;
+      productLabel.textContent=left?'Bao–Ye selected product u':'Bao–Ye selected product u (read β from right to left)';
+      equation.textContent=f.kind==='insert'
+        ? product(previous.paperProduct)+' → '+product(current.paperProduct)
+        : product(current.paperProduct);
+      renderPair(i,f.kind,current,previous);
+      title.textContent=names[f.kind]||f.kind; text.textContent=sentence(f);
       stats.replaceChildren(datum('Selected position', f.stage?positionPhrase(f.selectedPosition):'∅'),
         datum('Marker',f.markerPosition==null?'absent':'slot '+f.markerPosition+' · '+(f.markerHollow?'hollow':'solid')));
       if(f.kind==='insert'){
         const factor=generator(f.letter);
-        const before=product([...f.target].reverse()), after=product([...old].reverse());
-        const multiplication=left?factor+' · '+before:before+' · '+factor;
-        stats.append(datum(left?'Bar on ρ: sᵢρ':'Bar on ρ: ρsᵢ',multiplication+' = '+after));
+        stats.append(datum('Read the hollow bar',factor+' · ('+product(current.boundary)+') = '+product(previous.boundary)));
       }
       stripTitle.textContent='Current signed word';
       const selected=trace.scan.filter(s=>s.selected);
@@ -2739,7 +2746,7 @@ sitemap: false
       const at='β position '+pos(s.selectedPosition)+' (generator '+s.letter+')';
       if(s.type==='mutate')msg='For '+at+', mutate '+native(s.focus)+'. Compare the square move with the change in the graph’s relative cycles.';
       if(s.type==='freeze')msg='For '+at+', freeze neighbors of '+native(s.focus)+'. Newly frozen: '+(s.newlyFrozen.map(native).join(', ')||'none')+'.';
-      if(s.type==='delete')msg='Deleted '+native(s.focus)+' for '+at+'. Both constructions now use target '+word(readWord(s.target))+'.';
+      if(s.type==='delete')msg='Deleted '+native(s.focus)+' for '+at+'. Bao–Ye selected product u = '+word(reverse(s.target))+'. Film boundary c = '+word(s.target)+'.';
     }
     $('stepInfo').textContent=msg;
   }
@@ -2771,7 +2778,7 @@ sitemap: false
       const w=ctx.positive;
       for(const b of $('chartChoices').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.chart===chartSide));
       $('chartWord').textContent=word(readWord(w.before.beta))+' → '+word(readWord(w.after.beta));
-      $('geometryInfo').textContent='Verified positive braid move at displayed position '+pos(w.move.mutation)+'. With target '+word(readWord(w.before.v))+', the entire word realizes this Bao–Ye mutation. Both full film quivers match the paper before and after the move.';
+      $('geometryInfo').textContent='Verified positive braid move at displayed position '+pos(w.move.mutation)+'. At film boundary c = '+word(w.before.v)+', the entire word realizes this Bao–Ye mutation. Both full film quivers match the paper before and after the move.';
     }else if(chart) {
       const l=frame.local,p=l.prefixLength,interval=leftmost?(model.beta.length-p+1)+'–'+model.beta.length:'1–'+p;
       for(const b of $('chartChoices').querySelectorAll('button'))b.setAttribute('aria-pressed',String(b.dataset.chart===chartSide));
@@ -2822,8 +2829,10 @@ sitemap: false
     $('cutLabel').textContent='Cut '+dispCut;
     $('cutRange').min=leftmost?m-end:0;$('cutRange').max=leftmost?m:end;$('cutRange').value=dispCut;$('cutRange').disabled=end===0;
     $('cutBack').disabled=leftmost?cut>=end:cut===0;$('cutForward').disabled=leftmost?cut===0:cut>=end;
-    const target=word(readWord(g.v)),base=prev?.stage??0;
-    $('wireTarget').textContent=chart?'Auxiliary chart · '+chartSide+' swap · v = e':positive?'Full positive word · '+chartSide+' move · v = '+target:(mode==='recursion'&&s&&!s.boundary?'Cycle basis on stage '+base:'Graph target')+' · v = '+target;
+    const base=prev?.stage??0;
+    const diagram=chart?'Auxiliary chart · '+chartSide+' swap':positive?'Full positive word · '+chartSide+' move':
+      mode==='recursion'&&s&&!s.boundary?'Cycle basis on stage '+base:'Full signed word';
+    $('wireTarget').textContent=diagram+' · film boundary c = '+word(g.v);
     const localMove=chart?{id:'chart-square',start:frame.local.positions[0],end:frame.local.positions[1],mutation:frame.local.pivotPosition,verified:true}:positive?ctx.positive.move:null;
     const active=chart?frame.local.pivotPosition:(trace&&birth!==null?cut+1:(activeCross??(mode==='recursion'?s?.selectedPosition:null)));
     const ms=mode==='words'?moves():[];
