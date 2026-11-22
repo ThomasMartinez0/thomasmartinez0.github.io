@@ -297,6 +297,22 @@ sitemap: false
 
 .pg-freeze-legend .pg-key-symbol {color:#3276a2}
 .pg-sources {line-height:1.7}
+
+.pg-tracker {
+  padding:10px clamp(12px,2vw,22px);display:flex;flex-wrap:wrap;align-items:center;
+  gap:8px 28px;border-bottom:1px solid var(--pg-rule);background:#fafbf7;
+}
+.pg-follow-field {flex:1 1 225px;min-width:0}
+.pg-follow-label {display:inline-flex;align-items:center;gap:9px;color:var(--pg-deep);font:600 14px/1.3 var(--sans,system-ui,sans-serif)}
+.pg-follow-select {min-height:32px;padding:4px 8px;font:inherit;border:1px solid #afbeb3;background:#fffefa;color:var(--pg-ink);border-radius:5px}
+.pg-follow-status {margin:5px 0 0;line-height:1.4;color:var(--pg-muted);font-size:13px}
+.pg-follow-comparison {flex:1 1 265px;max-width:500px}
+.pg-compare-projections {margin:0;width:100%;border-collapse:collapse;table-layout:fixed;color:var(--pg-ink);text-align:left;font:13px/1.3 var(--sans,system-ui,sans-serif)}
+.pg-compare-projections th,.pg-compare-projections td {padding:2px 5px;background:transparent;text-align:left;overflow-wrap:anywhere}
+.pg-compare-projections thead th {font-weight:550;border-bottom:1px solid #cad5c9;color:var(--pg-muted);font-size:12px}
+.pg-compare-projections tbody td {font-family:var(--mono,monospace);font-variant-numeric:tabular-nums}
+.pg-compare-projections th[data-axis=red] {color:var(--pg-red)}
+.pg-compare-projections th[data-axis=blue] {color:var(--pg-blue)}
 </style>
 </head>
 <body>
@@ -307,7 +323,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Follow a move in 3D and in its red and blue projections. Select a crossing to trace it through all three views. <a class="figure-link" href="#glsbs-figure-7">View GLSBS Example 3.11</a>.</p></div>
+ <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?#bao-ye-example-5-3">Step through Bao–Ye Example 5.3</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -376,14 +392,14 @@ sitemap: false
 <h3>Bao–Ye induction and the reflected film</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
 <p>Each stage shows the Bao–Ye selected product <i>u</i> and the film pair (initial boundary <i>c</i>, signed word), where <i>c = u⁻¹</i>. In Leftmost mode, selecting <i>i</i> gives <i>u sᵢ</i>. The walkthrough shows the film in reflected slot order. Its engine receives the reversed signed word and boundary c. In these displayed slots, inserting the bar takes (c, β) to (sᵢ c, (−i)β). The boundary stays sᵢ c as the bar slides right. The selected crossing gives its label to the bar, and each later matching color gives a square mutation. Freeze the mutable neighbors of the terminal vertex and delete it to reach (sᵢ c, β).</p>
 <p>In Rightmost mode the film is shown in its native word order. Bao–Ye reads the displayed word from the right, so its product <i>u</i> is the inverse of the selected product written in displayed order. The new bar starts at the right end and the film boundary grows by the same left multiplication.</p>
-<p>The preset “Bao–Ye example 5.3” uses the published positive word and target in Leftmost mode. Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
+<p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens at the identity seed with bridge (2,1) selected. Use <b>Next</b> to compare it before and after each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
 <p>For a signed word the film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
 <h3>Inspecting the periodic 3D graph</h3>
 <p>In the induction walkthrough the graph inspector uses the chronological all-barred reverse gallery with endpoint <i>u</i>. The positive marker slides from right to left. The reflected word strip below it shows the same step in paper reading order with the tracks exchanged. During subexpression selection the inspector shows the final-target graph and highlights the crossing being tested.</p>
 <p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
 <p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
 <p>With <b>Projection planes</b> on, select a bridge in the 3D graph or on either plane. Follow the dashed guides from an endpoint (x, y, t) to (0, y, t) on the red plane and to (x, 0, t) on the blue plane. Selecting a translated bridge gives the coordinates of that lift. <a href="?bridge=4#glsbs-figure-7">Inspect the fourth bridge and its two projections</a>.</p>
-<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?n=6&amp;beta=2123454234231&amp;v=213542&amp;stage=1&amp;step=4#induction">Inspect the first square of Bao–Ye Example 5.3</a>.</p>
+<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?stage=1&amp;step=4&amp;follow=2,1#bao-ye-example-5-3">Inspect the first square of Bao–Ye Example 5.3</a>. <a href="?stage=3&amp;step=4&amp;follow=2,1#bao-ye-example-5-3">Compare the two projections of (2,1) at stage 3</a>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. In Rightmost mode the film engine receives the word as entered, and the paper uses the reversed word and inverse product. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
 <h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
@@ -2467,7 +2483,16 @@ sitemap: false
     }));
   }
 
-  function build(g, periods = 1) {
+  // An endpoint can move by at most one level per letter. An added neighbor
+  // of a primary strand is at most 2m+1 initial levels away, and a canonical
+  // endpoint at most m+1 from the base period. This bounds all picks in a
+  // one-to-five-period gallery, including the extra marker in a sweep.
+  function inTrackingRange(g, shift) {
+    return Number.isSafeInteger(shift) &&
+      Math.abs(shift)<=5+Math.ceil((3*(g.beta.length+1)+2)/g.n);
+  }
+
+  function build(g, periods = 1, extraLift = null) {
     const {n,beta,topWindows,bottomWindows} = g;
     if (!Number.isInteger(periods) || periods < 1 || periods > 5) {
       throw new Error('Display one to five consecutive affine periods.');
@@ -2518,6 +2543,12 @@ sitemap: false
       }
       for (const k of shifts) for (const id of event.ends) visible.add(id+k*n);
     }
+    // The same lift of a tracked occurrence can leave the ordinary display
+    // window on the other side of a move. Include its two complete strands.
+    const extra = extraLift && events[extraLift.slot-1];
+    if (extra?.solid && inTrackingRange(g,extraLift.shift)) {
+      for (const id of extra.ends) visible.add(id+extraLift.shift*n);
+    }
 
     const strands = [], segments = [], leftBoundary = [], rightBoundary = [];
     const byId = new Map();
@@ -2564,7 +2595,7 @@ sitemap: false
     return {n,m,periods,bounds,strands,segments,bridges,leftBoundary,rightBoundary,events};
   }
 
-  globalThis.QuiverPlabicGeometry = Object.freeze({build,onCoordinatePlane,bridgeEndpoints});
+  globalThis.QuiverPlabicGeometry = Object.freeze({build,onCoordinatePlane,bridgeEndpoints,inTrackingRange});
 })();
 </script>
 <script>// Native chronological graph inputs for the move inspector. QuiverPaper's snapshots
@@ -2586,6 +2617,17 @@ sitemap: false
   }
   function labelPositions(view) {
     return Object.fromEntries(view.tokens.filter(t=>t.label!=null).map(t=>[t.label,t.rawPosition]));
+  }
+  // An occurrence label identifies a seed index. Its supporting letter,
+  // chronological slot, endpoint colors, and cluster variable may all change.
+  // k always means translation of this frame's representative by (kn,kn,0).
+  function locateBridge(view, label, shift=0, periods=1, geometry=null) {
+    const token=label==null?null:view?.tokens.find(t=>!t.hollow && t.label===label)??null;
+    if(!token)return {token:null,bridge:null,status:'absent'};
+    const slot=token.rawPosition;
+    const scene=geometry??QuiverPlabicGeometry.build(view.graph,periods,{slot,shift});
+    const bridge=scene.events[slot-1]?.lifts.find(lift=>lift.shift===shift)?.bridge??null;
+    return {token,bridge,status:bridge?'present':'outside'};
   }
   function iceTransition(before, after, frame) {
     const old=labelPositions(before), next=labelPositions(after);
@@ -2666,16 +2708,20 @@ sitemap: false
   }
   function evidence(before,after,context,url,selection=null) {
     const periods=selection?.periods??1;
+    const tracked=selection?.label!=null?{label:selection.label,shift:selection.shift??0}:null;
     function record(view,sideName) {
       if(!view)return null;
-      const g=view.graph, lift=QuiverPlabicGeometry.build(g,periods);
+      const g=view.graph,token=tracked && view.tokens.find(t=>t.label===tracked.label);
+      const lift=QuiverPlabicGeometry.build(g,periods,token && {slot:token.rawPosition,shift:tracked.shift});
       const bySlot=Object.fromEntries(view.tokens.map(t=>[t.rawPosition,t.label]));
-      const picked=selection?.side===sideName
-        ?lift.events[selection.slot-1]?.lifts.find(l=>l.shift===selection.shift)?.bridge:null;
+      const match=tracked && locateBridge(view,tracked.label,tracked.shift,periods,lift);
+      const picked=match ? match.bridge : selection?.side===sideName ?
+        lift.events[selection.slot-1]?.lifts.find(l=>l.shift===selection.shift)?.bridge : null;
       const labeledIce={vertices:g.solid.map(p=>bySlot[p]),frozen:g.frozen.map(p=>bySlot[p]),
         arrows:g.arrows.map(([a,b,w])=>[bySlot[a],bySlot[b],w])};
       return {word:view.word,terminalTarget:view.target,cutWindows:g.topWindows,slots:view.tokens,
         labeledIce,baoYeIce:view.paperSeed,
+        ...(match?{trackingStatus:match.status}:{}),
         selectedBridge:picked?{slot:picked.slot,label:bySlot[picked.slot],shift:picked.shift,
           endpoints:QuiverPlabicGeometry.bridgeEndpoints(picked)}:null,
         solid:g.solid,hollow:g.hollow,intrinsicallyFrozen:g.intrinsicFrozen??g.frozen,seedFrozen:g.frozen,
@@ -2687,11 +2733,12 @@ sitemap: false
       endpointColors:'GLSBS Definition 3.4: positive starts black, negative starts white',
       sources:['https://arxiv.org/html/2210.04778v3#S3.SS2','https://arxiv.org/html/2506.10382v2#S5.SS1'],
       presentation:context.presentation,move:context.kind,stage:context.stage,focus:context.focus,
+      ...(tracked?{trackedBridge:tracked}:{}),
       crossedInputPosition:context.crossedPosition??null,
       beforeSlots:context.beforeSlots,afterSlots:context.afterSlots,
       newlyFrozen:context.newlyFrozen||[],check:context.check,periods,before:record(before,'before'),after:record(after,'after')};
   }
-  globalThis.QuiverPlabicFrames=Object.freeze({side,forModel,evidence});
+  globalThis.QuiverPlabicFrames=Object.freeze({side,locateBridge,forModel,evidence});
 })();
 </script>
 <script>// Isometric/orthographic views of a finite lift. Only the viewport is clipped.
@@ -3122,10 +3169,12 @@ sitemap: false
     for(const bridge of g.bridges) {
       if(bridge.a[2]<lo||bridge.a[2]>hi) continue;
       const selected=bridge.slot===activeSlot && bridge.shift===activeShift,focused=focus.has(bridge.slot),onSquare=cycle.members.has(bridge);
-      const tint=onSquare?squareColor:focused||selected?(planar?colors.axis:active):ink;
+      const tracked=options.tracking && selected;
+      const tint=tracked?(planar?colors.axis:active):onSquare?squareColor:focused||selected?(planar?colors.axis:active):ink;
       const opacity=bridge.ghost&&!focused&&!selected?.52:1;
       const a=project(bridge.a),b=project(bridge.b);
-      segment(bridge.a,bridge.b,{color:tint,opacity,width:focused||selected?3.3:2.1,slot:bridge.slot,type:onSquare?'square-bridge':'bridge'});
+      segment(bridge.a,bridge.b,{color:tint,opacity,width:tracked?4.4:focused||selected?3.3:2.1,
+        slot:bridge.slot,tracked,shift:bridge.shift,type:onSquare?'square-bridge':'bridge'});
       const dim=W<260 || (!viewport.local && g.n>12);
       const radii=(dim?2.6:3.2)+(focused||selected?.9:0);
       for(let i=0;i<2;i++) symbols.push({p:i?b:a,slot:bridge.slot,shift:bridge.shift,selected,
@@ -3134,7 +3183,7 @@ sitemap: false
       targets.push({a,b,slot:bridge.slot,shift:bridge.shift,plane:cam.view,kind:'solid bridge',label:label(bridge.slot)});
       if(selected||(focused && (!planar || focus.size<=2) && bridge.shift===0)) {
         const text=label(bridge.slot);
-        if(text)slotTexts.push({x:(a[0]+b[0])/2,y:(a[1]+b[1])/2,text,slot:bridge.slot});
+        if(text)slotTexts.push({x:(a[0]+b[0])/2,y:(a[1]+b[1])/2,text,slot:bridge.slot,tracked});
       }
     }
     for(const e of g.events) if(e.hollow && e.time>=lo && e.time<=hi && e.participants.length) {
@@ -3158,14 +3207,14 @@ sitemap: false
       const d=visiblePath(edge);
       if(d)element(world,'path',{d,fill:'none',stroke:edge.color,'stroke-width':edge.width,'data-gaps':edge.gaps.length||null,
         'stroke-opacity':edge.opacity,'stroke-linecap':'butt','stroke-dasharray':edge.dash,'data-edge':edge.type,
-        'data-slot':edge.slot,'data-strand':edge.strand});
+        'data-slot':edge.slot,'data-strand':edge.strand,'data-tracked':edge.tracked?'true':null,'data-shift':edge.shift});
     }
     symbols.sort((a,b)=>a.p[2]-b.p[2]);
     for(const s of symbols) {
       const [x,y,z]=s.p;
       if(x< -8||x>W+8||y< -8||y>H)continue;
       if(s.type==='vertex') {
-        if(cam.planes && s.selected)element(world,'circle',{cx:f(x),cy:f(y),r:s.r+1.65,
+        if((cam.planes || options.tracking) && s.selected)element(world,'circle',{cx:f(x),cy:f(y),r:s.r+1.65,
           fill:paper,stroke:s.tint,'stroke-width':1.3,'pointer-events':'none'});
         if(frozenHere.has(s.slot)) element(world,'circle',{cx:f(x),cy:f(y),r:s.r+2.9,
           fill:'none',stroke:'#3276a2','stroke-width':1.65,'data-frozen-slot':s.slot,'pointer-events':'none'});
@@ -3198,6 +3247,8 @@ sitemap: false
       }
     }
     const occupied=[];
+    // Place the followed bridge's label before other move annotations compete for space.
+    slotTexts.sort((a,b)=>Number(b.tracked===true)-Number(a.tracked===true));
     for(const entry of slotTexts) {
       const {x,y,text}=entry,w=text.length*5.9+7,h=15;
       if(x<0||x>W||y<0||y>H-24) continue;
@@ -3207,7 +3258,8 @@ sitemap: false
         (!cam.planes || symbols.every(s=>!s.selected||s.p[0]+6<a||s.p[0]-6>a+w||s.p[1]+6<b||s.p[1]-6>b+h)));
       if(!at)continue;
       const [tx,ty]=at;occupied.push([tx,ty,w,h]);
-      element(world,'rect',{x:f(tx),y:f(ty),width:w,height:h,rx:3,fill:paper,'fill-opacity':.93});
+      element(world,'rect',{x:f(tx),y:f(ty),width:w,height:h,rx:3,fill:paper,'fill-opacity':.93,
+        stroke:entry.tracked?(planar?colors.axis:active):null,'stroke-width':.9});
       element(world,'text',{x:f(tx+3),y:f(ty+10.8),fill:ink,'font-family':mono,'font-size':10,
         'data-bridge-label':entry.slot},text);
     }
@@ -3361,6 +3413,8 @@ sitemap: false
   function details(title) {
     const box=node('details','pg-details'); box.append(node('summary','',title)); return box;
   }
+  // Both readers of one sweep share a pin. Rebuilding a word creates a new scope.
+  const tracks=new WeakMap();
   function create() {
     const element=node('section','pg-panel');
     element.setAttribute('aria-label','Affine 3D plabic graph');
@@ -3397,7 +3451,11 @@ sitemap: false
     const periodSelect=node('select');periodSelect.setAttribute('aria-label','Periods of the affine graph');
     for(const k of [1,2]) {const opt=node('option','',k+' period'+(k===1?'':'s'));opt.value=String(k);periodSelect.append(opt);}
     periodLabel.append(periodSelect);toolbar.append(periodLabel);
-    periodSelect.onchange=()=>{periods=Number(periodSelect.value);renderAll();};
+    periodSelect.onchange=()=>{
+      periods=Number(periodSelect.value);
+      if(tracked())tracked().periods=periods;
+      renderAll();
+    };
     const camTools=node('div','pg-camera-tools');
     const left=action('↶',()=>{camera.yaw-=.25;draw(true);});
     const right=action('↷',()=>{camera.yaw+=.25;draw(true);});
@@ -3408,6 +3466,15 @@ sitemap: false
       b.setAttribute('aria-label',name);b.title=name;
     }
     camTools.append(left,right,smaller,bigger,reset);toolbar.append(camTools);
+    const tracker=node('div','pg-tracker'),followField=node('div','pg-follow-field');
+    const followLabel=node('label','pg-follow-label'),followSelect=node('select','pg-follow-select');
+    followSelect.setAttribute('aria-label','Follow bridge');
+    followLabel.append('Follow bridge',followSelect);
+    const followStatus=node('p','pg-follow-status');
+    followStatus.setAttribute('role','status');
+    const comparison=node('div','pg-follow-comparison');
+    followField.append(followLabel,followStatus);tracker.append(followField,comparison);
+    followSelect.onchange=()=>{if(followSelect.value)selectLabel(followSelect.value,0,periods);else clearTracking();};
     const stages=node('div','pg-stage');
     const key=node('div','pg-legend');
     for(const [symbol,text] of [['●','Black bridge endpoint'],['○','White bridge endpoint'],['▪','Marked left boundary'],['▫','Unmarked right boundary'],['┆','Periodic translate']]) {
@@ -3432,13 +3499,48 @@ sitemap: false
       const link=node('a','',name);link.href='https://arxiv.org/html/2210.04778v3#'+anchor;articles.append(' · ',link);
     }
     notes.append(articles);convention.append(notes);
-    element.append(head,toolbar,stages,key,operation,inspector,convention);
+    element.append(head,toolbar,tracker,stages,key,operation,inspector,convention);
     let before=null,after=null,ctx={},periods=1,camera=neutralCamera(),layout='linked',crop='full',cards=[],selection=null,byBridge=false,bridgePick=null,prevSignature='';
+    let optionsScope=null;
     const cache=new WeakMap();
+    function tracked(){return ctx.trackingScope && tracks.get(ctx.trackingScope);}
+    function labeledToken(side,id){return side?.tokens.find(t=>t.label===id && !t.hollow) || null;}
     function geometry(side,count=periods) {
       let entry=cache.get(side.graph); if(!entry){entry=new Map();cache.set(side.graph,entry);}
-      if(!entry.has(count)) entry.set(count,QuiverPlabicGeometry.build(side.graph,count));
-      return entry.get(count);
+      if(!entry.has(count))entry.set(count,QuiverPlabicGeometry.build(side.graph,count));
+      const base=entry.get(count), pin=tracked(), token=pin && labeledToken(side,pin.label);
+      if(!token || base.events[token.rawPosition-1].lifts.some(l=>l.shift===pin.shift))return base;
+      // A tracked translate can move outside the default period at a seam.
+      // Include its two actual strands in the finite drawing on that side.
+      const key=[count,token.rawPosition,pin.shift].join('/');
+      if(entry.extraKey!==key){
+        entry.extra=QuiverPlabicGeometry.build(side.graph,count,{slot:token.rawPosition,shift:pin.shift});
+        entry.extraKey=key;
+      }
+      return entry.extra;
+    }
+    function clearTracking(){
+      if(ctx.trackingScope)tracks.delete(ctx.trackingScope);
+      selection=null;byBridge=false;bridgePick=null;ctx.selectedSlot=null;
+      ctx.onPick?.(null);renderAll();
+    }
+    function selectLabel(id,shift=0,count=periods,side='after'){
+      if(!ctx.trackingScope || !ctx.bridgeLabels?.includes(id) || !QuiverPlabicGeometry.inTrackingRange(after.graph,shift) ||
+         ![1,2].includes(count) || !['before','after'].includes(side))return false;
+      periods=count;periodSelect.value=String(count);
+      tracks.set(ctx.trackingScope,{label:id,shift,periods:count,side});
+      selection=null;byBridge=false;bridgePick=null;
+      const counterpart=labeledToken(after,id);
+      ctx.onPick?.(counterpart?.rawPosition??null);
+      renderAll();
+      return true;
+    }
+    function selectedBridge(){
+      const pin=tracked();
+      if(!pin)return bridgePick && {...bridgePick,periods};
+      const side=[pin.side,pin.side==='before'?'after':'before'].find(name=>labeledToken(name==='after'?after:before,pin.label));
+      const token=side && labeledToken(side==='after'?after:before,pin.label);
+      return {label:pin.label,side:side??null,slot:token?.rawPosition??null,shift:pin.shift,periods:pin.periods};
     }
     function zoom(z) {camera.zoom=Math.max(.55,Math.min(4,z));draw();}
     async function copyURL() {
@@ -3466,6 +3568,7 @@ sitemap: false
         (ctx.kind==='freeze' && ctx.newlyFrozen?.includes(t.label))).map(t=>t.rawPosition);
     }
     function selected(side) {
+      if(tracked())return labeledToken(side,tracked().label);
       const anchor=selection || findSlot(after,ctx.selectedSlot) ||
         after.tokens.find(t=>t.marker) || before?.tokens.find(t=>t.marker) ||
         after.tokens.find(t=>ctx.scanPosition!=null && t.originalPosition===ctx.scanPosition) ||
@@ -3477,6 +3580,7 @@ sitemap: false
     function bridgeLift(c,slot){
       const event=slot!=null ? c.geometry.events[slot-1] : null;
       if(!event?.bridge)return null;
+      if(tracked())return event.lifts.find(l=>l.shift===tracked().shift) || null;
       return event.lifts.find(l=>l.shift===(bridgePick?.shift??0)) || event.lifts.find(l=>l.shift===0);
     }
     function choose(t,bridge=false,shift=0) {
@@ -3490,8 +3594,13 @@ sitemap: false
       if(focused && oldFocus.matches('.pg-endpoint-lift select'))focusSelector='.pg-endpoint-lift select';
       const focusSide=focused?.dataset?.side;
       const focusView=oldFocus?.closest('.pg-view')?.dataset.view;
-      selection=t;
-      byBridge=bridge && t.label!=null;
+      const pinning=ctx.trackingScope && bridge && !t.hollow && t.label!=null;
+      if(ctx.trackingScope){
+        if(pinning)tracks.set(ctx.trackingScope,{label:t.label,shift,periods,side:before?.tokens.includes(t)?'before':'after'});
+        else tracks.delete(ctx.trackingScope);
+      }
+      selection=pinning?null:t;
+      byBridge=!pinning && bridge && t.label!=null;
       bridgePick=byBridge?{slot:t.rawPosition,side:before?.tokens.includes(t)?'before':'after',shift}:null;
       if(crop==='move' && cards.some(c=>{
         const slot=selected(c.side)?.rawPosition;
@@ -3499,8 +3608,8 @@ sitemap: false
         const [lo,hi]=commonRange(c.side,c.slots,c.name);
         return slot<=lo || slot>hi;
       })){crop='full';camera.zoom=1;}
-      const matched=corresponding(t,after,ctx.wordMove || byBridge);
-      if(matched && ctx.onPick)ctx.onPick(matched.rawPosition);
+      const matched=corresponding(t,after,ctx.wordMove || pinning || byBridge);
+      if(matched || pinning)ctx.onPick?.(matched?.rawPosition??null);
       renderAll();
       const pane=focusView?' .pg-view[data-view="'+focusView+'"]':'';
       if(focusSelector && focusSide)element.querySelector('.pg-card[data-side="'+focusSide+'"]'+pane+' '+focusSelector)?.focus({preventScroll:true});
@@ -3523,6 +3632,10 @@ sitemap: false
       let affected=Array.isArray(explicit)?slots:slots.filter(p=>{
         const t=findSlot(side,p);return t.marker || t.originalPosition===ctx.crossedPosition || t.originalPosition===ctx.scanPosition;
       });
+      if(tracked()){
+        const slot=labeledToken(side,tracked().label)?.rawPosition;
+        if(slot!=null)affected=[...affected,slot];
+      }
       if(!affected.length && ctx.kind==='insert')return [Math.max(0,m-3),m];
       if(!affected.length && ctx.kind==='delete')return [0,Math.min(3,m)];
       if(!affected.length)affected=[selected(side)?.rawPosition||1];
@@ -3595,7 +3708,7 @@ sitemap: false
     function fillCard(c) {
       const chosen=selected(c.side),items=[...c.side.tokens].sort((a,b)=>a.rawPosition-b.rawPosition);
       const taps=items.map(t=>{
-        const letter=c.side.word[t.rawPosition-1],b=action(signed(letter),()=>choose(t,ctx.kind==='word' && !before),'pg-letter');
+        const letter=c.side.word[t.rawPosition-1],b=action(signed(letter),()=>choose(t,!!ctx.trackingScope || (ctx.kind==='word' && !before)),'pg-letter');
         b.dataset.rawSlot=t.rawPosition;
         const source=origin(t), role=t.hollow?'hollow':('solid '+label(t.label));
         const marked=c.slots.includes(t.rawPosition);b.classList.toggle('pg-marked',marked);b.classList.toggle('pg-marker',!!t.marker);
@@ -3608,6 +3721,7 @@ sitemap: false
       const bridgeCount=c.geometry.events.reduce((sum,e)=>sum+(e.solid?1:0),0);
       c.foot.textContent=c.side.word.length+' letter'+(c.side.word.length===1?'':'s')+' · '+bridgeCount+' bridge orbit'+(bridgeCount===1?'':'s')+
         (chosen?' · Slot '+chosen.rawPosition+' '+origin(chosen)+(chosen.hollow?' · hollow crossing in '+(c.side.word[chosen.rawPosition-1]>0?'red':'blue'):' · '+label(chosen.label)+' '+(chosen.frozen?'frozen':'mutable')):'');
+      if(tracked() && !chosen)c.foot.textContent+=' · Bridge '+label(tracked().label)+' absent';
       fillEndpoints(c,chosen);
     }
     function draw(orbitOnly=false){
@@ -3639,7 +3753,7 @@ sitemap: false
           if(figure.hidden){if(canvas.firstChild)canvas.replaceChildren();continue;}
           if(orbitOnly && key!=='space')continue;
           QuiverPlabicDrawing.draw(canvas,c.geometry,{camera:{...camera,view:key},compact:layout==='linked',linked:layout==='linked',paired:cards.length>1,
-            range:ranges[j],focusSlots:c.slots,selectedSlot,selectedShift,showPlanes:planeToggle.checked,square,labels,viewport,boundaryCut,frozenSlots,
+            range:ranges[j],focusSlots:c.slots,selectedSlot,selectedShift,tracking:!!tracked(),showPlanes:planeToggle.checked,square,labels,viewport,boundaryCut,frozenSlots,
             onPick:(pos,shift=0)=>choose(findSlot(c.side,pos),true,shift),onOrbit:(yaw,pitch)=>{camera.yaw=yaw;camera.pitch=pitch;draw(true);},onZoom:zoom});
         }
       });
@@ -3665,6 +3779,57 @@ sitemap: false
         d.append(dl);inspection.append(d);
       }
     }
+    function fillTracker(){
+      tracker.hidden=!ctx.trackingScope;
+      if(tracker.hidden){optionsScope=null;return;}
+      if(optionsScope!==ctx.trackingScope){
+        const options=(ctx.bridgeLabels || []).map(id=>{
+          const option=node('option','',label(id));option.value=id;return option;
+        });
+        const automatic=node('option','','Move focus');automatic.value='';
+        followSelect.replaceChildren(automatic,...options);optionsScope=ctx.trackingScope;
+      }
+      const pin=tracked();
+      followSelect.value=pin?.label || '';
+      comparison.replaceChildren();
+      const views=pin?cards.map(c=>QuiverPlabicFrames.locateBridge(c.side,pin.label,pin.shift,periods,c.geometry)):[];
+      comparison.hidden=views.length!==2;
+      let message='Choose a Bao–Ye label or click a bridge to follow its projections through the moves.';
+      if(pin){
+        const [first,second]=views;
+        if(!first?.token && !second?.token)message=ctx.kind==='scan'?'This label is absent from the final target graph.':'This label has been deleted. Step back to see it again.';
+        else if(first?.token && second && !second.token)message='Deleted at this move. The bridge appears only before deletion.';
+        else if(ctx.kind==='square' && pin.label===ctx.focus)message='The square move mutates this label. The highlighted edges show its two realizations.';
+        else if(ctx.kind==='freeze' && ctx.newlyFrozen?.includes(pin.label))message='Frozen at this move. Both projections stay fixed.';
+        else if(ctx.kind==='transfer' && pin.label===ctx.focus)message='The bridge label transfers onto the marker.';
+        else message='Tracking '+label(pin.label)+(pin.shift?' at lift k = '+signed(pin.shift):'')+' as you step through the moves.';
+        if(views.length===2){
+          const table=node('table','pg-compare-projections');
+          table.setAttribute('aria-label','Before and after projections of bridge '+label(pin.label));
+          const head=table.createTHead().insertRow();
+          for(const [index,title] of ['Black → white','Before','After'].entries()){
+            const th=node('th');th.scope='col';
+            const t=index>0 && views[index-1].token;
+            th.textContent=title+(t?' · slot '+t.rawPosition:'');head.append(th);
+          }
+          const body=table.createTBody();
+          const ends=views.map(v=>{
+            if(!v.bridge)return null;
+            const points=QuiverPlabicGeometry.bridgeEndpoints(v.bridge);
+            return ['black','white'].map(color=>points.find(p=>p.color===color).point);
+          });
+          for(const [caption,axis,cls] of [['Red · y',1,'red'],['Blue · x',0,'blue'],['Time · t',2,'time']]){
+            const row=body.insertRow(),name=node('th','',caption);name.scope='row';name.dataset.axis=cls;row.append(name);
+            for(const [index,points] of ends.entries()){
+              row.insertCell().textContent=points?(axis===2?String(points[0][2]):points.map(p=>p[axis]).join(' → ')):
+                views[index].token?'Outside view':'Absent';
+            }
+          }
+          comparison.append(table);
+        }
+      }
+      if(followStatus.textContent!==message)followStatus.textContent=message;
+    }
     function moveText(){
       if(ctx.kind==='freeze')return ctx.newlyFrozen?.length?'The embedded graph is fixed. Newly frozen '+ctx.newlyFrozen.map(label).join(', ')+'.':'The embedded graph is fixed. There are no new frozen vertices.';
       if(ctx.kind==='delete')return 'The positive marker is removed at the left cut. The target at the right cut stays fixed.';
@@ -3682,21 +3847,23 @@ sitemap: false
       stages.classList.toggle('pg-single',single);inspection.classList.toggle('pg-single',single);
       cards=single?[card(after,'after',ctx.kind==='initial'?'Initial graph':ctx.kind==='scan'?'Target graph':'Current graph')]:
         [card(before,'before','Before'),card(after,'after','After')];
-      if(bridgePick){
+      if(bridgePick && !tracked()){
         const c=cards.find(card=>card.name===bridgePick.side);
         if(!c)bridgePick=null;
         else bridgePick.shift=bridgeLift(c,bridgePick.slot)?.shift??0;
       }
       for(const c of cards)fillCard(c);
-      draw(); fillInspector();
+      fillTracker();draw(); fillInspector();
     }
     function show(inBefore,inAfter,context={}) {
       const previousSide=selection && (before?.tokens.includes(selection)?'before':after?.tokens.includes(selection)?'after':null);
+      const sameScope=ctx.trackingScope===context.trackingScope;
       before=inBefore;after=inAfter;ctx=context;
+      if(tracked()){periods=tracked().periods;periodSelect.value=String(periods);}
       const signature=[inAfter?.graph.n,ctx.stage,ctx.kind,ctx.crossedPosition,ctx.scanPosition,inBefore?.word.join(),inAfter?.word.join(),inAfter?.target.join()].join('|');
-      if(signature!==prevSignature){selection=null;byBridge=false;bridgePick=null;prevSignature=signature;}
+      if(!sameScope || signature!==prevSignature){selection=null;byBridge=false;bridgePick=null;prevSignature=signature;}
       else if(previousSide){selection=findSlot(previousSide==='before'?before:after,selection.rawPosition);}
-      if(ctx.selectedSlot!=null){
+      if(ctx.selectedSlot!=null && !tracked()){
         const matched=corresponding(selection,inAfter,ctx.wordMove||byBridge);
         if(matched?.rawPosition!==ctx.selectedSlot){byBridge=false;bridgePick=null;}
         selection=findSlot(inAfter,ctx.selectedSlot);
@@ -3721,7 +3888,7 @@ sitemap: false
         if(Math.abs(width-lastWidth)>.5){lastWidth=width;if(width>0)draw();}
       }).observe(element);
     }
-    return {element,show,selectSlot,selectedBridge:()=>bridgePick && {...bridgePick,periods}};
+    return {element,show,selectSlot,selectLabel,clearTracking,selectedBridge};
   }
   globalThis.QuiverPlabicPanel=Object.freeze({create});
 })();
@@ -3879,6 +4046,8 @@ sitemap: false
       const address=()=>shareUrl(page.scan!=null?{scan:page.scan+1}:{stage:group.key,step:group.items.indexOf(cursor)+1},inspector.selectedBridge());
       context.presentation=left?'Chronological gallery η = (−iₘ) ⋯ (−i₁). The positive marker travels right to left; β[p] counts from the left in the paper word.':
         'Chronological proof gallery for the rightmost setting. Bao–Ye reads the entered word from the right. Original positions β[p] refer to the entered word.';
+      context.trackingScope=review;
+      context.bridgeLabels=priorModel.paper.snapshots[0].active;
       context.share=address;
       context.data=()=>QuiverPlabicFrames.evidence(before,after,context,address(),inspector.selectedBridge());
       inspector.show(before,after,context);
@@ -3886,7 +4055,7 @@ sitemap: false
     function inspectMove(i,rawSlot=null) {
       const {before,after,context}=review.transition(i);
       context.selectedSlot=rawSlot;
-      context.onPick=p=>pick(left?after.word.length+1-p:p);
+      context.onPick=p=>markSlot(p==null?null:left?after.word.length+1-p:p);
       present(before,after,context);
     }
     function scanChip(s,index,current) {
@@ -3995,12 +4164,24 @@ sitemap: false
         '   ·   Selected positions through this stage '+chosen.join(', '): '   ·   '+selected.length+' selected position'+(selected.length===1?'':'s')+' in the target');
       legend.textContent='β[p] is the original position. The marker is the inserted letter. Select a slot to inspect it in both diagrams.';
       pictures.hidden=false;details.hidden=false;
-      updateSlots(f); draw(f); inspectMove(i, f.tokens.find(t=>t.position===selectedSlot)?.rawPosition);
+      inspectMove(i,f.tokens.find(t=>t.position===selectedSlot)?.rawPosition);
+      const followed=inspector.selectedBridge()?.label;
+      if(followed)selectedSlot=f.tokens.find(t=>t.label===followed)?.position??null;
+      updateSlots(f);draw(f);
       showAudit(f.stage, f.kind==='initial'||f.kind==='delete'?'boundary':'signed', selectionNote);
     }
-    function pick(slot) {
+    function markSlot(slot) {
       selectedSlot=slot;
-      if(activeFrame){updateSlots(activeFrame);draw(activeFrame);inspectMove(pages[cursor].step,activeFrame.tokens.find(t=>t.position===slot)?.rawPosition);}
+      if(activeFrame){updateSlots(activeFrame);draw(activeFrame);}
+    }
+    function pick(slot) {
+      if(!activeFrame)return;
+      const token=activeFrame.tokens.find(t=>t.position===slot);
+      if(!token)return;
+      if(!token.hollow && inspector.selectSlot(token.rawPosition,'after',0))return;
+      inspector.clearTracking();
+      markSlot(slot);
+      inspectMove(pages[cursor].step,token.rawPosition);
     }
     function updateSlots(f) {
       const tokens=f.tokens;
@@ -4028,7 +4209,8 @@ sitemap: false
     }
     function draw(f) {
       const g=f.graph,list=f.tokens, selected=list.find(t=>t.position===selectedSlot);
-      const focus=selected || list.find(t=>t.marker) || (f.focus!=null && list.find(t=>t.label===f.focus));
+      const followed=inspector.selectedBridge()?.label;
+      const focus=followed?list.find(t=>t.label===followed):selected || list.find(t=>t.marker) || list.find(t=>f.focus!=null && t.label===f.focus);
       const raw=t=>t.rawPosition;
       const rawActive=focus?raw(focus):null,film=focus && !focus.hollow?rawActive:null;
       const getSlot=p=>left?g.beta.length+1-p:p;
@@ -4037,7 +4219,7 @@ sitemap: false
         activeBirth:film,activePosition:rawActive,onBirth:p=>pick(getSlot(p)),onPosition:p=>pick(getSlot(p))});
       const byRaw=new Map(list.filter(t=>t.label!=null).map(t=>[raw(t),t]));
       const nodes=[...byRaw.values()].map(t=>({id:t.label,label:native(t.label),frozen:t.frozen,
-        highlight:t.label===(selected?.label??f.focus) || (f.kind==='freeze'&&f.newlyFrozen?.includes(t.label))}));
+        highlight:t.label===(followed??selected?.label??f.focus) || (f.kind==='freeze'&&f.newlyFrozen?.includes(t.label))}));
       const edges=[];
       for(const [a,b,w] of g.arrows){
         const A=byRaw.get(a),B=byRaw.get(b);
@@ -4065,7 +4247,7 @@ sitemap: false
       const index=pages.findIndex(page=>page.step!=null&&trace.stepAt(page.step).kind==='square');
       if(index>=0)go(index);
     }
-    return Object.freeze({set,clear,goToStage,goToScan,firstSquare,selectSlot:inspector.selectSlot,refresh:()=>{if(trace && !container.hidden)render();}});
+    return Object.freeze({set,clear,goToStage,goToScan,firstSquare,selectSlot:inspector.selectSlot,selectLabel:inspector.selectLabel,refresh:()=>{if(trace && !container.hidden)render();}});
   }
   globalThis.QuiverSweepView=Object.freeze({create});
 })();
@@ -4080,7 +4262,7 @@ sitemap: false
     {name:'Winding film', n:3, beta:[1,2,3,1,2,3,1,2,3], v:[1,2,3,1,2], cut:2},
     {name:'Double arrow', n:3, beta:[1,2,3,1,2,3], v:[1]},
     {name:'Frozen boundary', n:4, beta:[1,2,3,2,1], v:[2]},
-    {name:'Bao–Ye example 5.3', paperOrder:true, n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1].reverse(), v:[2,1,3,5,4,2].reverse()},
+    {name:'Bao–Ye example 5.3', anchor:'bao-ye-example-5-3', paperOrder:true, n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1].reverse(), v:[2,1,3,5,4,2].reverse()},
     {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]},
     {name:'GLSBS Example 3.11 · Figures 6–7', anchor:'glsbs-figure-7', nativeWord:true, n:3, beta:[-2,1,2,1,-1], v:[2]},
     {name:'Affine seam · lifted bridge', nativeWord:true, n:3, beta:[-3,-1], v:[3]},
@@ -4270,7 +4452,12 @@ sitemap: false
     if(p.nativeWord){leftmost=false;$('reading').value='right';mode='words';}
     if(p.paperOrder){leftmost=true;$('reading').value='left';mode='sweep';}
     $('rank').value=p.n;$('beta').value=word(readWord(p.beta));$('target').value=word(convertIndex(p.beta,p.v));$('examples').value=String(i);
-    if(build(p)&&p.nativeWord){selectedMove=null;render();}
+    if(!build(p))return;
+    if(p.nativeWord){selectedMove=null;render();}
+    if(p.paperOrder){
+      sweepView.goToStage(0);
+      sweepView.selectLabel('2,1');
+    }
   }
   function changeMode(next) {
     if(next!=='words'&&!model.paper)return;
@@ -4696,7 +4883,8 @@ sitemap: false
     if(!leftmost) url.searchParams.set('reading','right');
     for(const [key,value] of Object.entries(values))if(value!=null)url.searchParams.set(key,value);
     if(bridge){
-      url.searchParams.set('bridge',bridge.slot);
+      if(bridge.label!=null)url.searchParams.set('follow',bridge.label);
+      if(bridge.slot!=null)url.searchParams.set('bridge',bridge.slot);
       if(bridge.side==='before')url.searchParams.set('side','before');
       if(bridge.shift)url.searchParams.set('lift',bridge.shift);
       if(bridge.periods===2)url.searchParams.set('periods',2);
@@ -4733,6 +4921,8 @@ sitemap: false
       }
       const item=review.transition(frameId);
       before=item.before;after=item.after;details=item.context;
+      details.trackingScope=review;
+      details.bridgeLabels=model.paper.snapshots[0].active;
       details.presentation='Full chronological proof gallery for this Bao–Ye operation. The positive marker travels left through the reversed, barred paper word.';
       if(!leftmost)details.presentation+=' Here the paper word is the reverse of the entered word.';
       share=()=>moveUrl('bao-ye',{op:index,substep:walk.position()+1},moveInspector.selectedBridge());
@@ -4806,7 +4996,9 @@ sitemap: false
   $('reading').value=leftmost?'left':'right';
   const figurePreset=presets.findIndex(p=>p.anchor==='glsbs-figure-7');
   const figureHash='#'+presets[figurePreset].anchor;
-  if(location.hash!==figureHash){
+  const paperPreset=presets.findIndex(p=>p.paperOrder);
+  const paperHash='#'+presets[paperPreset].anchor;
+  if(location.hash!==figureHash && location.hash!==paperHash){
     loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
     if(linkedWords.has('beta')&&(linkedWords.has('c')||linkedWords.has('v'))){
       const indexKey=linkedWords.has('c')?'c':'v';
@@ -4820,6 +5012,12 @@ sitemap: false
       if($('guide').open)$('guide').close();
       loadPreset(figurePreset);
       requestAnimationFrame(()=>$('moveGraphs').scrollIntoView({block:'start'}));
+    }else if(location.hash===paperHash){
+      if($('guide').open)$('guide').close();
+      loadPreset(paperPreset);
+      const stage=linkedWords.get('stage');
+      if(stage!==null && /^\d+$/.test(stage))sweepView.goToStage(Number(stage),Number(linkedWords.get('step')||1));
+      requestAnimationFrame(()=>$('inductionWalk').scrollIntoView({block:'start'}));
     }else if(location.hash==='#bao-ye'&&model.paper){
       changeMode('recursion');
       const op=linkedWords.get('op'), part=linkedWords.get('substep');
@@ -4839,18 +5037,22 @@ sitemap: false
       if(relation!==null)selectedMove=moves().find(m=>m.id===relation)?.id??null;
       changeMode('words');
     }else if(!location.hash && !linkedWords.has('beta')&&model.paper)sweepView.firstSquare();
-    const bridge=linkedWords.get('bridge'),lift=linkedWords.get('lift')??'0';
-    if(bridge && /^[1-9]\d*$/.test(bridge) && /^-?\d+$/.test(lift)){
-      const inspector=mode==='sweep'?sweepView:moveInspector;
-      const side=linkedWords.get('side')==='before'?'before':'after';
-      inspector.selectSlot(Number(bridge),side,Number(lift),linkedWords.get('periods')==='2'?2:1);
+    const bridge=linkedWords.get('bridge'),follow=linkedWords.get('follow'),lift=linkedWords.get('lift')??'0';
+    const inspector=mode==='sweep'?sweepView:moveInspector;
+    const side=linkedWords.get('side')==='before'?'before':'after', periods=linkedWords.get('periods')==='2'?2:1;
+    if(/^-?\d+$/.test(lift) && Number.isSafeInteger(Number(lift))){
+      if(mode!=='words' && follow && /^[1-9]\d*,[1-9]\d*$/.test(follow)){
+        inspector.selectLabel(follow,Number(lift),periods,side);
+      }else if(bridge && /^[1-9]\d*$/.test(bridge)){
+        inspector.selectSlot(Number(bridge),side,Number(lift),periods);
+      }
     }
   }
   openLinkedView();
   window.addEventListener('hashchange',event=>{
     // The figure preset replaces the input word. Restore the preceding
     // address's word and stage when the reader leaves it via browser history.
-    if(new URL(event.oldURL).hash===figureHash)location.reload();
+    if([figureHash,paperHash].includes(new URL(event.oldURL).hash))location.reload();
     else openLinkedView();
   });
   for(const link of document.querySelectorAll('a[href="'+figureHash+'"]')){
