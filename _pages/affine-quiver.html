@@ -184,6 +184,9 @@ sitemap: false
 .pg-camera-tools {margin-left:auto}
 .pg-camera-tools button:disabled {opacity:.4;cursor:default}
 .pg-periods {display:inline-flex;align-items:center;gap:6px;color:var(--pg-muted);font:12px var(--sans,system-ui,sans-serif)}
+.pg-plane-toggle {display:inline-flex;align-items:center;gap:6px;min-height:32px;cursor:pointer;
+  font:600 13px/1.2 var(--sans,system-ui,sans-serif);color:var(--pg-deep)}
+.pg-plane-toggle input:focus-visible {outline:3px solid #157263;outline-offset:2px}
 .pg-share {display:flex;align-items:center;justify-content:flex-end;gap:5px 7px;flex-wrap:wrap}
 .pg-copy-status,.pg-shared-url {font-size:12px}
 .pg-shared-url {color:var(--pg-deep)}
@@ -207,6 +210,33 @@ sitemap: false
 .pg-coordinates {font:12px/1.2 var(--mono,monospace);color:var(--pg-muted)}
 .pg-canvas {width:100%;min-width:0;background:#fffefa}
 .pg-canvas svg {display:block;max-width:100%;width:100%}
+.pg-bridge-readout {margin:0 12px 10px;border-top:1px solid var(--pg-rule)}
+.pg-endpoints {width:100%;max-width:100%;min-width:0;border-collapse:collapse;table-layout:fixed;text-align:left;
+  font:13px/1.35 var(--sans,system-ui,sans-serif);color:var(--pg-ink);font-variant-numeric:tabular-nums}
+.pg-endpoints caption {caption-side:top;text-align:left;padding:7px 0 4px}
+.pg-endpoint-lift {display:inline-flex;align-items:center;gap:4px;margin-inline-start:12px;
+  color:var(--pg-muted);font-size:12px}
+.pg-endpoint-lift select {font:inherit;padding:1px 3px;min-height:24px}
+.pg-unmatched-lift {display:block;margin-top:3px;font-size:12px;color:var(--pg-muted)}
+.pg-endpoints th,.pg-endpoints td {padding:3px 5px 3px 0;vertical-align:middle;
+  white-space:normal;overflow-wrap:anywhere;background:transparent}
+.pg-endpoints th {font-family:var(--sans,system-ui,sans-serif)}
+.pg-endpoints th:nth-child(1) {width:22%}
+.pg-endpoints th:nth-child(2) {width:30%}
+.pg-endpoints thead th {border-bottom:1px solid #e0e5df;font-size:12px;font-weight:600}
+.pg-endpoints tbody th {white-space:nowrap;font-weight:500}
+.pg-endpoints td,.pg-wall-axes {font:12px/1.35 var(--mono,monospace)}
+.pg-endpoints tbody th .pg-key-symbol {margin-inline-end:5px;color:#162d36}
+.pg-wall-plane {margin-inline-start:4px;font-size:11px;font-weight:400;white-space:nowrap}
+.pg-wall-axes {display:block;font-size:11px;white-space:nowrap;color:var(--pg-muted);font-weight:400}
+.pg-endpoints [data-column=red] {color:var(--pg-red)}
+.pg-endpoints [data-column=blue] {color:var(--pg-blue)}
+@container (max-width:360px) {
+  .pg-bridge-readout {margin-inline:7px}
+  .pg-endpoints th,.pg-endpoints td {padding-right:3px}
+  .pg-endpoints td {font-size:11px}
+  .pg-wall-plane {display:block;margin:0}
+}
 .pg-word {margin:4px 14px 0;padding:4px 0 0;display:flex;flex-wrap:wrap;gap:3px}
 .pg-letter {font:600 12px/1 var(--mono,monospace);min-width:24px;max-width:100%;padding:5px 4px;min-height:26px;border:1px solid #d4dcd1;border-radius:4px;color:#344a3e;background:#fbfcf7;cursor:pointer}
 .pg-letter.pg-marked {background:#fff0d1;color:#673c09;border-color:#d5a854}
@@ -352,6 +382,7 @@ sitemap: false
 <p>In the induction walkthrough the graph inspector uses the chronological all-barred reverse gallery with endpoint <i>u</i>. The positive marker slides from right to left. The reflected word strip below it shows the same step in paper reading order with the tracks exchanged. During subexpression selection the inspector shows the final-target graph and highlights the crossing being tested.</p>
 <p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
 <p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
+<p>With <b>Projection planes</b> on, select a bridge in the 3D graph or on either plane. Follow the dashed guides from an endpoint (x, y, t) to (0, y, t) on the red plane and to (x, 0, t) on the blue plane. Selecting a translated bridge gives the coordinates of that lift. <a href="?bridge=4#glsbs-figure-7">Inspect the fourth bridge and its two projections</a>.</p>
 <p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?n=6&amp;beta=2123454234231&amp;v=213542&amp;stage=1&amp;step=4#induction">Inspect the first square of Bao–Ye Example 5.3</a>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. In Rightmost mode the film engine receives the word as entered, and the paper uses the reversed word and inverse product. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
@@ -2423,6 +2454,19 @@ sitemap: false
     return level;
   }
 
+  function onCoordinatePlane([x,y,t], plane) {
+    if (plane === 'red') return [0,y,t];
+    if (plane === 'blue') return [x,0,t];
+    throw new Error('Unknown projection plane: '+plane);
+  }
+
+  function bridgeEndpoints(bridge) {
+    return [bridge.a,bridge.b].map((point,i)=>({
+      color:bridge.colors[i], point,
+      red:onCoordinatePlane(point,'red'), blue:onCoordinatePlane(point,'blue')
+    }));
+  }
+
   function build(g, periods = 1) {
     const {n,beta,topWindows,bottomWindows} = g;
     if (!Number.isInteger(periods) || periods < 1 || periods > 5) {
@@ -2520,7 +2564,7 @@ sitemap: false
     return {n,m,periods,bounds,strands,segments,bridges,leftBoundary,rightBoundary,events};
   }
 
-  globalThis.QuiverPlabicGeometry = Object.freeze({build});
+  globalThis.QuiverPlabicGeometry = Object.freeze({build,onCoordinatePlane,bridgeEndpoints});
 })();
 </script>
 <script>// Native chronological graph inputs for the move inspector. QuiverPaper's snapshots
@@ -2620,15 +2664,20 @@ sitemap: false
     }
     return review;
   }
-  function evidence(before,after,context,url) {
-    function record(view) {
+  function evidence(before,after,context,url,selection=null) {
+    const periods=selection?.periods??1;
+    function record(view,sideName) {
       if(!view)return null;
-      const g=view.graph, lift=QuiverPlabicGeometry.build(g,1);
+      const g=view.graph, lift=QuiverPlabicGeometry.build(g,periods);
       const bySlot=Object.fromEntries(view.tokens.map(t=>[t.rawPosition,t.label]));
+      const picked=selection?.side===sideName
+        ?lift.events[selection.slot-1]?.lifts.find(l=>l.shift===selection.shift)?.bridge:null;
       const labeledIce={vertices:g.solid.map(p=>bySlot[p]),frozen:g.frozen.map(p=>bySlot[p]),
         arrows:g.arrows.map(([a,b,w])=>[bySlot[a],bySlot[b],w])};
       return {word:view.word,terminalTarget:view.target,cutWindows:g.topWindows,slots:view.tokens,
         labeledIce,baoYeIce:view.paperSeed,
+        selectedBridge:picked?{slot:picked.slot,label:bySlot[picked.slot],shift:picked.shift,
+          endpoints:QuiverPlabicGeometry.bridgeEndpoints(picked)}:null,
         solid:g.solid,hollow:g.hollow,intrinsicallyFrozen:g.intrinsicFrozen??g.frozen,seedFrozen:g.frozen,
         mutableIncidentArrows:g.arrows,canonicalBridges:lift.events.filter(e=>e.solid).map(e=>e.bridge),
         strandLifts:lift.strands.map(s=>({id:s.id,points:s.points,translatedContext:s.ghost}))};
@@ -2640,7 +2689,7 @@ sitemap: false
       presentation:context.presentation,move:context.kind,stage:context.stage,focus:context.focus,
       crossedInputPosition:context.crossedPosition??null,
       beforeSlots:context.beforeSlots,afterSlots:context.afterSlots,
-      newlyFrozen:context.newlyFrozen||[],check:context.check,before:record(before),after:record(after)};
+      newlyFrozen:context.newlyFrozen||[],check:context.check,periods,before:record(before,'before'),after:record(after,'after')};
   }
   globalThis.QuiverPlabicFrames=Object.freeze({side,forModel,evidence});
 })();
@@ -2675,12 +2724,12 @@ sitemap: false
   function eventAt(model,slot) { return model.events[slot-1]; }
   function cameraState(camera={}) {
     return {view:camera.view==='top'?'red':camera.view==='bottom'?'blue':camera.view||'space',
-      yaw:camera.yaw??-.6,pitch:clamp(camera.pitch??.45,-1.25,1.25),zoom:clamp(camera.zoom??1,.35,6)};
+      yaw:camera.yaw??-.6,pitch:clamp(camera.pitch??.28,-1.25,1.25),zoom:clamp(camera.zoom??1,.35,6)};
   }
 
   // A common set of framing points, so two drawings never silently auto-scale
   // differently. focusByModel frames the participating lifts in a local view.
-  function extent(models,ranges=[],focusByModel=[]) {
+  function extent(models,ranges=[],focusByModel=[],selectedByModel=[]) {
     const points=[];
     for(const [index,model] of models.entries()) {
       if(!model) continue;
@@ -2689,6 +2738,11 @@ sitemap: false
       if(local) {
         const strands=new Set();
         for(const slot of slots) for(const p of eventAt(model,slot)?.participants||[]) strands.add(p.strand);
+        const picked=selectedByModel[index];
+        if(picked && picked.slot>lo && picked.slot<=hi) {
+          const lift=eventAt(model,picked.slot)?.lifts.find(l=>l.shift===picked.shift);
+          for(const p of lift?.participants||[]) strands.add(p.strand);
+        }
         for(const strand of model.strands) if(strands.has(strand.id))
           for(const p of strand.points) if(p[2]>=lo && p[2]<=hi) points.push(p);
       }
@@ -2713,11 +2767,13 @@ sitemap: false
     const cy=Math.cos(cam.yaw), sy=Math.sin(cam.yaw), cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
     // An oblique picture plane gives the resting view the horizontal time
     // direction and upright permutation diagrams of GLSBS Figure 6.
-    const tilt=Math.sin(.45)*Math.tan(-.6);
+    // Look from the positive x,y quadrant: the x=0 and y=0 faces open on
+    // opposite sides of their common time axis, including when hidden.
+    const tilt=-Math.sin(.28)*Math.tan(-.6);
     return ([x,y,t])=>{
       const along=t*timeScale, inward=sy*along+cy*x;
       const horizontal=cy*along-sy*x;
-      return [horizontal,cp*y+sp*inward-tilt*horizontal,sp*y-cp*inward];
+      return [horizontal,cp*y-sp*inward-tilt*horizontal,sp*y+cp*inward];
     };
   }
 
@@ -2731,8 +2787,8 @@ sitemap: false
   }
 
   function projection(camera,viewport,W,H) {
-    const project=axes(camera,viewport.timeScale);
     if(camera.view!=='space') {
+      const project=axes(camera,viewport.timeScale);
       const [first,last]=viewport.limits[2], [bottom,top]=planarDomain(viewport);
       const left=31,right=W-18,upper=16,lower=H-35;
       const xScale=(right-left)/Math.max(1,last-first)*camera.zoom;
@@ -2745,7 +2801,17 @@ sitemap: false
     }
     let xmin=Infinity,xmax=-Infinity,ymin=Infinity,ymax=-Infinity;
     // Include the cut grids' off-diagonal corners in a common 3D framing.
-    const [xs,ys,ts]=viewport.limits;
+    const [xLimits,yLimits,ts]=viewport.limits;
+    const xs=[Math.min(0,xLimits[0]),Math.max(0,xLimits[1])];
+    const ys=[Math.min(0,yLimits[0]),Math.max(0,yLimits[1])];
+    // Time and lattice levels use different units. Give the t axis enough
+    // room to separate consecutive rungs on a wide card, with the same metric
+    // on both sides of the move and throughout an orbit.
+    const latticeSpan=.85*(ys[1]-ys[0])+.45*(xs[1]-xs[0]);
+    const frameRatio=(W-58)/(H-65);
+    const restingWidth=frameRatio*latticeSpan-.56*(xs[1]-xs[0]);
+    const timeScale=Math.max(viewport.timeScale,restingWidth/(.825*Math.max(1,ts[1]-ts[0])));
+    const project=axes(camera,timeScale);
     for(const column of xs) for(const row of ys) for(const t of ts) {
       const [x,y]=project([column,row,t]);
       xmin=Math.min(xmin,x); xmax=Math.max(xmax,x); ymin=Math.min(ymin,y); ymax=Math.max(ymax,y);
@@ -2756,7 +2822,7 @@ sitemap: false
     return {project:p=>{
       const [x,y,z]=project(p);
       return [W/2+(x-cx)*scale,(H-16)/2-(y-cy)*scale,z];
-    },orient:project,scale};
+    },orient:project,scale,timeScale};
   }
 
   function cutGuides(world,project,viewport,range,requestedSlot,width,height) {
@@ -2869,14 +2935,125 @@ sitemap: false
     return fragments.join(' ');
   }
 
+  // Each wall point is expressed in the SAME (x,y,t) coordinates as the
+  // embedded graph. Apply the orthogonal projection first and the shared camera
+  // second. For crossing gaps, retain the depth of the standalone projection.
+  function coordinatePlanes(world,project,g,range,selectedSlot,selectedShift,targets,W,H) {
+    const [lo,hi]=range;
+    const layers=element(world,'g',{'data-coordinate-planes':'','pointer-events':'none'});
+    const backgrounds=element(layers,'g');
+    const guides=element(layers,'g',{'data-projection-guides':''});
+    const offscreenLabels=[];
+    for(const plane of ['red','blue']) {
+      const red=plane==='red',axis=red?1:0, colors=projectionColors[plane];
+      const flat=point=>QuiverPlabicGeometry.onCoordinatePlane(point,plane);
+      const onWall=(level,t)=>red?[0,level,t]:[level,0,t];
+      const screen=point=>{
+        const p=project(flat(point));
+        p[2]=red?-point[0]:point[1];
+        return p;
+      };
+      const ordinate=red?g.bounds.y:g.bounds.x;
+      const lower=Math.min(0,ordinate[0]),upper=Math.max(0,ordinate[1]);
+      const polygon=[[lower,lo],[lower,hi],[upper,hi],[upper,lo]].map(([h,t])=>project(onWall(h,t)));
+      element(backgrounds,'polygon',{points:polygon.map(p=>f(p[0])+','+f(p[1])).join(' '),
+        fill:colors.wash,'fill-opacity':.77,stroke:colors.strand,'stroke-opacity':.32,'stroke-width':.9});
+      const wall=element(layers,'g',{'data-wall':plane});
+      const edges=[],vertices=[],wallsEnds=[];
+      const event=eventAt(g,selectedSlot);
+      const chosen=event?.lifts.find(l=>l.shift===selectedShift);
+      function edge(a,b,style) {
+        const p=screen(a),q=screen(b);
+        if(Math.max(p[0],q[0])< -6||Math.min(p[0],q[0])>W+6||
+           Math.max(p[1],q[1])< -6||Math.min(p[1],q[1])>H) return;
+        edges.push({a:p,b:q,gaps:[],...style});
+      }
+      for(const seg of g.segments) {
+        if(seg.a[2]<lo || seg.b[2]>hi)continue;
+        const highlighted=event?.hollow && seg.slot===selectedSlot && chosen?.participants.some(p=>p.strand===seg.strand);
+        edge(seg.a,seg.b,{type:'strand',slot:seg.slot,strand:seg.strand,ghost:seg.ghost,
+          selected:highlighted,width:highlighted?2.3:1.05});
+      }
+      for(const b of g.bridges) {
+        if(b.a[2]<lo || b.a[2]>hi)continue;
+        const selected=b.slot===selectedSlot && b.shift===selectedShift;
+        edge(b.a,b.b,{type:'bridge',slot:b.slot,shift:b.shift,ghost:b.ghost,selected,width:selected?3.1:1.55});
+        const a=screen(b.a),z=screen(b.b);
+        targets.push({a,b:z,slot:b.slot,shift:b.shift,plane,kind:'projected bridge'});
+        for(const [i,p] of [b.a,b.b].entries()) {
+          const end=flat(p),source=project(p),foot=project(end),color=b.colors[i];
+          vertices.push({p:foot,depth:red?-p[0]:p[1],end,color,slot:b.slot,shift:b.shift,selected,ghost:b.ghost});
+          if(selected) {
+            element(guides,'line',{x1:f(source[0]),y1:f(source[1]),x2:f(foot[0]),y2:f(foot[1]),
+              stroke:colors.axis,'stroke-width':1.45,'stroke-dasharray':'4 3','stroke-opacity':.84,
+              'data-project-to':plane,'data-end':color,'data-slot':b.slot,'data-shift':b.shift,
+              'data-from':p.join(','),'data-to':end.join(',')});
+          }
+        }
+      }
+      for(const boundary of [g.leftBoundary,g.rightBoundary]) for(const b of boundary) {
+        if(b.point[2]<lo || b.point[2]>hi || (!g.m && !b.marked))continue;
+        wallsEnds.push({p:screen(b.point),marked:b.marked,ghost:b.ghost});
+      }
+      crossingGaps(edges,W,H-24);
+      for(const e of edges) {
+        const d=visiblePath(e);
+        if(d)element(wall,'path',{d,fill:'none',stroke:e.selected?colors.axis:colors.strand,
+          'stroke-width':e.width,'stroke-opacity':e.selected?1:e.ghost?.34:.66,
+          'stroke-dasharray':e.ghost&&!e.selected?'3 2':null,
+          'data-wall-edge':e.type,'data-slot':e.slot,'data-strand':e.strand,'data-shift':e.shift,
+          'data-selected':e.selected?'true':null});
+      }
+      for(const b of wallsEnds) {
+        const [x,y]=b.p,r=1.55;
+        element(wall,'rect',{x:f(x-r),y:f(y-r),width:r*2,height:r*2,fill:b.marked?colors.strand:paper,
+          stroke:colors.strand,'stroke-width':.85,opacity:b.ghost?.34:.72});
+      }
+      // Endpoints remain black/white. The colored rim identifies the image of
+      // the selected endpoint among other bridges drawn onto the same face.
+      vertices.sort((a,b)=>Number(a.selected)-Number(b.selected)||a.depth-b.depth);
+      for(const v of vertices) {
+        const [x,y]=v.p;
+        if(x< -6 || x>W+6 || y< -6 || y>H)continue;
+        if(v.selected)element(wall,'circle',{cx:f(x),cy:f(y),r:5.35,fill:paper,stroke:colors.axis,'stroke-width':1.35});
+        element(wall,'circle',{cx:f(x),cy:f(y),r:v.selected?3:1.95,fill:v.color==='black'?ink:paper,
+          stroke:v.color==='black'?ink:colors.axis,'stroke-width':v.selected?1.15:.8,
+          opacity:v.selected?1:v.ghost?.35:.72,'data-wall-end':v.color,'data-point':v.end.join(','),
+          'data-slot':v.slot,'data-shift':v.shift,'data-selected':v.selected?'true':null});
+      }
+      // Put each plane's name at its remote ordinate edge. If zoom crops that
+      // edge the axes/legend still identify the two layers.
+      const labelHeight=Math.abs(upper)>=Math.abs(lower)?upper:lower;
+      const caption=project(onWall(labelHeight,lo)), atEnd=project(onWall(labelHeight,hi));
+      const forward=atEnd[0]>=caption[0]?1:-1;
+      const axisStart=project(onWall(lower,lo)),axisEnd=project(onWall(upper,lo));
+      const stride=tickStep(upper-lower,Math.hypot(axisEnd[0]-axisStart[0],axisEnd[1]-axisStart[1]),20);
+      for(let level=Math.ceil(ordinate[0]/stride)*stride;level<=ordinate[1];level+=stride){
+        const p=project(onWall(level,lo)),tx=p[0]-forward*5,ty=p[1]+3;
+        if(level===0 || tx<8 || tx>W-8 || ty<10 || ty>H-27)continue;
+        element(wall,'text',{x:f(tx),y:f(ty),fill:colors.axis,'font-family':mono,'font-size':9,
+          'text-anchor':forward>0?'end':'start','paint-order':'stroke',stroke:paper,'stroke-width':2.7,'data-wall-level':level},level);
+      }
+      const cx=caption[0]+forward*4;
+      const offset=caption[1]<=project(onWall(0,lo))[1]?-8:13;
+      const cy=caption[1]+offset;
+      if(cx>1 && cx<W-1 && cy>9 && cy<H-27)element(wall,'text',{x:f(cx),y:f(cy),
+        fill:colors.axis,'font-family':mono,'font-size':10,'font-weight':600,'text-anchor':forward>0?'start':'end',
+        'paint-order':'stroke',stroke:paper,'stroke-width':3,'data-plane-name':plane},red?'red · x = 0':'blue · y = 0');
+      else offscreenLabels.push(plane);
+    }
+    return offscreenLabels;
+  }
+
   function draw(host,g,options={}) {
     const cam=cameraState(options.camera);
+    cam.planes=cam.view==='space' && options.showPlanes!==false;
     const range=options.range||[0,g.m], viewport=options.viewport||extent([g],[range]);
     const W=Math.max(120,host.clientWidth||450), planar=cam.view!=='space';
     const compact=options.compact||options.linked, colors=projectionColors[cam.view];
     const [minLevel,maxLevel]=planarDomain(viewport);
     const H=planar ? (compact?clamp(57+22*(maxLevel-minLevel),116,210):clamp(86+32*(maxLevel-minLevel),165,355))
-      : (compact?clamp(W*.66,225,options.paired?285:315):clamp(W*.74,244,370));
+      : (compact?clamp(W*.66,263,options.paired?285:315):clamp(W*.74,272,370));
     const svg=element(null,'svg',{class:'pg-graph-svg',viewBox:'0 0 '+W+' '+H,
       width:'100%',height:H,role:'group','data-view':cam.view,'aria-label':(cam.view==='space'?'3D':cam.view+' projection of')+
         ' affine plabic graph, chronological cuts '+range.join(' to '),tabindex:0});
@@ -2889,13 +3066,15 @@ sitemap: false
     element(clip,'rect',{x:planar?24:0,y:0,width:W-(planar?31:0),height:H-24});
     element(svg,'rect',{width:W,height:H,fill:paper});
     const world=element(svg,'g',{'clip-path':'url(#'+id+')'});
-    const {project,orient}=projection(cam,viewport,W,H);
+    const {project,orient,timeScale}=projection(cam,viewport,W,H);
     const [lo,hi]=range;
-    const focus=new Set(options.focusSlots||[]),activeSlot=options.selectedSlot??null;
+    const focus=new Set(options.focusSlots||[]),activeSlot=options.selectedSlot??null,activeShift=options.selectedShift??0;
     const frozenHere=new Set(options.frozenSlots||[]);
     const cycle=squareSides(g,[...focus],options.square);
     const labels=options.labels||{};
     const label=slot=>(labels instanceof Map?labels.get(slot):labels[slot])||'';
+    const items=[],symbols=[],targets=[],slotTexts=[];
+    let offscreenLabels=[];
     if(planar) {
       if(activeSlot!=null && activeSlot>lo && activeSlot<=hi) {
         const start=project([0,0,activeSlot-1]),end=project([0,0,activeSlot]);
@@ -2907,10 +3086,11 @@ sitemap: false
         const x=project([0,0,t])[0];
         element(world,'path',{d:'M'+f(x)+' 5 V'+(H-25),stroke:'#d4deda','stroke-width':.7,'stroke-dasharray':'2 4'});
       }
+    } else if(cam.planes) {
+      offscreenLabels=coordinatePlanes(world,project,g,range,activeSlot,activeShift,targets,W,H);
     } else {
       cutGuides(world,project,viewport,range,activeSlot??(focus.size<=2?[...focus][0]:null),W,H);
     }
-    const items=[],symbols=[],targets=[],slotTexts=[];
     function segment(a,b,style) {
       const left=project(a),right=project(b);
       if(Math.max(left[0],right[0])< -6||Math.min(left[0],right[0])>W+6||
@@ -2941,24 +3121,25 @@ sitemap: false
     }
     for(const bridge of g.bridges) {
       if(bridge.a[2]<lo||bridge.a[2]>hi) continue;
-      const selected=bridge.slot===activeSlot,focused=focus.has(bridge.slot),onSquare=cycle.members.has(bridge);
+      const selected=bridge.slot===activeSlot && bridge.shift===activeShift,focused=focus.has(bridge.slot),onSquare=cycle.members.has(bridge);
       const tint=onSquare?squareColor:focused||selected?(planar?colors.axis:active):ink;
       const opacity=bridge.ghost&&!focused&&!selected?.52:1;
       const a=project(bridge.a),b=project(bridge.b);
       segment(bridge.a,bridge.b,{color:tint,opacity,width:focused||selected?3.3:2.1,slot:bridge.slot,type:onSquare?'square-bridge':'bridge'});
       const dim=W<260 || (!viewport.local && g.n>12);
       const radii=(dim?2.6:3.2)+(focused||selected?.9:0);
-      for(let i=0;i<2;i++) symbols.push({p:i?b:a,slot:bridge.slot,color:bridge.colors[i],tint,r:radii,
+      for(let i=0;i<2;i++) symbols.push({p:i?b:a,slot:bridge.slot,shift:bridge.shift,selected,
+        color:bridge.colors[i],tint,r:radii,
         opacity,type:'vertex',strand:bridge.strands[i]});
-      if(bridge.shift===0)targets.push({a,b,slot:bridge.slot,kind:'solid bridge',label:label(bridge.slot)});
-      if((selected||focused && (!planar || focus.size<=2)) && bridge.shift===0) {
+      targets.push({a,b,slot:bridge.slot,shift:bridge.shift,plane:cam.view,kind:'solid bridge',label:label(bridge.slot)});
+      if(selected||(focused && (!planar || focus.size<=2) && bridge.shift===0)) {
         const text=label(bridge.slot);
         if(text)slotTexts.push({x:(a[0]+b[0])/2,y:(a[1]+b[1])/2,text,slot:bridge.slot});
       }
     }
     for(const e of g.events) if(e.hollow && e.time>=lo && e.time<=hi && e.participants.length) {
       const p=e.participants.map(v=>project(between(v.a,v.b,.5)));
-      targets.push({a:p[0],b:p[1],slot:e.slot,kind:'hollow crossing',label:''});
+      targets.push({a:p[0],b:p[1],slot:e.slot,shift:0,plane:cam.view,kind:'hollow crossing',label:''});
     }
     for(const [side,ends] of [['left',g.leftBoundary],['right',g.rightBoundary]]) {
       for(const end of ends) {
@@ -2984,11 +3165,13 @@ sitemap: false
       const [x,y,z]=s.p;
       if(x< -8||x>W+8||y< -8||y>H)continue;
       if(s.type==='vertex') {
+        if(cam.planes && s.selected)element(world,'circle',{cx:f(x),cy:f(y),r:s.r+1.65,
+          fill:paper,stroke:s.tint,'stroke-width':1.3,'pointer-events':'none'});
         if(frozenHere.has(s.slot)) element(world,'circle',{cx:f(x),cy:f(y),r:s.r+2.9,
           fill:'none',stroke:'#3276a2','stroke-width':1.65,'data-frozen-slot':s.slot,'pointer-events':'none'});
         element(world,'circle',{cx:f(x),cy:f(y),r:s.r,fill:s.color==='black'?ink:'#fff',
           stroke:s.color==='black'?paper:ink,'stroke-width':s.color==='black'?.65:1.45,
-          opacity:s.opacity,'data-vertex':s.color,'data-slot':s.slot});
+          opacity:s.opacity,'data-vertex':s.color,'data-slot':s.slot,'data-shift':s.shift});
       } else {
         const r=s.selected?3.7:2.6;
         element(world,'rect',{x:f(x-r),y:f(y-r),width:r*2,height:r*2,rx:.45,
@@ -3018,9 +3201,10 @@ sitemap: false
     for(const entry of slotTexts) {
       const {x,y,text}=entry,w=text.length*5.9+7,h=15;
       if(x<0||x>W||y<0||y>H-24) continue;
-      const candidates=[[x+9,y-13],[x+9,y+6],[x-w-9,y-13],[x-w-9,y+6]];
+      const candidates=[[x+9,y-(cam.planes?22:13)],[x+9,y+6],[x-w-9,y-13],[x-w-9,y+6],[x-w/2,y+13],[x-w/2,y-27]];
       const at=candidates.find(([a,b])=>a>=2&&a+w<=W-2&&b>=1&&b+h<H-27&&
-        occupied.every(([px,py,pw,ph])=>a+w<px||px+pw<a||b+h<py||py+ph<b));
+        occupied.every(([px,py,pw,ph])=>a+w<px||px+pw<a||b+h<py||py+ph<b) &&
+        (!cam.planes || symbols.every(s=>!s.selected||s.p[0]+6<a||s.p[0]-6>a+w||s.p[1]+6<b||s.p[1]-6>b+h)));
       if(!at)continue;
       const [tx,ty]=at;occupied.push([tx,ty,w,h]);
       element(world,'rect',{x:f(tx),y:f(ty),width:w,height:h,rx:3,fill:paper,'fill-opacity':.93});
@@ -3029,10 +3213,11 @@ sitemap: false
     }
     // Larger transparent hit targets are separate from the embedded graph.
     if(options.onPick) for(const target of targets) {
-      const {a,b,slot,kind}=target;
+      const {a,b,slot,kind,shift,plane}=target;
       if(Math.max(a[0],b[0])<0||Math.min(a[0],b[0])>W||Math.max(a[1],b[1])<0||Math.min(a[1],b[1])>H-24) continue;
-      const aria='Inspect '+kind+' at chronological slot '+slot+(target.label?', '+target.label:'');
-      const hit=element(world,'g',{'data-pick':slot,tabindex:0,role:'button','aria-label':aria});
+      const aria='Inspect '+(kind==='projected bridge'?plane+' '+kind:kind)+' at chronological slot '+slot+
+        (target.label?', '+target.label:'')+(shift?', translated by '+shift+' periods':'');
+      const hit=element(world,'g',{'data-pick':slot,'data-shift':shift,'data-pick-plane':plane,tabindex:0,role:'button','aria-label':aria});
       hit.style.cursor='pointer';element(hit,'title',{},aria);
       element(hit,'path',{d:'M'+f(a[0])+' '+f(a[1])+' L'+f(b[0])+' '+f(b[1]),stroke:'transparent','stroke-width':14,'stroke-linecap':'round'});
       element(hit,'circle',{cx:f((a[0]+b[0])/2),cy:f((a[1]+b[1])/2),r:7,fill:'transparent'});
@@ -3041,11 +3226,14 @@ sitemap: false
     element(trim,'path',{d:'M0 '+(H-24)+' H'+W,stroke:grid});
     function caption(x,y,value,attrs={}) {element(trim,'text',{x:f(x),y:f(y),fill:'#52676b','font-family':mono,'font-size':10,...attrs},value);}
     if(!planar) {
-      const o=[30,H-12],ta=[[1,0,0,'x',projectionColors.blue.axis],[0,1,0,'y',projectionColors.red.axis],[0,0,1/viewport.timeScale,'t',ink]];
+      const o=[30,H-12],ta=[[1,0,0,'x',projectionColors.blue.axis],[0,1,0,'y',projectionColors.red.axis],[0,0,1/timeScale,'t',ink]];
       for(const [x,y,t,name,color] of ta) {
         const [dx,dy]=orient([x,y,t]),sx=o[0]+dx*11,sy=o[1]-dy*8;
         element(trim,'path',{d:'M'+o.join(' ')+' L'+f(sx)+' '+f(sy),stroke:color});
         caption(sx+(dx>=0?2:-5),sy+(dy>=0?0:5),name,{fill:color,'font-size':8});
+      }
+      for(const [i,plane] of offscreenLabels.entries()) {
+        caption(54+i*65,H-9,plane==='red'?'red x=0':'blue y=0',{fill:projectionColors[plane].axis,'data-plane-name':plane});
       }
       caption(W-10,H-9,'t = '+lo+' … '+hi,{'text-anchor':'end'});
     } else {
@@ -3072,7 +3260,7 @@ sitemap: false
     }
     function pick(e) {
       const node=e.target.closest?.('[data-pick]');
-      if(node && options.onPick) {options.onPick(Number(node.dataset.pick));return true;}
+      if(node && options.onPick) {options.onPick(Number(node.dataset.pick),Number(node.dataset.shift||0));return true;}
       return false;
     }
     let suppressClick=false;
@@ -3169,7 +3357,7 @@ sitemap: false
     {key:'blue',name:'Blue projection',coordinates:'(t, x)'}
   ];
   const crops=[['full','Full word'],['move','Move detail']];
-  const neutralCamera=()=>({view:'space',yaw:-.6,pitch:.45,zoom:1});
+  const neutralCamera=()=>({view:'space',yaw:-.6,pitch:.28,zoom:1});
   function details(title) {
     const box=node('details','pg-details'); box.append(node('summary','',title)); return box;
   }
@@ -3199,6 +3387,10 @@ sitemap: false
       if(key==='red'||key==='blue')b.setAttribute('aria-label',key==='red'?'Red projection':'Blue projection');
       if(key==='linked')b.title='Show the 3D graph with both projections';
     }
+    const planeControl=node('label','pg-plane-toggle'),planeToggle=node('input');
+    planeToggle.type='checkbox';planeToggle.checked=true;
+    planeToggle.addEventListener('change',()=>draw(true));
+    planeControl.append(planeToggle,'Projection planes');toolbar.append(planeControl);
     const cropButtons=segmented('Visible time interval',crops,key=>{crop=key;camera.zoom=1;draw();});
     const periodLabel=node('label','pg-periods');
     periodLabel.append(node('span','','Lifts'));
@@ -3231,6 +3423,7 @@ sitemap: false
     const convention=details('Graph and affine lift conventions');
     const notes=node('div','pg-conventions');
     notes.append(node('p','','Time increases from the left cut to the right cut. At each cut, the dots have coordinates (x,y,t) = (wₜ(y), y, t). Red projects to (t,y) and blue to (t,x). The affine deck translation is (x,y,t) ↦ (x+n,y+n,t).'));
+    notes.append(node('p','','In 3D the red projection lies on x = 0 and the blue projection on y = 0. Select a solid bridge to trace each endpoint perpendicularly to both planes. For lift k, add k·n to the original x and y coordinates before projecting.'));
     notes.append(node('p','','A hollow step exchanges two strands in its active projection. A solid step adds a bridge at the midtime between the two cuts. In increasing active coordinate, its ends are black then white for a positive letter, white then black for a negative letter. Left boundary vertices are marked. Right boundary vertices give the target permutation.'));
     const reference=node('a','','GLSBS, §3.2, Definition 3.4');reference.href='https://arxiv.org/html/2210.04778v3#S3.SS2';
     notes.append(node('p','','The view shows complete strand lifts starting in the chosen period(s), with translated neighbors added wherever needed to include every bridge orbit and seam connection.'));
@@ -3240,12 +3433,12 @@ sitemap: false
     }
     notes.append(articles);convention.append(notes);
     element.append(head,toolbar,stages,key,operation,inspector,convention);
-    let before=null,after=null,ctx={},periods=1,camera=neutralCamera(),layout='linked',crop='full',cards=[],selection=null,byBridge=false,reportingBridge=false,prevSignature='';
+    let before=null,after=null,ctx={},periods=1,camera=neutralCamera(),layout='linked',crop='full',cards=[],selection=null,byBridge=false,bridgePick=null,prevSignature='';
     const cache=new WeakMap();
-    function geometry(side) {
+    function geometry(side,count=periods) {
       let entry=cache.get(side.graph); if(!entry){entry=new Map();cache.set(side.graph,entry);}
-      if(!entry.has(periods)) entry.set(periods,QuiverPlabicGeometry.build(side.graph,periods));
-      return entry.get(periods);
+      if(!entry.has(count)) entry.set(count,QuiverPlabicGeometry.build(side.graph,count));
+      return entry.get(count);
     }
     function zoom(z) {camera.zoom=Math.max(.55,Math.min(4,z));draw();}
     async function copyURL() {
@@ -3281,24 +3474,48 @@ sitemap: false
         findSlot(after,stageSlots(after,'after')[0] || 1);
       return corresponding(anchor,side,ctx.wordMove || (byBridge && selection?.label!=null));
     }
-    function choose(t,bridge=false) {
+    function bridgeLift(c,slot){
+      const event=slot!=null ? c.geometry.events[slot-1] : null;
+      if(!event?.bridge)return null;
+      return event.lifts.find(l=>l.shift===(bridgePick?.shift??0)) || event.lifts.find(l=>l.shift===0);
+    }
+    function choose(t,bridge=false,shift=0) {
       if(!t)return;
       const oldFocus=document.activeElement;
-      const focused=element.contains(oldFocus)&&oldFocus.closest('.pg-card');
+      const focused=element.contains(oldFocus)?oldFocus.closest('.pg-card'):null;
       const slotControl=focused && oldFocus.closest('[data-pick],[data-raw-slot]');
-      const focusSelector=slotControl && (slotControl.hasAttribute('data-pick')?'[data-pick="'+t.rawPosition+'"]':'[data-raw-slot="'+t.rawPosition+'"]');
+      let focusSelector=slotControl && (slotControl.hasAttribute('data-pick')?'[data-pick="'+t.rawPosition+'"]':'[data-raw-slot="'+t.rawPosition+'"]');
+      if(slotControl?.hasAttribute('data-shift'))focusSelector+='[data-shift="'+slotControl.dataset.shift+'"]';
+      if(slotControl?.hasAttribute('data-pick-plane'))focusSelector+='[data-pick-plane="'+slotControl.dataset.pickPlane+'"]';
+      if(focused && oldFocus.matches('.pg-endpoint-lift select'))focusSelector='.pg-endpoint-lift select';
       const focusSide=focused?.dataset?.side;
       const focusView=oldFocus?.closest('.pg-view')?.dataset.view;
       selection=t;
       byBridge=bridge && t.label!=null;
+      bridgePick=byBridge?{slot:t.rawPosition,side:before?.tokens.includes(t)?'before':'after',shift}:null;
+      if(crop==='move' && cards.some(c=>{
+        const slot=selected(c.side)?.rawPosition;
+        if(slot==null)return false;
+        const [lo,hi]=commonRange(c.side,c.slots,c.name);
+        return slot<=lo || slot>hi;
+      })){crop='full';camera.zoom=1;}
       const matched=corresponding(t,after,ctx.wordMove || byBridge);
-      if(matched && ctx.onPick){
-        reportingBridge=byBridge;
-        try{ctx.onPick(matched.rawPosition);}finally{reportingBridge=false;}
-      }
+      if(matched && ctx.onPick)ctx.onPick(matched.rawPosition);
       renderAll();
       const pane=focusView?' .pg-view[data-view="'+focusView+'"]':'';
       if(focusSelector && focusSide)element.querySelector('.pg-card[data-side="'+focusSide+'"]'+pane+' '+focusSelector)?.focus({preventScroll:true});
+    }
+    function selectSlot(slot,sideName='after',shift=0,periodsToShow=periods){
+      const c=cards.find(card=>card.name===sideName);
+      if(!c || !Number.isInteger(slot) || !Number.isInteger(shift) || ![1,2].includes(periodsToShow))return false;
+      const token=findSlot(c.side,slot);
+      if(!token || token.hollow)return false;
+      const scene=geometry(c.side,periodsToShow);
+      if(!scene.events[slot-1]?.lifts.some(l=>l.shift===shift && l.bridge))return false;
+      periods=periodsToShow;
+      periodSelect.value=String(periods);
+      choose(token,true,shift);
+      return true;
     }
     function commonRange(side,slots,name) {
       const m=side.word.length;if(crop==='full'||!m)return [0,m];
@@ -3317,23 +3534,68 @@ sitemap: false
       const topName=node('strong','pg-card-name',caption), target=node('span','pg-target','Target '+product(side.target));
       top.append(topName,target);
       const bounds=node('span','pg-bounds');top.append(bounds);
+      const endpoints=node('div','pg-bridge-readout');
       const figures=node('div','pg-views'), panes=plates.map(({key,name:viewName,coordinates})=>{
         const figure=node('figure','pg-view'),title=node('figcaption','pg-view-title');
         figure.dataset.view=key;
         title.append(node('strong','',viewName),node('span','pg-coordinates',coordinates));
         const canvas=node('div','pg-canvas');
-        figure.append(title,canvas);figures.append(figure);return {key,figure,canvas};
+        figure.append(title,canvas);if(key==='space')figure.append(endpoints);
+        figures.append(figure);return {key,figure,canvas};
       });
       const wordStrip=node('div','pg-word');
       wordStrip.setAttribute('role','group');wordStrip.setAttribute('aria-label',caption+' chronological word');
       const foot=node('div','pg-cardfoot');
       box.append(top,wordStrip,foot,figures);stages.append(box);
-      return {side,name,box,bounds,figures,panes,wordStrip,foot,geometry:geometry(side),slots:stageSlots(side,name)};
+      return {side,name,box,bounds,figures,panes,wordStrip,foot,endpoints,geometry:geometry(side),slots:stageSlots(side,name)};
+    }
+    function fillEndpoints(c,t){
+      const lift=bridgeLift(c,t?.rawPosition);
+      c.endpoints.replaceChildren();
+      if(!lift)return;
+      const {bridge}=lift,event=c.geometry.events[t.rawPosition-1];
+      const table=node('table','pg-endpoints'),caption=table.createCaption();
+      const name=label(t.label)||('at slot '+t.rawPosition);
+      caption.append(node('strong','','Bridge '+name+' endpoints'));
+      if(event.lifts.length>1){
+        const field=node('label','pg-endpoint-lift'),select=node('select');
+        field.append('Lift k ',select);
+        select.title='Translate x and y by k times n';
+        for(const copy of [...event.lifts].sort((a,b)=>a.shift-b.shift)){
+          const option=node('option','',signed(copy.shift));
+          option.value=String(copy.shift);select.append(option);
+        }
+        select.value=String(lift.shift);
+        select.onchange=()=>choose(t,true,Number(select.value));
+        caption.append(field);
+      }
+      if(bridgePick && lift.shift!==bridgePick.shift){
+        caption.append(node('span','pg-unmatched-lift','Showing lift k = '+signed(lift.shift)+'. Lift k = '+signed(bridgePick.shift)+' is outside this view.'));
+      }
+      const head=table.createTHead().insertRow();
+      const columns=[['Endpoint','',''],['3D','(x, y, t)',''],['Red','(t, y)','x = 0'],['Blue','(t, x)','y = 0']];
+      for(const [name,axis,plane] of columns){
+        const th=node('th');th.scope='col';th.dataset.column=name.toLowerCase();
+        th.append(name,' ');
+        if(plane)th.append(node('small','pg-wall-plane',plane),' ');
+        if(axis)th.append(node('span','pg-wall-axes',axis));
+        head.append(th);
+      }
+      const body=table.createTBody();
+      const endpoints=QuiverPlabicGeometry.bridgeEndpoints(bridge);
+      for(const color of ['black','white']){
+        const end=endpoints.find(endpoint=>endpoint.color===color);
+        const row=body.insertRow();row.dataset.endpoint=color;
+        const th=node('th');th.scope='row';
+        th.append(arrowGlyph(color==='black'?'●':'○'),color==='black'?' Black':' White');row.append(th);
+        for(const p of [end.point,[end.red[2],end.red[1]],[end.blue[2],end.blue[0]]])row.insertCell().textContent=point(p);
+      }
+      c.endpoints.append(table);
     }
     function fillCard(c) {
       const chosen=selected(c.side),items=[...c.side.tokens].sort((a,b)=>a.rawPosition-b.rawPosition);
       const taps=items.map(t=>{
-        const letter=c.side.word[t.rawPosition-1],b=action(signed(letter),()=>choose(t),'pg-letter');
+        const letter=c.side.word[t.rawPosition-1],b=action(signed(letter),()=>choose(t,ctx.kind==='word' && !before),'pg-letter');
         b.dataset.rawSlot=t.rawPosition;
         const source=origin(t), role=t.hollow?'hollow':('solid '+label(t.label));
         const marked=c.slots.includes(t.rawPosition);b.classList.toggle('pg-marked',marked);b.classList.toggle('pg-marker',!!t.marker);
@@ -3346,20 +3608,27 @@ sitemap: false
       const bridgeCount=c.geometry.events.reduce((sum,e)=>sum+(e.solid?1:0),0);
       c.foot.textContent=c.side.word.length+' letter'+(c.side.word.length===1?'':'s')+' · '+bridgeCount+' bridge orbit'+(bridgeCount===1?'':'s')+
         (chosen?' · Slot '+chosen.rawPosition+' '+origin(chosen)+(chosen.hollow?' · hollow crossing in '+(c.side.word[chosen.rawPosition-1]>0?'red':'blue'):' · '+label(chosen.label)+' '+(chosen.frozen?'frozen':'mutable')):'');
+      fillEndpoints(c,chosen);
     }
     function draw(orbitOnly=false){
       if(!cards.length)return;
       for(const [name,b] of viewButtons)b.setAttribute('aria-pressed',String(name===layout));
       for(const [name,b] of cropButtons)b.setAttribute('aria-pressed',String(name===crop));
       const hasSpace=layout==='space'||layout==='linked';
+      planeControl.hidden=!hasSpace;
       left.disabled=right.disabled=!hasSpace;smaller.disabled=camera.zoom<=.55;bigger.disabled=camera.zoom>=4;
       gesture.hidden=!hasSpace;
       gesture.textContent=layout==='linked'?'Drag the 3D graph to rotate. Both projections have a fixed viewpoint.':cards.length===1?'Drag to rotate the 3D view.':'Drag either 3D view to rotate both.';
       const ranges=cards.map(c=>commonRange(c.side,c.slots,c.name));
-      const viewport=QuiverPlabicDrawing.extent(cards.map(c=>c.geometry),ranges,crop==='move'?cards.map(c=>c.slots):undefined);
+      const selections=cards.map(c=>{
+        const slot=selected(c.side)?.rawPosition??null;
+        return {slot,shift:bridgeLift(c,slot)?.shift??0};
+      });
+      const viewport=QuiverPlabicDrawing.extent(cards.map(c=>c.geometry),ranges,crop==='move'?cards.map(c=>c.slots):undefined,crop==='move'?selections:undefined);
       cards.forEach((c,j)=>{
         const [lo,hi]=ranges[j];c.bounds.textContent='Cuts '+lo+'–'+hi;
-        const selectedSlot=selected(c.side)?.rawPosition ?? null;
+        const {slot:selectedSlot,shift:selectedShift}=selections[j];
+        c.endpoints.hidden=!hasSpace || !planeToggle.checked || !c.endpoints.firstChild;
         const labels=Object.fromEntries(c.side.tokens.filter(t=>t.label!=null).map(t=>[t.rawPosition,label(t.label)]));
         const square=['square','word-square'].includes(ctx.kind);
         const frozenSlots=ctx.kind==='freeze'&&c.name==='after'?c.side.tokens.filter(t=>ctx.newlyFrozen?.includes(t.label)).map(t=>t.rawPosition):[];
@@ -3370,8 +3639,8 @@ sitemap: false
           if(figure.hidden){if(canvas.firstChild)canvas.replaceChildren();continue;}
           if(orbitOnly && key!=='space')continue;
           QuiverPlabicDrawing.draw(canvas,c.geometry,{camera:{...camera,view:key},compact:layout==='linked',linked:layout==='linked',paired:cards.length>1,
-            range:ranges[j],focusSlots:c.slots,selectedSlot,square,labels,viewport,boundaryCut,frozenSlots,
-            onPick:pos=>choose(findSlot(c.side,pos),true),onOrbit:(yaw,pitch)=>{camera.yaw=yaw;camera.pitch=pitch;draw(true);},onZoom:zoom});
+            range:ranges[j],focusSlots:c.slots,selectedSlot,selectedShift,showPlanes:planeToggle.checked,square,labels,viewport,boundaryCut,frozenSlots,
+            onPick:(pos,shift=0)=>choose(findSlot(c.side,pos),true,shift),onOrbit:(yaw,pitch)=>{camera.yaw=yaw;camera.pitch=pitch;draw(true);},onZoom:zoom});
         }
       });
     }
@@ -3386,12 +3655,13 @@ sitemap: false
         const dl=node('dl');
         detailRow(dl,'Crossing',signed(c.side.word[slot-1])+' · chronological slot '+slot+' · '+origin(t));
         detailRow(dl,'Vertex',t.hollow?'Hollow (no bridge)':label(t.label)+' · '+(t.frozen?'frozen':'mutable'));
-        if(e.bridge){detailRow(dl,'Bridge at t = '+(slot-.5),e.bridge.colors.map((color,i)=>color+' '+point(i===0?e.bridge.a:e.bridge.b)).join(' ↔ '));}
+        const lift=bridgeLift(c,slot);
+        if(lift?.bridge){const b=lift.bridge;detailRow(dl,'Bridge at t = '+(slot-.5),b.colors.map((color,i)=>color+' '+point(i===0?b.a:b.b)).join(' ↔ '));}
         else if(e.hollow){detailRow(dl,'Hollow crossing','Two distinct strands; no graph vertex at their projected intersection.');}
         const beforeWindow=c.side.graph.topWindows[slot-1], afterWindow=c.side.graph.topWindows[slot];
         detailRow(dl,'w at t = '+(slot-1),'['+beforeWindow.join(', ')+']');
         detailRow(dl,'w at t = '+slot,'['+afterWindow.join(', ')+']');
-        for(const p of e.participants||[])detailRow(dl,'Strand '+p.strand,point(p.a)+' → '+point(p.b));
+        for(const p of lift?.participants||e.participants||[])detailRow(dl,'Strand '+p.strand,point(p.a)+' → '+point(p.b));
         d.append(dl);inspection.append(d);
       }
     }
@@ -3412,6 +3682,11 @@ sitemap: false
       stages.classList.toggle('pg-single',single);inspection.classList.toggle('pg-single',single);
       cards=single?[card(after,'after',ctx.kind==='initial'?'Initial graph':ctx.kind==='scan'?'Target graph':'Current graph')]:
         [card(before,'before','Before'),card(after,'after','After')];
+      if(bridgePick){
+        const c=cards.find(card=>card.name===bridgePick.side);
+        if(!c)bridgePick=null;
+        else bridgePick.shift=bridgeLift(c,bridgePick.slot)?.shift??0;
+      }
       for(const c of cards)fillCard(c);
       draw(); fillInspector();
     }
@@ -3419,9 +3694,13 @@ sitemap: false
       const previousSide=selection && (before?.tokens.includes(selection)?'before':after?.tokens.includes(selection)?'after':null);
       before=inBefore;after=inAfter;ctx=context;
       const signature=[inAfter?.graph.n,ctx.stage,ctx.kind,ctx.crossedPosition,ctx.scanPosition,inBefore?.word.join(),inAfter?.word.join(),inAfter?.target.join()].join('|');
-      if(signature!==prevSignature){selection=null;byBridge=false;prevSignature=signature;}
+      if(signature!==prevSignature){selection=null;byBridge=false;bridgePick=null;prevSignature=signature;}
       else if(previousSide){selection=findSlot(previousSide==='before'?before:after,selection.rawPosition);}
-      if(ctx.selectedSlot!=null){selection=findSlot(inAfter,ctx.selectedSlot);byBridge=reportingBridge;}
+      if(ctx.selectedSlot!=null){
+        const matched=corresponding(selection,inAfter,ctx.wordMove||byBridge);
+        if(matched?.rawPosition!==ctx.selectedSlot){byBridge=false;bridgePick=null;}
+        selection=findSlot(inAfter,ctx.selectedSlot);
+      }
       const prefix=ctx.presentation || 'Chronological proof gallery · all-barred reversed word with a positive marker during the sweep';
       description.textContent=prefix;
       freezeLegend.hidden=ctx.kind!=='freeze'||!ctx.newlyFrozen?.length;
@@ -3442,7 +3721,7 @@ sitemap: false
         if(Math.abs(width-lastWidth)>.5){lastWidth=width;if(width>0)draw();}
       }).observe(element);
     }
-    return {element,show};
+    return {element,show,selectSlot,selectedBridge:()=>bridgePick && {...bridgePick,periods}};
   }
   globalThis.QuiverPlabicPanel=Object.freeze({create});
 })();
@@ -3597,11 +3876,11 @@ sitemap: false
     projection.onchange=()=>{if(activeFrame)draw(activeFrame);};
     function present(before,after,context) {
       const page=pages[cursor], group=groups[page.group];
-      const address=()=>shareUrl(page.scan!=null?{scan:page.scan+1}:{stage:group.key,step:group.items.indexOf(cursor)+1});
+      const address=()=>shareUrl(page.scan!=null?{scan:page.scan+1}:{stage:group.key,step:group.items.indexOf(cursor)+1},inspector.selectedBridge());
       context.presentation=left?'Chronological gallery η = (−iₘ) ⋯ (−i₁). The positive marker travels right to left; β[p] counts from the left in the paper word.':
         'Chronological proof gallery for the rightmost setting. Bao–Ye reads the entered word from the right. Original positions β[p] refer to the entered word.';
       context.share=address;
-      context.data=()=>QuiverPlabicFrames.evidence(before,after,context,address());
+      context.data=()=>QuiverPlabicFrames.evidence(before,after,context,address(),inspector.selectedBridge());
       inspector.show(before,after,context);
     }
     function inspectMove(i,rawSlot=null) {
@@ -3786,7 +4065,7 @@ sitemap: false
       const index=pages.findIndex(page=>page.step!=null&&trace.stepAt(page.step).kind==='square');
       if(index>=0)go(index);
     }
-    return Object.freeze({set,clear,goToStage,goToScan,firstSquare,refresh:()=>{if(trace && !container.hidden)render();}});
+    return Object.freeze({set,clear,goToStage,goToScan,firstSquare,selectSlot:inspector.selectSlot,refresh:()=>{if(trace && !container.hidden)render();}});
   }
   globalThis.QuiverSweepView=Object.freeze({create});
 })();
@@ -4407,7 +4686,7 @@ sitemap: false
     }
     renderData(ctx);
   }
-  function moveUrl(tab, values) {
+  function moveUrl(tab, values, bridge=null) {
     const base=location.protocol==='file:'?'https://thomasmartinez0.github.io/affine-quiver/':location.href;
     const url=new URL(base);
     url.search='';url.hash=tab;
@@ -4416,6 +4695,12 @@ sitemap: false
     url.searchParams.set(isSigned(model.beta)?'c':'v',convertIndex(model.beta,model.v).join(',')||'e');
     if(!leftmost) url.searchParams.set('reading','right');
     for(const [key,value] of Object.entries(values))if(value!=null)url.searchParams.set(key,value);
+    if(bridge){
+      url.searchParams.set('bridge',bridge.slot);
+      if(bridge.side==='before')url.searchParams.set('side','before');
+      if(bridge.shift)url.searchParams.set('lift',bridge.shift);
+      if(bridge.periods===2)url.searchParams.set('periods',2);
+    }
     return url.href;
   }
   const moveInspector=QuiverPlabicPanel.create();
@@ -4438,7 +4723,7 @@ sitemap: false
         details.presentation+=' '+({mixed:'B1 · opposite signs.',commutation:'B2 · commuting colors.',braid:'B3 · three-letter braid relation.'})[move.kind];
         details.check={ok:move.verified,text:move.verified?(move.mutation!==null?'Mutation at '+names[move.mutation]:'Bridge relabeling')+' checked on the labeled ice quiver, including frozen rows.':move.reason};
       }else {after=before;before=null;}
-      share=()=>moveUrl('word-moves',{relation:move?.id??'none'});
+      share=()=>moveUrl('word-moves',{relation:move?.id??'none'},moveInspector.selectedBridge());
     }else{
       const review=QuiverPlabicFrames.forModel(model,leftmost);
       const frameId=review.forOperation(index,action?.event);
@@ -4450,13 +4735,13 @@ sitemap: false
       before=item.before;after=item.after;details=item.context;
       details.presentation='Full chronological proof gallery for this Bao–Ye operation. The positive marker travels left through the reversed, barred paper word.';
       if(!leftmost)details.presentation+=' Here the paper word is the reverse of the entered word.';
-      share=()=>moveUrl('bao-ye',{op:index,substep:walk.position()+1});
+      share=()=>moveUrl('bao-ye',{op:index,substep:walk.position()+1},moveInspector.selectedBridge());
     }
     details.share=share;
-    details.data=()=>QuiverPlabicFrames.evidence(before,after,details,share());
+    details.data=()=>QuiverPlabicFrames.evidence(before,after,details,share(),moveInspector.selectedBridge());
     moveInspector.show(before,after,details);
   }
-  const sweepView=QuiverSweepView.create($('inductionWalk'),renderAudit,values=>moveUrl('induction',values));
+  const sweepView=QuiverSweepView.create($('inductionWalk'),renderAudit,(values,bridge)=>moveUrl('induction',values,bridge));
   const walk=QuiverWalk.create({model:()=>model,operation:()=>index,navigate:navigateOperation,
     leftmost:()=>leftmost,enabled:()=>mode==='recursion',redraw:render,paint:paintWalk,fail,
     viewBefore:()=>inspectingBefore(context())});
@@ -4554,6 +4839,12 @@ sitemap: false
       if(relation!==null)selectedMove=moves().find(m=>m.id===relation)?.id??null;
       changeMode('words');
     }else if(!location.hash && !linkedWords.has('beta')&&model.paper)sweepView.firstSquare();
+    const bridge=linkedWords.get('bridge'),lift=linkedWords.get('lift')??'0';
+    if(bridge && /^[1-9]\d*$/.test(bridge) && /^-?\d+$/.test(lift)){
+      const inspector=mode==='sweep'?sweepView:moveInspector;
+      const side=linkedWords.get('side')==='before'?'before':'after';
+      inspector.selectSlot(Number(bridge),side,Number(lift),linkedWords.get('periods')==='2'?2:1);
+    }
   }
   openLinkedView();
   window.addEventListener('hashchange',event=>{
