@@ -313,6 +313,59 @@ sitemap: false
 .pg-compare-projections tbody td {font-family:var(--mono,monospace);font-variant-numeric:tabular-nums}
 .pg-compare-projections th[data-axis=red] {color:var(--pg-red)}
 .pg-compare-projections th[data-axis=blue] {color:var(--pg-blue)}
+
+.sq-replay {
+  container-type:inline-size;
+  min-width:0;
+  margin:0;
+  padding:15px clamp(10px,2vw,22px) 12px;
+  border-block:1px solid var(--pg-rule,#ccd5c9);
+  background:#fcfcf7;
+  color:var(--pg-ink,#21372e);
+}
+.sq-replay[hidden] {display:none}
+.sq-replay-title {
+  margin:0;
+  font:600 clamp(20px,2.2vw,26px)/1.18 Georgia,serif;
+  letter-spacing:-.015em;
+  color:var(--pg-deep,#214238);
+}
+.sq-replay-intro,.sq-replay-status {
+  font:14px/1.48 var(--sans,system-ui,sans-serif);
+  color:var(--pg-muted,#506155);
+  margin:5px 0 0;
+}
+.sq-replay-controls {
+  display:flex;align-items:center;gap:clamp(14px,3vw,36px);
+  margin:12px 0 9px;
+}
+.sq-replay-play {
+  flex:0 0 auto;min-width:10.4em;min-height:38px;
+  padding:7px 13px;border:1px solid #234e43;border-radius:5px;
+  background:#234e43;color:#fff;cursor:pointer;
+  font:600 14px/1.2 var(--sans,system-ui,sans-serif);
+}
+.sq-replay-play:hover {background:#183e35}
+.sq-replay-timeline {
+  flex:1;min-width:0;
+  display:flex;align-items:center;gap:10px;
+  color:var(--pg-muted,#506155);
+  font:500 13px/1.3 var(--sans,system-ui,sans-serif);
+}
+.sq-replay-scrub {
+  flex:1;min-width:36px;max-width:100%;height:34px;min-height:34px;margin:0;padding:0;
+  border:0;box-shadow:none;accent-color:#286658;cursor:pointer;
+}
+.sq-replay-scrub:disabled {cursor:default;opacity:.55}
+.sq-replay-scrub:focus-visible,.sq-replay-play:focus-visible {outline:3px solid #157263;outline-offset:3px}
+.sq-replay-drawing {width:100%;min-width:0}
+.sq-replay-status {margin-top:6px;color:var(--pg-ink,#21372e);font-variant-numeric:tabular-nums;min-height:1.5em}
+@container (max-width:500px) {
+  .sq-replay-controls {flex-wrap:wrap;column-gap:12px;row-gap:2px}
+  .sq-replay-play {min-width:8.6em;min-height:40px}
+  .sq-replay-timeline {flex:1 1 170px}
+  .sq-replay-intro,.sq-replay-status {font-size:13px}
+}
 </style>
 </head>
 <body>
@@ -399,7 +452,7 @@ sitemap: false
 <p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
 <p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
 <p>With <b>Projection planes</b> on, select a bridge in the 3D graph or on either plane. Follow the dashed guides from an endpoint (x, y, t) to (0, y, t) on the red plane and to (x, 0, t) on the blue plane. Selecting a translated bridge gives the coordinates of that lift. <a href="?bridge=4#glsbs-figure-7">Inspect the fourth bridge and its two projections</a>.</p>
-<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?stage=1&amp;step=4&amp;follow=2,1#bao-ye-example-5-3">Inspect the first square of Bao–Ye Example 5.3</a>. <a href="?stage=3&amp;step=4&amp;follow=2,1#bao-ye-example-5-3">Compare the two projections of (2,1) at stage 3</a>.</p>
+<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">Watch the first square of Bao–Ye Example 5.3</a>. The positive marker moves from slot 12 to slot 11 in the chronological signed gallery. The bridge labeled (2,1) stays at slot 12 and its black and white endpoints exchange colors on both coordinate planes. <a href="?stage=3&amp;step=4&amp;follow=2,1#bao-ye-example-5-3">Compare the two projections of (2,1) at stage 3</a>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. In Rightmost mode the film engine receives the word as entered, and the paper uses the reversed word and inverse product. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
 <h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
@@ -2679,6 +2732,7 @@ sitemap: false
       const proofLabel={square:'Mutation at ('+frame.focus+')',insert:'Hollow insertion',transfer:'Bridge-label transfer',
         commute:'Mixed interchange',freeze:'Freezing of mutable neighbors',delete:'Marker deletion',initial:'Identity seed'};
       return {before,after,context:{kind:frame.kind,crossedPosition:frame.crossedPosition, stage:frame.stage,
+        isBaoYeFirstSquare:!!model.isBaoYeExample && !difference && frame.stage===1 && frame.kind==='square' && frame.focus==='2,1',
         focus:frame.focus,newlyFrozen:frame.newlyFrozen, check:{ok:!difference,text:difference||
           proofLabel[frame.kind]+' checked on the labeled ice quiver, including frozen rows.'}}};
     }
@@ -2739,6 +2793,450 @@ sitemap: false
       newlyFrozen:context.newlyFrozen||[],check:context.check,periods,before:record(before,'before'),after:record(after,'after')};
   }
   globalThis.QuiverPlabicFrames=Object.freeze({side,locateBridge,forModel,evidence});
+})();
+</script>
+<script>// A local square in chronological coordinates. Only its two discrete graph
+// states are part of the signed-word construction. A playback cursor can
+// separately illustrate the marker changing carriers between those states.
+(() => {
+  'use strict';
+
+  const samePoint = (p,q) => p.every((coordinate,i)=>coordinate===q[i]);
+  const sameRail = (p,q) => p[0]===q[0] && p[1]===q[1];
+
+  function localState(view,label,neighborLabel,shift,markerSlot,pivotSlot) {
+    const scene=QuiverPlabicGeometry.build(view.graph,1,{slot:pivotSlot,shift});
+    const pivot=QuiverPlabicFrames.locateBridge(view,label,shift,1,scene).bridge;
+    const neighbor=QuiverPlabicFrames.locateBridge(view,neighborLabel,shift,1,scene).bridge;
+    if(!pivot || !neighbor || pivot.slot!==pivotSlot || neighbor.slot!==pivotSlot-1)return null;
+    // The two bridges and these two straight strand segments bound the square.
+    if(!sameRail(pivot.a,neighbor.a) || !sameRail(pivot.b,neighbor.b) ||
+       !pivot.strands.every((id,i)=>id===neighbor.strands[i]))return null;
+    return {pivot,neighbor,markerSlot};
+  }
+
+  function reversesEndpoints(first,last) {
+    return samePoint(first.a,last.a) && samePoint(first.b,last.b) &&
+      first.colors.every((color,i)=>color===last.colors[1-i]);
+  }
+
+  function build(before,after,context,shift=0) {
+    if(context?.kind!=='square' || !context.check?.ok || !before || !after)return null;
+    if(!QuiverPlabicGeometry.inTrackingRange(before.graph,shift))return null;
+    const departing=before.tokens.find(token=>token.marker);
+    const arriving=after.tokens.find(token=>token.marker);
+    if(!departing || !arriving || departing.hollow || arriving.hollow ||
+       departing.rawPosition!==arriving.rawPosition+1 || departing.label!==context.focus ||
+       departing.letter<=0 || departing.letter!==arriving.letter)return null;
+    const crossed=before.tokens.find(token=>token.rawPosition===arriving.rawPosition);
+    const released=after.tokens.find(token=>token.rawPosition===departing.rawPosition);
+    if(!crossed || !released || crossed.letter!==-departing.letter || released.letter!==crossed.letter ||
+       crossed.originalPosition!==context.crossedPosition || released.originalPosition!==crossed.originalPosition ||
+       crossed.label!==arriving.label || released.label!==departing.label ||
+       !departing.label || !arriving.label || departing.label===arriving.label)return null;
+
+    const label=departing.label, neighborLabel=arriving.label;
+    const first=localState(before,label,neighborLabel,shift,departing.rawPosition,departing.rawPosition);
+    const last=localState(after,label,neighborLabel,shift,arriving.rawPosition,departing.rawPosition);
+    if(!first || !last || !reversesEndpoints(first.pivot,last.pivot) ||
+       !reversesEndpoints(first.neighbor,last.neighbor))return null;
+    return {before:first,after:last,label,neighborLabel,shift,rank:before.graph.n,
+      letter:departing.letter,crossedPosition:crossed.originalPosition};
+  }
+
+  globalThis.QuiverSquareReplayModel=Object.freeze({build});
+})();
+</script>
+<script>// Draw the local four-cycle at its chronological coordinates. Progress moves the
+// signed letter indicators; the two exact graph states supply all vertex colors.
+(() => {
+  'use strict';
+  const ns='http://www.w3.org/2000/svg';
+  const green='#087564', ink='#1a3236', white='#ffffff', muted='#4d6263';
+  const amber='#945119', red='#a6423f', blue='#365f96', paper='#fdfefb';
+  const mono='ui-monospace, SFMono-Regular, Consolas, monospace';
+  const sans='system-ui, sans-serif';
+
+  function el(tag,parent,attrs={},text=null){
+    const e=document.createElementNS(ns,tag);
+    for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));
+    if(text!==null)e.textContent=text;
+    parent.append(e);
+    return e;
+  }
+  function block(tag,parent,cls,text=null){
+    const e=document.createElement(tag);
+    e.className=cls;if(text!==null)e.textContent=text;parent.append(e);return e;
+  }
+  function line(svg,a,b,color,width,attrs={}){
+    return el('line',svg,{x1:a[0],y1:a[1],x2:b[0],y2:b[1],stroke:color,'stroke-width':width,'stroke-linecap':'round',...attrs});
+  }
+  function label(svg,x,y,value,attrs={}){
+    return el('text',svg,{x,y,fill:muted,'font-size':11,'font-family':mono,...attrs},value);
+  }
+  function canvas(parent,w,h,view,name){
+    return el('svg',parent,{viewBox:'0 0 '+w+' '+h,width:'100%',height:h,role:'img','aria-label':name,'data-replay-view':view,style:'display:block;overflow:hidden'});
+  }
+  function patch(svg,points,fill,stroke){
+    return el('polygon',svg,{points:points.map(p=>p.join(',')).join(' '),fill,stroke,'stroke-width':.8});
+  }
+  function foot(point,plane) {
+    return plane==='space'?point:QuiverPlabicGeometry.onCoordinatePlane(point,plane);
+  }
+  function create(host,model){
+    const entry=model.before;
+    const bridges=[['neighbor',model.neighborLabel],['pivot',model.label]];
+    const times=[entry.pivot.a[2],entry.neighbor.a[2]].sort((a,b)=>a-b);
+    const lo=times[0]-.5,hi=times[1]+.5;
+    const points=[entry.pivot.a,entry.pivot.b,entry.neighbor.a,entry.neighbor.b];
+    const xValues=[...new Set(points.map(p=>p[0]))].sort((a,b)=>a-b);
+    const yValues=[...new Set(points.map(p=>p[1]))].sort((a,b)=>a-b);
+    const root=block('div',host,'sq-replay-scene');
+    const space=block('div',root,'sq-space-view'),views=block('div',root,'sq-flat-views');
+    const flat={red:block('div',views,'sq-red-view'),blue:block('div',views,'sq-blue-view')};
+    root.style.cssText='display:grid;align-items:stretch;gap:1px;background:#d4deda;min-width:0';
+    for(const panel of [space,...Object.values(flat)])panel.style.cssText='min-width:0;background:'+paper;
+    views.style.cssText='display:grid;gap:1px;min-width:0;background:#d4deda';
+    let progress=0,lastWidth=-1,currentState='',dots=[],pulseRings=[],carrierUpdate=null,flatReadouts=[];
+    let observer=null;
+    function endpoint(svg,project,point,key,id,end,plane,radius){
+      const actual=foot(point,plane),[cx,cy]=project(actual),tint=plane==='red'?red:plane==='blue'?blue:green;
+      if(key==='pivot'){
+        const ring=el('circle',svg,{cx,cy,r:radius+3,stroke:tint,fill:'none','stroke-width':1.7,opacity:0,'aria-hidden':true});
+        pulseRings.push({ring,radius});
+        el('circle',svg,{cx,cy,r:radius+2.25,stroke:tint,fill:paper,'stroke-width':1.3});
+      }
+      const dot=el('circle',svg,{cx,cy,r:radius,stroke:ink,'stroke-width':1.4,'data-point':actual.join(','),
+        'data-bridge':id,'data-plane':plane,'data-end':end});
+      dots.push({dot,key,index:end==='a'?0:1});
+    }
+    function bridge(svg,project,key,id,plane,main){
+      const b=entry[key],pivot=key==='pivot',tint=plane==='blue'?blue:plane==='red'?red:green;
+      const a=project(foot(b.a,plane)),z=project(foot(b.b,plane));
+      line(svg,a,z,pivot?tint:main?'#718684':plane==='red'?'#b48782':'#88a0bf',pivot?4.4:2.5,
+        {'data-bridge':id,'data-plane':plane,'data-slot':b.slot});
+      endpoint(svg,project,b.a,key,id,'a',plane,pivot?(main?5.6:4.7):3.7);
+      endpoint(svg,project,b.b,key,id,'b',plane,pivot?(main?5.6:4.7):3.7);
+    }
+    function header(parent,name,color=ink){
+      const h=block('div',parent,'sq-drawing-title',name);
+      h.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px 0;font:600 13px/1.3 '+sans+';color:'+color;
+      return h;
+    }
+    function signedRail(w,timeX){
+      const svg=canvas(space,w,78,'letters','Chronological slots with the marker and crossed letter');
+      const start=entry.markerSlot-.5,finish=model.after.markerSlot-.5;
+      const xs=times.map(timeX);
+      line(svg,[xs[0],53],[xs[1],53],'#b8c4be',1);
+      for(const t of times){
+        line(svg,[timeX(t),49],[timeX(t),55],'#6e817b',1);
+        label(svg,timeX(t),70,'slot '+(t+.5),{'text-anchor':'middle','font-size':10.5});
+      }
+      function chip(role,caption,width,fill,stroke){
+        const g=el('g',svg,{'data-carrier':role});
+        el('rect',g,{x:-width/2,y:-11,width,height:22,rx:5,fill,stroke,'stroke-width':1.15});
+        label(g,0,4,caption,{'text-anchor':'middle','font-size':11.1,'font-weight':600,fill:stroke});
+        return g;
+      }
+      const marker=chip('marker','+'+model.letter+' marker',77,'#fff1d8',amber);
+      const crossed=chip('crossing','−'+model.letter+' · β['+model.crossedPosition+']',77,'#f0f5f2','#4e625e');
+      return u=>{
+        // Raised/slightly lowered paths keep both signed letters legible during the swap.
+        const eased=u*u*(3-2*u),arc=Math.sin(Math.PI*eased);
+        const assign=(g,from,to,side)=>{
+          const t=from+(to-from)*eased;
+          g.setAttribute('transform','translate('+timeX(t)+' '+(31+side*16*arc)+')');
+          g.dataset.time=String(t);
+        };
+        assign(marker,start,finish,-1);assign(crossed,finish,start,1);
+      };
+    }
+
+    function drawSpace(w){
+      header(space,'Local 3D square');
+      const h=w<420?240:268;
+      const xlo=Math.min(0,xValues[0]),xhi=Math.max(0,xValues.at(-1));
+      const ylo=Math.min(0,yValues[0]),yhi=Math.max(0,yValues.at(-1));
+      const left=w<420?33:43,right=18,dx=w*.18/Math.max(1,xhi-xlo);
+      const timeScale=(w-left-right-dx*(xhi-xlo))/(hi-lo);
+      const height=h-52, xSlope=.29*height/Math.max(1,xhi-xlo), yScale=.71*height/Math.max(1,yhi-ylo);
+      const project=([x,y,t])=>[left+timeScale*(t-lo)+dx*(x-xlo),
+        22+xSlope*(x-xlo)+yScale*(yhi-y)];
+      const svg=canvas(space,w,h,'space','Local square with its red and blue images on the coordinate planes');
+      const planes={red:{color:red,fill:'#fcf1ee',border:'#e6c7c3',grid:'#e1c0ba',
+        p:(level,t)=>[0,level,t],values:yValues,lo:ylo,hi:yhi},
+        blue:{color:blue,fill:'#edf3fa',border:'#c9d8e8',grid:'#b7cce2',
+        p:(level,t)=>[level,0,t],values:xValues,lo:xlo,hi:xhi}};
+      for(const [name,v] of Object.entries(planes)){
+        const wall=el('g',svg,{'data-wall':name}),map=(l,t)=>project(v.p(l,t));
+        patch(wall,[map(v.lo,lo),map(v.lo,hi),map(v.hi,hi),map(v.hi,lo)],v.fill,v.border);
+        for(const level of v.values){
+          line(wall,map(level,lo),map(level,hi),v.grid,1.1);
+          const [x,y]=map(level,lo);
+          label(wall,x-5,y+3,String(level),{'text-anchor':'end','font-size':10,fill:v.color});
+        }
+        for(const [key,id] of bridges)bridge(wall,project,key,id,name,false);
+      }
+      const guides=el('g',svg,{'data-role':'projection-guides'});
+      for(const [end,point] of [['a',entry.pivot.a],['b',entry.pivot.b]]){
+        for(const name of ['red','blue']){
+          const projected=foot(point,name);
+          line(guides,project(point),project(projected),planes[name].color,1.1,
+            {'stroke-dasharray':'3 4','data-guide-plane':name,'data-end':end,'data-from':point.join(','),'data-to':projected.join(',')});
+        }
+      }
+      for(const point of [entry.pivot.a,entry.pivot.b]){
+        const [x,y]=point;
+        line(svg,project([x,y,lo]),project([x,y,hi]),'#5b7574',2.15);
+      }
+      for(const [key,id] of bridges)bridge(svg,project,key,id,'space',true);
+      const a=project(entry.pivot.a),b=project(entry.pivot.b);
+      const tag='('+model.label+')',tx=Math.max(a[0],b[0])+12,ty=(a[1]+b[1])/2;
+      const ww=tag.length*6.9+10;
+      el('rect',svg,{x:tx-3,y:ty-11,width:ww,height:17,rx:3.5,stroke:green,'stroke-width':.8,fill:paper});
+      label(svg,tx+2,ty+1.1,tag,{fill:green,'font-size':11.3,'font-weight':600});
+      const floor=h-7;
+      label(svg,10,floor,'red · x = 0',{fill:red,'font-size':10.6,'font-weight':600});
+      label(svg,101,floor,'blue · y = 0',{fill:blue,'font-size':10.6,'font-weight':600});
+      label(svg,w-10,floor,'t increases →',{'text-anchor':'end','font-size':10.2});
+      const mid=entry.pivot.a.map((val,k)=>(val+entry.pivot.b[k])/2);
+      carrierUpdate=signedRail(w,t=>project([mid[0],mid[1],t])[0]);
+    }
+    function drawFlat(parent,plane,w){
+      const isRed=plane==='red',axis=isRed?1:0,values=isRed?yValues:xValues,color=isRed?red:blue;
+      const title=header(parent,isRed?'Red projection':'Blue projection',color);
+      const dynamic=block('span',title,'sq-directed-span');
+      dynamic.style.cssText='font:500 11px/1.25 '+mono+';color:'+color+';white-space:nowrap';
+      if(w<205){
+        title.style.flexDirection='column';
+        title.style.alignItems='flex-start';
+        title.style.gap='3px';
+      }
+      flatReadouts.push({dynamic,axis,plane});
+      const h=w<200?114:134;
+      const svg=canvas(parent,w,h,plane,(isRed?'Red (t,y)':'Blue (t,x)')+' projection of the local square');
+      const left=24,right=10,top=22,bottom=h-37,span=Math.max(1,values.at(-1)-values[0]);
+      const project=(p)=>[left+(w-left-right)*(p[2]-lo)/(hi-lo),bottom-(bottom-top)*(p[axis]-values[0])/span];
+      const xmin=left,xmax=w-right;
+      for(const level of values){
+        const p=[level,level,lo],y=project(p)[1];
+        line(svg,[xmin,y],[xmax,y],isRed?'#c18e87':'#8da5c4',1.55);
+        label(svg,xmin-6,y+3,String(level),{fill:color,'text-anchor':'end'});
+      }
+      label(svg,8,12,isRed?'y':'x',{fill:color,'font-size':10});
+      for(const [key,id] of bridges){
+        bridge(svg,project,key,id,plane,false);
+        const [x]=project(entry[key].a);
+        line(svg,[x,bottom+9],[x,h-18],'#d6dfd7',.85,{'stroke-dasharray':'2 3'});
+        label(svg,x,h-7,String(entry[key].a[2]),{'text-anchor':'middle','font-size':10.4});
+      }
+      label(svg,w-7,h-7,'t',{'text-anchor':'end','font-size':10});
+    }
+    function render(value){
+      const u=Number(value);
+      progress=Number.isFinite(u)?Math.max(0,Math.min(1,u)):0;
+      carrierUpdate?.(progress);
+      const pulse=Math.max(0,1-Math.abs(progress-.5)/.13);
+      for(const {ring,radius} of pulseRings){
+        ring.setAttribute('r',String(radius+3.5+4*pulse));
+        ring.setAttribute('opacity',String(.76*pulse));
+      }
+      const state=progress<.5?'before':'after';
+      if(currentState===state)return;
+      currentState=state;host.dataset.state=state;root.dataset.state=state;
+      for(const {dot,key,index} of dots){
+        const color=model[state][key].colors[index];
+        dot.dataset.color=color;dot.setAttribute('fill',color==='black'?ink:white);
+      }
+      const pivot=model[state].pivot;
+      for(const {dynamic,axis,plane} of flatReadouts){
+        const pair=pivot.colors[0]==='black'?[pivot.a,pivot.b]:[pivot.b,pivot.a];
+        const levels=pair.map(p=>p[axis]).join(' → ');
+        dynamic.textContent='● '+pair[0][axis]+' → ○ '+pair[1][axis];
+        dynamic.setAttribute('aria-label',(plane==='red'?'Red':'Blue')+' from black to white: '+levels);
+      }
+    }
+    function fit(){
+      const w=Math.round(host.getBoundingClientRect().width);
+      if(w<1||w===lastWidth)return;
+      lastWidth=w;const wide=w>=615;
+      root.style.gridTemplateColumns=wide?'minmax(0,1.7fr) minmax(0,1fr)':'minmax(0,1fr)';
+      views.style.gridTemplateColumns=wide?'minmax(0,1fr)':'repeat(2,minmax(0,1fr))';
+      dots=[];pulseRings=[];flatReadouts=[];currentState='';
+      space.replaceChildren();flat.red.replaceChildren();flat.blue.replaceChildren();
+      drawSpace(space.getBoundingClientRect().width);
+      for(const name of ['red','blue'])drawFlat(flat[name],name,flat[name].getBoundingClientRect().width);
+      render(progress);
+    }
+    fit();
+    if(typeof ResizeObserver!=='undefined'){
+      observer=new ResizeObserver(fit);observer.observe(host);
+    }
+    return {render,destroy(){observer?.disconnect();delete host.dataset.state;root.remove();}};
+  }
+  globalThis.QuiverSquareReplayDrawing=Object.freeze({create});
+})();
+</script>
+<script>// Replay of the first square in Example 5.3. Only the two endpoint states are
+// signed words. The renderer illustrates their exchange on a continuous clock.
+(() => {
+  'use strict';
+  const duration = 4600;
+  let serial = 0;
+
+  function element(tag, name, text) {
+    const item = document.createElement(tag);
+    if (name) item.className = name;
+    if (text) item.textContent = text;
+    return item;
+  }
+
+  function create() {
+    const section = element('section', 'sq-replay');
+    const heading = element('h4', 'sq-replay-title', 'First square move');
+    heading.id = 'sq-replay-title-' + (++serial);
+    section.setAttribute('aria-labelledby', heading.id);
+    const introduction = element('p', 'sq-replay-intro');
+    const drawing = element('div', 'sq-replay-drawing');
+    const toolbar = element('div', 'sq-replay-controls');
+    const playButton = element('button', 'sq-replay-play', 'Play square move');
+    playButton.type = 'button';
+    const scrub = element('input', 'sq-replay-scrub');
+    scrub.type = 'range';
+    scrub.min = '0';
+    scrub.max = '100';
+    scrub.step = '1';
+    scrub.value = '0';
+    scrub.setAttribute('aria-label', 'Square move progress');
+    const timeline = element('div', 'sq-replay-timeline');
+    timeline.append(element('span', '', 'Before'), scrub, element('span', '', 'After'));
+    toolbar.append(playButton, timeline);
+    const status = element('p', 'sq-replay-status');
+    status.setAttribute('role', 'status');
+    section.append(heading, introduction, toolbar, drawing, status);
+    section.hidden = true;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let context = null, selection = null, scope = null, model = null, scene = null;
+    let progress = 0, playing = false, request = null, start = 0;
+
+    function otherLabel() {
+      return model != null && selection?.label != null && selection.label !== model.label;
+    }
+    function updateControl() {
+      const text = otherLabel() ? 'Follow (' + model.label + ') and play'
+        : playing ? 'Pause' : progress === 1 ? 'Replay square move'
+        : progress > 0 ? 'Resume' : 'Play square move';
+      playButton.textContent = text;
+      scrub.disabled = otherLabel();
+    }
+    function draw(value) {
+      if (!scene) return;
+      progress = Math.max(0, Math.min(1, value));
+      scene.render(progress);
+      const before = progress < .5;
+      const side = before ? model.before : model.after;
+      const carrier = before ? model.label : model.neighborLabel;
+      const phase = progress === 0 ? 'Before' : progress === 1 ? 'After' : before ? 'Before exchange' : 'After exchange';
+      section.dataset.phase = phase;
+      scrub.value = String(Math.round(progress * 100));
+      scrub.setAttribute('aria-valuetext', scrub.value + ' percent, ' + phase.toLowerCase());
+      const message = phase + ' · ' +
+        (progress === 0 || progress === 1
+          ? 'The +' + model.letter + ' marker carries (' + carrier + ') at slot ' + side.markerSlot + '.'
+          : before ? 'The marker approaches the next ' + model.letter + '.'
+            : 'The endpoint colors have switched on both projections.');
+      if (status.textContent !== message) status.textContent = message;
+    }
+    function pause() {
+      playing = false;
+      if (request !== null) cancelAnimationFrame(request);
+      request = null;
+      updateControl();
+    }
+    function tick(timestamp) {
+      if (!playing || section.hidden) return;
+      const elapsed = Math.min(1, (timestamp - start) / duration);
+      // In the reduced-motion presentation the letter exchange advances in
+      // still frames. Readers can inspect every intermediate position by hand.
+      const value = reduceMotion.matches ? (elapsed >= 1 ? 1 : elapsed >= .5 ? Math.max(.5, progress) : progress) : elapsed;
+      if (progress !== value) draw(value);
+      if (elapsed >= 1) {
+        pause();
+        return;
+      }
+      request = requestAnimationFrame(tick);
+    }
+    function followPivot() {
+      if (model && selection?.label !== model.label) context?.followPivot?.();
+    }
+    function play() {
+      if (!scene || section.hidden || document.hidden || playing) return;
+      context?.onReplayStart?.();
+      followPivot();
+      if (!scene || otherLabel()) return;
+      if (progress >= 1) draw(0);
+      playing = true;
+      start = performance.now() - progress * duration;
+      updateControl();
+      request = requestAnimationFrame(tick);
+    }
+    function stop() {
+      pause();
+      if (scene && progress !== 0) draw(0);
+      updateControl();
+    }
+    playButton.addEventListener('click', () => playing ? pause() : play());
+    scrub.addEventListener('input', () => {
+      const value = Number(scrub.value) / 100;
+      pause();
+      context?.onReplayStart?.();
+      followPivot();
+      draw(value);
+      updateControl();
+    });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) pause(); });
+    window.addEventListener('pagehide', pause);
+
+    function show(before, after, nextContext = {}, nextSelection = null) {
+      if (!nextContext?.isBaoYeFirstSquare || !before || !after) {
+        if (section.hidden) return false;
+        pause();
+        scene?.destroy();
+        scene = model = scope = context = selection = null;
+        drawing.replaceChildren();
+        section.hidden = true;
+        return false;
+      }
+      const nextScope = nextContext.trackingScope || before.graph;
+      const differentPin = selection?.label !== nextSelection?.label;
+      context = nextContext;
+      selection = nextSelection;
+      const shift = selection?.label === context.focus ? selection.shift ?? 0 : 0;
+      if (scope !== nextScope || !model || model.shift !== shift) {
+        pause();
+        scene?.destroy();
+        drawing.replaceChildren();
+        scene = null;
+        model = QuiverSquareReplayModel.build(before, after, context, shift);
+        scope = nextScope;
+        section.hidden = !model;
+        if (!model) return false;
+        introduction.textContent = 'The moving letters show the marker passing β[' + model.crossedPosition +
+          ']. Bridge (' + model.label + ') stays at t = ' + model.before.pivot.a[2] +
+          '. Read each projection from its black endpoint to its white endpoint.';
+        scene = QuiverSquareReplayDrawing.create(drawing, model);
+        draw(0);
+      } else if (differentPin && otherLabel()) {
+        stop();
+      }
+      updateControl();
+      return true;
+    }
+    return {element:section, show, play, pause, stop};
+  }
+
+  globalThis.QuiverSquareReplay = Object.freeze({create});
 })();
 </script>
 <script>// Isometric/orthographic views of a finite lift. Only the viewport is clipped.
@@ -3499,7 +3997,8 @@ sitemap: false
       const link=node('a','',name);link.href='https://arxiv.org/html/2210.04778v3#'+anchor;articles.append(' · ',link);
     }
     notes.append(articles);convention.append(notes);
-    element.append(head,toolbar,tracker,stages,key,operation,inspector,convention);
+    const replay=QuiverSquareReplay.create();
+    element.append(head,toolbar,tracker,replay.element,stages,key,operation,inspector,convention);
     let before=null,after=null,ctx={},periods=1,camera=neutralCamera(),layout='linked',crop='full',cards=[],selection=null,byBridge=false,bridgePick=null,prevSignature='';
     let optionsScope=null;
     const cache=new WeakMap();
@@ -3853,12 +4352,15 @@ sitemap: false
         else bridgePick.shift=bridgeLift(c,bridgePick.slot)?.shift??0;
       }
       for(const c of cards)fillCard(c);
-      fillTracker();draw(); fillInspector();
+      fillTracker();
+      replay.show(before,after,ctx,selectedBridge());
+      draw(); fillInspector();
     }
     function show(inBefore,inAfter,context={}) {
       const previousSide=selection && (before?.tokens.includes(selection)?'before':after?.tokens.includes(selection)?'after':null);
       const sameScope=ctx.trackingScope===context.trackingScope;
       before=inBefore;after=inAfter;ctx=context;
+      if(ctx.isBaoYeFirstSquare)ctx.followPivot=()=>selectLabel(ctx.focus,0,periods);
       if(tracked()){periods=tracked().periods;periodSelect.value=String(periods);}
       const signature=[inAfter?.graph.n,ctx.stage,ctx.kind,ctx.crossedPosition,ctx.scanPosition,inBefore?.word.join(),inAfter?.word.join(),inAfter?.target.join()].join('|');
       if(!sameScope || signature!==prevSignature){selection=null;byBridge=false;bridgePick=null;prevSignature=signature;}
@@ -3877,7 +4379,7 @@ sitemap: false
       operation.hidden=!operationText.textContent && !ctx.check;
       shareButton.hidden=typeof ctx.share!=='function';download.hidden=typeof ctx.data!=='function';
       shareWrap.hidden=shareButton.hidden&&download.hidden;fallback.hidden=true;copied.textContent='';
-      if(!after){element.hidden=true;return;}element.hidden=false;
+      if(!after){replay.stop();element.hidden=true;return;}element.hidden=false;
       renderAll();
     }
     // Fit newly revealed panels and recompute axes after a responsive layout change.
@@ -3888,7 +4390,13 @@ sitemap: false
         if(Math.abs(width-lastWidth)>.5){lastWidth=width;if(width>0)draw();}
       }).observe(element);
     }
-    return {element,show,selectSlot,selectLabel,clearTracking,selectedBridge};
+    function playReplay(){
+      if(replay.element.hidden)return;
+      replay.element.scrollIntoView({block:'start'});
+      replay.element.querySelector('.sq-replay-play').focus({preventScroll:true});
+      replay.play();
+    }
+    return {element,show,selectSlot,selectLabel,clearTracking,selectedBridge,stopReplay:replay.stop,playReplay};
   }
   globalThis.QuiverPlabicPanel=Object.freeze({create});
 })();
@@ -3953,7 +4461,11 @@ sitemap: false
     const next = button('Next →','Next walkthrough step',() => go(cursor+1));
     const arrows = el('div','sw-arrows'); arrows.append(prev,next);
     const controls = el('div','sw-controls');
-    controls.append(control('Stage',stageSelect), control('Step',stepSelect), arrows);
+    const replayFirst=button('Play first square','Play the first square at (2,1)',()=>{
+      firstSquare();
+      inspector.playReplay();
+    });
+    controls.append(control('Stage',stageSelect), control('Step',stepSelect), replayFirst, arrows);
     const lesson = el('section','sw-lesson'), title = el('h3'), text = el('p','sw-explain');
     const transition = el('div','sw-product'), equation = el('strong','sw-product-equation');
     const productLabel = el('span','sw-product-label');
@@ -3989,6 +4501,7 @@ sitemap: false
     let activeFrame = null, review = null;
     const display = a => left ? [...a].reverse() : [...a];
     function clear(msg) {
+      inspector.stopReplay();
       trace = null; priorModel = null; pages = []; activeFrame = null;
       status.textContent = msg || 'Build a positive word and a feasible target to start the walkthrough.';
       status.hidden = false; shell.hidden = true;
@@ -4025,6 +4538,8 @@ sitemap: false
       if (!trace || index<0 || index>=pages.length) return;
       cursor=index;selectedSlot=null;
       const page=pages[cursor],group=groups[page.group];
+      replayFirst.hidden=!priorModel.isBaoYeExample || (page.step!=null &&
+        trace.stepAt(page.step).kind==='square' && trace.stepAt(page.step).focus==='2,1' && group.key===1);
       stageSelect.value=String(page.group);
       stepSelect.replaceChildren(...group.items.map((k,j)=>option(k,(j+1)+'. '+pages[k].label)));
       stepSelect.value=String(cursor);prev.disabled=cursor===0;next.disabled=cursor===pages.length-1;
@@ -4043,7 +4558,9 @@ sitemap: false
     projection.onchange=()=>{if(activeFrame)draw(activeFrame);};
     function present(before,after,context) {
       const page=pages[cursor], group=groups[page.group];
-      const address=()=>shareUrl(page.scan!=null?{scan:page.scan+1}:{stage:group.key,step:group.items.indexOf(cursor)+1},inspector.selectedBridge());
+      const location=page.scan!=null?{scan:page.scan+1}:{stage:group.key,step:group.items.indexOf(cursor)+1};
+      if(context.isBaoYeFirstSquare)location.replay='square';
+      const address=()=>shareUrl(location,inspector.selectedBridge());
       context.presentation=left?'Chronological gallery η = (−iₘ) ⋯ (−i₁). The positive marker travels right to left; β[p] counts from the left in the paper word.':
         'Chronological proof gallery for the rightmost setting. Bao–Ye reads the entered word from the right. Original positions β[p] refer to the entered word.';
       context.trackingScope=review;
@@ -4247,7 +4764,7 @@ sitemap: false
       const index=pages.findIndex(page=>page.step!=null&&trace.stepAt(page.step).kind==='square');
       if(index>=0)go(index);
     }
-    return Object.freeze({set,clear,goToStage,goToScan,firstSquare,selectSlot:inspector.selectSlot,selectLabel:inspector.selectLabel,refresh:()=>{if(trace && !container.hidden)render();}});
+    return Object.freeze({set,clear,goToStage,goToScan,firstSquare,selectSlot:inspector.selectSlot,selectLabel:inspector.selectLabel,stopReplay:inspector.stopReplay,refresh:()=>{if(trace && !container.hidden)render();}});
   }
   globalThis.QuiverSweepView=Object.freeze({create});
 })();
@@ -4268,6 +4785,7 @@ sitemap: false
     {name:'Affine seam · lifted bridge', nativeWord:true, n:3, beta:[-3,-1], v:[3]},
     {name:'Leftmost induction · 2112', n:3, beta:[2,1,1,2], v:[2,1]}
   ];
+  const paperPreset=presets.findIndex(p=>p.paperOrder);
   let model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
   let leftmost=true, mode='sweep', selectedMove=null, previewPivot=null, history=[], lastChange='';
   let geometry='chart', chartSide='after', cycleId=null;
@@ -4334,7 +4852,9 @@ sitemap: false
       const g=i===paper.snapshots.length-1?graph:QuiverFilm.compute(n,beta,s.target);
       stages.set(s.stage,{graph:g,snapshot:s,check:verdict(g,s)});
     });
-    return {n,beta,v,inputBeta:[...inputBeta],graph,paper,stages,
+    const example=presets[paperPreset];
+    const isBaoYeExample=leftmost && n===example.n && beta.join()===example.beta.join() && v.join()===example.v.join();
+    return {n,beta,v,inputBeta:[...inputBeta],graph,paper,stages,isBaoYeExample,
       moves:null,frames:null,localCache:new Map(),positiveCache:new Map()};
   }
   function renderAudit(stage, timing, anchor) {
@@ -4836,6 +5356,8 @@ sitemap: false
     $('sweepTab').disabled=!model.paper;
     $('inductionWalk').hidden=!guided;
     $('moveGraphs').hidden=guided;
+    if(guided)moveInspector.stopReplay();
+    else sweepView.stopReplay();
     for(const id of ['subwordStrip','originalDiagrams','dataPanel']) $(id).hidden=guided;
     if(guided) {
       $('diagramPlayer').hidden=true;
@@ -4916,6 +5438,7 @@ sitemap: false
       const review=QuiverPlabicFrames.forModel(model,leftmost);
       const frameId=review.forOperation(index,action?.event);
       if(frameId<0){
+        moveInspector.stopReplay();
         $('moveGraphs').hidden=true;
         return;
       }
@@ -4923,9 +5446,10 @@ sitemap: false
       before=item.before;after=item.after;details=item.context;
       details.trackingScope=review;
       details.bridgeLabels=model.paper.snapshots[0].active;
+      if(details.isBaoYeFirstSquare)details.onReplayStart=()=>{walk.stop();walk.controls();};
       details.presentation='Full chronological proof gallery for this Bao–Ye operation. The positive marker travels left through the reversed, barred paper word.';
       if(!leftmost)details.presentation+=' Here the paper word is the reverse of the entered word.';
-      share=()=>moveUrl('bao-ye',{op:index,substep:walk.position()+1},moveInspector.selectedBridge());
+      share=()=>moveUrl('bao-ye',{op:index,substep:walk.position()+1,replay:details.isBaoYeFirstSquare?'square':null},moveInspector.selectedBridge());
     }
     details.share=share;
     details.data=()=>QuiverPlabicFrames.evidence(before,after,details,share(),moveInspector.selectedBridge());
@@ -4996,7 +5520,6 @@ sitemap: false
   $('reading').value=leftmost?'left':'right';
   const figurePreset=presets.findIndex(p=>p.anchor==='glsbs-figure-7');
   const figureHash='#'+presets[figurePreset].anchor;
-  const paperPreset=presets.findIndex(p=>p.paperOrder);
   const paperHash='#'+presets[paperPreset].anchor;
   if(location.hash!==figureHash && location.hash!==paperHash){
     loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
@@ -5017,7 +5540,7 @@ sitemap: false
       loadPreset(paperPreset);
       const stage=linkedWords.get('stage');
       if(stage!==null && /^\d+$/.test(stage))sweepView.goToStage(Number(stage),Number(linkedWords.get('step')||1));
-      requestAnimationFrame(()=>$('inductionWalk').scrollIntoView({block:'start'}));
+      if(linkedWords.get('replay')!=='square')requestAnimationFrame(()=>$('inductionWalk').scrollIntoView({block:'start'}));
     }else if(location.hash==='#bao-ye'&&model.paper){
       changeMode('recursion');
       const op=linkedWords.get('op'), part=linkedWords.get('substep');
@@ -5047,6 +5570,10 @@ sitemap: false
         inspector.selectSlot(Number(bridge),side,Number(lift),periods);
       }
     }
+    if(linkedWords.get('replay')==='square')requestAnimationFrame(()=>{
+      const panel=mode==='sweep'?$('inductionWalk'):$('moveGraphs');
+      (panel.querySelector('.sq-replay:not([hidden])') || panel).scrollIntoView({block:'start'});
+    });
   }
   openLinkedView();
   window.addEventListener('hashchange',event=>{
