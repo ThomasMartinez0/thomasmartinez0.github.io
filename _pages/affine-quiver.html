@@ -36,6 +36,13 @@ sitemap: false
 .diagram-buttons .playbtn{min-width:64px;color:white;background:var(--deep);border-color:var(--deep)}
 @media(max-width:550px){.diagram-player{gap:5px;padding:4px 6px}.diagram-caption .frame-count{font-size:10px}.diagram-buttons button{min-height:36px;min-width:34px}.diagram-buttons .playbtn{min-width:60px}}
 
+.intro {flex-wrap:wrap}
+.intro > div {flex:1 1 420px;min-width:0}
+.example-label {min-width:0;max-width:100%}
+.example-label select {min-width:0;max-width:100%}
+.figure-link {color:var(--deep);text-underline-offset:2px}
+#moveGraphs {scroll-margin-top:.65rem}
+
 .sw-shell > * { min-width:0; }
 .sw-shell { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; margin:16px 0 22px; }
 .sw-shell[hidden],.sw-empty[hidden],.sw-pictures[hidden],.sw-details[hidden] { display:none; }
@@ -148,6 +155,7 @@ sitemap: false
 
 .pg-panel {
   --pg-deep:#214238; --pg-ink:#21372e; --pg-muted:#506155; --pg-rule:#ccd5c9;
+  --pg-red:#a33135; --pg-blue:#265f95; container-type:inline-size;
   border:1px solid var(--pg-rule); border-radius:10px; background:#fffefa; color:var(--pg-ink);
   overflow:hidden; min-width:0;
 }
@@ -169,6 +177,10 @@ sitemap: false
 .pg-segmented button:first-child,.pg-camera-tools button:first-child {border-radius:5px 0 0 5px}
 .pg-segmented button:last-child,.pg-camera-tools button:last-child {border-radius:0 5px 5px 0}
 .pg-toggle[aria-pressed=true] {background:var(--pg-deep);color:white;border-color:var(--pg-deep);z-index:1}
+.pg-tools .pg-toggle[data-view=red] {color:var(--pg-red)}
+.pg-tools .pg-toggle[data-view=blue] {color:var(--pg-blue)}
+.pg-tools .pg-toggle[data-view=red][aria-pressed=true] {background:var(--pg-red);color:white;border-color:var(--pg-red)}
+.pg-tools .pg-toggle[data-view=blue][aria-pressed=true] {background:var(--pg-blue);color:white;border-color:var(--pg-blue)}
 .pg-camera-tools {margin-left:auto}
 .pg-camera-tools button:disabled {opacity:.4;cursor:default}
 .pg-periods {display:inline-flex;align-items:center;gap:6px;color:var(--pg-muted);font:12px var(--sans,system-ui,sans-serif)}
@@ -185,6 +197,14 @@ sitemap: false
 .pg-target,.pg-bounds {color:var(--pg-muted);font:12px/1.3 var(--mono,monospace)}
 .pg-target {overflow-wrap:anywhere}
 .pg-bounds {margin-left:auto}
+.pg-views {display:grid;grid-template-columns:minmax(0,1fr);align-content:start;min-width:0}
+.pg-view {min-width:0;margin:0;border-top:1px solid var(--pg-rule);background:#fcfdfb}
+.pg-view-title {min-height:30px;display:flex;align-items:baseline;gap:8px;margin:0;padding:8px 13px 3px;
+  color:var(--pg-ink);font:600 14px/1.23 var(--sans,system-ui,sans-serif)}
+.pg-view-title strong {font-weight:650}
+.pg-view[data-view=red] .pg-view-title {color:var(--pg-red)}
+.pg-view[data-view=blue] .pg-view-title {color:var(--pg-blue)}
+.pg-coordinates {font:12px/1.2 var(--mono,monospace);color:var(--pg-muted)}
 .pg-canvas {width:100%;min-width:0;background:#fffefa}
 .pg-canvas svg {display:block;max-width:100%;width:100%}
 .pg-word {margin:4px 14px 0;padding:4px 0 0;display:flex;flex-wrap:wrap;gap:3px}
@@ -192,7 +212,7 @@ sitemap: false
 .pg-letter.pg-marked {background:#fff0d1;color:#673c09;border-color:#d5a854}
 .pg-letter.pg-marker {border-bottom:3px solid #b6752b}
 .pg-letter[aria-pressed=true] {outline:2px solid #31594d;outline-offset:0}
-.pg-cardfoot {font-size:12px;margin:6px 14px 12px;color:var(--pg-muted)}
+.pg-cardfoot {font-size:12px;margin:6px 14px 9px;color:var(--pg-muted)}
 .pg-empty-word {font:12px var(--mono,monospace)}
 .pg-legend {padding-block:7px;border-block:1px solid #dbe2d5;display:flex;flex-wrap:wrap;gap:2px 15px;color:var(--pg-muted);font-size:12px}
 .pg-legend span {display:inline-flex;align-items:center;gap:4px}
@@ -221,6 +241,23 @@ sitemap: false
   .pg-share {justify-content:flex-start}
   .pg-legend .pg-gesture {margin-left:0}
 }
+@container (min-width:760px) {
+  .pg-stage.pg-single .pg-views[data-layout=linked] {
+    grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);
+    grid-template-rows:auto auto;
+  }
+  .pg-stage.pg-single .pg-views[data-layout=linked] .pg-view[data-view=space] {
+    grid-row:1 / span 2;grid-column:1;
+  }
+  .pg-stage.pg-single .pg-views[data-layout=linked] .pg-view:not([data-view=space]) {
+    grid-column:2;border-left:1px solid var(--pg-rule);
+  }
+  .pg-stage:not(.pg-single) .pg-card {display:grid;grid-row:span 4;grid-template-rows:subgrid}
+}
+@container (max-width:595px) {
+  .pg-stage,.pg-inspections {grid-template-columns:minmax(0,1fr)}
+  .pg-card+.pg-card {border-left:0;border-top:2px solid var(--pg-rule)}
+}
 @media(max-width:520px) {
   .pg-head {flex-wrap:wrap;align-items:flex-start;gap:8px}
   .pg-tools {gap:6px}
@@ -240,7 +277,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Inspect the strands and bridges on both sides of a move and compare the labeled ice quivers.</p></div>
+ <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Follow a move in 3D and in its red and blue projections. Select a crossing to trace it through all three views. <a class="figure-link" href="#glsbs-figure-7">View GLSBS Example 3.11</a>.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -313,12 +350,13 @@ sitemap: false
 <p>For a signed word the film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
 <h3>Inspecting the periodic 3D graph</h3>
 <p>In the induction walkthrough the graph inspector uses the chronological all-barred reverse gallery with endpoint <i>u</i>. The positive marker slides from right to left. The reflected word strip below it shows the same step in paper reading order with the tracks exchanged. During subexpression selection the inspector shows the final-target graph and highlights the crossing being tested.</p>
-<p>At each cut the dots are (u<sub>t</sub>(h), h, t). The red projection retains (t, h) and the blue projection retains (t, u<sub>t</sub>(h)). Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate both lattice coordinates by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
-<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?n=6&amp;beta=2123454234231&amp;v=213542&amp;stage=1&amp;step=4#induction">Inspect the first square of Bao–Ye Example 5.3</a>. For a finite reference, <a href="?n=3&amp;beta=-2,1,2,1,-1&amp;c=2&amp;reading=right&amp;relation=none#word-moves">open GLSBS Example 3.11</a> and compare its graph with Figures 6–7.</p>
+<p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
+<p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
+<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?n=6&amp;beta=2123454234231&amp;v=213542&amp;stage=1&amp;step=4#induction">Inspect the first square of Bao–Ye Example 5.3</a>.</p>
 <h3>Reading direction and word moves</h3><p>In Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. In Rightmost mode the film engine receives the word as entered, and the paper uses the reversed word and inverse product. Switching modes recomputes the seed for the words in the form.</p>
 <p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
 <h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
-<p>Top and Bottom show the two projections. Lifts shows integer heights before reducing modulo <i>n</i>. Several heights can cover the same face, so a film can contribute more than once. The 3D view shows the periodic strand diagram schematically, with film coverage on the two coordinate walls.</p>
+<p>In the separate film diagram, Top shows rows and Bottom shows columns. Lifts shows integer heights before reducing modulo <i>n</i>. Several heights can cover the same face, so a film can contribute more than once. The 3D view shows the periodic strand diagram schematically, with film coverage on the two coordinate walls.</p>
 <h3>Step through Bao–Ye</h3><p><b>Next move</b> advances one commutation, square move, freeze or deletion. A commutation moves the barred letter past its neighbor and preserves the seed up to relabeling. A square move swaps the matching generators and mutates the quiver in the same step. Freezing updates the neighboring vertices together. Deletion removes the marked vertex and shows the graph for the new partial target.</p>
 <p>Choose <b>Play</b> to follow the moves in order or <b>Replay operation</b> to watch just the selected Bao–Ye operation. The lower slider selects one of its moves. After a square move, <b>Before swap</b> and <b>After swap</b> let you compare the diagrams and quivers. <b>Full graph cycles</b> shows how the pivot boundary reverses and how its neighbors change in that same mutation.</p>
 <p>Local signed word shows the moving barred generator on the auxiliary word for the current stage. The displayed square move acts on this local chart. Positive word becomes available when a verified sequence of adjacent positive moves from the stage’s starting word realizes the current mutation. The full-graph view checks the ice quiver of the walkthrough against the paper step. In Leftmost mode this graph uses the reversed word and inverse selected product.</p>
@@ -2614,6 +2652,10 @@ sitemap: false
   const NS='http://www.w3.org/2000/svg';
   const ink='#162d36', thread='#637981', active='#0c7468', squareColor='#a55120';
   const paper='#fcfdfb', faint='#aebfc2', grid='#e5ebea';
+  const projectionColors={
+    red:{strand:'#ad4b49',axis:'#953a39',wash:'#fbefec'},
+    blue:{strand:'#416ea3',axis:'#305c91',wash:'#eaf2fb'}
+  };
   const PI=Math.PI, EPS=1e-7;
   const mono='ui-monospace,SFMono-Regular,Consolas,monospace';
   let serial=0;
@@ -2662,24 +2704,50 @@ sitemap: false
     }
     const spread=Math.max(2,limits[0][1]-limits[0][0],limits[1][1]-limits[1][0]);
     const span=Math.max(1,limits[2][1]-limits[2][0]);
-    return {points,limits,timeScale:clamp(1.6*spread/span,1,3.5),local:focusByModel.some(slots=>slots?.length)};
+    return {points,limits,timeScale:clamp(2.5*spread/span,1,3.5),local:focusByModel.some(slots=>slots?.length)};
   }
 
   function axes(cam,timeScale) {
     if(cam.view==='red') return ([x,y,t])=>[t*timeScale,y,-x];
     if(cam.view==='blue') return ([x,y,t])=>[t*timeScale,x,y];
     const cy=Math.cos(cam.yaw), sy=Math.sin(cam.yaw), cp=Math.cos(cam.pitch), sp=Math.sin(cam.pitch);
+    // An oblique picture plane gives the resting view the horizontal time
+    // direction and upright permutation diagrams of GLSBS Figure 6.
+    const tilt=Math.sin(.45)*Math.tan(-.6);
     return ([x,y,t])=>{
       const along=t*timeScale, inward=sy*along+cy*x;
-      return [cy*along-sy*x,cp*y+sp*inward,sp*y-cp*inward];
+      const horizontal=cy*along-sy*x;
+      return [horizontal,cp*y+sp*inward-tilt*horizontal,sp*y-cp*inward];
     };
+  }
+
+  function planarDomain(viewport) {
+    const [x,y]=viewport.limits;
+    return [Math.min(x[0],y[0]),Math.max(x[1],y[1])];
+  }
+
+  function tickStep(units,pixels,minSpace) {
+    return Math.max(1,Math.ceil(units/(Math.max(1,pixels)/minSpace)));
   }
 
   function projection(camera,viewport,W,H) {
     const project=axes(camera,viewport.timeScale);
+    if(camera.view!=='space') {
+      const [first,last]=viewport.limits[2], [bottom,top]=planarDomain(viewport);
+      const left=31,right=W-18,upper=16,lower=H-35;
+      const xScale=(right-left)/Math.max(1,last-first)*camera.zoom;
+      const yScale=(lower-upper)/Math.max(1,top-bottom)*camera.zoom;
+      return {project:point=>{
+        const [,level,depth]=project(point);
+        return [(left+right)/2+(point[2]-(first+last)/2)*xScale,
+          (lower+upper)/2-(level-(bottom+top)/2)*yScale,depth];
+      },orient:project};
+    }
     let xmin=Infinity,xmax=-Infinity,ymin=Infinity,ymax=-Infinity;
-    for(const p of viewport.points) {
-      const [x,y]=project(p);
+    // Include the cut grids' off-diagonal corners in a common 3D framing.
+    const [xs,ys,ts]=viewport.limits;
+    for(const column of xs) for(const row of ys) for(const t of ts) {
+      const [x,y]=project([column,row,t]);
       xmin=Math.min(xmin,x); xmax=Math.max(xmax,x); ymin=Math.min(ymin,y); ymax=Math.max(ymax,y);
     }
     const pad=viewport.local?.68:.35;
@@ -2689,6 +2757,50 @@ sitemap: false
       const [x,y,z]=project(p);
       return [W/2+(x-cx)*scale,(H-16)/2-(y-cy)*scale,z];
     },orient:project,scale};
+  }
+
+  function cutGuides(world,project,viewport,range,requestedSlot,width,height) {
+    const [xs,ys]=viewport.limits,[lo,hi]=range;
+    const selected=Number.isInteger(requestedSlot)&&requestedSlot>lo&&requestedSlot<=hi;
+    let cuts=selected?[requestedSlot-1,requestedSlot]:[lo,hi];
+    if(hi-lo<=5 && !viewport.local && width>=520)cuts=Array.from({length:hi-lo+1},(_,k)=>lo+k);
+    const reference=selected?requestedSlot-1:lo;
+    for(const t of new Set(cuts)) {
+      const ref=t===reference, muted=!ref && (!selected || t!==requestedSlot);
+      const guide=element(world,'g',{'data-guide-cut':t,'aria-hidden':'true','pointer-events':'none'});
+      function line(x0,y0,x1,y1,color,weight) {
+        const a=project([x0,y0,t]),b=project([x1,y1,t]);
+        element(guide,'path',{d:'M'+f(a[0])+' '+f(a[1])+' L'+f(b[0])+' '+f(b[1]),fill:'none',stroke:color,
+          'stroke-width':weight,'stroke-opacity':muted?.52:.86});
+      }
+      function labels(x,y,dx,dy,anchor,color,value) {
+        const p=project([x,y,t]),sx=p[0]+dx,sy=p[1]+dy;
+        if(sx<5||sx>width-4||sy<10||sy>height-28)return;
+        element(guide,'text',{x:f(sx),y:f(sy),fill:color,'font-family':mono,'font-size':10,
+          'paint-order':'stroke',stroke:paper,'stroke-width':2.5,'text-anchor':anchor},value);
+      }
+      const p=project([xs[0],ys[0],t]),px=project([xs[1],ys[0],t]),py=project([xs[0],ys[1],t]);
+      const dx=tickStep(xs[1]-xs[0],Math.hypot(px[0]-p[0],px[1]-p[1]),24);
+      const dy=tickStep(ys[1]-ys[0],Math.hypot(py[0]-p[0],py[1]-p[1]),23);
+      const pad=.17;
+      for(let x=Math.ceil(xs[0]/dx)*dx;x<=xs[1];x+=dx) {
+        line(x,ys[0]-pad,x,ys[1]+pad,'#c1cdd2',.7);
+        if(ref)labels(x,ys[0]-pad,2,12,'start',projectionColors.blue.axis,
+          x===Math.ceil(xs[0]/dx)*dx?'x '+x:x);
+      }
+      for(let y=Math.ceil(ys[0]/dy)*dy;y<=ys[1];y+=dy) {
+        line(xs[0]-pad,y,xs[1]+pad,y,'#bccbc8',.7);
+        if(ref)labels(xs[0]-pad,y,-5,3,'end',projectionColors.red.axis,
+          y===Math.floor(ys[1]/dy)*dy?'y '+y:y);
+      }
+      if(ref || (selected && t===requestedSlot)){
+        line(xs[0]-pad,ys[0]-pad,xs[1]+pad,ys[0]-pad,projectionColors.blue.strand,1.05);
+        line(xs[0]-pad,ys[0]-pad,xs[0]-pad,ys[1]+pad,projectionColors.red.strand,1.05);
+        const corners=xs.flatMap(x=>ys.map(y=>[x,y]));
+        const [topX,topY]=corners.reduce((a,b)=>project([a[0],a[1],t])[1]<project([b[0],b[1],t])[1]?a:b);
+        labels(topX,topY,0,-13,'middle','#536b69','t='+t);
+      }
+    }
   }
 
   function squareSides(g,slots,requested) {
@@ -2733,7 +2845,9 @@ sitemap: false
             const diff=lerp(a[2],b[2],t)-lerp(p[2],q[2],u);
             if(Math.abs(diff)<EPS) continue;
             const under=diff<0?edge:other, fraction=diff<0?t:u, over=diff<0?other:edge;
-            const gap=(over.width/2+1.65)/Math.max(1,Math.hypot(under.b[0]-under.a[0],under.b[1]-under.a[1]));
+            const overLength=Math.hypot(over.b[0]-over.a[0],over.b[1]-over.a[1]);
+            // Clearance is measured perpendicular to the overpassing line.
+            const gap=Math.min(.43,(over.width/2+2)*overLength/Math.abs(det));
             under.gaps.push([clamp(fraction-gap,0,1),clamp(fraction+gap,0,1)]);
           }
           entries.push(index); bins.set(key,entries);
@@ -2758,17 +2872,21 @@ sitemap: false
   function draw(host,g,options={}) {
     const cam=cameraState(options.camera);
     const range=options.range||[0,g.m], viewport=options.viewport||extent([g],[range]);
-    const W=Math.max(200,host.clientWidth||450),H=clamp(W*.74,244,370);
+    const W=Math.max(120,host.clientWidth||450), planar=cam.view!=='space';
+    const compact=options.compact||options.linked, colors=projectionColors[cam.view];
+    const [minLevel,maxLevel]=planarDomain(viewport);
+    const H=planar ? (compact?clamp(57+22*(maxLevel-minLevel),116,210):clamp(86+32*(maxLevel-minLevel),165,355))
+      : (compact?clamp(W*.66,225,options.paired?285:315):clamp(W*.74,244,370));
     const svg=element(null,'svg',{class:'pg-graph-svg',viewBox:'0 0 '+W+' '+H,
-      width:'100%',height:H,role:'group','aria-label':(cam.view==='space'?'3D':cam.view+' projection of')+
+      width:'100%',height:H,role:'group','data-view':cam.view,'aria-label':(cam.view==='space'?'3D':cam.view+' projection of')+
         ' affine plabic graph, chronological cuts '+range.join(' to '),tabindex:0});
     svg.style.display='block'; svg.style.touchAction=cam.view==='space'?'pan-y':'auto';
     svg.style.cursor=cam.view==='space'?'grab':'default';
-    element(svg,'title',{},'Affine 3D plabic graph');
+    element(svg,'title',{},planar?(cam.view==='red'?'Red projection (t, y)':'Blue projection (t, x)'):'Affine 3D plabic graph');
     element(svg,'desc',{},'Integer-lifted strands. Black and white circles are bridge vertices. Filled boundary squares are marked. Open boundary squares are unmarked.');
     const id='pg-clip-'+(++serial);
     const clip=element(element(svg,'defs'),'clipPath',{id});
-    element(clip,'rect',{x:0,y:0,width:W,height:H-24});
+    element(clip,'rect',{x:planar?24:0,y:0,width:W-(planar?31:0),height:H-24});
     element(svg,'rect',{width:W,height:H,fill:paper});
     const world=element(svg,'g',{'clip-path':'url(#'+id+')'});
     const {project,orient}=projection(cam,viewport,W,H);
@@ -2778,19 +2896,19 @@ sitemap: false
     const cycle=squareSides(g,[...focus],options.square);
     const labels=options.labels||{};
     const label=slot=>(labels instanceof Map?labels.get(slot):labels[slot])||'';
-    const keyStyle=cam.view==='space'?'3D':cam.view==='red'?'(t, y)':'(t, x)';
-    // Planar guides lie behind the graph. Degree-one boundary vertices and
-    // the interior cut marks remain visually distinct.
-    if(cam.view!=='space') {
-      const [x,y]=viewport.limits;
-      const axis=cam.view==='red'?y:x;
-      for(let level=Math.ceil(axis[0])-1;level<=axis[1]+1;level++) {
-        const start=project([level,level,lo]),end=project([level,level,hi]);
-        element(world,'path',{d:'M'+f(start[0])+' '+f(start[1])+' H'+f(end[0]),fill:'none',stroke:grid,'stroke-width':.75});
-        if(start[1]>9 && start[1]<H-29 && end[0]-start[0]>10)
-          element(world,'text',{x:clamp(start[0]-5,12,W-10),y:f(start[1]+3),fill:'#698083',
-            'font-family':mono,'font-size':9,'text-anchor':'end'},level);
+    if(planar) {
+      if(activeSlot!=null && activeSlot>lo && activeSlot<=hi) {
+        const start=project([0,0,activeSlot-1]),end=project([0,0,activeSlot]);
+        element(world,'rect',{x:f(start[0]),y:2,width:f(end[0]-start[0]),height:H-26,fill:colors.wash,
+          'data-guide-slot':activeSlot,'pointer-events':'none'});
       }
+      const stride=tickStep(hi-lo,W-49,29);
+      for(let t=Math.ceil(lo/stride)*stride;t<=hi;t+=stride) {
+        const x=project([0,0,t])[0];
+        element(world,'path',{d:'M'+f(x)+' 5 V'+(H-25),stroke:'#d4deda','stroke-width':.7,'stroke-dasharray':'2 4'});
+      }
+    } else {
+      cutGuides(world,project,viewport,range,activeSlot??(focus.size<=2?[...focus][0]:null),W,H);
     }
     const items=[],symbols=[],targets=[],slotTexts=[];
     function segment(a,b,style) {
@@ -2814,9 +2932,9 @@ sitemap: false
       const highlighted=activeBySlot.get(edge.slot)?.has(edge.strand);
       for(let i=1;i<stops.length;i++) {
         const mid=(stops[i]+stops[i-1])/2, onSquare=side && mid>side[0] && mid<side[1];
-        const color=onSquare?squareColor:highlighted?active:edge.ghost?faint:thread;
+        const color=onSquare?squareColor:planar?(highlighted?colors.axis:colors.strand):highlighted?active:edge.ghost?faint:thread;
         segment(between(edge.a,edge.b,stops[i-1]-edge.a[2]),between(edge.a,edge.b,stops[i]-edge.a[2]),{
-          color,width:onSquare?3.35:highlighted?2.7:edge.ghost?1.05:1.7,opacity:edge.ghost&&!highlighted?.52:1,
+          color,width:onSquare?3.35:highlighted?2.8:edge.ghost?1.15:planar?1.9:1.7,opacity:edge.ghost&&!highlighted?.48:1,
           type:onSquare?'square-side':'strand',slot:edge.slot,strand:edge.strand,
           dash:edge.ghost&&!onSquare&&!highlighted?'3 2':null});
       }
@@ -2824,7 +2942,7 @@ sitemap: false
     for(const bridge of g.bridges) {
       if(bridge.a[2]<lo||bridge.a[2]>hi) continue;
       const selected=bridge.slot===activeSlot,focused=focus.has(bridge.slot),onSquare=cycle.members.has(bridge);
-      const tint=onSquare?squareColor:focused||selected?active:ink;
+      const tint=onSquare?squareColor:focused||selected?(planar?colors.axis:active):ink;
       const opacity=bridge.ghost&&!focused&&!selected?.52:1;
       const a=project(bridge.a),b=project(bridge.b);
       segment(bridge.a,bridge.b,{color:tint,opacity,width:focused||selected?3.3:2.1,slot:bridge.slot,type:onSquare?'square-bridge':'bridge'});
@@ -2833,7 +2951,7 @@ sitemap: false
       for(let i=0;i<2;i++) symbols.push({p:i?b:a,slot:bridge.slot,color:bridge.colors[i],tint,r:radii,
         opacity,type:'vertex',strand:bridge.strands[i]});
       if(bridge.shift===0)targets.push({a,b,slot:bridge.slot,kind:'solid bridge',label:label(bridge.slot)});
-      if((focused||selected) && bridge.shift===0) {
+      if((selected||focused && (!planar || focus.size<=2)) && bridge.shift===0) {
         const text=label(bridge.slot);
         if(text)slotTexts.push({x:(a[0]+b[0])/2,y:(a[1]+b[1])/2,text,slot:bridge.slot});
       }
@@ -2857,7 +2975,7 @@ sitemap: false
     items.sort((a,b)=>(a.a[2]+a.b[2])-(b.a[2]+b.b[2]));
     for(const edge of items) {
       const d=visiblePath(edge);
-      if(d)element(world,'path',{d,fill:'none',stroke:edge.color,'stroke-width':edge.width,
+      if(d)element(world,'path',{d,fill:'none',stroke:edge.color,'stroke-width':edge.width,'data-gaps':edge.gaps.length||null,
         'stroke-opacity':edge.opacity,'stroke-linecap':'butt','stroke-dasharray':edge.dash,'data-edge':edge.type,
         'data-slot':edge.slot,'data-strand':edge.strand});
     }
@@ -2922,15 +3040,36 @@ sitemap: false
     const trim=element(svg,'g',{'aria-hidden':'true'});
     element(trim,'path',{d:'M0 '+(H-24)+' H'+W,stroke:grid});
     function caption(x,y,value,attrs={}) {element(trim,'text',{x:f(x),y:f(y),fill:'#52676b','font-family':mono,'font-size':10,...attrs},value);}
-    if(cam.view==='space') {
-      const o=[30,H-12],ta=[[1,0,0,'x','#677f83'],[0,1,0,'y','#486861'],[0,0,1/viewport.timeScale,'t',ink]];
+    if(!planar) {
+      const o=[30,H-12],ta=[[1,0,0,'x',projectionColors.blue.axis],[0,1,0,'y',projectionColors.red.axis],[0,0,1/viewport.timeScale,'t',ink]];
       for(const [x,y,t,name,color] of ta) {
         const [dx,dy]=orient([x,y,t]),sx=o[0]+dx*11,sy=o[1]-dy*8;
         element(trim,'path',{d:'M'+o.join(' ')+' L'+f(sx)+' '+f(sy),stroke:color});
         caption(sx+(dx>=0?2:-5),sy+(dy>=0?0:5),name,{fill:color,'font-size':8});
       }
-    } else caption(12,H-9,keyStyle,{fill:cam.view==='red'?'#a34736':'#2d668a'});
-    caption(W-10,H-9,'t = '+lo+' … '+hi,{'text-anchor':'end'});
+      caption(W-10,H-9,'t = '+lo+' … '+hi,{'text-anchor':'end'});
+    } else {
+      const step=tickStep(maxLevel-minLevel,(H-51)*cam.zoom,15);
+      for(let level=Math.ceil(minLevel/step)*step;level<=maxLevel;level+=step){
+        const y=project([level,level,lo])[1];
+        if(y<8||y>H-28)continue;
+        caption(22,y+3.5,level,{fill:colors.axis,'text-anchor':'end','font-size':11,'data-level':level});
+      }
+      caption(5,12,cam.view==='red'?'y':'x',{fill:colors.axis,'font-weight':700});
+      caption(9,H-8,'t',{'font-weight':700});
+      const stepT=tickStep(hi-lo,(W-49)*cam.zoom,29);
+      const tickValues=new Set([lo,hi]);
+      for(let t=Math.ceil((lo+1)/stepT)*stepT;t<hi;t+=stepT) {
+        const position=project([0,0,t])[0];
+        if(position-project([0,0,lo])[0]>18 && project([0,0,hi])[0]-position>18)tickValues.add(t);
+      }
+      for(const t of tickValues) {
+        const x=project([0,0,t])[0];
+        if(x<25||x>W-7)continue;
+        element(trim,'path',{d:'M'+f(x)+' '+(H-24)+' v4',stroke:'#81908f'});
+        caption(x,H-8,t,{'data-cut':t,'text-anchor':'middle','font-size':10.5});
+      }
+    }
     function pick(e) {
       const node=e.target.closest?.('[data-pick]');
       if(node && options.onPick) {options.onPick(Number(node.dataset.pick));return true;}
@@ -3023,7 +3162,12 @@ sitemap: false
     span.setAttribute('aria-hidden','true'); span.textContent=n;
     return span;
   }
-  const views=[['space','3D'],['red','Red projection'],['blue','Blue projection']];
+  const views=[['linked','All three'],['space','3D'],['red','Red'],['blue','Blue']];
+  const plates=[
+    {key:'space',name:'3D graph',coordinates:'(x, y, t)'},
+    {key:'red',name:'Red projection',coordinates:'(t, y)'},
+    {key:'blue',name:'Blue projection',coordinates:'(t, x)'}
+  ];
   const crops=[['full','Full word'],['move','Move detail']];
   const neutralCamera=()=>({view:'space',yaw:-.6,pitch:.45,zoom:1});
   function details(title) {
@@ -3049,7 +3193,12 @@ sitemap: false
         group.append(b);return [key,b];
       });toolbar.append(group);return list;
     }
-    const viewButtons=segmented('Graph projection',views,key=>{camera.view=key;draw();});
+    const viewButtons=segmented('Graph views',views,key=>{layout=key;draw();});
+    for (const [key,b] of viewButtons) {
+      b.dataset.view=key;
+      if(key==='red'||key==='blue')b.setAttribute('aria-label',key==='red'?'Red projection':'Blue projection');
+      if(key==='linked')b.title='Show the 3D graph with both projections';
+    }
     const cropButtons=segmented('Visible time interval',crops,key=>{crop=key;camera.zoom=1;draw();});
     const periodLabel=node('label','pg-periods');
     periodLabel.append(node('span','','Lifts'));
@@ -3058,11 +3207,11 @@ sitemap: false
     periodLabel.append(periodSelect);toolbar.append(periodLabel);
     periodSelect.onchange=()=>{periods=Number(periodSelect.value);renderAll();};
     const camTools=node('div','pg-camera-tools');
-    const left=action('↶',()=>{camera.yaw-=.25;draw();});
-    const right=action('↷',()=>{camera.yaw+=.25;draw();});
+    const left=action('↶',()=>{camera.yaw-=.25;draw(true);});
+    const right=action('↷',()=>{camera.yaw+=.25;draw(true);});
     const smaller=action('−',()=>zoom(camera.zoom/1.25));
     const bigger=action('+',()=>zoom(camera.zoom*1.25));
-    const reset=action('Reset view',()=>{camera={...neutralCamera(),view:camera.view};draw();});
+    const reset=action('Reset view',()=>{camera=neutralCamera();draw();});
     for(const [b,name] of [[left,'Rotate left'],[right,'Rotate right'],[smaller,'Zoom out'],[bigger,'Zoom in']]) {
       b.setAttribute('aria-label',name);b.title=name;
     }
@@ -3091,7 +3240,7 @@ sitemap: false
     }
     notes.append(articles);convention.append(notes);
     element.append(head,toolbar,stages,key,operation,inspector,convention);
-    let before=null,after=null,ctx={},periods=1,camera=neutralCamera(),crop='full',cards=[],selection=null,prevSignature='';
+    let before=null,after=null,ctx={},periods=1,camera=neutralCamera(),layout='linked',crop='full',cards=[],selection=null,byBridge=false,reportingBridge=false,prevSignature='';
     const cache=new WeakMap();
     function geometry(side) {
       let entry=cache.get(side.graph); if(!entry){entry=new Map();cache.set(side.graph,entry);}
@@ -3128,21 +3277,28 @@ sitemap: false
         after.tokens.find(t=>t.marker) || before?.tokens.find(t=>t.marker) ||
         after.tokens.find(t=>ctx.scanPosition!=null && t.originalPosition===ctx.scanPosition) ||
         after.tokens.find(t=>ctx.focus!=null && t.label===ctx.focus) ||
+        (ctx.kind==='word' && after.tokens.find(t=>t.hollow)) ||
         findSlot(after,stageSlots(after,'after')[0] || 1);
-      return corresponding(anchor,side,ctx.wordMove);
+      return corresponding(anchor,side,ctx.wordMove || (byBridge && selection?.label!=null));
     }
-    function choose(t) {
+    function choose(t,bridge=false) {
       if(!t)return;
       const oldFocus=document.activeElement;
       const focused=element.contains(oldFocus)&&oldFocus.closest('.pg-card');
       const slotControl=focused && oldFocus.closest('[data-pick],[data-raw-slot]');
       const focusSelector=slotControl && (slotControl.hasAttribute('data-pick')?'[data-pick="'+t.rawPosition+'"]':'[data-raw-slot="'+t.rawPosition+'"]');
       const focusSide=focused?.dataset?.side;
+      const focusView=oldFocus?.closest('.pg-view')?.dataset.view;
       selection=t;
-      const matched=corresponding(t,after,ctx.wordMove);
-      if(matched && ctx.onPick){ctx.onPick(matched.rawPosition);}
+      byBridge=bridge && t.label!=null;
+      const matched=corresponding(t,after,ctx.wordMove || byBridge);
+      if(matched && ctx.onPick){
+        reportingBridge=byBridge;
+        try{ctx.onPick(matched.rawPosition);}finally{reportingBridge=false;}
+      }
       renderAll();
-      if(focusSelector && focusSide)element.querySelector('.pg-card[data-side="'+focusSide+'"] '+focusSelector)?.focus({preventScroll:true});
+      const pane=focusView?' .pg-view[data-view="'+focusView+'"]':'';
+      if(focusSelector && focusSide)element.querySelector('.pg-card[data-side="'+focusSide+'"]'+pane+' '+focusSelector)?.focus({preventScroll:true});
     }
     function commonRange(side,slots,name) {
       const m=side.word.length;if(crop==='full'||!m)return [0,m];
@@ -3161,11 +3317,18 @@ sitemap: false
       const topName=node('strong','pg-card-name',caption), target=node('span','pg-target','Target '+product(side.target));
       top.append(topName,target);
       const bounds=node('span','pg-bounds');top.append(bounds);
-      const canvas=node('div','pg-canvas');const wordStrip=node('div','pg-word');
+      const figures=node('div','pg-views'), panes=plates.map(({key,name:viewName,coordinates})=>{
+        const figure=node('figure','pg-view'),title=node('figcaption','pg-view-title');
+        figure.dataset.view=key;
+        title.append(node('strong','',viewName),node('span','pg-coordinates',coordinates));
+        const canvas=node('div','pg-canvas');
+        figure.append(title,canvas);figures.append(figure);return {key,figure,canvas};
+      });
+      const wordStrip=node('div','pg-word');
       wordStrip.setAttribute('role','group');wordStrip.setAttribute('aria-label',caption+' chronological word');
       const foot=node('div','pg-cardfoot');
-      box.append(top,canvas,wordStrip,foot);stages.append(box);
-      return {side,name,box,bounds,canvas,wordStrip,foot,geometry:geometry(side),slots:stageSlots(side,name)};
+      box.append(top,wordStrip,foot,figures);stages.append(box);
+      return {side,name,box,bounds,figures,panes,wordStrip,foot,geometry:geometry(side),slots:stageSlots(side,name)};
     }
     function fillCard(c) {
       const chosen=selected(c.side),items=[...c.side.tokens].sort((a,b)=>a.rawPosition-b.rawPosition);
@@ -3182,14 +3345,16 @@ sitemap: false
       c.wordStrip.replaceChildren(...taps);
       const bridgeCount=c.geometry.events.reduce((sum,e)=>sum+(e.solid?1:0),0);
       c.foot.textContent=c.side.word.length+' letter'+(c.side.word.length===1?'':'s')+' · '+bridgeCount+' bridge orbit'+(bridgeCount===1?'':'s')+
-        (chosen?' · Slot '+chosen.rawPosition+' '+origin(chosen)+(chosen.hollow?' · hollow':' · '+label(chosen.label)+' '+(chosen.frozen?'frozen':'mutable')):'');
+        (chosen?' · Slot '+chosen.rawPosition+' '+origin(chosen)+(chosen.hollow?' · hollow crossing in '+(c.side.word[chosen.rawPosition-1]>0?'red':'blue'):' · '+label(chosen.label)+' '+(chosen.frozen?'frozen':'mutable')):'');
     }
-    function draw(){
+    function draw(orbitOnly=false){
       if(!cards.length)return;
-      for(const [name,b] of viewButtons)b.setAttribute('aria-pressed',String(name===camera.view));
+      for(const [name,b] of viewButtons)b.setAttribute('aria-pressed',String(name===layout));
       for(const [name,b] of cropButtons)b.setAttribute('aria-pressed',String(name===crop));
-      left.disabled=right.disabled=camera.view!=='space';smaller.disabled=camera.zoom<=.55;bigger.disabled=camera.zoom>=4;
-      gesture.hidden=camera.view!=='space';gesture.textContent=cards.length===1?'Drag to rotate the 3D view.':'Drag either 3D view to rotate both.';
+      const hasSpace=layout==='space'||layout==='linked';
+      left.disabled=right.disabled=!hasSpace;smaller.disabled=camera.zoom<=.55;bigger.disabled=camera.zoom>=4;
+      gesture.hidden=!hasSpace;
+      gesture.textContent=layout==='linked'?'Drag the 3D graph to rotate. Both projections have a fixed viewpoint.':cards.length===1?'Drag to rotate the 3D view.':'Drag either 3D view to rotate both.';
       const ranges=cards.map(c=>commonRange(c.side,c.slots,c.name));
       const viewport=QuiverPlabicDrawing.extent(cards.map(c=>c.geometry),ranges,crop==='move'?cards.map(c=>c.slots):undefined);
       cards.forEach((c,j)=>{
@@ -3199,8 +3364,15 @@ sitemap: false
         const square=['square','word-square'].includes(ctx.kind);
         const frozenSlots=ctx.kind==='freeze'&&c.name==='after'?c.side.tokens.filter(t=>ctx.newlyFrozen?.includes(t.label)).map(t=>t.rawPosition):[];
         const boundaryCut=ctx.kind==='insert'?'right':['freeze','delete'].includes(ctx.kind)?'left':null;
-        QuiverPlabicDrawing.draw(c.canvas,c.geometry,{camera,range:ranges[j],focusSlots:c.slots,selectedSlot,square,labels,viewport,boundaryCut,frozenSlots,
-          onPick:pos=>choose(findSlot(c.side,pos)),onOrbit:(yaw,pitch)=>{camera.yaw=yaw;camera.pitch=pitch;draw();},onZoom:zoom});
+        c.figures.dataset.layout=layout;
+        for(const {key,figure,canvas} of c.panes){
+          figure.hidden=layout!=='linked' && layout!==key;
+          if(figure.hidden){if(canvas.firstChild)canvas.replaceChildren();continue;}
+          if(orbitOnly && key!=='space')continue;
+          QuiverPlabicDrawing.draw(canvas,c.geometry,{camera:{...camera,view:key},compact:layout==='linked',linked:layout==='linked',paired:cards.length>1,
+            range:ranges[j],focusSlots:c.slots,selectedSlot,square,labels,viewport,boundaryCut,frozenSlots,
+            onPick:pos=>choose(findSlot(c.side,pos),true),onOrbit:(yaw,pitch)=>{camera.yaw=yaw;camera.pitch=pitch;draw(true);},onZoom:zoom});
+        }
       });
     }
     function detailRow(dl,term,value) {dl.append(node('dt','',term),node('dd','',value));}
@@ -3244,10 +3416,12 @@ sitemap: false
       draw(); fillInspector();
     }
     function show(inBefore,inAfter,context={}) {
+      const previousSide=selection && (before?.tokens.includes(selection)?'before':after?.tokens.includes(selection)?'after':null);
       before=inBefore;after=inAfter;ctx=context;
-      const signature=[ctx.stage,ctx.kind,ctx.crossedPosition,ctx.scanPosition,inBefore?.word.join(),inAfter?.word.join(),inAfter?.target.join()].join('|');
-      if(signature!==prevSignature){selection=null;prevSignature=signature;}
-      if(ctx.selectedSlot!=null){selection=findSlot(inAfter,ctx.selectedSlot);}
+      const signature=[inAfter?.graph.n,ctx.stage,ctx.kind,ctx.crossedPosition,ctx.scanPosition,inBefore?.word.join(),inAfter?.word.join(),inAfter?.target.join()].join('|');
+      if(signature!==prevSignature){selection=null;byBridge=false;prevSignature=signature;}
+      else if(previousSide){selection=findSlot(previousSide==='before'?before:after,selection.rawPosition);}
+      if(ctx.selectedSlot!=null){selection=findSlot(inAfter,ctx.selectedSlot);byBridge=reportingBridge;}
       const prefix=ctx.presentation || 'Chronological proof gallery · all-barred reversed word with a positive marker during the sweep';
       description.textContent=prefix;
       freezeLegend.hidden=ctx.kind!=='freeze'||!ctx.newlyFrozen?.length;
@@ -3259,6 +3433,14 @@ sitemap: false
       shareWrap.hidden=shareButton.hidden&&download.hidden;fallback.hidden=true;copied.textContent='';
       if(!after){element.hidden=true;return;}element.hidden=false;
       renderAll();
+    }
+    // Fit newly revealed panels and recompute axes after a responsive layout change.
+    if(typeof ResizeObserver!=='undefined'){
+      let lastWidth=0;
+      new ResizeObserver(entries=>{
+        const width=entries[0].contentRect.width;
+        if(Math.abs(width-lastWidth)>.5){lastWidth=width;if(width>0)draw();}
+      }).observe(element);
     }
     return {element,show};
   }
@@ -3621,7 +3803,7 @@ sitemap: false
     {name:'Frozen boundary', n:4, beta:[1,2,3,2,1], v:[2]},
     {name:'Bao–Ye example 5.3', paperOrder:true, n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1].reverse(), v:[2,1,3,5,4,2].reverse()},
     {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]},
-    {name:'GLSBS Example 3.11 · Figures 6–7', nativeWord:true, n:3, beta:[-2,1,2,1,-1], v:[2]},
+    {name:'GLSBS Example 3.11 · Figures 6–7', anchor:'glsbs-figure-7', nativeWord:true, n:3, beta:[-2,1,2,1,-1], v:[2]},
     {name:'Affine seam · lifted bridge', nativeWord:true, n:3, beta:[-3,-1], v:[3]},
     {name:'Leftmost induction · 2112', n:3, beta:[2,1,1,2], v:[2,1]}
   ];
@@ -4337,15 +4519,23 @@ sitemap: false
   const linkedWords=new URLSearchParams(location.search);
   leftmost=linkedWords.get('reading')!=='right';
   $('reading').value=leftmost?'left':'right';
-  loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
-  if(linkedWords.has('beta')&&(linkedWords.has('c')||linkedWords.has('v'))){
-    const indexKey=linkedWords.has('c')?'c':'v';
-    $('rank').value=linkedWords.get('n')??'3';
-    $('beta').value=linkedWords.get('beta');$('target').value=linkedWords.get(indexKey);
-    build(null,indexKey);
+  const figurePreset=presets.findIndex(p=>p.anchor==='glsbs-figure-7');
+  const figureHash='#'+presets[figurePreset].anchor;
+  if(location.hash!==figureHash){
+    loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
+    if(linkedWords.has('beta')&&(linkedWords.has('c')||linkedWords.has('v'))){
+      const indexKey=linkedWords.has('c')?'c':'v';
+      $('rank').value=linkedWords.get('n')??'3';
+      $('beta').value=linkedWords.get('beta');$('target').value=linkedWords.get(indexKey);
+      build(null,indexKey);
+    }
   }
   function openLinkedView(){
-    if(location.hash==='#bao-ye'&&model.paper){
+    if(location.hash===figureHash){
+      if($('guide').open)$('guide').close();
+      loadPreset(figurePreset);
+      requestAnimationFrame(()=>$('moveGraphs').scrollIntoView({block:'start'}));
+    }else if(location.hash==='#bao-ye'&&model.paper){
       changeMode('recursion');
       const op=linkedWords.get('op'), part=linkedWords.get('substep');
       if(op!==null&&/^\d+$/.test(op)){
@@ -4365,7 +4555,20 @@ sitemap: false
       changeMode('words');
     }else if(!location.hash && !linkedWords.has('beta')&&model.paper)sweepView.firstSquare();
   }
-  openLinkedView();window.addEventListener('hashchange',openLinkedView);
+  openLinkedView();
+  window.addEventListener('hashchange',event=>{
+    // The figure preset replaces the input word. Restore the preceding
+    // address's word and stage when the reader leaves it via browser history.
+    if(new URL(event.oldURL).hash===figureHash)location.reload();
+    else openLinkedView();
+  });
+  for(const link of document.querySelectorAll('a[href="'+figureHash+'"]')){
+    link.addEventListener('click',event=>{
+      if(location.hash===figureHash && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey){
+        event.preventDefault();openLinkedView();
+      }
+    });
+  }
 
 })();
 </script>
