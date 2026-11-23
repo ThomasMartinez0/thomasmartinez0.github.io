@@ -517,7 +517,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=2&amp;step=1#film-proof">Check stage 2 of Bao–Ye Example 5.3</a>, <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=1&amp;step=4&amp;follow=2,1&amp;chart=auxiliary#film-proof">replay its first square</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
+ <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a crossing to inspect its rightmost scan and its two projections. <a class="figure-link" href="?n=6&amp;beta=2123454234231&amp;v=213542&amp;stage=2&amp;move=1#film-proof">Rightmost stage 2 on Example 5.3</a> · <a class="figure-link" href="?n=6&amp;beta=-1,-3,-2,-4,-3,-2,-4,-5,-4,-3,-2,-1,-2&amp;v=213542&amp;stage=2&amp;move=1#film-proof">Bao–Ye’s stage 2 on the signed graph</a> · <a class="figure-link" href="?n=6&amp;beta=2123454234231&amp;v=213542&amp;series=paper&amp;stage=2#film-proof">Published stage 2 at s₂s₁</a> · <a class="figure-link" href="#glsbs-figure-7">GLSBS Example 3.11</a></p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -527,8 +527,8 @@ sitemap: false
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
  <p id="inputError" class="error" role="alert" hidden></p>
- <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="directInduction" aria-pressed="false">Bao–Ye induction</button><button type="button" id="proofTab" aria-controls="forwardProof" aria-pressed="false">Film comparison</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Film mutation charts</button></div>
- <label class="reading" id="filmConvention">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
+ <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="directInduction" aria-pressed="false">Bao–Ye induction</button><button type="button" id="proofTab" aria-controls="forwardProof" aria-pressed="false">GLSBS graph and induction</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" hidden id="recTab" aria-pressed="false">Film mutation charts</button></div>
+ <label class="reading" id="filmConvention">Subexpression <select id="reading" disabled aria-label="Subexpression convention"><option value="right" selected>GLSBS rightmost</option></select></label></div>
  <section id="richardsonPanel" class="panel" aria-label="Richardson reading" hidden></section>
  <section id="directInduction" class="panel" aria-label="Bao–Ye induction on Ω" hidden></section>
  <section id="forwardProof" class="panel" aria-label="Film comparison" hidden></section>
@@ -584,32 +584,14 @@ sitemap: false
 </main>
 <dialog id="guide"><div class="guide-head"><h2>Reading the explorer</h2><button id="guideClose" class="iconbtn" aria-label="Close reading guide">×</button></div>
 <div class="guide-body">
-<h3>Signed galleries in the Richardson reading</h3><p>Enter the chronological signed word β and terminal codistance v in written order. Read the negative occurrences backwards, then the positive occurrences forwards, to obtain the positive word Ω. The table records each letter’s original slot. Walk through Ω to inspect the normalized induction, or open the raw chronological film separately.</p>
-<h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
-<p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. In the Word moves view, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
-<h3>Bao–Ye induction</h3><p>Read Ω from the left, starting at residual <i>r = v</i> with selected product <i>u = e</i>. Select <i>i</i> exactly when <i>sᵢr</i> shortens the residual. Then set <i>r</i> to <i>sᵢr</i> and append <i>sᵢ</i> on the right of <i>u</i>. For Ω = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂. The induction displays the seed after every mutation, freezing and deletion.</p>
-<h3>Fixed-word film comparison</h3><p>The two endpoint films use the written positive word Ω, with the old and new targets. For the genuine positive extension Ωi, the applet computes the leftmost subexpression again and compares its quiver to the old one. The stage also tests Bao–Ye’s matrix operations on the full old quiver. These computations concern the chosen input. A realization of those operations by moves on the original gallery is a separate question.</p>
-<h3>Auxiliary gallery sweep</h3><p>For a selected letter <i>i</i>, append one positive step to the terminal positive flag. This identifies the based galleries for <i>R</i><sub>u,Ω</sub> and <i>R</i><sub>usᵢ,Ωi</sub>. The two rows show the two positive flags. Each column is a cut in the original positive word Ω, read from left to right. Moving the vertical step one column changes which flag moves first. The auxiliary word Ωi and the codistance usᵢ stay fixed throughout the slide.</p>
-<p>The film strip calls the vertical step Mᵢ. At cut 0 it consumes the last sᵢ of usᵢ and is hollow. At the selected letter it acquires a solid bridge. Every subsequent matching letter gives a square move on the entire quiver. At the right boundary the applet shows which films close across the last slab. Removing it leaves these films open, so their vertices freeze. Follow a bridge to compare its arrows and its red and blue projections on both sides.</p>
-<p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens the direct induction at its identity seed. Use <b>Next</b> to read the published positive word from its first letter and follow each seed operation.</p>
-<p>The <a href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">chronological first-square replay</a> opens with bridge (2,1) selected. Use <b>Next</b> to compare its two projections across each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
-<p>In the Word moves view the signed film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
-<h3>Inspecting the periodic 3D graph</h3>
-<p>The fixed-word comparison uses the leftmost films on Ω. The auxiliary view realizes Ω on the negative gallery in reverse chronological order. The optional <a href="#chronological-proof" id="chronologicalGuideLink">chronological proof charts</a> draw the corresponding all-barred reverse gallery with a positive marker travelling left. Their coordinates and slot numbers are chronological.</p>
-<p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
-<p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
-<p>With <b>Projection planes</b> on, select a bridge in the 3D graph or on either plane. Follow the dashed guides from an endpoint (x, y, t) to (0, y, t) on the red plane and to (x, 0, t) on the blue plane. Selecting a translated bridge gives the coordinates of that lift. <a href="?bridge=4#glsbs-figure-7">Inspect the fourth bridge and its two projections</a>.</p>
-<p>Use <b>Copy move link</b> to reopen a particular transition and <b>Download move data</b> for its signed words, affine windows, bridge endpoint coordinates, and labeled quiver data. <a href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">Watch the chronological replay of the first square</a>. The positive marker moves from slot 12 to slot 11 in the chronological signed gallery. The bridge labeled (2,1) stays at slot 12 and its black and white endpoints exchange colors on both coordinate planes. <a href="?stage=3&amp;step=4&amp;follow=2,1#bao-ye-example-5-3">Compare the two projections of (2,1) at stage 3</a>.</p>
-<h3>Reading direction in the Word moves tab</h3><p>In this tab’s Leftmost mode, the paper reads the entered word from left to right and selects the leftmost reduced subexpression for the element <i>v</i>. The plabic construction uses the reflected wiring, including reflected cut numbers and reversed arrow orientation. In Rightmost mode the film engine receives the word as entered, and the paper uses the reversed word and inverse product. Switching modes recomputes the seed for the words in the form.</p>
-<p>An adjacent braid relation or commutation appears as a bracket above the wiring. Click a bracket to apply its verified word change, or choose a relation to preview the new word first. A fully solid three-letter braid move is a square mutation. Other local relations may preserve the quiver up to relabeling. Click μ at any mutable vertex to preview the abstract quiver mutation. The relation menu identifies which previews have an adjacent word realization. Undo retraces applied word changes.</p>
-<h3>Follow a disk</h3><p>A solid bridge at word position <i>d</i> gives one quiver vertex and one soap film. Select it on the diagram or in the film menu. Choose <b>Trace from birth</b> to follow the film toward the boundary. In Leftmost mode it starts at cut <i>d</i> and advances to the right. In Rightmost mode it starts at cut <i>d−1</i> and advances to the left. A cut numbered <i>c</i> lies after the first <i>c</i> displayed letters. Reaching the outer boundary makes a film frozen.</p>
-<p>In the separate film diagram, Top shows rows and Bottom shows columns. Lifts shows integer heights before reducing modulo <i>n</i>. Several heights can cover the same face, so a film can contribute more than once. The 3D view shows the periodic strand diagram schematically, with film coverage on the two coordinate walls.</p>
-<h3>Step through Bao–Ye</h3><p><b>Next move</b> advances one commutation, square move, freeze or deletion. A commutation moves the barred letter past its neighbor and preserves the seed up to relabeling. A square move swaps the matching generators and mutates the quiver in the same step. Freezing updates the neighboring vertices together. Deletion removes the marked vertex and shows the graph for the new partial target.</p>
-<p>Choose <b>Play</b> to follow the moves in order or <b>Replay operation</b> to watch just the selected Bao–Ye operation. The lower slider selects one of its moves. After a square move, <b>Before swap</b> and <b>After swap</b> let you compare the diagrams and quivers. <b>Full graph cycles</b> shows how the pivot boundary reverses and how its neighbors change in that same mutation.</p>
-<p>In the Film mutation charts tab, Local signed word shows the moving barred generator on the auxiliary word for the current stage. The displayed square move acts on this local chart. Positive word becomes available when a verified sequence of adjacent positive moves from the stage’s starting word realizes the current mutation. The full-graph view checks the ice quiver of the walkthrough against the paper step. In Leftmost mode this graph uses the reversed word and inverse selected product.</p>
-<p>In Leftmost mode, native label (<i>i,k</i>) corresponds at each completed stage to the <i>k</i>th omitted <i>i</i> from the left. In Rightmost mode, count from the right instead. The marker highlights the chosen word position in either convention.</p>
-<p>In Leftmost mode the reflected-scan check compares mapped vertices, frozen labels and weighted arrows incident to a mutable vertex. The separate chronological check runs the unreflected positive film on the paper’s written β with boundary equal to its selected product u. It compares endpoint counts that are invariant under relabeling or reversing every arrow. Unequal counts rule out an ice-quiver isomorphism. Equal counts leave the comparison open. In Rightmost mode the Bao–Ye panel uses the reverse of the displayed word. On the paper view, Frozen edges also shows the frozen–frozen entries, including halves, retained during mutation. Agreement is checked for the displayed input and stage.</p>
-</div></dialog>
+<h3>GLSBS graphs and rightmost induction</h3>
+<p>Keep the signed word in the order entered. The time axis runs left to right. The rightmost scan begins at the target on the right and tests one crossing at a time from right to left. Select any crossing in the strip or the graph to see both cut windows. Red shows (t,y), and blue shows (t,x). Soap films propagate toward cut 0 on the left.</p>
+<p>For a positive word the GLSBS stage selector processes the selected positions from right to left. If the old boundary is u and the next letter is i, the new boundary is sᵢu. Use the operation menu to append the hollow bar at the right, move it to the left, freeze the mutable neighbors of the leftmost bridge, and delete that bridge. For an all-negative word the marker is positive and the new boundary is u sᵢ. Each displayed quiver uses the complete word.</p>
+<p>The target sequence menu also offers Bao–Ye’s stage targets. This choice computes the native graph at each paper target and compares the two independently calculated ice quivers. Bao–Ye induction shows the published mutations on the positive word in paper order. The Richardson reading tab gives the normalized positive word for a signed gallery.</p>
+<h3>Word moves</h3><p>Choose an adjacent relation to inspect the native graphs on either side. Both projections and the bridge coordinates follow the selected lift. In this tab the optional comparison labeled “reversed word” uses a different Bao–Ye input. The graph and induction tab compares the same word and target.</p>
+<p>Enter generators separated by spaces or commas, with negative integers for barred letters. For n ≤ 9, compact positive words such as 2112 also work. Both n and 0 denote the affine generator. Use e for the identity.</p>
+<a href="https://arxiv.org/html/2210.04778v3#S3.SS1">GLSBS, §3.1</a> · <a href="https://arxiv.org/html/2506.10382v2#S5.SS1">Bao–Ye, §5.1</a>
+<a id="chronologicalGuideLink" hidden></a></div></dialog>
 <noscript>This explorer needs JavaScript to compute the two quivers.</noscript>
 <script>/* Periodic type-A plabic quiver, using one lifted disk per solid bridge.
    A browser port of affine_quiver_films.py. This calculation uses the graph
@@ -766,9 +748,11 @@ sitemap: false
     return {birth, frozen: cuts[0].changes.length !== 0, cuts};
   }
 
-  function countArrows(n, beta, frozen, topFaces, bottomFaces) {
+  function countArrows(n, beta, solid, frozen, topFaces, bottomFaces) {
     const m = beta.length, half = Array.from({length: m + 1}, () => Array(m + 1).fill(0));
-    for (let c = 0; c < m; c++) {
+    // GLSBS Proposition 3.19 sums local contributions over solid crossings.
+    for (const slot of solid) {
+      const c = slot-1;
       const letter = beta[c], i = Math.abs(letter), sign = Math.sign(letter);
       const faces = sign > 0 ? topFaces : bottomFaces;
       const L = faces[c][i], R = faces[c + 1][i];
@@ -809,7 +793,7 @@ sitemap: false
       if (film.frozen) frozen.push(birth);
     }
     return {n, beta: beta.slice(), v: v.slice(), solid: path.solid, hollow: path.hollow,
-      frozen, arrows: countArrows(n, beta, frozen, topFaces, bottomFaces),
+      frozen, arrows: countArrows(n, beta, path.solid, frozen, topFaces, bottomFaces),
       topWindows: path.top, bottomWindows: path.bottom, films, topFaces, bottomFaces};
   }
 
@@ -1882,7 +1866,8 @@ sitemap: false
     return null;
   }
 
-  globalThis.QuiverMoves=Object.freeze({enumerate,mutateIce,compareMappedIce,positiveWitness});
+  globalThis.QuiverMoves=Object.freeze({enumerate,mutateIce,compareMappedIce,positiveWitness,checkPaperSnapshot,
+    mixedAt(graph,p){return candidate(graph,p,'mixed',[graph.beta[p],graph.beta[p-1]],graph.v);}});
 })();
 </script>
 <script>/* Graph-side evidence for the individual Bao–Ye operations.
@@ -5002,7 +4987,7 @@ sitemap: false
     const link = new URL(base);
     link.search = '';
     const raw = view === 'words';
-    const original = raw || view === 'richardson';
+    const original = raw || view === 'richardson' || view === 'proof';
     link.searchParams.set('n', reading.n);
     link.searchParams.set('beta',(original ? reading.beta : reading.omega).join(',') || 'e');
     link.searchParams.set(raw ? 'c' : 'v', reading.v.join(',') || 'e');
@@ -6599,7 +6584,7 @@ sitemap: false
     function notify(){onNavigate?.(address());}
 
     function shareURL() {
-      const base=location.protocol==='file:'?'https://thomasmartinez0.github.io/affine-quiver/':location.href;
+      const base=location.href;
       const url=new URL(QuiverRichardsonReading.url(base,reading,'proof'));
       for(const [key,value] of Object.entries(address()))url.searchParams.set(key,value);
       return url.href;
@@ -6867,6 +6852,266 @@ sitemap: false
   globalThis.QuiverForwardProof=Object.freeze({create,comparison});
 })();
 </script>
+<script>// Literal GLSBS graph on the entered word, independently of the Bao–Ye seed.
+(() => {
+  'use strict';
+  const product = letters => letters.map(i=>'s'+String(i).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d])).join('') || 'e';
+  const positions = a => a.join(', ') || '∅';
+  function node(tag,text,cls) {
+    const element=document.createElement(tag);
+    if(text!==undefined) element.textContent=text;
+    if(cls) element.className=cls;
+    return element;
+  }
+  function control(label,action) {
+    const b=node('button',label,'nextbtn'); b.type='button'; b.onclick=action; return b;
+  }
+  function nativeLink(reading,stage,tab='film-proof') {
+    const url=new URL(location.href);
+    url.search='';url.hash=tab;
+    url.searchParams.set('n',reading.n);
+    url.searchParams.set('beta',reading.beta.join(',')||'e');
+    url.searchParams.set('v',reading.v.join(',')||'e');
+    if(stage!=null)url.searchParams.set('stage',stage);
+    return url;
+  }
+  function counts(vertices,frozen,arrows) {
+    const ice=new Set(frozen);
+    return [vertices.length-ice.size,ice.size,arrows.reduce((sum,[a,b,w])=>sum+(!ice.has(a)&&!ice.has(b)?Number(w):0),0)];
+  }
+  function nativeStages(n,beta,v) {
+    const path=QuiverFilm.compute(n,beta,v);
+    const stages=[{stage:0,target:[],position:null}];
+    for(const p of [...path.hollow].reverse()){
+      const previous=stages[stages.length-1];
+      const letter=beta[p-1];
+      const target=letter>0?[letter,...previous.target]:[...previous.target,-letter];
+      stages.push({stage:stages.length,position:p,target});
+    }
+    return stages;
+  }
+  function occurrences(graph) {
+    const labels={},count={};
+    for(const p of [...graph.solid].reverse()){
+      const i=Math.abs(graph.beta[p-1]);
+      count[i]=(count[i]??0)+1;labels[p]='('+i+','+count[i]+')';
+    }
+    return labels;
+  }
+  function scanFrames(reading,old,now) {
+    const {n,beta}=reading,letter=beta[now.position-1],i=Math.abs(letter),target=now.target;
+    let g=QuiverFilm.compute(n,beta,old.target),names=occurrences(g);
+    let frames=[{graph:g,labels:names,title:'Start at Q('+product(old.target)+', β)',text:'Occurrence labels count solid letters of each color from the right.'}];
+    function push(frame){frames.push({graph:g,labels:names,...frame});}
+    const parent=g;
+    g=QuiverFilm.compute(n,[...beta,-letter],target);
+    const identity=Object.fromEntries(parent.solid.map(p=>[p,p]));
+    if(!g.hollow.includes(g.beta.length)||QuiverMoves.compareMappedIce(parent,g,identity))throw new Error('Hollow insertion failed its full ice-quiver check.');
+    push({title:'Append hollow '+(letter>0?'−':'+')+i+' at the right',focus:g.beta.length,text:'At the right boundary, '+product([i])+' acts on the '+(letter>0?'left':'right')+' of '+product(target)+' and removes its '+(letter>0?'first':'last')+' factor. Every preceding bridge retains its label and arrows.'});
+    for(let p=beta.length;p>0;p--){
+      const move=QuiverMoves.mixedAt(g,p);
+      if(!move.verified)throw new Error('Full-quiver check failed at β['+p+']: '+move.reason);
+      const pivot=move.mutation==null?null:names[move.mutation];
+      names=Object.fromEntries(Object.entries(move.mapping).map(([from,to])=>[to,names[from]]));
+      g=move.graph;
+      push({title:'Pass β['+p+'] = '+beta[p-1]+(pivot?' · mutate '+pivot:' · preserve the quiver'),
+        focus:p,text:'Target '+product(target)+' stays fixed. The marker is '+(g.hollow.includes(p)?'hollow.':'solid and carries '+names[p]+'.')+' The bridge identification was checked on every arrow with a mutable endpoint.'});
+    }
+    const d=names[1],oldFrozen=new Set(g.frozen);
+    if(!oldFrozen.has(1))throw new Error('The leftmost marker must carry a frozen bridge.');
+    const neighbors=[...new Set(g.arrows.flatMap(([p,q])=>p===1?[q]:q===1?[p]:[]).filter(p=>!oldFrozen.has(p)))];
+    const frozen=[...new Set([...g.frozen,...neighbors])];
+    push({title:'Freeze the mutable neighbors of '+d,focus:1,frozen,
+      text:'The leftmost marker is solid and frozen. Newly frozen: '+(neighbors.map(p=>names[p]).join(', ')||'none')+'. The 3D picture still contains the boundary slab.'});
+    const cut={solid:g.solid.filter(p=>p!==1),frozen:frozen.filter(p=>p!==1),
+      arrows:g.arrows.filter(([p,q])=>p!==1&&q!==1&&!(frozen.includes(p)&&frozen.includes(q)))};
+    const map=Object.fromEntries(cut.solid.map(p=>[p,p-1]));
+    g=QuiverFilm.compute(n,beta,target);
+    const error=QuiverMoves.compareMappedIce(cut,g,map);
+    if(error)throw new Error('Boundary deletion failed its full ice-quiver check: '+error);
+    const canonical=occurrences(g),transport=Object.fromEntries(cut.solid.map(p=>[p-1,names[p]]));
+    if(g.solid.some(p=>canonical[p]!==transport[p]))throw new Error('Endpoint occurrence labels disagree after deletion.');
+    names=canonical;
+    push({title:'Delete '+d+' at the left boundary',text:'The surviving quiver agrees with an independent film computation on the full word β at target '+product(target)+'.'});
+    return frames;
+  }
+
+  function create(host) {
+    let reading,graph,stage,slot,shift,stages,model,series,frames=[],frameIndex,paperOrigin=null;
+    let camera={yaw:-.6,pitch:.28};
+    const header=node('header'),h=node('h2','GLSBS rightmost graph'),chooser=node('select');
+    chooser.setAttribute('aria-label','Boundary target for the graph');
+    const choose=node('label','Boundary target ');choose.append(chooser);header.append(h,choose);
+    const seriesChoice=node('select');seriesChoice.setAttribute('aria-label','Target sequence');
+    seriesChoice.append(new Option('GLSBS rightmost induction','native'),new Option('Bao–Ye’s stage targets','paper'));
+    const seriesLabel=node('label','Target sequence ');seriesLabel.append(seriesChoice);header.prepend(seriesLabel);header.prepend(h);
+    const steps=node('div',undefined,'di-controls'),stepChoice=node('select');stepChoice.setAttribute('aria-label','Rightmost induction operation');
+    const back=control('Previous operation',()=>showFrame(frameIndex-1,true)),ahead=control('Next operation',()=>showFrame(frameIndex+1,true));
+    steps.append(back,stepChoice,ahead);
+    const operation=node('section');operation.setAttribute('aria-live','polite');
+    const convention=node('p','The signed word is drawn in its entered order. Put the target at the right cut and scan toward cut 0. A positive i tests r sᵢ. A barred i tests sᵢ r. A shorter candidate gives a hollow crossing. Each solid crossing carries a bridge.','fp-note');
+    const summary=node('p',undefined,'di-product'),strip=node('div',undefined,'fp-strip');strip.setAttribute('role','group');strip.setAttribute('aria-label','Crossings in written order');
+    const readout=node('section');readout.setAttribute('aria-live','polite');
+    const previous=control('Previous scan step',()=>pick(slot+1,0));
+    const next=control('Next scan step',()=>pick(slot-1,0));
+    const nav=node('div',undefined,'di-controls');nav.append(previous,next);
+    const views=node('div',undefined,'di-graph-views'),holders={};
+    for(const [key,title] of [['space','3D graph and projection planes'],['red','Red projection · (t, y)'],['blue','Blue projection · (t, x)']]){
+      const figure=node('figure'),box=node('div');figure.append(node('figcaption',title),box);views.append(figure);holders[key]=box;
+    }
+    const coords=node('p',undefined,'di-graph-caption'),boundary=node('p','The marked disk boundary is cut 0, on the left. A bridge at slot c starts its film at cut c−1. It is frozen exactly when the film is still open at cut 0.','di-graph-caption');
+    const graphHost=node('div',undefined,'ep-quiver'),qData=node('details'),qBody=node('p');
+    qData.append(node('summary','Frozen slots and weighted ice arrows'),qBody);
+    const comparison=node('section',undefined,'chronological-audit'),actions=node('div',undefined,'rr-links');
+    host.classList.add('fp-panel');host.replaceChildren(header,convention,steps,operation,summary,strip,nav,readout,views,coords,boundary,node('h3','Film ice quiver'),graphHost,qData,comparison,actions);
+    function syncAddress() {
+      const url=nativeLink(reading,stages?stage:null);
+      if(series==='paper')url.searchParams.set('series','paper');
+      if(paperOrigin)url.searchParams.set('origin',paperOrigin.join(','));
+      if(frames.length)url.searchParams.set('move',frameIndex);
+      if(slot)url.searchParams.set('slot',slot);
+      if(shift)url.searchParams.set('lift',shift);
+      window.history.replaceState(null,'',url.href);
+    }
+    function paint() {
+      if(!graph)return;
+      const labels=frames[frameIndex]?.labels??Object.fromEntries(graph.solid.map(p=>[p,'b'+p]));
+      const extra=slot?{slot,shift}:null;
+      model=QuiverPlabicGeometry.build(graph,1,extra);
+      const viewport=QuiverPlabicDrawing.extent([model],[],[],[extra]);
+      for(const view of Object.keys(holders))QuiverPlabicDrawing.draw(holders[view],model,{
+        camera:{...camera,view},viewport,showPlanes:true,tracking:true,compact:true,selectedSlot:slot,selectedShift:shift,
+        labels,frozenSlots:graph.frozen,onPick:pick,onOrbit:view==='space'?(yaw,pitch)=>{camera={yaw,pitch};paint();}:null});
+      const frozen=new Set(frames[frameIndex]?.frozen??graph.frozen);
+      const vertices=graph.solid.map(p=>({id:String(p),label:labels[p],frozen:frozen.has(p),highlight:p===slot}));
+      QuiverDraw.quiver(graphHost,{nodes:vertices,edges:graph.arrows.filter(([a,b])=>!frozen.has(a)||!frozen.has(b)).map(([a,b,w])=>[String(a),String(b),w]),onSelect:p=>pick(Number(p),0),ariaLabel:'GLSBS rightmost film ice quiver'});
+      const event=model.events[slot-1],bridge=event?.lifts.find(l=>l.shift===shift)?.bridge;
+      if(bridge){
+        coords.textContent='Bridge '+labels[slot]+' at slot '+slot+' · '+QuiverPlabicGeometry.bridgeEndpoints(bridge).map(e=>e.color+' ('+e.point.join(', ')+'), red ('+e.red.join(', ')+'), blue ('+e.blue.join(', ')+')').join(' · ');
+      }else coords.textContent=event?'Hollow crossing. Follow the two strands in the highlighted slab.':'The empty word has no crossings.';
+    }
+    function pick(at,lift,save=true) {
+      slot=Number.isInteger(at)&&at>=1&&at<=graph.beta.length?at:null;shift=Number.isInteger(lift)?lift:0;
+      for(const btn of strip.children)btn.setAttribute('aria-pressed',String(+btn.dataset.slot===slot));
+      previous.disabled=slot==null||slot===graph.beta.length;next.disabled=slot==null||slot===1;
+      const windowText=values=>'['+values.join(', ')+']';
+      if(slot){
+        const hollow=graph.hollow.includes(slot), letter=graph.beta[slot-1],gen=product([Math.abs(letter)]);
+        const bridge=frames[frameIndex]?.labels?.[slot]??('b'+slot);
+        const before=graph.topWindows[slot],after=graph.topWindows[slot-1];
+        const marker=paperOrigin&&graph.beta.length>reading.beta.length?graph.beta.findIndex(i=>i>0)+1:0;
+        const originalSlot=reading.beta.length+1-slot+(marker&&slot>marker?1:0);
+        const origin=paperOrigin?(slot===marker?' (positive marker)':' (original positive slot '+originalSlot+')'):'';
+        readout.replaceChildren(node('h3','Slot '+slot+origin+' · '+(letter<0?'barred ':'positive ')+Math.abs(letter)+' · '+(hollow?'hollow':'solid bridge '+bridge)),
+          node('p','From cut '+slot+' test '+(letter<0?gen+' r':'r '+gen)+'. The length '+(hollow?'decreases. Take the candidate.':'increases. Keep r.')+
+            '  Affine windows  '+windowText(before)+' → '+windowText(after)+'.','di-graph-word'));
+      }else readout.replaceChildren();
+      host.dataset.slot=slot??'';paint();if(save)syncAddress();
+    }
+    function selectStage(at,lift,save,move) {
+      const nativeStep=series==='native'&&stages&&stage>0;
+      frames=nativeStep?scanFrames(reading,stages[stage-1],stages[stage]):[];
+      const target=stages?stages[stage].target:reading.v;
+      if(!frames.length)graph=QuiverFilm.compute(reading.n,reading.beta,target);
+      stepChoice.replaceChildren(...frames.map((f,j)=>new Option((j+1)+' / '+frames.length+' · '+f.title,j)));
+      steps.hidden=!frames.length;operation.hidden=!frames.length;
+      chooser.value=String(stages?stage:0);
+      showFrame(Number.isInteger(move)?move:frames.length-1,save,at,lift);
+    }
+    function showFrame(index,save,at,lift=0) {
+      frameIndex=Math.max(0,Math.min(frames.length-1,index));
+      const frame=frames[frameIndex];
+      if(frame){
+        graph=frame.graph;stepChoice.value=String(frameIndex);
+        back.disabled=frameIndex===0;ahead.disabled=frameIndex===frames.length-1;
+        operation.replaceChildren(node('h3',frame.title),node('p',frame.text,'fp-note'));
+      }
+      const target=graph.v,displayLabels=frame?.labels??Object.fromEntries(graph.solid.map(p=>[p,'b'+p]));
+      host.dataset.target=target.join(',');host.dataset.series=series;host.dataset.word=graph.beta.join(',');host.dataset.hollow=graph.hollow.join(',');host.dataset.stage=stages?stage:'';host.dataset.move=frameIndex;
+            summary.textContent='Pair ('+product(target)+', '+(graph.beta.join(' ')||'∅')+') · Right boundary at cut '+graph.beta.length+' · Hollow slots in written order  '+positions(graph.hollow)+' · Scan order  '+positions([...graph.hollow].reverse())+'.';
+      strip.replaceChildren(...graph.beta.map((i,j)=>{
+        const p=j+1,hollow=graph.hollow.includes(p),b=control(i<0?'−'+(-i):String(i),()=>pick(p,0));
+        b.dataset.slot=p;b.className=hollow?'fp-taken':'';b.setAttribute('aria-label','Slot '+p+', '+(hollow?'hollow':'solid bridge '+displayLabels[p]));return b;
+      }));
+      const frozen=frame?.frozen??graph.frozen;
+      qBody.textContent='Frozen slots '+positions(frozen)+'. Ice arrows '+(graph.arrows.filter(([a,b])=>!frozen.includes(a)||!frozen.includes(b)).map(([a,b,w])=>'slot '+a+' → '+b+(w===1?'':' × '+w)).join(', ')||'∅')+'.';
+      comparison.replaceChildren();actions.replaceChildren();
+      const moves=node('a','Inspect adjacent word moves');moves.href=nativeLink({...reading,beta:graph.beta,v:target},null,'word-moves');actions.append(moves);
+      if(paperOrigin&&graph.beta.length===reading.beta.length){
+        const paper=QuiverPaper.computeInPaperOrder(reading.n,paperOrigin,target);
+        const map={};
+        for(const [id,p] of Object.entries(paper.final.mapping))map[id]=graph.beta.length+1-p;
+        const result=QuiverMoves.checkPaperSnapshot(paper.final,graph,map);
+        comparison.dataset.signedAgreement=String(!result);
+        const original=p=>graph.beta.length+1-p;
+        comparison.append(node('h3','Bao–Ye on the original positive word'),
+          node('p','Original β = '+paperOrigin.join(' ')+'. This signed graph uses Dβ = (−iₘ,…,−i₁), at the same target '+product(target)+'. Each signed slot c represents positive slot '+graph.beta.length+' + 1 − c.'),
+          node('p','GLSBS hollow slots '+positions(graph.hollow)+' correspond, in that order, to positive slots '+positions(graph.hollow.map(original))+'. Bao–Ye’s leftmost selection in written order is '+positions(paper.selectedPositions)+'.'),
+          node('p',result?'The same-target ice-quiver comparison differs: '+result:'The occurrence labels, frozen set, and every weighted arrow with a mutable endpoint agree in their given orientations.'));
+        const originalView=node('a','Return to the positive graph at this target');
+        originalView.href=nativeLink({n:reading.n,beta:paperOrigin,v:target},null);actions.append(originalView);
+      }else delete comparison.dataset.signedAgreement;
+      if(stages&&!paperOrigin&&graph.beta.length===reading.beta.length){
+        const reversed=[...graph.beta].reverse(), inverseWord=[...target].reverse();
+        const reflected=QuiverPaper.computeInPaperOrder(reading.n,reversed,inverseWord).final;
+        const occ=occurrences(graph), idAt=p=>occ[p], paperId=id=>'('+id+')';
+        const filmIds=graph.solid.map(idAt), paperIds=reflected.active.map(paperId);
+        const frozenFilm=graph.frozen.map(idAt), frozenPaper=reflected.frozen.map(paperId);
+        const frozenSet=new Set(reflected.frozen), signature=items=>[...items].sort().join('|');
+        const arrowsFilm=graph.arrows.map(([p,q,w])=>idAt(p)+'>'+idAt(q)+'@'+w);
+        const arrowsPaper=reflected.edges.filter(([p,q])=>!frozenSet.has(p)||!frozenSet.has(q))
+          .map(([p,q,w])=>paperId(q)+'>'+paperId(p)+'@'+w);
+        const check=signature(filmIds)===signature(paperIds)&&signature(frozenFilm)===signature(frozenPaper)&&signature(arrowsFilm)===signature(arrowsPaper);
+        const identification=node('details'),heading=node('summary','Check Bao–Ye on the reversed word and inverse target');
+        identification.dataset.verified=String(check);
+        identification.append(heading,node('p','Bao–Ye input ('+product(inverseWord)+', '+(reversed.join(' ')||'∅')+'). Count solid occurrences in the GLSBS word from the right and reverse every Bao–Ye arrow. '+(check?'The vertex labels, frozen set and all weighted arrows with a mutable endpoint agree.':'The labeled ice quivers differ on this input.')));
+        comparison.append(identification);
+        const paper=QuiverPaper.computeInPaperOrder(reading.n,reading.beta,graph.v);
+        const snapshot=paper.final,film=counts(graph.solid,graph.frozen,graph.arrows),paperCounts=counts(snapshot.active,snapshot.frozen,snapshot.edges);
+        const paperSlots=paper.selectedPositions;
+        comparison.append(node('h3','Bao–Ye on the same positive word and target'),
+          node('p','Bao–Ye selects slots '+positions(paperSlots)+' from the left. The GLSBS graph selects slots '+positions(graph.hollow)+' from the right.'));
+        const table=node('table'),head=table.createTHead().insertRow(),body=table.createTBody();
+        for(const label of ['Invariant','GLSBS','Bao–Ye'])head.append(node('th',label));
+        ['Mutable vertices','Frozen vertices','Arrows between mutable vertices, with multiplicity'].forEach((label,k)=>{
+          const row=body.insertRow();row.append(node('th',label));row.insertCell().textContent=film[k];row.insertCell().textContent=paperCounts[k];
+          if(film[k]!==paperCounts[k])row.className='audit-difference';
+        });
+        const differ=film.some((v,k)=>v!==paperCounts[k]);
+        comparison.append(table,node('p',differ?'These counts differ, so the two endpoint ice quivers are nonisomorphic.':'The counts agree. They do not decide equality of labeled ice quivers.'));
+        const link=node('a','Inspect Bao–Ye’s seed operations');link.href=nativeLink({...reading,v:graph.v},paper.stages.length,'induction');actions.append(link);
+        const gallery=node('a','Draw the all-negative reversed graph at this same target');
+        const url=nativeLink({n:reading.n,beta:[...reading.beta].reverse().map(i=>-i),v:series==='paper'?reading.v:target},series==='paper'?stage:null);
+        url.searchParams.set('origin',reading.beta.join(','));gallery.href=url.href;actions.append(gallery);
+      }
+      pick(Number.isInteger(at)&&at>=1&&at<=graph.beta.length?at:(frame?.focus??graph.beta.length),lift,save);
+    }
+    stepChoice.onchange=()=>showFrame(Number(stepChoice.value),true);
+    chooser.onchange=()=>{stage=Number(chooser.value);selectStage(null,0,true);};
+    seriesChoice.onchange=()=>{const query=new URLSearchParams();query.set('series',seriesChoice.value);query.set('stage',stage);set(reading,query);syncAddress();};
+    function set(input,query) {
+      reading=input;
+      const encoded=query.get('origin'),origin=encoded?.split(',').map(Number);
+      const negative=input.beta.length>0&&input.beta.every(i=>i<0);
+      paperOrigin=negative?[...input.beta].reverse().map(i=>-i):null;
+      if(origin && (!paperOrigin || origin.join()!==paperOrigin.join()))throw new Error('The source word in this link differs from the reverse of the negative word.');
+      const positive=input.beta.every(i=>i>0);
+      series=query.get('series')==='paper'&&positive?'paper':'native';
+      stages=!positive&&!negative?null:series==='paper'?QuiverPaper.computeInPaperOrder(input.n,input.beta,input.v).snapshots.filter(s=>s.boundary):nativeStages(input.n,input.beta,input.v);
+      const chosen=query.has('stage')?Number(query.get('stage')):NaN;
+      stage=stages&&Number.isInteger(chosen)?Math.min(stages.length-1,Math.max(0,chosen)):(stages?.length??1)-1;
+      chooser.replaceChildren(...(stages?stages.map(s=>new Option('Stage '+s.stage+' · '+product(s.target)+(s.position?' · β['+s.position+']':''),s.stage)):[new Option(product(input.v),'0')]));
+      chooser.disabled=!stages||stages.length<2;
+      seriesLabel.hidden=!positive;seriesChoice.value=series;
+      const at=Number(query.get('slot')??query.get('bridge')),lift=Number(query.get('lift')??0);
+      const move=query.has('move')?Number(query.get('move')):null;
+      selectStage(at,Math.abs(lift)<=10?lift:0,false,move);
+    }
+    return {set,stage:()=>stage};
+  }
+  globalThis.NativeRightmost={create,nativeLink,nativeStages,scanFrames};
+})();
+</script>
 <script>/* Interface for the two independent engines. All correspondence verdicts
    compare computed vertices, frozen flags and oriented, weighted ice arrows. */
 (() => {
@@ -6886,7 +7131,7 @@ sitemap: false
   ];
   const paperPreset=presets.findIndex(p=>p.paperOrder);
   let readingModel, model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
-  let leftmost=true, mode='sweep', selectedMove=null, previewPivot=null, history=[], lastChange='';
+  let leftmost=false, mode='words', selectedMove=null, previewPivot=null, history=[], lastChange='';
   let geometry='chart', chartSide='after', cycleId=null;
   const readsPositiveWord=()=>mode==='direct'||mode==='proof';
   const usesReading=()=>mode==='richardson'||readsPositiveWord();
@@ -6929,8 +7174,8 @@ sitemap: false
   function updateTargetLabel() {
     const focused=mode==='richardson',positive=readsPositiveWord();
     $('targetLabel').textContent=focused||positive?'Terminal codistance v':/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
-    $('betaLabel').textContent=focused?'Chronological signed word β':positive?'Positive Bao–Ye word Ω':'Braid word β';
-    $('buildLabel').textContent=focused?'Read gallery':mode==='proof'?'Compare films':positive?'Start induction':'Build quiver';
+    $('betaLabel').textContent=focused?'Chronological signed word β':mode==='proof'?'Chronological signed word β':positive?'Positive Bao–Ye word Ω':'Braid word β';
+    $('buildLabel').textContent=focused?'Read gallery':mode==='proof'?'Build GLSBS graph':positive?'Start induction':'Build quiver';
   }
 
   function verdict(graph,step) {
@@ -7056,6 +7301,14 @@ sitemap: false
       if(!Number.isInteger(n)||n<3||n>24)throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
       const beta=parseWord($('beta').value,n,'β',true);
       const v=parseWord($('target').value,n,linkIndex??(usesReading()||!isSigned(beta)?'v':'c'),false);
+      if(mode==='proof'){
+        const source=directQuery?.has('gallery')?parseWord(directQuery.get('gallery'),n,'gallery',true):beta;
+        const next={n,beta:source,v,omega:beta};
+        proofView.set(next,directQuery??new URLSearchParams());
+        readingModel=next;$('beta').value=word(source);$('inputError').hidden=true;
+        if(!preset)$('examples').value='custom';
+        render();return true;
+      }
       if(usesReading()){
         const positive=readsPositiveWord();
         const hasOrigin=positive && directQuery?.has('gallery');
@@ -7096,9 +7349,9 @@ sitemap: false
       $('rank').value=p.n;$('beta').value=word(p.beta);$('target').value=word(p.v);$('examples').value=String(i);
       build(p);return;
     }
-    if(usesReading()){mode='sweep';leftmost=true;$('reading').value='left';}
+    if(usesReading()){mode='words';leftmost=false;$('reading').value='right';}
     if(p.nativeWord){leftmost=false;$('reading').value='right';mode='words';}
-    if(p.paperOrder){leftmost=true;$('reading').value='left';mode='sweep';}
+    if(p.paperOrder){leftmost=false;$('reading').value='right';mode='words';}
     $('rank').value=p.n;
     const written=p.paperOrder||p.writtenOrder;
     $('beta').value=word(written?p.beta:readWord(p.beta));
@@ -7106,10 +7359,7 @@ sitemap: false
     $('examples').value=String(i);
     if(!build(p))return;
     if(p.nativeWord){selectedMove=null;render();}
-    if(p.paperOrder){
-      sweepView.goToStage(0);
-      sweepView.selectLabel('2,1');
-    }
+    
   }
   function changeMode(next) {
     if(usesReading()){
@@ -7642,18 +7892,23 @@ sitemap: false
     const url=new URL(QuiverRichardsonReading.url(location.href,readingModel,'sweep'));
     if(frame)url.searchParams.set('frame',frame);
     window.history.replaceState(null,'',url.href);
-  },(host,reading,frame)=>QuiverLeftmostGraph.render(host,reading,frame));
-  const proofView=QuiverForwardProof.comparison($('forwardProof'),address=>{
-    const url=new URL(QuiverRichardsonReading.url(location.href,readingModel,'proof'));
-    for(const [key,value] of Object.entries(address)) if(value!=null)url.searchParams.set(key,value);
-    window.history.replaceState(null,'',url.href);
+  },(host,reading,frame)=>{
+    const stage=frame.row?.stage?.stage??frame.completedStages;
+    const link=el('a','Inspect the GLSBS rightmost graph at this stage target');
+    const url=NativeRightmost.nativeLink({n:reading.n,beta:reading.omega,v:reading.v},stage);
+    url.searchParams.set('series','paper');link.href=url.href;
+    host.replaceChildren(link);
   });
+  const proofView=NativeRightmost.create($('forwardProof'));
   bindDiagramPlayer();
   for(let i=0;i<presets.length;i++)$('examples').append(opt(presets[i].name,i));
   const custom=opt('Custom words','custom');custom.disabled=true;$('examples').append(custom);
   $('examples').onchange=e=>{
     const i=Number(e.target.value);
-    if(presets[i].writtenOrder||(mode==='proof'&&presets[i].paperOrder)){
+    if(mode==='proof'){
+      const p=presets[i];location.assign(NativeRightmost.nativeLink(p,null).href);return;
+    }
+    if(presets[i].writtenOrder){
       const p=presets[i];
       location.assign(QuiverRichardsonReading.url(location.href,{...p,omega:p.beta},mode==='proof'?'proof':'sweep'));
       return;
@@ -7698,23 +7953,14 @@ sitemap: false
         reading=QuiverRichardsonReading.compute(n,source,v);
       }
       if(!reading)return;
+      if(mode==='proof' && destination!=='proof')reading=QuiverRichardsonReading.compute(reading.n,reading.beta,reading.v);
       const link=new URL(QuiverRichardsonReading.url(location.href,reading,destination));
-      if(destination==='proof'&&mode==='direct'){
+      if(destination==='proof' && mode==='direct'){
         const frame=QuiverDirectInduction.frames(reading)[directView.index()];
-        if(frame.kind==='scan') link.searchParams.set('scan',frame.row.position);
-        else {
-          const step=frame.kind==='mutate'?QuiverLeftmostGraph.markerCut(reading,frame)+1:
-            frame.kind==='freeze'?reading.omega.length+2:frame.kind==='delete'?reading.omega.length+3:1;
-          link.searchParams.set('stage',frame.snapshot.stage);
-          link.searchParams.set('step',step);
+        if(reading.beta.every(i=>i>0)){
+          link.searchParams.set('stage',frame.row?.stage?.stage??frame.completedStages);
+          link.searchParams.set('series','paper');
         }
-      }else if(destination==='sweep'&&mode==='proof'){
-        const frame=proofView.auxiliaryFrame();
-        if(!frame)link.searchParams.set('stage',proofView.stage());
-        else if(frame.kind==='scan')link.searchParams.set('scan',frame.row.position);
-        else if(['initial','square','freeze','delete'].includes(frame.kind))
-          link.searchParams.set('op',reading.paper.snapshots.indexOf(frame.after.snapshot));
-        else link.searchParams.set('stage',frame.stage);
       }
       location.assign(link.href);
     }catch(err){fail(err);}
@@ -7751,21 +7997,21 @@ sitemap: false
   $('guide').addEventListener('click',e=>{if(e.target===$('guide'))$('guide').close();});
   let resizeToken;window.addEventListener('resize',()=>{clearTimeout(resizeToken);resizeToken=setTimeout(render,100);});
   const linkedWords=new URLSearchParams(location.search);
-  leftmost=linkedWords.get('reading')!=='right';
+  leftmost=false;
   $('reading').value=leftmost?'left':'right';
   const figurePreset=presets.findIndex(p=>p.anchor==='glsbs-figure-7');
   const figureHash='#'+presets[figurePreset].anchor;
   const paperHash='#'+presets[paperPreset].anchor;
-  const focusedAddress=location.hash==='#richardson' || (!location.hash && !['c','reading','relation','bridge','op','stage','scan','follow','replay','example'].some(k=>linkedWords.has(k)));
+  const focusedAddress=location.hash==='#richardson';
   const namedExample=location.hash===paperHash && !['stage','step','follow','replay','bridge','scan','side','lift','periods'].some(k=>linkedWords.has(k));
-  const proofAddress=location.hash==='#film-proof';
+  const proofAddress=!location.hash || ['#film-proof','#chronological-proof','#bao-ye'].includes(location.hash) || (location.hash===paperHash&&!namedExample);
   const directAddress=proofAddress||location.hash==='#induction'||namedExample;
   if(directAddress){
     mode=proofAddress?'proof':'direct';
-    const example=presets[paperPreset];
-    $('rank').value=namedExample?example.n:linkedWords.get('n')??'3';
-    $('beta').value=namedExample?word(example.beta):linkedWords.get('beta')??'2 1 1 2';
-    $('target').value=namedExample?word(example.v):linkedWords.get('v')??'1 2';
+    const example=presets[paperPreset],exampleDefaults=!linkedWords.has('beta');
+    $('rank').value=namedExample||exampleDefaults?example.n:linkedWords.get('n')??'3';
+    $('beta').value=namedExample||exampleDefaults?word(example.beta):linkedWords.get('beta');
+    $('target').value=namedExample||exampleDefaults?word(example.v):linkedWords.get('v')??linkedWords.get('c')??'e';
     if(namedExample)$('examples').value=String(paperPreset);
     render();build(namedExample?example:null,'v',namedExample?null:linkedWords);
   }else if(focusedAddress){
