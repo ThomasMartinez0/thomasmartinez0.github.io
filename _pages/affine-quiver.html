@@ -88,6 +88,14 @@ sitemap: false
 @media(max-width:760px){.di-graph-views{grid-template-columns:minmax(0,1fr)}}
 
 .fp-panel{margin:14px 0;padding:clamp(14px,2.2vw,27px)}
+.fp-view-select{display:flex;flex-wrap:wrap;gap:.35rem;margin:.6rem 0 1rem}
+.fp-view-select button{padding:.45em .8em;font:600 .9rem/1.35 var(--sans);color:var(--deep);border:1px solid var(--line);border-radius:5px;background:var(--paper)}
+.fp-view-select button[aria-pressed=true]{color:white;background:var(--deep);border-color:var(--deep)}
+#auxiliarySweep{padding:0;margin:0}.fp-convention{margin:.4rem 0 .9rem;color:var(--ink);max-width:90ch}
+#forwardProof [hidden]{display:none}
+#fixedRecursion{border-top:1px solid var(--line);margin-block:1rem;padding-top:.85rem}
+#fixedRecursion h4{font-size:1rem;margin:0 0 .35rem}#fixedRecursion p{font-size:.95rem;line-height:1.5;margin:.3rem 0}
+#inputAudit summary{font-size:.95rem;font-weight:600;cursor:pointer}#inputAudit .se-body{margin-top:.6rem}
 .fp-cases{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:12px 0;color:var(--muted);font-size:.9rem}
 .fp-cases[hidden]{display:none}.fp-cases span{margin-right:4px}
 .fp-cases button{padding:.32em .7em;background:var(--paper);color:var(--deep);border:1px solid var(--line);border-radius:5px;font-size:.875rem}
@@ -149,6 +157,15 @@ sitemap: false
 .gs-foot {margin-top:7px}.gs-directions {margin:0;color:#39544b}.gs-control {display:flex;align-items:center;gap:6px}.gs-control select {min-width:55px;max-width:160px}
 .gs-details {margin-top:6px;color:#39544b}.gs-details summary {width:fit-content;cursor:pointer}.gs-details dl {display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;margin:8px 0}.gs-details dd {margin:0;font-family:var(--mono);overflow-wrap:anywhere}.gs-details p {margin:5px 0}
 @media(max-width:600px){.gs-gallery{padding:10px}.gs-gallery .gs-head{align-items:start}.gs-intro{font-size:14px}.gs-gallery .gs-foot{align-items:start}.gs-axes{grid-template-columns:30px minmax(0,1fr)}.gs-axis-labels span{right:5px}}
+
+.ep-view{color:var(--deep);min-width:0}.ep-heading,.ep-navigation{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem}.ep-heading{justify-content:space-between;margin-block:.75rem}.ep-heading h3{margin:0}.ep-navigation label{display:flex;gap:.35rem;align-items:center}
+.ep-navigation button,.ep-navigation select{border:1px solid var(--line);border-radius:5px;padding:.4rem .6rem;color:var(--deep);background:var(--paper);font-size:.9rem}.ep-navigation button:disabled{opacity:.46}
+.ep-description,.ep-selected{font-size:1rem;line-height:1.5}.ep-strips{display:grid;gap:.4rem;margin:.7rem 0}.ep-strip{display:flex;align-items:center;gap:.7rem;min-width:0}.ep-target{min-width:3.5rem;max-width:30%;overflow-wrap:anywhere;font:600 .95rem/1.35 var(--sans)}.ep-letters{display:flex;gap:4px;flex-wrap:wrap;align-items:center}.ep-letter{display:inline-grid;place-items:center;height:29px;min-width:29px;border:1px solid var(--deep);border-radius:50%;background:var(--deep);color:white;font:.84rem var(--mono);padding:0 .25rem}
+.ep-extension{margin:.85rem 0;padding:.65rem .85rem;border-inline-start:3px solid #986035;background:#f6f5ec}.ep-extension h4{font:600 1rem/1.4 var(--sans);margin:0}.ep-extension p{font:.94rem/1.5 var(--sans);margin:.3rem 0}.ep-extension-counts{display:flex;gap:.55rem 1.2rem;flex-wrap:wrap;margin:.6rem 0}.ep-extension-counts dt{font:.83rem/1.4 var(--sans);color:var(--muted)}.ep-extension-counts dd{font:600 1.05rem/1.4 var(--mono);margin:0}
+.ep-letter[data-hollow=true]{background:var(--paper);color:var(--deep);border-width:2px}.ep-letter[aria-pressed=true]{outline:2px solid #a95526;outline-offset:1px}.ep-legend,.ep-view .ep-card p{font-size:.85rem;line-height:1.5;color:var(--muted)}.ep-selected{font-weight:600;margin:.35rem 0 .75rem}
+.ep-grids{display:grid;gap:.8rem;grid-template-columns:repeat(2,minmax(0,1fr))}.ep-facing{min-width:0}.ep-grids[data-count="1"]{grid-template-columns:minmax(0,1fr)}.ep-card,.ep-planes{min-width:0}.ep-card{border:1px solid var(--line);border-radius:6px;overflow:hidden}.ep-card h4,.ep-planes h4{background:#f1f5f2;margin:0;padding:.5rem .7rem;font:600 .95rem/1.4 var(--sans)}
+.ep-quiver{min-width:0;overflow-x:auto}.ep-card details,.ep-projections{padding:.4rem .7rem;font:.88rem/1.5 var(--sans)}.ep-card summary,.ep-projections summary{cursor:pointer}.ep-projections{margin:.5rem 0;background:var(--paper)}.ep-projections .ep-grids{margin-top:.7rem}.ep-planes figure{margin:0}.ep-planes figcaption{margin:.4rem 0 0;font:.85rem var(--sans);color:var(--muted)}.ep-card p{overflow-wrap:anywhere}
+@media(max-width:750px){.ep-grids{grid-template-columns:minmax(0,1fr)}.ep-navigation select{max-width:46vw}.ep-strip{align-items:flex-start}.ep-target{margin-block-start:.2rem}.ep-navigation button,.ep-navigation select{padding:.35rem .45rem}}
 
 .se-panel {display:grid; gap:.45rem; min-width:0; margin:.8rem 0; color:var(--deep)}
 .se-body {min-width:0; border-left:3px solid var(--teal); padding:.25rem .9rem .5rem; background:var(--paper)}
@@ -500,7 +517,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=2&amp;step=1#film-proof">Explore the full-gallery sweep in Bao–Ye Example 5.3</a>, <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=1&amp;step=4&amp;follow=2,1#film-proof">replay its first square</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
+ <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=2&amp;step=1#film-proof">Check stage 2 of Bao–Ye Example 5.3</a>, <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=1&amp;step=4&amp;follow=2,1&amp;chart=auxiliary#film-proof">replay its first square</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -510,11 +527,11 @@ sitemap: false
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
  <p id="inputError" class="error" role="alert" hidden></p>
- <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="directInduction" aria-pressed="false">Bao–Ye induction</button><button type="button" id="proofTab" aria-controls="forwardProof" aria-pressed="false">Film proof moves</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Film mutation charts</button></div>
+ <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="directInduction" aria-pressed="false">Bao–Ye induction</button><button type="button" id="proofTab" aria-controls="forwardProof" aria-pressed="false">Film comparison</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Film mutation charts</button></div>
  <label class="reading" id="filmConvention">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
  <section id="richardsonPanel" class="panel" aria-label="Richardson reading" hidden></section>
  <section id="directInduction" class="panel" aria-label="Bao–Ye induction on Ω" hidden></section>
- <section id="forwardProof" class="panel" aria-label="Film proof moves" hidden></section>
+ <section id="forwardProof" class="panel" aria-label="Film comparison" hidden></section>
  <section id="inductionWalk" aria-label="Chronological proof charts" hidden></section>
  <div id="subwordStrip" aria-label="Selected subexpression of beta" class="subword-strip"></div>
  <section id="wordPanel" class="panel action-panel" aria-labelledby="moveTitle"><div class="timeline-line"><div class="row"><h2 id="moveTitle">Change the braid word</h2><span id="moveCount" class="chip"></span></div><button id="undoMove" class="nextbtn" disabled>↶ Undo move</button></div>
@@ -571,13 +588,14 @@ sitemap: false
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. In the Word moves view, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
 <h3>Bao–Ye induction</h3><p>Read Ω from the left, starting at residual <i>r = v</i> with selected product <i>u = e</i>. Select <i>i</i> exactly when <i>sᵢr</i> shortens the residual. Then set <i>r</i> to <i>sᵢr</i> and append <i>sᵢ</i> on the right of <i>u</i>. For Ω = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂. The induction displays the seed after every mutation, freezing and deletion.</p>
-<h3>Film proof moves</h3><p>For a selected letter <i>i</i>, append one positive step to the terminal positive flag. This identifies the based galleries for <i>R</i><sub>u,Ω</sub> and <i>R</i><sub>usᵢ,Ωi</sub>. The two rows show the two positive flags. Each column is a cut in the original positive word Ω, read from left to right. Moving the vertical step one column changes which flag moves first. The auxiliary word Ωi and the codistance usᵢ stay fixed throughout the slide.</p>
+<h3>Fixed-word film comparison</h3><p>The two endpoint films use the written positive word Ω, with the old and new targets. For the genuine positive extension Ωi, the applet computes the leftmost subexpression again and compares its quiver to the old one. The stage also tests Bao–Ye’s matrix operations on the full old quiver. These computations concern the chosen input. A realization of those operations by moves on the original gallery is a separate question.</p>
+<h3>Auxiliary gallery sweep</h3><p>For a selected letter <i>i</i>, append one positive step to the terminal positive flag. This identifies the based galleries for <i>R</i><sub>u,Ω</sub> and <i>R</i><sub>usᵢ,Ωi</sub>. The two rows show the two positive flags. Each column is a cut in the original positive word Ω, read from left to right. Moving the vertical step one column changes which flag moves first. The auxiliary word Ωi and the codistance usᵢ stay fixed throughout the slide.</p>
 <p>The film strip calls the vertical step Mᵢ. At cut 0 it consumes the last sᵢ of usᵢ and is hollow. At the selected letter it acquires a solid bridge. Every subsequent matching letter gives a square move on the entire quiver. At the right boundary the applet shows which films close across the last slab. Removing it leaves these films open, so their vertices freeze. Follow a bridge to compare its arrows and its red and blue projections on both sides.</p>
 <p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens the direct induction at its identity seed. Use <b>Next</b> to read the published positive word from its first letter and follow each seed operation.</p>
 <p>The <a href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">chronological first-square replay</a> opens with bridge (2,1) selected. Use <b>Next</b> to compare its two projections across each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
 <p>In the Word moves view the signed film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
 <h3>Inspecting the periodic 3D graph</h3>
-<p>The Film proof moves tab computes each diagram in the written order of Ω. The optional <a href="#chronological-proof" id="chronologicalGuideLink">chronological proof charts</a> draw the corresponding all-barred reverse gallery with a positive marker travelling left. Their coordinates and slot numbers are chronological.</p>
+<p>The fixed-word comparison uses the leftmost films on Ω. The auxiliary view realizes Ω on the negative gallery in reverse chronological order. The optional <a href="#chronological-proof" id="chronologicalGuideLink">chronological proof charts</a> draw the corresponding all-barred reverse gallery with a positive marker travelling left. Their coordinates and slot numbers are chronological.</p>
 <p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
 <p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
 <p>With <b>Projection planes</b> on, select a bridge in the 3D graph or on either plane. Follow the dashed guides from an endpoint (x, y, t) to (0, y, t) on the red plane and to (x, 0, t) on the blue plane. Selecting a translated bridge gives the coordinates of that lift. <a href="?bridge=4#glsbs-figure-7">Inspect the fourth bridge and its two projections</a>.</p>
@@ -5525,12 +5543,15 @@ sitemap: false
       host.dataset.word=spec.word.join(',');host.dataset.hollow=g.hollow.join(',');host.dataset.target=spec.target.join(',');
       wordLine.textContent='Film strip   '+displayed+'     ·     hollow slots   '+(g.hollow.join(', ')||'none');
       if(spec.mode==='marker'){
-        desc.textContent='Target '+product(spec.target)+' at the left. The positive panel step is drawn as a film marker, '+(spec.riding?'solid and carrying '+bridgeName(spec.riding):'hollow')+
+        title.textContent='Auxiliary gallery film and projections';
+        desc.textContent='This chart puts Ω on the negative gallery and its added step on the positive flag. At target '+product(spec.target)+' the film marker is '+(spec.riding?'solid and carrying '+bridgeName(spec.riding):'hollow')+
           ' at slot '+spec.marker+'. '+(frame.kind==='freeze'&&cut===reading.omega.length?'Blue rings show films open at the present right boundary. The quiver above also freezes the films that will be open after this marker is cut. ':'')+
           (cutSelect.value!=='auto'?'The quiver above stays at the selected induction step.':'');
       }else if(spec.mode==='scan'){
+        title.textContent='Leftmost film on Ω and projections';
         desc.textContent='The scan diagram uses the fixed target v = '+product(spec.target)+'. The highlighted slot is the current scan position unless you have selected a bridge. Films extend toward the right boundary.';
       }else{
+        title.textContent='Leftmost film on Ω and projections';
         desc.textContent='The positive diagram starts at '+product(spec.target)+' and reaches e at the right boundary. Blue rings mark bridges whose films reach that boundary.';
       }
       paint();
@@ -6065,6 +6086,415 @@ sitemap: false
   globalThis.QuiverSweepEvidence = Object.freeze({render, ice});
 })();
 </script>
+<script>// Each endpoint uses the entire positive word and its own target.
+(() => {
+  'use strict';
+  const sub = i => String(i).replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]);
+  const product = word => word.map(i => 's' + sub(i)).join('') || 'e';
+  const vertex = id => '(' + id + ')';
+  const memo = new WeakMap();
+
+  function element(tag, text, cls) {
+    const node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (cls) node.className = cls;
+    return node;
+  }
+
+  function endpoint(reading, target) {
+    let recent = memo.get(reading);
+    if (!recent) { recent = new Map(); memo.set(reading,recent); }
+    const key = target.join(',');
+    if (recent.has(key)) return recent.get(key);
+    const graph = QuiverLeftmostGeometry.compute(reading.n, reading.omega, target);
+    const counts = new Map(), ids = new Map(), slots = new Map();
+    const frozen = new Set(graph.frozen);
+    const nodes = graph.solid.map(slot => {
+      const color = graph.beta[slot-1], k = (counts.get(color) || 0) + 1;
+      counts.set(color, k);
+      const id = color + ',' + k;
+      ids.set(slot, id); slots.set(id, slot);
+      return {id,label:vertex(id),frozen:frozen.has(slot)};
+    });
+    const edges = graph.arrows.map(([a,b,w]) => [ids.get(a),ids.get(b),String(w)]);
+    const side = {graph,nodes,edges,ids,slots,target};
+    recent.set(key,side);
+    if (recent.size > 3) recent.delete(recent.keys().next().value);
+    return side;
+  }
+
+  function makeStagePicker(stages, stage, change) {
+    const controls = element('div',undefined,'ep-navigation');
+    const prev = element('button','Previous stage'), next = element('button','Next stage');
+    prev.type = next.type = 'button';
+    prev.disabled = stage === 0; next.disabled = stage === stages.length;
+    prev.onclick = () => change(stage-1); next.onclick = () => change(stage+1);
+    const label = element('label','Stage '), select = element('select');
+    select.id = 'endpointStage';
+    select.add(new Option('0 · e','0'));
+    stages.forEach((r,j) => select.add(new Option((j+1) + ' · ' + product(r.prefix),String(j+1))));
+    select.value = String(stage); select.onchange = () => change(Number(select.value));
+    label.append(select); controls.append(prev,label,next);
+    return controls;
+  }
+
+  function terminalExtension(reading, row, old) {
+    const word = [...reading.omega,row.letter];
+    const graph = QuiverLeftmostGeometry.compute(reading.n,word,row.prefix);
+    const end = word.length, hollow = graph.hollow.includes(end);
+    const count = g => g.arrows.reduce((total,edge)=>total+edge[2],0);
+    const before = count(old.graph), extended = count(graph);
+    const section=element('section',undefined,'ep-extension');
+    section.dataset.oldArrows=before;section.dataset.extendedArrows=extended;
+    section.dataset.lastSlot=end;section.dataset.lastStatus=hollow?'hollow':'solid';
+    section.append(element('h4','Test the positive terminal extension'));
+    const terminal = 'Ω · '+row.letter;
+    section.append(element('p','Append a positive '+row.letter+' at slot '+end+' and set the target to '+product(row.prefix)+'. The terminal flag extension gives an isomorphism of the based gallery varieties. The leftmost film has already consumed this target at Ω['+row.position+'] when it reaches the appended letter.'));
+    const results=element('dl',undefined,'ep-extension-counts');
+    for(const [key,s] of [['Hollow slots on '+terminal,graph.hollow.join(', ')||'∅'],
+                         ['Appended slot '+end,hollow?'Hollow':'Solid'],
+                         ['Ice arrows on Q('+product(old.target)+', Ω)',before],
+                         ['Ice arrows on Q('+product(row.prefix)+', '+terminal+')',extended]]) {
+      const item=element('div');item.append(element('dt',key),element('dd',s));results.append(item);
+    }
+    section.append(results,element('p',before!==extended
+      ? 'The two leftmost film quivers have different arrow totals, counting multiplicities and every arrow with a mutable endpoint. Thus the proposed first quiver isomorphism fails on these inputs.'
+      : 'The weighted arrow totals with a mutable endpoint agree. This count alone leaves the proposed quiver isomorphism undecided.'));
+    return section;
+  }
+
+  function render(host, reading, stage, {setStage} = {}) {
+    const stages = reading.scan.filter(r => r.stage);
+    stage = Math.max(0,Math.min(stages.length,Number.isInteger(stage)?stage:0));
+    const row = stage ? stages[stage-1] : null;
+    const sides = row ? [endpoint(reading,row.previous),endpoint(reading,row.prefix)] : [endpoint(reading,[])];
+    let picked = row?.position || (reading.omega.length ? 1 : null), lift = 0;
+    let camera = {};
+    const chooseStage = setStage || (j => render(host,reading,j));
+    const heading = element('div',undefined,'ep-heading');
+    heading.append(element('h3','Positive word Ω'),makeStagePicker(stages,stage,chooseStage));
+    const desc = element('p',row
+      ? 'Keep every position of Ω and change the target from ' + product(row.previous) + ' to ' + product(row.prefix) + '. The leftmost scan now selects Ω[' + row.position + '] = ' + row.letter + '.'
+      : 'At the identity target e, every crossing is solid. Select a stage to inspect the next change of target.','ep-description');
+    if (!stages.length) desc.textContent='At the identity target e, every crossing is solid. This word and target have no further stages.';
+    const strips = element('div',undefined,'ep-strips'), stripButtons = [];
+    for (const side of sides) {
+      const line = element('div',undefined,'ep-strip'), numbers = element('div',undefined,'ep-letters');
+      line.dataset.target=side.target.join(','); line.dataset.hollow=side.graph.hollow.join(',');
+      const target = product(side.target), hollows = new Set(side.graph.hollow);
+      line.append(element('strong',target,'ep-target'),numbers);
+      if (!reading.omega.length) numbers.textContent='∅';
+      reading.omega.forEach((i,k) => {
+        const slot=k+1, hollow=hollows.has(slot), button=element('button',String(i),'ep-letter');
+        button.type='button';button.dataset.slot=slot;button.dataset.hollow=String(hollow);
+        const name='Ω['+slot+'] = '+i+' · '+(hollow?'hollow':'solid '+vertex(side.ids.get(slot)));
+        button.title=name;button.setAttribute('aria-label',target+' · '+name);
+        button.onclick=()=>pick(slot,0);
+        numbers.append(button);stripButtons.push(button);
+      });
+      strips.append(line);
+    }
+    const legend=element('p','Hollow crossings have an open outline. Select an original slot to follow it in both films.','ep-legend');
+    const sharedOrder=[...new Set(sides.flatMap(s=>s.nodes.map(n=>n.id)))];
+    const selected=element('p',undefined,'ep-selected');selected.setAttribute('aria-live','polite');
+    const grids=element('div',undefined,'ep-grids');
+    grids.dataset.count=sides.length;
+    const qTargets=sides.map((side,j)=>{
+      const card=element('section',undefined,'ep-card'), q=element('div',undefined,'ep-quiver');
+      card.dataset.endpoint=side.target.join(',');card.dataset.side=sides.length===1?'initial':j?'after':'before';
+      const title = (sides.length===1?'Initial':j?'After':'Before')+' · Q('+product(side.target)+', Ω)';
+      card.append(element('h4',title),q);
+      const arrowData=element('details'), summary=element('summary','Labels and weighted arrows');
+      const edges=side.edges.map(([a,b,w])=>vertex(a)+' → '+vertex(b)+(w==='1'?'':' × '+w));
+      arrowData.append(summary,element('p','Frozen · '+(side.nodes.filter(n=>n.frozen).map(n=>n.label).join(', ')||'∅')),element('p','Arrows · '+(edges.join(', ')||'∅')));
+      card.append(arrowData);grids.append(card);
+      return q;
+    });
+    const projections=element('details',undefined,'ep-projections');
+    projections.append(element('summary','Inspect the 3D films and their red and blue projections'));
+    const planes=element('div',undefined,'ep-grids');planes.dataset.count=sides.length;
+    const holders=sides.map(side=>{
+      const panel=element('section',undefined,'ep-planes');
+      panel.append(element('h4','Target '+product(side.target)));
+      const boxes={};
+      for(const [key,title] of [['space','3D graph'],['red','Red projection · x = 0'],['blue','Blue projection · y = 0']]){
+        const fig=element('figure'),h=element('div');fig.append(element('figcaption',title),h);panel.append(fig);boxes[key]=h;
+      }
+      planes.append(panel);return boxes;
+    });
+    projections.append(planes);
+    function paintPlanes() {
+      if (!projections.open) return;
+      const models=sides.map(s=>QuiverLeftmostGeometry.build(s.graph,1,picked?{slot:picked,shift:lift}:null));
+      const viewport=QuiverPlabicDrawing.extent(models,[],[],models.map(()=>picked?{slot:picked,shift:lift}:null));
+      sides.forEach((side,j)=>{
+        const labels=new Map([...side.ids].map(([k,id])=>[k,vertex(id)]));
+        for(const view of Object.keys(holders[j])) QuiverPlabicDrawing.draw(holders[j][view],models[j],{
+          camera:{...camera,view},viewport,showPlanes:true,tracking:true,compact:true,paired:sides.length>1,
+          selectedSlot:picked,selectedShift:lift,labels,frozenSlots:side.graph.frozen,orderName:'left-to-right',onPick:pick,
+          onOrbit:view==='space'?(yaw,pitch)=>{camera={yaw,pitch};paintPlanes();}:null});
+      });
+    }
+    function pick(slot,shift) {
+      picked=slot;lift=shift;
+      for(const b of stripButtons)b.setAttribute('aria-pressed',String(Number(b.dataset.slot)===picked));
+      selected.textContent=picked?'Ω['+picked+'] · '+sides.map(s=>product(s.target)+': '+(s.ids.has(picked)?'solid '+vertex(s.ids.get(picked)):'hollow')).join('    |    '):'Empty word';
+      sides.forEach((side,j)=>QuiverDraw.quiver(qTargets[j],{layoutOrder:sharedOrder,
+        nodes:side.nodes.map(n=>({...n,highlight:side.slots.get(n.id)===picked})),edges:side.edges,
+        ariaLabel:'Leftmost endpoint ice quiver for '+product(side.target),onSelect:id=>pick(side.slots.get(id),0)}));
+      paintPlanes();
+    }
+    projections.ontoggle=paintPlanes;
+    host.classList.add('ep-view');host.dataset.stage=String(stage);
+    const blocks=[heading,desc,strips,legend];
+    if(row)blocks.push(terminalExtension(reading,row,sides[0]));
+    blocks.push(selected,grids,projections);
+    host.replaceChildren(...blocks);
+    pick(picked,0);
+  }
+
+  globalThis.QuiverEndpointView=Object.freeze({render,endpoint});
+})();
+</script>
+<script>// Test the Bao–Ye operations on the complete leftmost films of the positive word.
+(() => {
+  'use strict';
+  const label = id => '(' + id + ')';
+  const recent = new WeakMap();
+
+  function endpoint(reading,target) {
+    const side=QuiverEndpointView.endpoint(reading,target);
+    return {film:side.graph,byId:Object.fromEntries(side.slots),bySlot:Object.fromEntries(side.ids)};
+  }
+
+  function comparePaper(snapshot, result) {
+    const frozen = new Set(snapshot.frozen);
+    const arrows = snapshot.edges.filter(([a,b]) => !frozen.has(a) || !frozen.has(b));
+    return QuiverMoves.compareMappedIce({solid:snapshot.active,frozen:snapshot.frozen,arrows},result.film,result.byId);
+  }
+
+  function check(reading,stage) {
+    const cached = recent.get(reading);
+    if (cached?.stage === stage) return cached;
+    const snapshots = reading.paper.snapshots.filter(s => s.boundary);
+    if (!Number.isInteger(stage) || !snapshots[stage]) throw new RangeError('Unknown induction stage.');
+    const from = snapshots[Math.max(0,stage - 1)], to = snapshots[stage];
+    const before = cached?.stage === stage - 1 ? cached.after : endpoint(reading,from.target);
+    const after = stage === 0 ? before : endpoint(reading,to.target);
+    const beforeError = comparePaper(from,before), afterError = comparePaper(to,after);
+    const result = {stage,before,after,pivots:[],frozen:[],deleted:null,beforeError,afterError,reason:''};
+    if (stage) {
+      const step = reading.paper.stages[stage-1];
+      result.pivots = [...step.mutations];
+      result.deleted = step.deleteVertex;
+      let graph = before.film;
+      try {
+        for (const id of result.pivots) graph = QuiverMoves.mutateIce(graph,before.byId[id]);
+        const d = before.byId[result.deleted];
+        if (!graph.frozen.includes(d)) throw new Error('The deletion vertex is missing or mutable.');
+        const frozen = new Set(graph.frozen);
+        const neighbors = new Set();
+        for (const [a,b] of graph.arrows) {
+          const other = a === d ? b : b === d ? a : null;
+          if (other !== null && !frozen.has(other)) neighbors.add(other);
+        }
+        for (const slot of neighbors) frozen.add(slot);
+        result.frozen = [...neighbors].sort((a,b)=>a-b).map(slot=>before.bySlot[slot]);
+        const cut = {
+          solid:graph.solid.filter(p=>p!==d),
+          frozen:[...frozen].filter(p=>p!==d),
+          arrows:graph.arrows.filter(([a,b])=>a!==d && b!==d && !(frozen.has(a) && frozen.has(b)))
+        };
+        // Slot numbers can change. Surviving occurrence labels identify the two ends.
+        const mapping = Object.fromEntries(cut.solid.map(p=>[p,after.byId[before.bySlot[p]]]));
+        result.reason = QuiverMoves.compareMappedIce(cut,after.film,mapping);
+      } catch (err) {
+        result.reason = err.message;
+      }
+    }
+    result.ok = !beforeError && !afterError && !result.reason;
+    recent.set(reading,result);
+    return result;
+  }
+
+  function render(host,reading,stage) {
+    const r = check(reading,stage);
+    const heading = document.createElement('h4'), operations = document.createElement('p'), outcome = document.createElement('p');
+    heading.textContent = stage ? 'Bao–Ye operations on the full leftmost quiver' : 'Identity-target check';
+    host.dataset.endpointCheck = r.ok ? 'match' : 'difference';
+    host.dataset.stage = String(stage);
+    if (stage) {
+      const pivots = r.pivots.length ? 'Mutate in order at ' + r.pivots.map(label).join(', ') : 'No mutations';
+      const freeze = r.frozen.length ? 'Freeze ' + r.frozen.map(label).join(', ') : 'No new frozen vertices';
+      operations.textContent = pivots + '. ' + freeze + '. Delete ' + label(r.deleted) + '.';
+    }
+    if (r.ok) {
+      outcome.textContent = stage
+        ? 'Applying these operations to the previous full film gives the independently computed next film. Every occurrence label, frozen vertex and weighted arrow with a mutable endpoint agrees. This checks the matrix calculation for this input. A realization by gallery moves needs a separate argument.'
+        : 'At e the full positive film and the Bao–Ye initial matrix agree on every occurrence label, frozen vertex and weighted arrow with a mutable endpoint.';
+    } else {
+      const issues = [];
+      if (r.beforeError) issues.push('Starting film versus Bao–Ye: ' + r.beforeError);
+      if (r.reason) issues.push('Stage operation versus the next film: ' + r.reason);
+      if (r.afterError && stage) issues.push('Next film versus Bao–Ye: ' + r.afterError);
+      outcome.textContent = issues.join(' ');
+    }
+    host.replaceChildren(heading,...(stage?[operations]:[]),outcome);
+    return r;
+  }
+  globalThis.QuiverEndpointRecursion = Object.freeze({check,render});
+})();
+</script>
+<script>// Tests on the actual chronological input. The positive presentation is used
+// only to read Bao–Ye's chosen slots and its completed stage.
+(() => {
+  'use strict';
+  const cache = new WeakMap();
+  const sub = i => String(i).replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]);
+  const product = word => word.map(i => 's' + sub(i)).join('') || 'e';
+  const signedWord = word => word.map(i => i < 0 ? '(−' + (-i) + ')' : String(i)).join(' ') || '∅';
+  const slotList = a => a.join(', ') || 'none';
+
+  function affineWindow(n, letters) {
+    const w = Array.from({length:n}, (_, p) => p + 1);
+    for (const i of letters) {
+      if (i === n) [w[0], w[n-1]] = [w[n-1] - n, w[0] + n];
+      else [w[i-1],w[i]] = [w[i],w[i-1]];
+    }
+    return w;
+  }
+
+  function counts(vertices, frozen, edges) {
+    const fixed = new Set(frozen);
+    let mutableArrows = 0n;
+    for (const [a,b,w] of edges) {
+      if (!fixed.has(a) && !fixed.has(b)) mutableArrows += BigInt(w);
+    }
+    return {mutable:vertices.length - fixed.size, frozen:fixed.size, mutableArrows:String(mutableArrows)};
+  }
+
+  function actual(n, beta, target) {
+    try {
+      const {solid, hollow, frozen, arrows} = QuiverFilm.compute(n, beta, target);
+      return {beta, target, solid, hollow, frozen, arrows};
+    } catch (e) {
+      if (e.message === 'The word β has no distinguished subexpression for this boundary permutation.') return null;
+      throw e;
+    }
+  }
+
+  function data(reading, stage) {
+    if (!Number.isInteger(stage) || stage < 0 || stage > reading.paper.stages.length) {
+      throw new RangeError('Unknown Bao–Ye stage.');
+    }
+    if (!cache.has(reading)) cache.set(reading, new Map());
+    const stages = cache.get(reading);
+    if (stages.has(stage)) return stages.get(stage);
+    const {n,beta,paper} = reading;
+    const row = stage ? reading.scan.find(r => r.stage?.stage === stage) : null;
+    const previousTarget = row?.previous || [], target = row?.prefix || [];
+    const letter = row?.letter ?? null;
+    const snapshot = paper.snapshots.find(s => s.stage === stage && s.boundary);
+    const original = actual(n,beta,target);
+    const originalCounts = original ? counts(original.solid, original.frozen, original.arrows) : null;
+    const baoYeCounts = counts(snapshot.active, snapshot.frozen, snapshot.edges);
+    const result = {
+      previousTarget,target,letter,original,originalCounts,baoYeCounts,
+      obstructed:originalCounts ? Object.keys(baoYeCounts).some(k => originalCounts[k] !== baoYeCounts[k]) : null,
+      previous:null,extension:null,prepend:null,extensionPreservesIce:null,prependedSelection:null,
+      targetMatchesSelection:null
+    };
+    if (row) {
+      const previous = actual(n,beta,previousTarget);
+      const extension = actual(n,[...beta,letter],target);
+      const prepend = actual(n,[-letter,...beta],target);
+      const sameIce = Boolean(previous && extension && ['solid','frozen','arrows'].every(key =>
+        JSON.stringify(previous[key]) === JSON.stringify(extension[key])));
+      // The earlier chosen slots are already in rev(N)P order. Prepending a
+      // chronological negative step inserts its factor between rev(N) and P.
+      const old = reading.scan.filter(r => r.stage && r.stage.stage < stage);
+      const prependedSelection = [...old.filter(r => r.value < 0).map(r => r.letter), letter,
+        ...old.filter(r => r.value > 0).map(r => r.letter)];
+      const left = affineWindow(n,prependedSelection), right = affineWindow(n,target);
+      Object.assign(result,{previous,extension,prepend,extensionPreservesIce:sameIce,prependedSelection,
+        targetMatchesSelection:left.every((x,p) => x === right[p])});
+    }
+    stages.set(stage,result);
+    return result;
+  }
+
+  function el(tag,text) {
+    const node = document.createElement(tag);
+    node.textContent = text;
+    return node;
+  }
+
+  function render(host,reading,stage) {
+    const open = Boolean(host.querySelector('details[open]'));
+    const box = document.createElement('details');
+    box.className = 'gs-details';
+    box.append(el('summary','Test the actual chronological gallery β'));
+    const show = () => {
+      if (!box.open || box.children.length > 1) return;
+      const a = data(reading,stage), i = a.letter;
+      const pane = document.createElement('div');
+      pane.className = 'se-body';
+      const hasNegative = reading.beta.some(x => x < 0);
+      pane.append(el('p','Chronological input β = ' + signedWord(reading.beta) + '. ' +
+        (hasNegative ? 'Its Bao–Ye presentation is Ω = ' + signedWord(reading.omega) + '. ' : '') +
+        'The film scans backward from the terminal codistance. Slots below are numbered in chronological order.'));
+      const tbl = document.createElement('table'), header = tbl.createTHead().insertRow();
+      for (const name of ['Gallery word','Codistance','Hollow slots','Extra step']) {
+        const th = el('th',name); th.scope='col'; header.append(th);
+      }
+      const body = tbl.createTBody();
+      const add = (name,id,graph,last,word) => {
+        const row = body.insertRow();row.dataset.galleryCheck=id;
+        const th = el('th',name);th.scope='row';row.append(th);
+        row.insertCell().textContent = product(word);
+        row.insertCell().textContent = graph ? slotList(graph.hollow) : 'Infeasible';
+        row.insertCell().textContent = last === null || !graph ? '—' :
+          'Slot ' + last + (graph.hollow.includes(last) ? ' · hollow' : ' · solid');
+      };
+      if (stage) {
+        add('β','before',a.previous,null,a.previousTarget);
+        add('β · ' + i,'append',a.extension,reading.beta.length+1,a.target);
+        add('(−' + i + ') · β','prepend',a.prepend,1,a.target);
+      }
+      add('β','endpoint',a.original,null,a.target);
+      const scroll=document.createElement('div');scroll.className='se-scroll';scroll.append(tbl);
+      pane.append(scroll);
+      if (stage) {
+        pane.append(el('p','Appending +' + i + ' changes the positive flag. ' +
+          (a.extensionPreservesIce ? 'The earlier solid slots, frozen set and all mutable-incident arrows agree with the preceding chronological film.' :
+            'The chronological quivers differ in the surviving slots, frozen set or mutable-incident arrows.')));
+        const selected = product(a.prependedSelection);
+        pane.append(el('p','Selecting the new initial (−' + i + ') together with the previously selected Bao–Ye slots gives ' +
+          selected + (a.targetMatchesSelection ? ', equal to the new target ' : ', different from the new target ') +
+          product(a.target) + '. ' + (hasNegative ? 'In rev(N)P this inserts its factor after the selected negative factors.' :
+            'On this positive β the new factor is on the left.')));
+      }
+      if (a.originalCounts) {
+        const c=a.originalCounts, b=a.baoYeCounts;
+        const p = el('p','At ' + product(a.target) + ' the chronological film on β has ' + c.mutableArrows +
+          ' mutable-to-mutable arrows and Bao–Ye on Ω has ' + b.mutableArrows + ', counted with multiplicity. ' +
+          (a.obstructed ? 'The counts rule out an ice-quiver isomorphism.' : 'Equal counts leave the quiver identification open.'));
+        p.dataset.rawMutableArrows=c.mutableArrows; p.dataset.baoYeMutableArrows=b.mutableArrows;
+        if (c.mutable!==b.mutable || c.frozen!==b.frozen) {
+          p.append(document.createTextNode(' Mutable/frozen vertex counts are '+c.mutable+'/'+c.frozen+' and '+b.mutable+'/'+b.frozen+', respectively.'));
+        }
+        pane.append(p);
+      }
+      box.append(pane);
+    };
+    box.ontoggle=show;
+    host.replaceChildren(box);
+    box.open=open;
+    if (open) show();
+  }
+  globalThis.QuiverInputAudit = Object.freeze({data,render});
+})();
+</script>
 <script>// The film proof reads the displayed word from the left. Both pictures of a
 // move use their own directly computed geometry and the same bridge labels.
 (() => {
@@ -6124,7 +6554,7 @@ sitemap: false
   }
 
   function create(host,onNavigate) {
-    const heading=el('h2','Film proof moves'),header=el('header');
+    const heading=el('h3','Auxiliary gallery sweep'),header=el('header');
     const prev=control('button','forwardPrev','Previous proof move'),next=control('button','forwardNext','Next proof move');
     prev.textContent='← Previous';next.textContent='Next →';
     const picker=control('select','forwardMove','Choose proof move'),nav=el('div',undefined,'fp-nav');
@@ -6148,7 +6578,8 @@ sitemap: false
     const evidence=el('section');evidence.id='forwardEvidence';
     const pair=el('div',undefined,'fp-sides'),replay=QuiverSquareReplay.create();
     host.classList.add('fp-panel');
-    host.replaceChildren(header,cases,strip,current,note,selectedProduct,gallery,evidence,settings,pair,replay.element);
+    const convention=el('p','Here Ω is carried by the negative gallery in reverse chronological order, and the extra i-step is on the positive flag. Mᵢ denotes that step in the reflected film strip. A seed transition from the original presentation would need a separate argument.','fp-convention');
+    host.replaceChildren(header,convention,cases,strip,current,note,selectedProduct,gallery,evidence,settings,pair,replay.element);
     let reading,frames=[],cursor=0,pinned=null,shift=0,camera={},cards=[];
     let lastWidth=0;
     const observer=new ResizeObserver(entries=>{
@@ -6159,7 +6590,7 @@ sitemap: false
 
     function address(){
       const f=frames[cursor];
-      const params=f.kind==='scan'?{scan:f.row.position}:{stage:f.stage,step:f.step};
+      const params=f.kind==='scan'?{chart:'auxiliary',scan:f.row.position}:{chart:'auxiliary',stage:f.stage,step:f.step};
       if(pinned)params.follow=pinned;
       if(pinned && shift)params.lift=shift;
       return params;
@@ -6203,7 +6634,7 @@ sitemap: false
 
     function downloadData(){
       const f=frames[cursor];
-      const data={view:'Forward film proof',moveURL:shareURL(),rank:reading.n,chronologicalInput:reading.beta,
+      const data={view:'Auxiliary gallery sweep',moveURL:shareURL(),rank:reading.n,chronologicalInput:reading.beta,
         positiveWord:reading.omega,sourceSlots:reading.scan.map(r=>r.slot),finalTarget:reading.v,
         selectedPositions:reading.scan.filter(r=>r.stage).map(r=>r.position),stage:f.stage,step:f.step,
         kind:f.kind,scanPosition:f.kind==='scan'?f.row.position:null,selectedPosition:f.stage?f.row.position:null,
@@ -6378,7 +6809,62 @@ sitemap: false
     detail.onchange=paint;copy.onclick=copyLink;download.onclick=downloadData;
     return {set,go,index:()=>cursor,pause:()=>replay.pause()};
   }
-  globalThis.QuiverForwardProof=Object.freeze({create});
+  function comparison(host,onNavigate) {
+    const heading=el('h2','Film comparison');
+    const nav=el('div',undefined,'fp-view-select');
+    nav.setAttribute('role','group');nav.setAttribute('aria-label','Choose film presentation');
+    const original=el('button','Fixed positive word'),auxiliary=el('button','Auxiliary gallery');
+    original.type=auxiliary.type='button';
+    original.id='selectFixedFilm';auxiliary.id='selectAuxiliaryFilm';
+    nav.append(original,auxiliary);
+    const endpoints=el('section'),sweep=el('section'),recursion=el('section'),audit=el('section');
+    endpoints.id='fixedEndpoints';sweep.id='auxiliarySweep';recursion.id='fixedRecursion';audit.id='inputAudit';
+    host.classList.add('fp-panel');
+    host.replaceChildren(heading,nav,endpoints,recursion,audit,sweep);
+    let reading,stage=0,mode='fixed',engine=null,locationInSweep=null;
+    function choose(view) {
+      mode=view;
+      host.dataset.view=view;
+      const marked=view==='auxiliary';
+      original.setAttribute('aria-pressed',String(!marked));auxiliary.setAttribute('aria-pressed',String(marked));
+      endpoints.hidden=recursion.hidden=audit.hidden=marked;sweep.hidden=!marked;
+      if(marked) {
+        if(!engine)engine=create(sweep, address=>{
+          locationInSweep=new URLSearchParams(address);
+          stage=address.stage ?? stageForQuery(locationInSweep);
+          onNavigate(address);
+        });
+        engine.set(reading,locationInSweep);
+      } else {
+        engine?.pause();
+        QuiverEndpointView.render(endpoints,reading,stage,{setStage:next=>{
+          if(!Number.isInteger(next)||next<0||next>reading.paper.stages.length)return;
+          stage=next;locationInSweep=new URLSearchParams({stage,step:1});choose('fixed');onNavigate({stage});
+        }});
+        QuiverEndpointRecursion.render(recursion,reading,stage);
+        QuiverInputAudit.render(audit,reading,stage);
+      }
+    }
+    function stageForQuery(query) {
+      if(query.has('stage')&&/^\d+$/.test(query.get('stage')))return Math.min(Number(query.get('stage')),reading.paper.stages.length);
+      const pos=Number(query.get('scan'));
+      if(pos>0)return reading.scan.filter(r=>r.stage && r.position<=pos).length;
+      return Math.min(1,reading.paper.stages.length);
+    }
+    original.onclick=()=>{if(mode==='fixed')return;choose('fixed');onNavigate({stage});};
+    auxiliary.onclick=()=>{
+      if(mode==='auxiliary')return;
+      choose('auxiliary');onNavigate(Object.fromEntries(new URLSearchParams([...locationInSweep,['chart','auxiliary']])));
+    };
+    function set(model,query) {
+      reading=model;stage=stageForQuery(query);
+      locationInSweep=new URLSearchParams(query);
+      if(!query.has('stage')&&!query.has('scan'))locationInSweep.set('stage',stage);
+      choose(query.get('chart')==='auxiliary'||query.get('replay')==='square'?'auxiliary':'fixed');
+    }
+    return {set,stage:()=>stage,auxiliaryFrame:()=>mode==='auxiliary'?QuiverForwardProofModel.frames(reading)[engine.index()]:null};
+  }
+  globalThis.QuiverForwardProof=Object.freeze({create,comparison});
 })();
 </script>
 <script>/* Interface for the two independent engines. All correspondence verdicts
@@ -6444,7 +6930,7 @@ sitemap: false
     const focused=mode==='richardson',positive=readsPositiveWord();
     $('targetLabel').textContent=focused||positive?'Terminal codistance v':/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
     $('betaLabel').textContent=focused?'Chronological signed word β':positive?'Positive Bao–Ye word Ω':'Braid word β';
-    $('buildLabel').textContent=focused?'Read gallery':mode==='proof'?'Start proof':positive?'Start induction':'Build quiver';
+    $('buildLabel').textContent=focused?'Read gallery':mode==='proof'?'Compare films':positive?'Start induction':'Build quiver';
   }
 
   function verdict(graph,step) {
@@ -7157,7 +7643,7 @@ sitemap: false
     if(frame)url.searchParams.set('frame',frame);
     window.history.replaceState(null,'',url.href);
   },(host,reading,frame)=>QuiverLeftmostGraph.render(host,reading,frame));
-  const proofView=QuiverForwardProof.create($('forwardProof'),address=>{
+  const proofView=QuiverForwardProof.comparison($('forwardProof'),address=>{
     const url=new URL(QuiverRichardsonReading.url(location.href,readingModel,'proof'));
     for(const [key,value] of Object.entries(address)) if(value!=null)url.searchParams.set(key,value);
     window.history.replaceState(null,'',url.href);
@@ -7195,7 +7681,7 @@ sitemap: false
       window.history.replaceState(null,'',QuiverRichardsonReading.url(location.href,readingModel,mode==='direct'?'sweep':mode==='proof'?'proof':'richardson'));
     }
   };
-  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent=mode==='richardson'?'Words edited. Choose Read gallery to update the selection.':mode==='direct'?'Words edited. Choose Start induction to read the new word.':mode==='proof'?'Words edited. Choose Start proof to read the new word.':'Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
+  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent=mode==='richardson'?'Words edited. Choose Read gallery to update the selection.':mode==='direct'?'Words edited. Choose Start induction to read the new word.':mode==='proof'?'Words edited. Choose Compare films to use the new word.':'Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
   $('reading').onchange=e=>{
     const was=leftmost;leftmost=e.target.value==='left';
     if(!build()){leftmost=was;e.target.value=was?'left':'right';}
@@ -7223,8 +7709,9 @@ sitemap: false
           link.searchParams.set('step',step);
         }
       }else if(destination==='sweep'&&mode==='proof'){
-        const frame=QuiverForwardProofModel.frames(reading)[proofView.index()];
-        if(frame.kind==='scan')link.searchParams.set('scan',frame.row.position);
+        const frame=proofView.auxiliaryFrame();
+        if(!frame)link.searchParams.set('stage',proofView.stage());
+        else if(frame.kind==='scan')link.searchParams.set('scan',frame.row.position);
         else if(['initial','square','freeze','delete'].includes(frame.kind))
           link.searchParams.set('op',reading.paper.snapshots.indexOf(frame.after.snapshot));
         else link.searchParams.set('stage',frame.stage);
