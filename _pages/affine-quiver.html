@@ -58,6 +58,35 @@ sitemap: false
 .rr-details{margin-top:17px}.rr-details summary{cursor:pointer;width:fit-content;font-size:13px}
 @media(max-width:780px){.rr-content{grid-template-columns:minmax(0,1fr);gap:20px}.rr-graph svg{max-height:225px}.rr-table td,.rr-table th{padding:6px}.rr-words{gap:12px 18px}}
 
+#directInduction{margin:14px 0;padding:clamp(14px,2.5vw,28px)}
+#directInduction header,.di-controls,.di-strip{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+#directInduction header{justify-content:space-between;gap:14px}
+#directInduction h2{font-size:clamp(23px,2.4vw,31px)}
+#directInduction h3{font:500 21px/1.25 var(--serif);letter-spacing:-.02em}
+.di-controls{min-width:0;max-width:100%}
+.di-controls select{font-size:12px;min-width:0;max-width:min(43vw,310px)}
+.di-controls button,.di-strip button{background:var(--paper);color:var(--deep);border:1px solid var(--line);border-radius:5px;padding:6px 10px;font-size:13px}
+#directNext{background:var(--deep);color:white}
+.di-strip{margin:16px 0 24px;gap:5px}
+.di-strip button{font:13px var(--mono);min-width:31px}
+.di-strip button.di-selected{background:#d9ece2}
+.di-strip button[aria-current]{outline:2px solid var(--teal);outline-offset:1px;font-weight:700}
+.di-body{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:24px}
+.di-body p{color:var(--muted);font-size:13px;line-height:1.55;margin-top:9px;overflow-wrap:anywhere}
+.di-current .di-product{color:var(--deep);font:600 14px/1.55 var(--mono);padding:10px 12px;border-left:3px solid #85aca1;background:var(--soft)}
+.di-seed-graph{max-width:100%;overflow:auto}.di-seed-graph svg{display:block}
+.di-seed summary{font-size:12px;cursor:pointer;margin:10px 0}.di-data p{font:12px/1.6 var(--mono)}
+.di-positive:not(:empty){border-top:1px solid var(--line);margin-top:18px;padding-top:18px}
+@media(max-width:720px){.di-body{grid-template-columns:minmax(0,1fr);gap:18px}.di-controls button{padding:6px 7px}.di-strip{margin:12px 0 18px}}
+.di-graph-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:12px 0 6px}
+.di-graph-controls label{font-size:13px}.di-graph-controls select{max-width:100%;font-size:12px}
+.di-graph-word,.di-graph-caption{font-size:13px;line-height:1.55;overflow-wrap:anywhere}
+.di-graph-word{font-family:var(--mono);margin:8px 0;color:var(--deep)}
+.di-graph-views{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:6px 14px;margin:10px 0}
+.di-graph-views figure{margin:0;min-width:0}.di-graph-views figure:first-child{grid-row:span 2}
+.di-graph-views figcaption{font-size:12px;font-weight:600;color:var(--deep)}
+@media(max-width:760px){.di-graph-views{grid-template-columns:minmax(0,1fr)}}
+
 .sw-shell > * { min-width:0; }
 .sw-shell { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; margin:16px 0 22px; }
 .sw-shell[hidden],.sw-empty[hidden],.sw-pictures[hidden],.sw-details[hidden] { display:none; }
@@ -391,7 +420,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?#bao-ye-example-5-3">Step through Bao–Ye Example 5.3</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
+ <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?#bao-ye-example-5-3">Step through Bao–Ye Example 5.3</a>, <a class="figure-link" href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">replay its first square</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -401,10 +430,11 @@ sitemap: false
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
  <p id="inputError" class="error" role="alert" hidden></p>
- <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="inductionWalk" aria-pressed="true">Induction walkthrough</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Bao–Ye steps</button></div>
+ <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="directInduction" aria-pressed="false">Bao–Ye induction</button><button type="button" id="proofTab" aria-controls="inductionWalk" aria-pressed="false">Film proof moves</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Film mutation charts</button></div>
  <label class="reading" id="filmConvention">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
  <section id="richardsonPanel" class="panel" aria-label="Richardson reading" hidden></section>
- <section id="inductionWalk" aria-label="Induction walkthrough" hidden></section>
+ <section id="directInduction" class="panel" aria-label="Bao–Ye induction on Ω" hidden></section>
+ <section id="inductionWalk" aria-label="Film proof moves" hidden></section>
  <div id="subwordStrip" aria-label="Selected subexpression of beta" class="subword-strip"></div>
  <section id="wordPanel" class="panel action-panel" aria-labelledby="moveTitle"><div class="timeline-line"><div class="row"><h2 id="moveTitle">Change the braid word</h2><span id="moveCount" class="chip"></span></div><button id="undoMove" class="nextbtn" disabled>↶ Undo move</button></div>
  <div class="move-options"><label><span>Adjacent relation</span> <select id="moveSelect" aria-label="Preview a word relation"></select></label><button id="applyMove" class="primary">Apply move</button></div>
@@ -459,13 +489,15 @@ sitemap: false
 <h3>Signed galleries in the Richardson reading</h3><p>Enter the chronological signed word β and terminal codistance v in written order. Read the negative occurrences backwards, then the positive occurrences forwards, to obtain the positive word Ω. The table records each letter’s original slot. Walk through Ω to inspect the normalized induction, or open the raw chronological film separately.</p>
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. In the Word moves view, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
-<h3>Bao–Ye induction and the reflected film</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
-<p>Each stage shows the Bao–Ye selected product <i>u</i> and the film pair (initial boundary <i>c</i>, signed word), where <i>c = u⁻¹</i>. In Leftmost mode, selecting <i>i</i> gives <i>u sᵢ</i>. The walkthrough shows the film in reflected slot order. Its engine receives the reversed signed word and boundary c. In these displayed slots, inserting the bar takes (c, β) to (sᵢ c, (−i)β). The boundary stays sᵢ c as the bar slides right. The selected crossing gives its label to the bar, and each later matching color gives a square mutation. Freeze the mutable neighbors of the terminal vertex and delete it to reach (sᵢ c, β).</p>
+<h3>Bao–Ye induction</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
+<p><b>Bao–Ye induction</b> reads Ω in its original positive order and shows the seed after every mutation, freezing and deletion.</p>
+<h3>Film proof moves</h3><p>In this separate view each stage shows the Bao–Ye selected product <i>u</i> and the film pair (initial boundary <i>c</i>, signed word), where <i>c = u⁻¹</i>. In Leftmost mode, selecting <i>i</i> gives <i>u sᵢ</i>. The walkthrough shows the film in reflected slot order. Its engine receives the reversed signed word and boundary c. In these displayed slots, inserting the bar takes (c, β) to (sᵢ c, (−i)β). The boundary stays sᵢ c as the bar slides right. The selected crossing gives its label to the bar, and each later matching color gives a square mutation. Freeze the mutable neighbors of the terminal vertex and delete it to reach (sᵢ c, β).</p>
 <p>In Rightmost mode the film is shown in its native word order. Bao–Ye reads the displayed word from the right, so its product <i>u</i> is the inverse of the selected product written in displayed order. The new bar starts at the right end and the film boundary grows by the same left multiplication.</p>
-<p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens at the identity seed with bridge (2,1) selected. Use <b>Next</b> to compare it before and after each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
+<p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens the direct induction at its identity seed. Use <b>Next</b> to read the published positive word from its first letter and follow each seed operation.</p>
+<p>The <a href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">first-square replay</a> opens the separate film proof view with bridge (2,1) selected. Use <b>Next</b> to compare its two projections across each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
 <p>In the Word moves view the signed film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
 <h3>Inspecting the periodic 3D graph</h3>
-<p>In the induction walkthrough the graph inspector uses the chronological all-barred reverse gallery with endpoint <i>u</i>. The positive marker slides from right to left. The reflected word strip below it shows the same step in paper reading order with the tracks exchanged. During subexpression selection the inspector shows the final-target graph and highlights the crossing being tested.</p>
+<p>In the Film proof moves view the graph inspector uses the chronological all-barred reverse gallery with endpoint <i>u</i>. The positive marker slides from right to left. The reflected word strip below it shows the same step in paper reading order with the tracks exchanged. During subexpression selection the inspector shows the final-target graph and highlights the crossing being tested.</p>
 <p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
 <p>In <a href="#glsbs-figure-7">GLSBS Example 3.11</a>, select the third letter, +2. Between cuts 2 and 3 the participating strands exchange rows. They form an X in red and stay at two distinct levels in blue. At the fourth letter, the same bridge spans one row in red and two columns in blue. Compare <a href="https://arxiv.org/html/2210.04778v3#S3.F7" target="_blank" rel="noopener">Figure 7(a,b)</a>.</p>
 <p>With <b>Projection planes</b> on, select a bridge in the 3D graph or on either plane. Follow the dashed guides from an endpoint (x, y, t) to (0, y, t) on the red plane and to (x, 0, t) on the blue plane. Selecting a translated bridge gives the coordinates of that lift. <a href="?bridge=4#glsbs-figure-7">Inspect the fourth bridge and its two projections</a>.</p>
@@ -687,9 +719,8 @@ sitemap: false
 })();
 </script>
 <script>/* Bao–Ye, arXiv:2506.10382v2, §§2.7, 5.1, 5.3. Positive affine A words.
- * Input follows the ThomasM graph convention. The paper reads both words
- * backwards. Seeds below retain the paper's FULL native exchange matrix.
- * Snapshots reverse all arrows to match the graph's display convention.
+ * computeInPaperOrder reads the written positive word from left to right.
+ * compute adapts the older, reflected film charts to this calculation.
  */
 (function () {
   'use strict';
@@ -723,13 +754,18 @@ sitemap: false
   function leftmost(paperBeta, paperV, n) {
     // A left descent of x is a right descent of x^{-1}. Maintain the
     // inverse window, whose descents are visible in adjacent entries.
-    const inverse = identity(n);
-    for (const i of [...paperV].reverse()) {
-      if (at(inverse, i) > at(inverse, i + 1)) {
+    const target = identity(n);
+    for (const i of paperV) {
+      if (at(target, i) > at(target, i + 1)) {
         throw new Error('The expression for v must be reduced.');
       }
-      reflectRight(inverse, i);
+      reflectRight(target, i);
     }
+    const inverse = Array(n);
+    target.forEach((x, j) => {
+      const period = Math.floor((x - 1) / n);
+      inverse[x - 1 - period * n] = j + 1 - period * n;
+    });
     const selected = [];
     paperBeta.forEach((i, p) => {
       if (at(inverse, i) > at(inverse, i + 1)) {
@@ -830,11 +866,11 @@ sitemap: false
       this.frozen.delete(k);
     }
 
-    displayEdges() {
+    displayEdges(reflected) {
       const edges = [];
       for (const x of this.active) {
         for (const y of this.active) {
-          const doubledWeight = -this.matrix[x][y];
+          const doubledWeight = reflected ? -this.matrix[x][y] : this.matrix[x][y];
           if (doubledWeight <= 0n) continue;
           const weight = doubledWeight % 2n === 0n
             ? String(doubledWeight / 2n) : `${doubledWeight}/2`;
@@ -844,10 +880,10 @@ sitemap: false
       return edges;
     }
 
-    mapPositions(word, processed) {
+    mapPositions(word, processed, reflected) {
       const positions = Array.from({ length: this.counts.length }, () => []);
       word.forEach((letter, p) => {
-        if (!processed.has(p)) positions[letter].push(word.length - p);
+        if (!processed.has(p)) positions[letter].push(reflected ? word.length - p : p + 1);
       });
       const mapping = {};
       for (const x of this.active) {
@@ -868,17 +904,18 @@ sitemap: false
     return object;
   }
 
-  function compute(n, beta, v = []) {
+  function run(n, beta, v, reflected) {
     if (!Number.isSafeInteger(n) || n < 3 || n > 128) {
       throw new Error('Use an integer n from 3 to 128.');
     }
     validate(n, beta, 'β');
     validate(n, v, 'v');
-    const paperBeta = [...beta].reverse();
-    const paperV = [...v].reverse();
+    const paperBeta = reflected ? [...beta].reverse() : [...beta];
+    const paperV = reflected ? [...v].reverse() : [...v];
     const selected = leftmost(paperBeta, paperV, n);
     const selectedSet = new Set(selected);
-    const selectedPositions = selected.map(p => beta.length - p);
+    const displayPosition = p => reflected ? beta.length - p : p + 1;
+    const selectedPositions = selected.map(displayPosition);
     const seed = new Seed(paperBeta, n);
     const processed = new Set();
     const chosen = Array(n + 1).fill(0);
@@ -891,13 +928,14 @@ sitemap: false
 
     function snapshot(type, focus = null, newlyFrozen = []) {
       const boundary = type === 'initial' || type === 'delete';
-      const target = boundary ? [...processed].reverse().map(p => paperBeta[p]) : null;
+      const target = boundary ? [...processed].map(p => paperBeta[p]) : null;
+      if (target && reflected) target.reverse();
       snapshots.push(immutable({
         type, stage, boundary, focus, newlyFrozen, ...context,
         active: seed.active.map(x => seed.labels[x]),
         frozen: seed.active.filter(x => seed.frozen.has(x)).map(x => seed.labels[x]),
-        edges: seed.displayEdges(),
-        mapping: boundary ? seed.mapPositions(paperBeta, processed) : null,
+        edges: seed.displayEdges(reflected),
+        mapping: boundary ? seed.mapPositions(paperBeta, processed, reflected) : null,
         target
       }));
     }
@@ -914,7 +952,7 @@ sitemap: false
       const mutations = [];
       for (let k = b + 1; k <= seed.counts[i] - a; k++) mutations.push(`${i},${k}`);
       const deleteVertex = `${i},${seed.counts[i] - a + 1}`;
-      context = { selectedPosition: beta.length - p, selectedPaperPosition: p + 1,
+      context = { selectedPosition: displayPosition(p), selectedPaperPosition: p + 1,
         letter: i, a, b, deleteVertex, mutations };
       for (const label of mutations) {
         seed.mutate(seed.indices.get(label));
@@ -932,7 +970,15 @@ sitemap: false
       selectedPositions, paperBeta, paperV });
   }
 
-  globalThis.QuiverPaper = Object.freeze({ compute });
+  function computeInPaperOrder(n, word, target = []) {
+    return run(n, word, target, false);
+  }
+
+  function compute(n, reflectedWord, reflectedTarget = []) {
+    return run(n, reflectedWord, reflectedTarget, true);
+  }
+
+  globalThis.QuiverPaper = Object.freeze({ computeInPaperOrder, compute });
 })();
 </script>
 <script>/* Affine strand and disk projections, and weighted ice quivers.
@@ -2562,7 +2608,7 @@ sitemap: false
       Math.abs(shift)<=5+Math.ceil((3*(g.beta.length+1)+2)/g.n);
   }
 
-  function build(g, periods = 1, extraLift = null) {
+  function build(g, periods = 1, extraLift = null, forward = false) {
     const {n,beta,topWindows,bottomWindows} = g;
     if (!Number.isInteger(periods) || periods < 1 || periods > 5) {
       throw new Error('Display one to five consecutive affine periods.');
@@ -2570,7 +2616,7 @@ sitemap: false
     const m = beta.length;
     const hollow = new Set(g.hollow), solid = new Set(g.solid);
     const primary = id => 1 <= id && id <= n * periods;
-    const basis = Array.from({length:n},(_,index) => [[index+1,index+1,0]]);
+    const basis = Array.from({length:n},(_,index) => [[topWindows[0][index],index+1,0]]);
     const events = [];
 
     // Follow each representative from the marked boundary. At a hollow
@@ -2578,7 +2624,8 @@ sitemap: false
     // even when a strand leaves the initial coordinate window.
     for (let c=0; c<m; c++) {
       const slot = c+1, letter = beta[c], color = Math.abs(letter);
-      const positive = letter > 0, axis = positive ? 1 : 0;
+      const rowCrossing = forward ? letter < 0 : letter > 0;
+      const axis = rowCrossing ? 1 : 0;
       const swappable = hollow.has(slot);
       if (swappable === solid.has(slot)) throw new Error('Missing or ambiguous crossing at slot '+slot+'.');
       const ends = [color,color+1].map(level => {
@@ -2587,12 +2634,12 @@ sitemap: false
         return strand+1 + level-basis[strand][c][axis];
       });
       events.push({slot,letter,color,solid:!swappable,hollow:swappable,time:c+.5,
-        axis:positive?'row':'column',ends,participants:[],bridge:null,lifts:[]});
+        axis:rowCrossing?'row':'column',ends,participants:[],bridge:null,lifts:[]});
 
       for (const points of basis) {
         const [x,y] = points[c];
-        const nextX = swappable && !positive ? transposeLevel(x,color,n) : x;
-        const nextY = swappable && positive ? transposeLevel(y,color,n) : y;
+        const nextX = swappable && !rowCrossing ? transposeLevel(x,color,n) : x;
+        const nextY = swappable && rowCrossing ? transposeLevel(y,color,n) : y;
         if (valueAt(topWindows[slot],nextY) !== nextX ||
             valueAt(bottomWindows[slot],nextX) !== nextY) {
           throw new Error('Strand and permutation disagree at chronological cut '+slot+'.');
@@ -2630,8 +2677,8 @@ sitemap: false
       const strand = {id,ghost,points};
       strands.push(strand);
       byId.set(id,strand);
-      leftBoundary.push({point:points[0],strand:id,ghost,marked:true});
-      rightBoundary.push({point:points[m],strand:id,ghost,marked:false});
+      leftBoundary.push({point:points[0],strand:id,ghost,marked:!forward || m===0});
+      rightBoundary.push({point:points[m],strand:id,ghost,marked:forward});
       for (let t=0; t<=m; t++) {
         const [x,y] = points[t];
         bounds.x[0]=Math.min(bounds.x[0],x); bounds.x[1]=Math.max(bounds.x[1],x);
@@ -2655,7 +2702,7 @@ sitemap: false
         if (event.solid) {
           const [a,b] = participants.map(p => [p.a[0],p.a[1],event.time]);
           bridge = {slot,shift,strands:pair,ghost:!primary(low)&&!primary(high),a,b,
-            colors:event.letter>0 ? ['black','white'] : ['white','black']};
+            colors:event.axis==='row' ? ['black','white'] : ['white','black']};
           bridges.push(bridge);
         }
         event.lifts.push({shift,participants,bridge});
@@ -3608,6 +3655,7 @@ sitemap: false
   }
 
   function draw(host,g,options={}) {
+    const order=options.orderName || 'chronological';
     const cam=cameraState(options.camera);
     cam.planes=cam.view==='space' && options.showPlanes!==false;
     const range=options.range||[0,g.m], viewport=options.viewport||extent([g],[range]);
@@ -3618,7 +3666,7 @@ sitemap: false
       : (compact?clamp(W*.66,263,options.paired?285:315):clamp(W*.74,272,370));
     const svg=element(null,'svg',{class:'pg-graph-svg',viewBox:'0 0 '+W+' '+H,
       width:'100%',height:H,role:'group','data-view':cam.view,'aria-label':(cam.view==='space'?'3D':cam.view+' projection of')+
-        ' affine plabic graph, chronological cuts '+range.join(' to '),tabindex:0});
+        ' affine plabic graph, '+order+' cuts '+range.join(' to '),tabindex:0});
     svg.style.display='block'; svg.style.touchAction=cam.view==='space'?'pan-y':'auto';
     svg.style.cursor=cam.view==='space'?'grab':'default';
     element(svg,'title',{},planar?(cam.view==='red'?'Red projection (t, y)':'Blue projection (t, x)'):'Affine 3D plabic graph');
@@ -3782,7 +3830,7 @@ sitemap: false
     if(options.onPick) for(const target of targets) {
       const {a,b,slot,kind,shift,plane}=target;
       if(Math.max(a[0],b[0])<0||Math.min(a[0],b[0])>W||Math.max(a[1],b[1])<0||Math.min(a[1],b[1])>H-24) continue;
-      const aria='Inspect '+(kind==='projected bridge'?plane+' '+kind:kind)+' at chronological slot '+slot+
+      const aria='Inspect '+(kind==='projected bridge'?plane+' '+kind:kind)+' at '+order+' slot '+slot+
         (target.label?', '+target.label:'')+(shift?', translated by '+shift+' periods':'');
       const hit=element(world,'g',{'data-pick':slot,'data-shift':shift,'data-pick-plane':plane,tabindex:0,role:'button','aria-label':aria});
       hit.style.cursor='pointer';element(hit,'title',{},aria);
@@ -4473,7 +4521,7 @@ sitemap: false
   function create(container, showAudit, shareUrl) {
     const status = el('p','sw-empty'), shell = el('div','sw-shell');
     const header = el('header','sw-header'), intro = el('div');
-    const sub = el('p','sw-sub'); intro.append(el('h2','','Induction walkthrough'), sub);
+    const sub = el('p','sw-sub'); intro.append(el('h2','','Film proof moves'), sub);
     const count = el('span','sw-count'); header.append(intro, count);
     const stageSelect = el('select'), stepSelect = el('select');
     const prev = button('←','Previous walkthrough step',() => go(cursor-1));
@@ -4804,8 +4852,7 @@ sitemap: false
     const positive = occurrences.filter(entry => entry.value > 0);
     const rows = [...reverse(negative), ...positive];
     const omega = rows.map(row => Math.abs(row.value));
-    // QuiverPaper accepts the two words in its reflected display coordinates.
-    const paper = QuiverPaper.compute(n, reverse(omega), reverse(v));
+    const paper = QuiverPaper.computeInPaperOrder(n, omega, v);
     const byPosition = new Map(paper.stages.map(stage => [stage.selectedPaperPosition, stage]));
     let prefix = [];
     const scan = rows.map((row,index) => {
@@ -4841,6 +4888,13 @@ sitemap: false
     if (text !== undefined) node.textContent = text;
     if (cls) node.className = cls;
     return node;
+  }
+
+  function seedGraph(snapshot) {
+    const frozen = new Set(snapshot.frozen);
+    const nodes = snapshot.active.map(id => ({id,label:'('+id+')',frozen:frozen.has(id)}));
+    const edges = snapshot.edges.filter(([a,b]) => !frozen.has(a) || !frozen.has(b));
+    return {nodes,edges};
   }
 
   function render(host, reading) {
@@ -4893,10 +4947,7 @@ sitemap: false
     const right = element('section',undefined,'rr-quiver');
     right.append(element('h3','Bao–Ye quiver on Ω'));
     const graph = element('div',undefined,'rr-graph');
-    const frozen = new Set(paper.final.frozen);
-    const nodes = paper.final.active.map(id => ({id,label:'('+id+')',frozen:frozen.has(id)}));
-    // Snapshot arrows use the reflected film display convention.
-    const edges = paper.final.edges.filter(([a,b]) => !frozen.has(a)||!frozen.has(b)).map(([a,b,w])=>[b,a,w]);
+    const {nodes,edges} = seedGraph(paper.final);
     right.append(graph,element('p','Circle = mutable. Square = frozen. Labels (i,k) count the surviving occurrences on Ω.'));
     content.append(left,right);
 
@@ -4906,7 +4957,11 @@ sitemap: false
       a.href = url(location.href,reading,view);
       return a;
     }
-    links.append(link('Walk through Ω','sweep'),link('See Bao–Ye mutations on Ω','recursion'));
+    const operations = link('See Bao–Ye operations on Ω','sweep');
+    const firstOp = new URL(operations.href);
+    if (paper.stages.length) firstOp.searchParams.set('op','1');
+    operations.href = firstOp.href;
+    links.append(link('Walk through Ω','sweep'),operations);
     const details = element('details',undefined,'rr-details');
     details.append(element('summary','Compare the raw chronological film'));
     const rawText = element('p');
@@ -4922,7 +4977,459 @@ sitemap: false
     QuiverDraw.quiver(graph,{nodes,edges,ariaLabel:'Bao–Ye ice quiver for the normalized word Ω'});
   }
 
-  globalThis.QuiverRichardsonReading = Object.freeze({compute, url, render});
+  globalThis.QuiverRichardsonReading = Object.freeze({compute, seedGraph, url, render});
+})();
+</script>
+<script>/* Direct paper-order walkthrough. Scan events and seed operations share one
+   cursor. Seed snapshots are exactly the outputs of the Bao–Ye engine. */
+(() => {
+  'use strict';
+
+  const product = word => word.length ? word.map(i => 's'+String(i).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d])).join('') : 'e';
+  const label = id => '('+id+')';
+  const labels = ids => ids.map(label).join(', ') || 'none';
+  const signed = i => (i>0?'+':'−')+Math.abs(i);
+
+  function frames(reading) {
+    const snapshots=reading.paper.snapshots;
+    let current=0,completedStages=0;
+    const result=[{kind:'initial',row:null,snapshot:snapshots[0],completedStages}];
+    for(const row of reading.scan){
+      result.push({kind:'scan',row,snapshot:snapshots[current],completedStages});
+      if(!row.stage)continue;
+      while(snapshots[current+1]?.stage===row.stage.stage){
+        const snapshot=snapshots[++current];
+        if(snapshot.type==='delete')completedStages=snapshot.stage;
+        result.push({kind:snapshot.type,row,snapshot,completedStages});
+      }
+    }
+    return result;
+  }
+
+  function title(frame){
+    const {kind,row,snapshot}=frame;
+    if(kind==='initial')return 'Initial seed';
+    const slot='Ω['+row.position+']';
+    if(kind==='scan')return (row.stage?'Select ':'Skip ')+product([row.letter])+' at '+slot;
+    return 'Stage '+snapshot.stage+' · '+({mutate:'Mutate '+label(snapshot.focus),freeze:'Freeze neighbors of '+label(snapshot.focus),delete:'Delete '+label(snapshot.focus)})[kind];
+  }
+
+  function node(tag, text, cls){
+    const out=document.createElement(tag);
+    if(cls)out.className=cls;
+    if(text!==undefined)out.textContent=text;
+    return out;
+  }
+
+  function create(host,onNavigate,renderPositiveGraph){
+    const head=node('header'),heading=node('h2','Bao–Ye induction on Ω');
+    const controls=node('div',undefined,'di-controls');
+    const prev=node('button','← Previous'),next=node('button','Next →');
+    prev.id='directPrev';next.id='directNext';prev.type=next.type='button';
+    prev.setAttribute('aria-label','Previous induction step');next.setAttribute('aria-label','Next induction step');
+    const picker=node('select');picker.id='directFrame';picker.setAttribute('aria-label','Induction step');
+    controls.append(prev,picker,next);head.append(heading,controls);
+    const strip=node('div',undefined,'di-strip');strip.setAttribute('role','group');strip.setAttribute('aria-label','Ω in left-to-right order');
+    const info=node('section',undefined,'di-current'),stepTitle=node('h3'),position=node('p'),rule=node('p'),eq=node('p',undefined,'di-product');
+    stepTitle.setAttribute('aria-live','polite');info.append(stepTitle,position,rule,eq);
+    const seed=node('section',undefined,'di-seed'),seedTitle=node('h3','Bao–Ye ice quiver'),graph=node('div',undefined,'di-seed-graph'),caption=node('p');
+    const details=node('details'),summary=node('summary','Vertex and arrow data'),data=node('div',undefined,'di-data');
+    details.append(summary,data);seed.append(seedTitle,graph,caption,details);
+    const body=node('div',undefined,'di-body');body.append(info,seed);
+    const positiveGraph=node('div',undefined,'di-positive');
+    host.replaceChildren(head,strip,body,positiveGraph);
+    let reading,steps=[],cursor=0;
+    const scanIndices=new Map();
+    prev.onclick=()=>go(cursor-1);next.onclick=()=>go(cursor+1);
+    picker.onchange=()=>go(Number(picker.value));
+
+    function show(){
+      const frame=steps[cursor],{kind,row,snapshot}=frame;
+      host.dataset.kind=kind;host.dataset.frame=String(cursor);
+      if(row){host.dataset.position=row.position;host.dataset.source=row.slot;}
+      else{delete host.dataset.position;delete host.dataset.source;}
+      stepTitle.textContent=title(frame);
+      picker.value=String(cursor);
+      prev.disabled=cursor===0;next.disabled=cursor===steps.length-1;
+      const scanned=row?.position||0;
+      for(const [index,item] of Array.from(strip.children).entries()){
+        const entry=reading.scan[index];
+        item.classList.toggle('di-selected',entry.position<=scanned&&Boolean(entry.stage));
+        const here=entry.position===scanned;
+        if(here)item.setAttribute('aria-current','step');else item.removeAttribute('aria-current');
+      }
+      if(!row){
+        position.textContent='Fixed target v = '+product(reading.v)+'.';
+        rule.textContent=reading.scan.length?'Read Ω from its first slot. Each selection is followed by its mutations, freezing and deletion.':'Ω is empty. The initial seed is the final seed.';
+        eq.textContent='Selected u = e · residual u⁻¹v = '+product(reading.v);
+      }else{
+        position.textContent='Ω['+row.position+'] = '+row.letter+' comes from β['+row.slot+'] = '+signed(row.value)+'. Fixed target v = '+product(reading.v)+'.';
+        eq.textContent='Selected u = '+(kind==='scan'&&row.stage?product(row.previous)+' → ':'')+product(row.prefix)+' · residual u⁻¹v = '+product(row.residual);
+        if(kind==='scan'){
+          const length=row.residual.length+(row.stage?1:0);
+          rule.textContent='Testing '+product([row.letter])+' on the left of the residual '+(row.stage?'shortens':'increases')+' its length from '+length+' to '+(length+(row.stage?-1:1))+'. '+(row.stage?'Append '+product([row.letter])+' on the right of u.':'Keep u and the current seed.');
+        }else if(kind==='mutate'){
+          rule.textContent='Mutate at pivot '+label(snapshot.focus)+'. The ordered pivots for this stage are '+snapshot.mutations.map(label).join(' → ')+'.';
+        }else if(kind==='freeze'){
+          rule.textContent='Freeze every mutable neighbor of '+label(snapshot.focus)+' in the current quiver. Newly frozen: '+labels(snapshot.newlyFrozen)+'.';
+        }else{
+          rule.textContent='Delete '+label(snapshot.focus)+' after freezing its mutable neighbors. This completes stage '+snapshot.stage+'.';
+        }
+      }
+      const rendered=QuiverRichardsonReading.seedGraph(snapshot);
+      const nodes=rendered.nodes.map(n=>({...n,highlight:n.id===snapshot.focus||snapshot.newlyFrozen.includes(n.id)}));
+      QuiverDraw.quiver(graph,{...rendered,nodes,ariaLabel:'Bao–Ye ice quiver, '+title(frame)});
+      const post=kind==='scan'&&row.stage?'Seed before stage '+row.stage.stage:kind==='scan'?'Seed after '+frame.completedStages+' completed stages':title(frame);
+      caption.textContent=post+'. Circles are mutable. Squares are frozen.';
+      const mutable=nodes.filter(n=>!n.frozen).map(n=>n.id);
+      const arrows=rendered.edges.map(([a,b,w])=>label(a)+' → '+label(b)+(String(w)==='1'?'':' × '+w));
+      data.replaceChildren(node('p','Mutable: '+labels(mutable)),node('p','Frozen: '+labels(snapshot.frozen)),node('p','Ice arrows: '+(arrows.join(', ')||'none')));
+      if(renderPositiveGraph)renderPositiveGraph(positiveGraph,reading,frame);
+    }
+
+    function go(index){
+      if(!steps.length)return;
+      const clamped=Math.max(0,Math.min(steps.length-1,Number.isSafeInteger(index)?index:0));
+      if(clamped===cursor)return;
+      cursor=clamped;show();onNavigate?.(cursor);
+    }
+
+    function set(model,start=0){
+      reading=model;steps=frames(model);scanIndices.clear();
+      steps.forEach((f,i)=>{if(f.kind==='scan')scanIndices.set(f.row.position,i);});
+      cursor=Math.max(0,Math.min(steps.length-1,Number.isSafeInteger(start)?start:0));
+      picker.replaceChildren(...steps.map((f,i)=>new Option((i+1)+' / '+steps.length+' · '+title(f),String(i))));
+      strip.replaceChildren(...reading.scan.map(row=>{
+        const button=node('button',String(row.letter));
+        button.type='button';
+        button.title='Ω['+row.position+'] from β['+row.slot+'] = '+signed(row.value);
+        button.setAttribute('aria-label','Read '+button.title);
+        button.onclick=()=>go(scanIndices.get(row.position));
+        return button;
+      }));
+      show();
+    }
+    return {set,go,index:()=>cursor};
+  }
+
+  // Earlier film links address a stage rather than an individual Bao–Ye snapshot.
+  // A request for that stage opens its selected Ω occurrence in the direct scan.
+  function addressIndex(reading,query){
+    const steps=frames(reading);
+    const number=key=>/^\d+$/.test(query.get(key)||'')?Number(query.get(key)):null;
+    if(number('frame')!==null)return Math.min(number('frame'),steps.length-1);
+    if(number('op')!==null){
+      const snapshot=reading.paper.snapshots[number('op')];
+      if(snapshot)return steps.findIndex(f=>f.kind===snapshot.type&&f.snapshot===snapshot);
+    }
+    if(number('stage')!==null){
+      const stage=number('stage');
+      return Math.max(0,steps.findIndex(f=>f.kind==='scan'&&f.row.stage?.stage===stage));
+    }
+    if(number('scan')!==null)return Math.max(0,steps.findIndex(f=>f.kind==='scan'&&f.row.position===number('scan')));
+    return 0;
+  }
+
+  globalThis.QuiverDirectInduction=Object.freeze({frames,create,addressIndex});
+})();
+</script>
+<script>// Positive words in their written order. At cut t, the dots are (r_t(y), y, t).
+// The leftmost scan, films, and half-arrows all run forward from the target.
+(() => {
+  'use strict';
+
+  const mod = (k,n) => (k % n + n) % n;
+  const residue = (h,n) => 1 + mod(h-1,n);
+  const at = (w,h) => w[mod(h-1,w.length)] + w.length*Math.floor((h-1)/w.length);
+  const identity = n => Array.from({length:n},(_,j)=>j+1);
+
+  function inverse(w) {
+    const result=Array(w.length);
+    w.forEach((x,j)=>{result[mod(x-1,w.length)]=j+1-w.length*Math.floor((x-1)/w.length);});
+    return result;
+  }
+  function swap(w,i) {
+    const next=w.slice(), n=w.length;
+    next[i-1]=at(w,i+1);
+    next[i % n]=w[i-1]-(i===n?n:0);
+    return next;
+  }
+  function checkedPath(n,word,target,marked) {
+    if (!Number.isInteger(n)||n<3||n>128) throw new Error('Use rank 3 through 128.');
+    const valid=(letters,signed)=>Array.isArray(letters)&&letters.length<=256&&letters.every(i=>
+      Number.isInteger(i)&&Math.abs(i)<=n&&(signed?i!==0:i>0));
+    if(!valid(target,false)||!valid(word,marked))throw new Error('Invalid generator in the word or target.');
+    if(marked && word.filter(i=>i<0).length!==1)throw new Error('The marked word must contain exactly one negative letter.');
+    let r=identity(n);
+    for(const i of target) {
+      if(at(r,i)>at(r,i+1)) throw new Error('The target expression must be reduced.');
+      r=swap(r,i);
+    }
+    let inverseResidual=inverse(r);
+    const topWindows=[r],bottomWindows=[inverseResidual],solid=[],hollow=[];
+    word.forEach((letter,j)=>{
+      const i=Math.abs(letter),positive=letter>0,active=positive?inverseResidual:r;
+      if(at(active,i)>at(active,i+1)) {
+        hollow.push(j+1);
+        const moved=swap(active,i);
+        if(positive){inverseResidual=moved;r=inverse(moved);}
+        else{r=moved;inverseResidual=inverse(moved);}
+      } else solid.push(j+1);
+      topWindows.push(r);
+      bottomWindows.push(inverseResidual);
+    });
+    if(r.some((v,j)=>v!==j+1)) throw new Error('The word has no reduced subexpression for the target.');
+    return {topWindows,bottomWindows,solid,hollow};
+  }
+
+  // A film lift is q relative to the periodic baseline r. Keep only columns
+  // at which q^(-1) differs from r^(-1). Sort the disjoint i-comparators that
+  // meet those columns; all remaining comparators reproduce the next baseline.
+  function sortPairs(changes,before,after,i) {
+    const affected=new Set(),n=before.length;
+    for(const x of changes.keys()) {
+      const k=mod(x-i,n);
+      if(k<2) affected.add(x-k);
+    }
+    const result=new Map(changes);
+    function put(x,y) {
+      if(at(after,x)===y) result.delete(x);
+      else result.set(x,y);
+    }
+    for(const x of affected) {
+      const a=changes.get(x)??at(before,x), b=changes.get(x+1)??at(before,x+1);
+      put(x,Math.min(a,b));
+      put(x+1,Math.max(a,b));
+    }
+    return result;
+  }
+  function covered(baseline,changes) {
+    if(!changes.size) return [];
+    const heights=[],keys=[...changes.keys()],delta=new Map();
+    function add(key,sign) {
+      const v=(delta.get(key)||0)+sign;
+      if(v) delta.set(key,v); else delta.delete(key);
+    }
+    for(let h=Math.min(...keys);h<=Math.max(...keys);h++) {
+      if(changes.has(h)) {add(at(baseline,h),1);add(changes.get(h),-1);}
+      if(delta.size) heights.push(h);
+    }
+    return heights;
+  }
+  const transpose=changes=>new Map([...changes].map(([a,b])=>[b,a]));
+  function trace(g,birth) {
+    const letter=g.beta[birth-1], i=Math.abs(letter);
+    const base=(letter>0?g.bottomWindows:g.topWindows)[birth];
+    let changes=new Map([[i,at(base,i+1)],[i+1,at(base,i)]]);
+    if(letter<0)changes=transpose(changes); // retain inverse-permutation coordinates
+    const cuts=Array.from({length:g.beta.length+1},()=>({top:[],bottom:[],changes:[]}));
+    for(let t=birth;t<=g.beta.length&&changes.size;t++) {
+      const rowChanges=transpose(changes);
+      const top=covered(g.topWindows[t],rowChanges), bottom=covered(g.bottomWindows[t],changes);
+      cuts[t]={top,bottom,changes:[...rowChanges].sort(([a],[b])=>a-b)};
+      for(const h of top) g.topFaces[t][residue(h,g.n)].push(birth);
+      for(const h of bottom) g.bottomFaces[t][residue(h,g.n)].push(birth);
+      if(t<g.beta.length){
+        const next=g.beta[t];
+        changes=next>0
+          ?sortPairs(changes,g.bottomWindows[t],g.bottomWindows[t+1],next)
+          :transpose(sortPairs(rowChanges,g.topWindows[t],g.topWindows[t+1],-next));
+      }
+    }
+    return {birth,cuts,frozen:cuts[g.beta.length].changes.length!==0};
+  }
+  function exchange(g) {
+    const size=g.beta.length+1,doubled=Array.from({length:size},()=>new Int32Array(size));
+    function wedge(a,b,weight) {
+      for(const p of a) for(const q of b) if(p!==q) {
+        doubled[p][q]+=weight;
+        doubled[q][p]-=weight;
+      }
+    }
+    // Blue crossing: R∧L + (L∧T + T∧R)/2, T the two side faces.
+    for(const slot of g.solid){
+      const t=slot-1, letter=g.beta[t];
+      const sign=Math.sign(letter),i=Math.abs(letter),faces=sign>0?g.bottomFaces:g.topFaces;
+      const incoming=faces[t],L=incoming[i],R=faces[t+1][i];
+      wedge(R,L,2*sign);
+      for(const h of [residue(i-1,g.n),residue(i+1,g.n)]) {
+        wedge(L,incoming[h],sign);
+        wedge(incoming[h],R,sign);
+      }
+    }
+    const frozen=new Set(g.frozen), arrows=[];
+    for(const p of g.solid) for(const q of g.solid) {
+      const h=doubled[p][q];
+      if(h<=0||(frozen.has(p)&&frozen.has(q))) continue;
+      if(h%2) throw new Error('Nonintegral forward film exchange entry.');
+      arrows.push([p,q,h/2]);
+    }
+    return arrows;
+  }
+  function computeFilm(n,word,target,marked) {
+    const path=checkedPath(n,word,target,marked);
+    const faces=()=>Array.from({length:word.length+1},()=>Array.from({length:n+1},()=>[]));
+    const g={n,beta:word.slice(),v:target.slice(),...path,topFaces:faces(),bottomFaces:faces(),
+      films:{},frozen:[],arrows:[]};
+    for(const birth of g.solid) {
+      g.films[birth]=trace(g,birth);
+      if(g.films[birth].frozen) g.frozen.push(birth);
+    }
+    g.arrows=exchange(g);
+    return g;
+  }
+
+  const compute=(n,word,target=[])=>computeFilm(n,word,target,false);
+  const computeMarked=(n,word,target=[])=>computeFilm(n,word,target,true);
+
+  function build(g,periods=1,extraLift=null) {
+    return QuiverPlabicGeometry.build(g,periods,extraLift,true);
+  }
+  globalThis.QuiverLeftmostGeometry=Object.freeze({compute,computeMarked,build});
+})();
+</script>
+<script>// Geometry for the direct scan and for one barred marker on the same positive word.
+(() => {
+  'use strict';
+  const product = word => word.length ? word.map(i=>'s'+String(i).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d])).join('') : 'e';
+  const tag = (name,value) => {
+    const el = document.createElement(name);
+    if (value!==undefined) el.textContent=value;
+    return el;
+  };
+  const bridgeName = label => '('+label+')';
+  const states = new WeakMap();
+
+  function stageStart(reading,row) {
+    if(row.stage.stage===1) return reading.paper.snapshots[0];
+    return reading.paper.snapshots.find(s=>s.stage===row.stage.stage-1 && s.type==='delete');
+  }
+
+  function markerCut(reading,frame) {
+    if(frame.kind==='freeze') return reading.omega.length;
+    if(frame.kind!=='mutate') return null;
+    const later=reading.scan.filter(r=>r.position>frame.row.position && r.letter===frame.row.letter);
+    return later[frame.snapshot.mutations.indexOf(frame.snapshot.focus)].position;
+  }
+
+  function diagram(reading,frame,cut=markerCut(reading,frame)) {
+    const {row,kind,snapshot}=frame;
+    if(cut===null) {
+      const seed=kind==='scan'?reading.paper.final:snapshot;
+      return {word:reading.omega,target:seed.target,mapping:seed.mapping,marker:null,
+        focus:row?.position??null,mode:kind==='scan'?'scan':'boundary'};
+    }
+    const base=stageStart(reading,row),i=row.letter;
+    const mapping={},after=pos=>pos+(pos>cut?1:0);
+    let riding=null;
+    for(const [label,pos] of Object.entries(base.mapping)) {
+      if(pos<row.position||pos>cut||reading.omega[pos-1]!==i) mapping[label]=after(pos);
+    }
+    const passed=Object.entries(base.mapping).filter(([,pos])=>
+      pos>=row.position && pos<=cut && reading.omega[pos-1]===i).sort((a,b)=>a[1]-b[1]);
+    for(const [id,pos] of passed) {
+      if(riding!==null) mapping[riding]=pos;
+      riding=id;
+    }
+    const marker=cut+1;
+    if(riding!==null) mapping[riding]=marker;
+    const word=reading.omega.slice();
+    word.splice(cut,0,-i);
+    const focus=kind==='mutate'&&cut===markerCut(reading,frame)?mapping[snapshot.focus]:marker;
+    return {word,target:row.prefix,mapping,marker,focus,mode:'marker',riding};
+  }
+
+  function render(host,reading,frame) {
+    const prev=states.get(host);
+    const state=prev?.reading===reading?prev:{reading,camera:{},pinned:null,shift:0};
+    states.set(host,state);
+    const defaultCut=markerCut(reading,frame);
+    const isStage=Boolean(frame.row?.stage);
+    const title=tag('h3','3D plabic graph and projections');
+    const controls=tag('div');controls.className='di-graph-controls';
+    const cutSelect=tag('select');
+    const defaultName=frame.kind==='scan'?'Leftmost scan for v':
+      frame.kind==='initial'?'Initial graph at e':frame.kind==='delete'?'Positive graph after deletion':
+      frame.kind==='mutate'?'After this square move':'Terminal marker before deletion';
+    cutSelect.add(new Option(defaultName,'auto'));
+    if(isStage) {
+      for(let c=0;c<=reading.omega.length;c++) {
+        cutSelect.add(new Option(c===0?'Insert the marker at the left':'Marker after Ω slot '+c,String(c)));
+      }
+      const lab=tag('label','Diagram ');lab.append(cutSelect);controls.append(lab);
+    }
+    const pick=tag('select'),selectLabel=tag('label','Inspect ');
+    selectLabel.append(pick);controls.append(selectLabel);
+    const desc=tag('p'),wordLine=tag('p'),coordinates=tag('p');
+    desc.className=coordinates.className='di-graph-caption';wordLine.className='di-graph-word';
+    const views=tag('div');views.className='di-graph-views';
+    const holders={};
+    for(const [key,name] of [['space','Space'],['red','Red projection · x = 0'],['blue','Blue projection · y = 0']]) {
+      const figure=tag('figure'),canvas=tag('div');
+      figure.append(tag('figcaption',name),canvas);views.append(figure);holders[key]=canvas;
+    }
+    host.replaceChildren(title,controls,desc,wordLine,views,coordinates);
+    let spec,g,model,labels,selected;
+    function selectSlot(slot,shift=0){
+      state.pinned=labels[slot]??null;state.shift=shift;
+      selected=slot;
+      pick.value=String(slot);paint();
+    }
+    function paint() {
+      const event=model.events[selected-1];
+      const lift=event?.lifts.find(l=>l.shift===state.shift)??event?.lifts.find(l=>l.shift===0);
+      const opts={selectedSlot:selected,selectedShift:lift?.shift??0,focusSlots:selected?[selected]:[],
+        labels,frozenSlots:g.frozen,showPlanes:true,tracking:true,compact:true,orderName:'left-to-right',
+        onPick:selectSlot};
+      for(const name of Object.keys(holders)){
+        QuiverPlabicDrawing.draw(holders[name],model,{...opts,camera:{...state.camera,view:name},
+          onOrbit:name==='space'?(yaw,pitch)=>{state.camera={...state.camera,yaw,pitch};paint();}:null});
+      }
+      if(!event){coordinates.textContent='The empty diagram consists of its boundary dots.';return;}
+      if(!lift?.bridge){coordinates.textContent='Slot '+event.slot+' is hollow. Its two strands cross in the active projection and carry no bridge.';return;}
+      const endpoints=QuiverPlabicGeometry.bridgeEndpoints(lift.bridge);
+      const [a,b]=endpoints,point=xyz=>'('+xyz.join(', ')+')';
+      coordinates.textContent='Bridge '+labels[event.slot]+' at slot '+event.slot+' (t = '+event.time+'). '+
+        a.color+' → '+b.color+': '+point(a.point)+' → '+point(b.point)+'. Red: '+point(a.red)+' → '+point(b.red)+'. Blue: '+point(a.blue)+' → '+point(b.blue)+'.';
+    }
+    function loadDiagram() {
+      const cut=cutSelect.value==='auto'?defaultCut:Number(cutSelect.value);
+      spec=diagram(reading,frame,cut);
+      g=spec.mode==='marker'?QuiverLeftmostGeometry.computeMarked(reading.n,spec.word,spec.target):
+        QuiverLeftmostGeometry.compute(reading.n,spec.word,spec.target);
+      model=QuiverPlabicGeometry.build(g,1,null,true);
+      labels=Object.fromEntries(Object.entries(spec.mapping).map(([id,pos])=>[pos,bridgeName(id)]));
+      if(g.solid.length!==Object.keys(labels).length || g.solid.some(slot=>!labels[slot]))
+        throw new Error('The bridge labels and solid crossings disagree in the forward diagram.');
+      const pinned=state.pinned && Object.entries(labels).find(([,id])=>id===state.pinned);
+      selected=pinned?Number(pinned[0]):spec.focus??g.solid[0]??null;
+      if(!pinned)state.shift=0;
+      pick.replaceChildren(new Option('Follow current crossing','auto'),...model.events.map(e=>new Option('Slot '+e.slot+' · '+(labels[e.slot]??'hollow')+(e.slot===spec.marker?' · marker':''),String(e.slot))));
+      pick.disabled=!g.beta.length;
+      pick.value=pinned?String(selected):'auto';
+      const displayed=spec.word.map(i=>i<0?'('+String(i).replace('-','−')+')':String(i)).join(' ')||'∅';
+      host.dataset.word=spec.word.join(',');host.dataset.hollow=g.hollow.join(',');host.dataset.target=spec.target.join(',');
+      wordLine.textContent='Word   '+displayed+'     ·     hollow slots   '+(g.hollow.join(', ')||'none');
+      if(spec.mode==='marker'){
+        desc.textContent='Target '+product(spec.target)+' at the left. The added marker is '+(spec.riding?'solid and carries '+bridgeName(spec.riding):'hollow')+
+          ' at slot '+spec.marker+'. '+(frame.kind==='freeze'&&cut===reading.omega.length?'Blue rings show films open at the present right boundary. The quiver above also freezes the films that will be open after this marker is cut. ':'')+
+          (cutSelect.value!=='auto'?'The quiver above stays at the selected induction step.':'');
+      }else if(spec.mode==='scan'){
+        desc.textContent='The scan diagram uses the fixed target v = '+product(spec.target)+'. The highlighted slot is the current scan position unless you have selected a bridge. Films extend toward the right boundary.';
+      }else{
+        desc.textContent='The positive diagram starts at '+product(spec.target)+' and reaches e at the right boundary. Blue rings mark bridges whose films reach that boundary.';
+      }
+      paint();
+    }
+    pick.onchange=()=>{
+      if(pick.value==='auto') {
+        state.pinned=null;state.shift=0;loadDiagram();
+      } else selectSlot(Number(pick.value));
+    };
+    cutSelect.onchange=loadDiagram;
+    loadDiagram();
+  }
+  globalThis.QuiverLeftmostGraph=Object.freeze({render,diagram,markerCut});
 })();
 </script>
 <script>/* Interface for the two independent engines. All correspondence verdicts
@@ -4935,7 +5442,7 @@ sitemap: false
     {name:'Winding film', n:3, beta:[1,2,3,1,2,3,1,2,3], v:[1,2,3,1,2], cut:2},
     {name:'Double arrow', n:3, beta:[1,2,3,1,2,3], v:[1]},
     {name:'Frozen boundary', n:4, beta:[1,2,3,2,1], v:[2]},
-    {name:'Bao–Ye example 5.3', anchor:'bao-ye-example-5-3', paperOrder:true, n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1].reverse(), v:[2,1,3,5,4,2].reverse()},
+    {name:'Bao–Ye example 5.3', anchor:'bao-ye-example-5-3', paperOrder:true, n:6, beta:[2,1,2,3,4,5,4,2,3,4,2,3,1], v:[2,1,3,5,4,2]},
     {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]},
     {name:'GLSBS Example 3.11 · Figures 6–7', anchor:'glsbs-figure-7', nativeWord:true, n:3, beta:[-2,1,2,1,-1], v:[2]},
     {name:'Affine seam · lifted bridge', nativeWord:true, n:3, beta:[-3,-1], v:[3]},
@@ -4983,10 +5490,10 @@ sitemap: false
     });
   }
   function updateTargetLabel() {
-    const focused=mode==='richardson';
-    $('targetLabel').textContent=focused?'Terminal codistance v':/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
-    $('betaLabel').textContent=focused?'Chronological signed word β':'Braid word β';
-    $('buildLabel').textContent=focused?'Read gallery':'Build quiver';
+    const focused=mode==='richardson',direct=mode==='direct';
+    $('targetLabel').textContent=focused||direct?'Terminal codistance v':/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
+    $('betaLabel').textContent=focused?'Chronological signed word β':direct?'Positive Bao–Ye word Ω':'Braid word β';
+    $('buildLabel').textContent=focused?'Read gallery':direct?'Start induction':'Build quiver';
   }
 
   function verdict(graph,step) {
@@ -5013,7 +5520,7 @@ sitemap: false
       stages.set(s.stage,{graph:g,snapshot:s,check:verdict(g,s)});
     });
     const example=presets[paperPreset];
-    const isBaoYeExample=leftmost && n===example.n && beta.join()===example.beta.join() && v.join()===example.v.join();
+    const isBaoYeExample=leftmost && n===example.n && inputBeta.join()===example.beta.join() && inputV.join()===example.v.join();
     return {n,beta,v,inputBeta:[...inputBeta],graph,paper,stages,isBaoYeExample,
       moves:null,frames:null,localCache:new Map(),positiveCache:new Map()};
   }
@@ -5105,19 +5612,29 @@ sitemap: false
     $('inputError').hidden=true;
     $('stepList').replaceChildren(...(model.paper?model.paper.snapshots.map((s,i)=>opt(i+' · '+describeStep(s),i)):[]));
   }
-  function build(preset=null,linkIndex=null) {
+  function build(preset=null,linkIndex=null,directQuery=null) {
     updateTargetLabel();
     try {
       const n=Number($('rank').value);
       if(!Number.isInteger(n)||n<3||n>24)throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
       const beta=parseWord($('beta').value,n,'β',true);
       const v=parseWord($('target').value,n,linkIndex??(mode==='richardson'||!isSigned(beta)?'v':'c'),false);
-      if(mode==='richardson'){
-        readingModel=QuiverRichardsonReading.compute(n,beta,v);
+      if(mode==='richardson'||mode==='direct'){
+        const direct=mode==='direct';
+        const hasOrigin=direct && directQuery?.has('gallery');
+        const reuseOrigin=direct && readingModel?.omega.join()===beta.join();
+        const source=hasOrigin?parseWord(directQuery.get('gallery'),n,'gallery',true):reuseOrigin?readingModel.beta:beta;
+        const next=QuiverRichardsonReading.compute(n,source,v);
+        if(hasOrigin && next.omega.join()!==beta.join())throw new Error('The signed gallery in this link normalizes to a different Ω. Check the two words.');
+        readingModel=next;
         $('inputError').hidden=true;
         if(!preset)$('examples').value='custom';
         render();
-        QuiverRichardsonReading.render($('richardsonPanel'),readingModel);
+        if(direct){
+          if(isSigned(beta))$('beta').value=word(readingModel.omega);
+          const start=directQuery?QuiverDirectInduction.addressIndex(readingModel,directQuery):0;
+          directView.set(readingModel,start);
+        }else QuiverRichardsonReading.render($('richardsonPanel'),readingModel);
         return true;
       }
       // ?v= links historically used displayed product order even for signed β.
@@ -5142,10 +5659,10 @@ sitemap: false
       $('rank').value=p.n;$('beta').value=word(p.beta);$('target').value=word(p.v);$('examples').value=String(i);
       build(p);return;
     }
-    if(mode==='richardson'){mode='sweep';leftmost=true;$('reading').value='left';}
+    if(mode==='richardson'||mode==='direct'){mode='sweep';leftmost=true;$('reading').value='left';}
     if(p.nativeWord){leftmost=false;$('reading').value='right';mode='words';}
     if(p.paperOrder){leftmost=true;$('reading').value='left';mode='sweep';}
-    $('rank').value=p.n;$('beta').value=word(readWord(p.beta));$('target').value=word(convertIndex(p.beta,p.v));$('examples').value=String(i);
+    $('rank').value=p.n;$('beta').value=word(p.paperOrder?p.beta:readWord(p.beta));$('target').value=word(p.paperOrder?p.v:convertIndex(p.beta,p.v));$('examples').value=String(i);
     if(!build(p))return;
     if(p.nativeWord){selectedMove=null;render();}
     if(p.paperOrder){
@@ -5154,7 +5671,7 @@ sitemap: false
     }
   }
   function changeMode(next) {
-    if(mode==='richardson'){
+    if(mode==='richardson'||mode==='direct'){
       if(readingModel)location.assign(QuiverRichardsonReading.url(location.href,readingModel,next));
       return;
     }
@@ -5525,14 +6042,16 @@ sitemap: false
     box.append(panels,el('p','A positive entry in row p and column q gives p → q. Exchange matrices have all vertices as rows and mutable vertices as columns.'));
   }
   function render() {
-    const focused=mode==='richardson';
+    const focused=mode==='richardson',direct=mode==='direct';
     $('richardsonPanel').hidden=!focused;
-    $('filmConvention').hidden=focused;
+    $('directInduction').hidden=!direct;
+    $('filmConvention').hidden=focused||direct;
+    $('proofTab').setAttribute('aria-pressed',String(mode==='sweep'));
     $('richardsonTab').setAttribute('aria-pressed',String(focused));
-    if(focused){
+    if(focused||direct){
       for(const id of ['wordPanel','recPanel','inductionWalk','moveGraphs','subwordStrip','originalDiagrams','dataPanel','diagramPlayer','chronologicalAudit'])$(id).hidden=true;
-      for(const id of ['sweepTab','wordTab','recTab']){
-        $(id).setAttribute('aria-pressed','false');
+      for(const id of ['sweepTab','wordTab','recTab','proofTab']){
+        $(id).setAttribute('aria-pressed',String(direct && id==='sweepTab'));
         $(id).disabled=!readingModel;
       }
       document.querySelector('main').classList.remove('walking');
@@ -5544,8 +6063,8 @@ sitemap: false
     $('recTab').disabled=!model.paper;$('wordPanel').hidden=mode!=='words';$('recPanel').hidden=mode!=='recursion';
     const guided=mode==='sweep';
     $('chronologicalAudit').hidden=!leftmost || !model.paper;
-    $('sweepTab').setAttribute('aria-pressed',String(guided));
-    $('sweepTab').disabled=!model.paper;
+    $('sweepTab').setAttribute('aria-pressed','false');
+    $('sweepTab').disabled=false;$('proofTab').disabled=!model.paper;
     $('inductionWalk').hidden=!guided;
     $('moveGraphs').hidden=guided;
     if(guided)moveInspector.stopReplay();
@@ -5595,6 +6114,10 @@ sitemap: false
     url.searchParams.set('beta',model.inputBeta.join(',')||'e');
     url.searchParams.set(isSigned(model.beta)?'c':'v',convertIndex(model.beta,model.v).join(',')||'e');
     if(!leftmost) url.searchParams.set('reading','right');
+    const origin=linkedWords.get('gallery');
+    if(origin && tab==='film-proof' && linkedWords.get('beta')===model.inputBeta.join(',') && linkedWords.get('n')===String(model.n)){
+      url.searchParams.set('gallery',origin);
+    }
     for(const [key,value] of Object.entries(values))if(value!=null)url.searchParams.set(key,value);
     if(bridge){
       if(bridge.label!=null)url.searchParams.set('follow',bridge.label);
@@ -5647,7 +6170,7 @@ sitemap: false
     details.data=()=>QuiverPlabicFrames.evidence(before,after,details,share(),moveInspector.selectedBridge());
     moveInspector.show(before,after,details);
   }
-  const sweepView=QuiverSweepView.create($('inductionWalk'),renderAudit,(values,bridge)=>moveUrl('induction',values,bridge));
+  const sweepView=QuiverSweepView.create($('inductionWalk'),renderAudit,(values,bridge)=>moveUrl('film-proof',values,bridge));
   const walk=QuiverWalk.create({model:()=>model,operation:()=>index,navigate:navigateOperation,
     leftmost:()=>leftmost,enabled:()=>mode==='recursion',redraw:render,paint:paintWalk,fail,
     viewBefore:()=>inspectingBefore(context())});
@@ -5673,12 +6196,27 @@ sitemap: false
     const position=new IntersectionObserver(sync);
     position.observe(source);
   }
+  const directView=QuiverDirectInduction.create($('directInduction'),frame=>{
+    const url=new URL(QuiverRichardsonReading.url(location.href,readingModel,'sweep'));
+    if(frame)url.searchParams.set('frame',frame);
+    window.history.replaceState(null,'',url.href);
+  },(host,reading,frame)=>QuiverLeftmostGraph.render(host,reading,frame));
   bindDiagramPlayer();
   for(let i=0;i<presets.length;i++)$('examples').append(opt(presets[i].name,i));
   const custom=opt('Custom words','custom');custom.disabled=true;$('examples').append(custom);
   $('examples').onchange=e=>{
     const i=Number(e.target.value);
-    if(mode==='richardson' || presets[i].richardson){
+    if(presets[i].paperOrder){
+      const url=new URL(location.href);
+      url.search='';url.hash=presets[i].anchor;location.assign(url.href);return;
+    }
+    if(presets[i].name==='Leftmost induction · 2112'){
+      // This historical preset stores both words in reflected coordinates.
+      const p=presets[i],omega=reverse(p.beta),v=reverse(p.v);
+      location.assign(QuiverRichardsonReading.url(location.href,{n:p.n,omega,beta:omega,v},'sweep'));
+      return;
+    }
+    if(mode==='richardson'||mode==='direct'||presets[i].richardson){
       if(presets[i].richardson){
         location.assign(QuiverRichardsonReading.url(location.href,presets[i],'richardson'));
       }else{
@@ -5693,29 +6231,35 @@ sitemap: false
   };
   $('wordForm').onsubmit=e=>{
     e.preventDefault();
-    if(build() && mode==='richardson'){
-      window.history.replaceState(null,'',QuiverRichardsonReading.url(location.href,readingModel,'richardson'));
+    if(build() && (mode==='richardson'||mode==='direct')){
+      window.history.replaceState(null,'',QuiverRichardsonReading.url(location.href,readingModel,mode==='direct'?'sweep':'richardson'));
     }
   };
-  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent=mode==='richardson'?'Words edited. Choose Read gallery to update the selection.':'Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
+  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent=mode==='richardson'?'Words edited. Choose Read gallery to update the selection.':mode==='direct'?'Words edited. Choose Start induction to read the new word.':'Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
   $('reading').onchange=e=>{
     const was=leftmost;leftmost=e.target.value==='left';
     if(!build()){leftmost=was;e.target.value=was?'left':'right';}
   };
-  $('richardsonTab').onclick=()=>{
-    if(mode==='richardson')return;
+  function openPaperView(destination){
+    if((destination==='sweep'&&mode==='direct') || (destination==='richardson'&&mode==='richardson') || (destination==='proof'&&location.hash==='#film-proof'&&mode==='sweep'))return;
     try{
-      const n=Number($('rank').value);
-      const beta=parseWord($('beta').value,n,'β',true), v=parseWord($('target').value,n,'v',false);
-      const from=linkedWords.get('gallery');
-      let original=beta;
-      if(from && linkedWords.get('beta')===beta.join(',') && linkedWords.get('v')===v.join(',') && linkedWords.get('n')===String(n)){
-        original=parseWord(from,n,'β',true);
+      let reading=readingModel;
+      if(mode!=='direct'&&mode!=='richardson'){
+        const n=Number($('rank').value),beta=parseWord($('beta').value,n,'β',true),v=parseWord($('target').value,n,'v',false);
+        const from=linkedWords.get('gallery');
+        const isOriginal=from && linkedWords.get('beta')===beta.join(',') && linkedWords.get('n')===String(n);
+        const source=isOriginal?parseWord(from,n,'gallery',true):beta;
+        reading=QuiverRichardsonReading.compute(n,source,v);
       }
-      location.assign(QuiverRichardsonReading.url(location.href,{n,beta:original,v},'richardson'));
+      if(!reading)return;
+      const link=new URL(QuiverRichardsonReading.url(location.href,reading,destination==='proof'?'sweep':destination));
+      if(destination==='proof')link.hash='film-proof';
+      location.assign(link.href);
     }catch(err){fail(err);}
-  };
-  $('sweepTab').onclick=()=>changeMode('sweep');
+  }
+  $('richardsonTab').onclick=()=>openPaperView('richardson');
+  $('sweepTab').onclick=()=>openPaperView('sweep');
+  $('proofTab').onclick=()=>openPaperView('proof');
   $('wordTab').onclick=()=>changeMode('words');$('recTab').onclick=()=>changeMode('recursion');
   $('moveSelect').onchange=e=>{selectedMove=e.target.value||null;previewPivot=null;render();};
   $('applyMove').onclick=()=>applyWordMove(selectedMove);
@@ -5746,7 +6290,17 @@ sitemap: false
   const figureHash='#'+presets[figurePreset].anchor;
   const paperHash='#'+presets[paperPreset].anchor;
   const focusedAddress=location.hash==='#richardson' || (!location.hash && !['c','reading','relation','bridge','op','stage','scan','follow','replay','example'].some(k=>linkedWords.has(k)));
-  if(focusedAddress){
+  const namedExample=location.hash===paperHash && !['stage','step','follow','replay','bridge','scan','side','lift','periods'].some(k=>linkedWords.has(k));
+  const directAddress=location.hash==='#induction'||namedExample;
+  if(directAddress){
+    mode='direct';
+    const example=presets[paperPreset];
+    $('rank').value=namedExample?example.n:linkedWords.get('n')??'3';
+    $('beta').value=namedExample?word(example.beta):linkedWords.get('beta')??'2 1 1 2';
+    $('target').value=namedExample?word(example.v):linkedWords.get('v')??'1 2';
+    if(namedExample)$('examples').value=String(paperPreset);
+    render();build(namedExample?example:null,'v',namedExample?null:linkedWords);
+  }else if(focusedAddress){
     mode='richardson';
     if(linkedWords.has('beta')&&linkedWords.has('v')){
       $('rank').value=linkedWords.get('n')??'3';
@@ -5765,7 +6319,7 @@ sitemap: false
     }
   }
   function openLinkedView(){
-    if(focusedAddress)return;
+    if(focusedAddress||directAddress)return;
     if(location.hash===figureHash){
       if($('guide').open)$('guide').close();
       loadPreset(figurePreset);
@@ -5784,7 +6338,7 @@ sitemap: false
         if(part!==null&&/^\d+$/.test(part)&&index>0)walk.scrub(Math.max(0,Number(part)-1));
       }
     }
-    else if(location.hash==='#induction'&&model.paper){
+    else if(location.hash==='#film-proof'&&model.paper){
       changeMode('sweep');
       const stage=linkedWords.get('stage');
       if(stage!==null && /^\d+$/.test(stage))sweepView.goToStage(Number(stage),Number(linkedWords.get('step')||1));
@@ -5814,7 +6368,7 @@ sitemap: false
   window.addEventListener('hashchange',event=>{
     // The figure preset replaces the input word. Restore the preceding
     // address's word and stage when the reader leaves it via browser history.
-    if(focusedAddress || ['#richardson','#preset'].includes(location.hash) || [figureHash,paperHash,'#richardson','#preset'].includes(new URL(event.oldURL).hash))location.reload();
+    if(focusedAddress || directAddress || [paperHash,'#induction','#film-proof','#richardson','#preset'].includes(location.hash) || [figureHash,paperHash,'#induction','#film-proof','#richardson','#preset'].includes(new URL(event.oldURL).hash))location.reload();
     else openLinkedView();
   });
   for(const link of document.querySelectorAll('a[href="'+figureHash+'"]')){
