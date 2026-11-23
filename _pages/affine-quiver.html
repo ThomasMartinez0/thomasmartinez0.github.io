@@ -88,6 +88,10 @@ sitemap: false
 @media(max-width:760px){.di-graph-views{grid-template-columns:minmax(0,1fr)}}
 
 .fp-panel{margin:14px 0;padding:clamp(14px,2.2vw,27px)}
+.fp-cases{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:12px 0;color:var(--muted);font-size:.9rem}
+.fp-cases[hidden]{display:none}.fp-cases span{margin-right:4px}
+.fp-cases button{padding:.32em .7em;background:var(--paper);color:var(--deep);border:1px solid var(--line);border-radius:5px;font-size:.875rem}
+.fp-cases button[aria-current]{background:var(--deep);color:white}
 .fp-panel header,.fp-nav,.fp-settings,.fp-strip{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .fp-panel header{justify-content:space-between;gap:12px}.fp-panel h2{font-size:clamp(23px,2.4vw,31px)}
 .fp-nav button,.fp-strip button{padding:6px 10px;border-radius:5px;border:1px solid var(--line);background:var(--paper);color:var(--deep);font-size:13px}
@@ -118,6 +122,50 @@ sitemap: false
 .fp-share button{font-size:12px;background:transparent;border:1px solid var(--line);border-radius:5px;padding:5px 9px;color:var(--deep)}
 .fp-share span,.fp-share a{font-size:12px;color:var(--teal)}
 @media(max-width:720px){.fp-share{margin-left:0}}
+
+.gs-gallery {margin:14px 0 18px;padding:14px 16px;border:1px solid #bacdc6;border-radius:8px;background:#f8fbf8;min-width:0;color:var(--ink)}
+.gs-gallery .gs-head,.gs-gallery .gs-foot {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 16px}
+.gs-gallery h4 {font:600 17px/1.3 var(--sans);color:var(--deep);margin:0}
+.gs-gallery .gs-pair {display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;color:var(--deep);overflow-wrap:anywhere}
+.gs-pair .gs-variety {font:italic 23px/1.1 var(--serif)}
+.gs-pair .gs-variety sub {font:500 14px/1.25 var(--sans);vertical-align:-.22em}
+.gs-symbol {font:20px/1 var(--serif)}
+.gs-prefix,.gs-gallery .gs-foot,.gs-gallery .gs-details {font:14px/1.45 var(--sans)}
+.gs-intro {font-size:15px;line-height:1.5;margin:6px 0 0;max-width:100ch}
+.gs-residual {color:var(--deep);font:500 .9rem/1.5 var(--sans);margin:.5rem 0 .25rem}
+.gs-axes {display:grid;grid-template-columns:34px minmax(0,1fr);margin-top:10px;background:#fff;border:1px solid #d7e2dc;border-radius:5px;overflow:hidden}
+.gs-axis-labels {height:136px;position:relative;background:#edf3ef;border-right:1px solid #d7e2dc;color:#36534b;font:600 13px/1 var(--sans)}
+.gs-axis-labels span {position:absolute;right:7px}.gs-axis-word {top:10px}.gs-axis-upper {top:47px}.gs-axis-lower {top:95px}.gs-axis-cut {top:117px}
+.gs-scroll {min-width:0;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+.gs-scroll svg {display:block;max-width:none;min-width:100%;height:136px}
+.gs-scroll svg text {text-anchor:middle;font-family:var(--mono)}
+.gs-letter {font-size:15px;font-weight:600;fill:#233e37}.gs-index {font-size:13px;fill:#4c625c}.gs-index.gs-current{font-weight:bold;fill:#175d50}
+.gs-track,.gs-after-path,.gs-before-path,.gs-after-arrow,.gs-before-arrow,.gs-muted-arrow {fill:none;stroke-linecap:round;stroke-linejoin:round}
+.gs-track {stroke:#bccbc5;stroke-width:1.4}.gs-square-shade{fill:#edf5f0}
+.gs-after-path {stroke:#196354;stroke-width:3}.gs-after-arrow {stroke:#196354;stroke-width:2.5}
+.gs-before-path {stroke:#ac5a2e;stroke-width:2.4;stroke-dasharray:4 5}.gs-before-arrow {stroke:#ac5a2e;stroke-width:2.3}
+.gs-muted-arrow {stroke:#9cafa7;stroke-width:1.5}.gs-node {stroke:#8daba0;stroke-width:1.3;fill:white}.gs-node.gs-on {stroke:#196354;stroke-width:2;fill:#e4f1ea}
+.gs-pick {fill:transparent;cursor:pointer}.gs-pick:hover {fill:#326a5311}
+.gs-foot {margin-top:7px}.gs-directions {margin:0;color:#39544b}.gs-control {display:flex;align-items:center;gap:6px}.gs-control select {min-width:55px;max-width:160px}
+.gs-details {margin-top:6px;color:#39544b}.gs-details summary {width:fit-content;cursor:pointer}.gs-details dl {display:grid;grid-template-columns:max-content minmax(0,1fr);gap:4px 14px;margin:8px 0}.gs-details dd {margin:0;font-family:var(--mono);overflow-wrap:anywhere}.gs-details p {margin:5px 0}
+@media(max-width:600px){.gs-gallery{padding:10px}.gs-gallery .gs-head{align-items:start}.gs-intro{font-size:14px}.gs-gallery .gs-foot{align-items:start}.gs-axes{grid-template-columns:30px minmax(0,1fr)}.gs-axis-labels span{right:5px}}
+
+.se-panel {display:grid; gap:.45rem; min-width:0; margin:.8rem 0; color:var(--deep)}
+.se-body {min-width:0; border-left:3px solid var(--teal); padding:.25rem .9rem .5rem; background:var(--paper)}
+.se-body h4 {font:600 1rem/1.35 var(--sans); margin:0 0 .25rem}
+.se-body p,.se-panel .se-compare,.se-origin {font:.875rem/1.5 var(--sans); margin:.25rem 0}
+.se-panel .se-compare,.se-origin {color:var(--muted)}
+.se-panel[data-checked=difference] .se-compare {font-weight:650; color:#893b20}
+.se-scroll {overflow-x:auto; max-height:19rem; margin:.5rem 0}
+.se-scroll table {border-collapse:collapse; width:100%; font:.875rem/1.45 var(--mono)}
+.se-scroll th,.se-scroll td {text-align:left; padding:.35rem .55rem; vertical-align:top; border-bottom:1px solid var(--line); white-space:normal}
+.se-scroll th {background:var(--soft); font:600 .875rem/1.4 var(--sans)}
+.se-body .se-origin {display:block; margin:.12rem 0 0}
+.se-follow-list {display:flex; flex-wrap:wrap; gap:.35rem}
+.se-body .se-follow {padding:.25rem .5rem; border-radius:4px; border:1px solid var(--line); background:var(--paper); color:var(--deep); font:.875rem/1.4 var(--sans); cursor:pointer}
+.se-body .se-follow[aria-pressed=true],.se-scroll tr.se-pinned {background:#e4f0e7}
+.se-body .se-follow:focus-visible {outline:2px solid var(--teal); outline-offset:2px}
+@media(max-width:550px){.se-body{padding-inline:.6rem}.se-scroll th,.se-scroll td{padding:.3rem .25rem}}
 
 .sw-shell > * { min-width:0; }
 .sw-shell { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; margin:16px 0 22px; }
@@ -452,7 +500,7 @@ sitemap: false
  </div>
 </header>
 <main>
- <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?#bao-ye-example-5-3">Step through Bao–Ye Example 5.3</a>, <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=1&amp;step=4&amp;follow=2,1#film-proof">replay its first square</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
+ <div class="intro"><div><h1>Affine 3D plabic graph explorer</h1><p>Select a bridge to see its red and blue projections. <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=2&amp;step=1#film-proof">Explore the full-gallery sweep in Bao–Ye Example 5.3</a>, <a class="figure-link" href="?n=6&amp;beta=2,1,2,3,4,5,4,2,3,4,2,3,1&amp;v=2,1,3,5,4,2&amp;stage=1&amp;step=4&amp;follow=2,1#film-proof">replay its first square</a> or <a class="figure-link" href="#glsbs-figure-7">view GLSBS Example 3.11</a>.</p></div>
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
@@ -523,8 +571,8 @@ sitemap: false
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
 <p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. In the Word moves view, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
 <h3>Bao–Ye induction</h3><p>Read Ω from the left, starting at residual <i>r = v</i> with selected product <i>u = e</i>. Select <i>i</i> exactly when <i>sᵢr</i> shortens the residual. Then set <i>r</i> to <i>sᵢr</i> and append <i>sᵢ</i> on the right of <i>u</i>. For Ω = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂. The induction displays the seed after every mutation, freezing and deletion.</p>
-<h3>Film proof moves</h3><p>Read the positive word Ω from its first letter. The target is at the left, and a film grows toward the right boundary. Each stage compares the pairs (<i>u</i>, Ω), (<i>usᵢ</i>, (−i)Ω), (<i>usᵢ</i>, Ω(−i)), and (<i>usᵢ</i>, Ω). Step through the interchanges between the two middle pairs to see the marker slide one slot to the right. The other letters keep their order.</p>
-<p>At insertion the marker is hollow because <i>(usᵢ)sᵢ = u</i> is shorter. At the selected position, the positive letter becomes hollow and its label transfers to the marker. Each later positive occurrence of <i>i</i> gives a square mutation. At the right boundary, freeze the mutable neighbors of the solid marker and delete it. Choose a bridge to follow its occurrence label through the two graphs and their red and blue projections.</p>
+<h3>Film proof moves</h3><p>For a selected letter <i>i</i>, append one positive step to the terminal positive flag. This identifies the based galleries for <i>R</i><sub>u,Ω</sub> and <i>R</i><sub>usᵢ,Ωi</sub>. The two rows show the two positive flags. Each column is a cut in the original positive word Ω, read from left to right. Moving the vertical step one column changes which flag moves first. The auxiliary word Ωi and the codistance usᵢ stay fixed throughout the slide.</p>
+<p>The film strip calls the vertical step Mᵢ. At cut 0 it consumes the last sᵢ of usᵢ and is hollow. At the selected letter it acquires a solid bridge. Every subsequent matching letter gives a square move on the entire quiver. At the right boundary the applet shows which films close across the last slab. Removing it leaves these films open, so their vertices freeze. Follow a bridge to compare its arrows and its red and blue projections on both sides.</p>
 <p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens the direct induction at its identity seed. Use <b>Next</b> to read the published positive word from its first letter and follow each seed operation.</p>
 <p>The <a href="?stage=1&amp;step=4&amp;follow=2,1&amp;replay=square#bao-ye-example-5-3">chronological first-square replay</a> opens with bridge (2,1) selected. Use <b>Next</b> to compare its two projections across each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
 <p>In the Word moves view the signed film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
@@ -3061,7 +3109,8 @@ sitemap: false
         label(g,0,4,caption,{'text-anchor':'middle','font-size':11.1,'font-weight':600,fill:stroke});
         return g;
       }
-      const marker=chip('marker',(model.forward?'−':'+')+model.letter+' marker',77,'#fff1d8',amber);
+      const markerName=model.forward?'M'+String(model.letter).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d]):'+'+model.letter;
+      const marker=chip('marker',markerName+' marker',77,'#fff1d8',amber);
       const crossed=chip('crossing',(model.forward?'+':'−')+model.letter+(model.forward?' · Ω[':' · β[')+model.crossedPosition+']',77,'#f0f5f2','#4e625e');
       return u=>{
         // Raised/slightly lowered paths keep both signed letters legible during the swap.
@@ -3266,7 +3315,7 @@ sitemap: false
       scrub.setAttribute('aria-valuetext', scrub.value + ' percent, ' + phase.toLowerCase());
       const message = phase + ' · ' +
         (progress === 0 || progress === 1
-          ? 'The ' + (model.forward?'−':'+') + model.letter + ' marker carries (' + carrier + ') at slot ' + side.markerSlot + '.'
+          ? 'The ' + (model.forward?'M'+String(model.letter).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d]):'+'+model.letter) + ' marker carries (' + carrier + ') at slot ' + side.markerSlot + '.'
           : before ? 'The marker approaches the next ' + model.letter + '.'
             : 'The endpoint colors have switched on both projections.');
       if (status.textContent !== message) status.textContent = message;
@@ -5419,7 +5468,7 @@ sitemap: false
     cutSelect.add(new Option(defaultName,'auto'));
     if(isStage) {
       for(let c=0;c<=reading.omega.length;c++) {
-        cutSelect.add(new Option(c===0?'Insert the marker at the left':'Marker after Ω slot '+c,String(c)));
+        cutSelect.add(new Option(c===0?'Panel step at cut 0':'Panel step after Ω slot '+c,String(c)));
       }
       const lab=tag('label','Diagram ');lab.append(cutSelect);controls.append(lab);
     }
@@ -5472,11 +5521,11 @@ sitemap: false
       pick.replaceChildren(new Option('Follow current crossing','auto'),...model.events.map(e=>new Option('Slot '+e.slot+' · '+(labels[e.slot]??'hollow')+(e.slot===spec.marker?' · marker':''),String(e.slot))));
       pick.disabled=!g.beta.length;
       pick.value=pinned?String(selected):'auto';
-      const displayed=spec.word.map(i=>i<0?'('+String(i).replace('-','−')+')':String(i)).join(' ')||'∅';
+      const displayed=spec.word.map(i=>i<0?'M'+String(-i).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d]):String(i)).join(' ')||'∅';
       host.dataset.word=spec.word.join(',');host.dataset.hollow=g.hollow.join(',');host.dataset.target=spec.target.join(',');
-      wordLine.textContent='Word   '+displayed+'     ·     hollow slots   '+(g.hollow.join(', ')||'none');
+      wordLine.textContent='Film strip   '+displayed+'     ·     hollow slots   '+(g.hollow.join(', ')||'none');
       if(spec.mode==='marker'){
-        desc.textContent='Target '+product(spec.target)+' at the left. The added marker is '+(spec.riding?'solid and carries '+bridgeName(spec.riding):'hollow')+
+        desc.textContent='Target '+product(spec.target)+' at the left. The positive panel step is drawn as a film marker, '+(spec.riding?'solid and carrying '+bridgeName(spec.riding):'hollow')+
           ' at slot '+spec.marker+'. '+(frame.kind==='freeze'&&cut===reading.omega.length?'Blue rings show films open at the present right boundary. The quiver above also freezes the films that will be open after this marker is cut. ':'')+
           (cutSelect.value!=='auto'?'The quiver above stays at the selected induction step.':'');
       }else if(spec.mode==='scan'){
@@ -5591,6 +5640,431 @@ sitemap: false
   globalThis.QuiverForwardProofModel=Object.freeze({frames,addressIndex});
 })();
 </script>
+<script>// The ordinary two-gallery presentation for one stage of the forward film sweep.
+(() => {
+  'use strict';
+  const sub = n => String(n).replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]);
+  const product = word => word.map(i => 's' + sub(i)).join('') || 'e';
+  const svgNS = 'http://www.w3.org/2000/svg';
+
+  function element(name, cls, text) {
+    const node = document.createElement(name);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function svg(name, attributes, text) {
+    const node = document.createElementNS(svgNS, name);
+    for (const [key, value] of Object.entries(attributes)) node.setAttribute(key, value);
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function chart(omega, i, side) {
+    const cut = side.marker === null ? null : side.marker - 1;
+    const negative = omega.map(j => -j).reverse();
+    const chronologicalWord = negative.slice();
+    if (cut !== null) chronologicalWord.splice(omega.length - cut, 0, i);
+    return {
+      cut, target: [...side.target], chronologicalWord,
+      unfoldedWord: cut === null ? [...omega] : [...omega, i],
+      markerFilmStatus: cut === null ? null : side.riding ? 'solid' : 'hollow'
+    };
+  }
+
+  function describe(reading, frame) {
+    const i = frame.stage ? frame.row.letter : null;
+    return {
+      positiveStep: i, negativeGallery: reading.omega.map(j => -j).reverse(),
+      before: chart(reading.omega, i, frame.before), after: chart(reading.omega, i, frame.after)
+    };
+  }
+
+  function variety(side, i) {
+    const name = element('span', 'gs-variety', 'R');
+    const word = side.cut === null ? 'Ω' : 'Ω · ' + i;
+    name.append(element('sub', null, product(side.target) + ', ' + word));
+    return name;
+  }
+
+  function chartDetails(info, frame) {
+    const details = element('details', 'gs-details');
+    details.append(element('summary', null, 'Chronological flag steps'));
+    const sides = frame.kind === 'freeze' ? [['At the boundary', info.after]] : [['Before', info.before], ['After', info.after]];
+    const rows = element('dl');
+    for (const [label, side] of sides) {
+      const steps = side.chronologicalWord.map(j => j < 0 ? '−' + Math.abs(j) : '+' + j);
+      rows.append(element('dt', null, label), element('dd', null, steps.join(' ') || '∅'));
+    }
+    details.append(rows, element('p', null, 'A minus step changes Y. The positive panel step changes X. In the terminal product y⁻¹x the Y steps occur in reverse chronological order, followed by the X step when it is present.'));
+    return details;
+  }
+
+  const spacing = 54;
+  const padding = 24;
+  const x = c => padding + c * spacing;
+  const upper = 54;
+  const lower = 102;
+
+  function path(points, cls, attrs = {}) {
+    return svg('polyline', {points: points.map(p => p.join(',')).join(' '), class: cls, ...attrs});
+  }
+
+  function arrowhead(px, py, up, cls) {
+    const pts = up ? [[px - 4, py + 5], [px, py], [px + 4, py + 5]] : [[px + 4, py - 3], [px, py], [px + 4, py + 3]];
+    return path(pts, cls);
+  }
+
+  function galleryDiagram(omega, info, goToCut) {
+    const m = omega.length;
+    const cut = info.after.cut;
+    const previousCut = info.before.cut;
+    const width = x(m) + padding;
+    const diagram = svg('svg', {viewBox: `0 0 ${width} 136`, width, height: 136, role: 'img', 'data-gallery-paths': '', 'aria-label': cut === null
+      ? 'The terminal panel step has been removed. The full film ends at cut ' + m + '.'
+      : 'At cut ' + cut + ' change X₀ to X₁. Start at the lower right, travel left along X₀, rise at Y' + sub(cut) + ', then follow X₁ to the left.'});
+    const changed = previousCut !== null && previousCut !== cut;
+    if (changed && cut !== null) {
+      diagram.append(svg('rect', {x: x(previousCut) - 9, y: 36, width: spacing + 18, height: 81, rx: 7, class: 'gs-square-shade'}));
+    }
+    if (cut !== null) {
+      diagram.append(svg('line', {x1: x(0), x2: x(m), y1: upper, y2: upper, class: 'gs-track'}));
+    }
+    diagram.append(svg('line', {x1: x(0), x2: x(m), y1: lower, y2: lower, class: 'gs-track'}));
+    // The after path and the displaced corner use both horizontal tracks of the same rectangle.
+    if (changed) {
+      const oldCorner = cut === null
+        ? [[x(previousCut), lower], [x(previousCut), upper], [x(0), upper]]
+        : [[x(cut), lower], [x(previousCut), lower], [x(previousCut), upper]];
+      diagram.append(path(oldCorner, 'gs-before-path', {'data-role': 'previous-panel-step'}));
+    }
+    if (cut === null) {
+      diagram.append(path([[x(m), lower], [x(0), lower]], 'gs-after-path'));
+    } else {
+      diagram.append(path([[x(m), lower], [x(cut), lower]], 'gs-after-path'));
+      diagram.append(path([[x(cut), lower], [x(cut), upper]], 'gs-after-path', {'data-role': 'panel-step'}));
+      diagram.append(path([[x(cut), upper], [x(0), upper]], 'gs-after-path'));
+      diagram.append(arrowhead(x(cut), 75, true, 'gs-after-arrow'));
+    }
+    if (changed) diagram.append(arrowhead(x(previousCut), 75, true, 'gs-before-arrow'));
+    for (let c = 0; c <= m; c++) {
+      const px = x(c);
+      const active = c === cut;
+      if (c < m) {
+        const midpoint = px + spacing / 2;
+        diagram.append(svg('text', {x: midpoint, y: 21, class: 'gs-letter'}, String(omega[c])));
+        diagram.append(arrowhead(midpoint, lower, false, cut === null || c >= cut ? 'gs-after-arrow' : 'gs-muted-arrow'));
+        if (cut !== null || changed) {
+          const upperArrow = cut === null ? 'gs-before-arrow' : c < cut ? 'gs-after-arrow' : 'gs-muted-arrow';
+          diagram.append(arrowhead(midpoint, upper, false, upperArrow));
+        }
+      }
+      for (const [y, onPath] of [[upper, cut !== null && c <= cut], [lower, cut === null || c >= cut]]) {
+        diagram.append(svg('circle', {cx: px, cy: y, r: active ? 4.7 : 3.6, class: onPath ? 'gs-node gs-on' : 'gs-node'}));
+      }
+      diagram.append(svg('text', {x: px, y: 128, class: active ? 'gs-index gs-current' : 'gs-index'}, String(c)));
+      const hit = svg('rect', {x: px - 17, y: 29, width: 34, height: 106, class: 'gs-pick', 'data-gallery-cut': c, 'aria-hidden': true});
+      hit.append(svg('title', {}, 'Move the positive panel step to cut ' + c));
+      hit.onclick = () => goToCut?.(c);
+      diagram.append(hit);
+    }
+    return diagram;
+  }
+
+  function stageCaption(info, frame, m) {
+    const i = info.positiveStep;
+    const now = product(frame.row.prefix);
+    if (frame.kind === 'insert') return 'Start at the lower right. At cut 0 the gallery reaches the terminal negative flag Y₀. The vertical edge changes the positive flag from X₀ to the unique X₁ of codistance ' + now + ' in the same ' + i + '-panel.';
+    if (frame.kind === 'delete') return 'The dashed path shows the auxiliary gallery before deletion. The solid path shows Ω at codistance ' + now + ' after the cut. The film now ends at cut ' + m + '.';
+    if (frame.kind === 'freeze') return 'The solid marker is at cut ' + m + '. The terminal slab follows this cut in the film. Its removal exposes every film that closed there.';
+    const a = info.before.cut, b = info.after.cut;
+    return 'The dashed corner rises at Y' + sub(a) + '. The solid corner rises at Y' + sub(b) + '. Both paths use the same Y flags and the same positive step X₀ → X₁. The terminal codistance is ' + now + '.';
+  }
+
+  function render(host, reading, frame, {goToCut} = {}) {
+    const restoreFocus = document.activeElement?.matches('.gs-cut-select') && host.contains(document.activeElement);
+    const detailsOpen = Boolean(host.querySelector('.gs-details[open]'));
+    const info = describe(reading, frame);
+    const {omega} = reading;
+    host.classList.add('gs-gallery');
+    host.dataset.stage = frame.stage;
+    host.dataset.galleryKind = frame.kind;
+    host.dataset.previousCut = info.before.cut ?? 'none';
+    host.dataset.cut = info.after.cut ?? 'none';
+    if (!frame.stage) {
+      const title = element('h4', null, 'The full-word sweep');
+      const explanation = reading.scan.some(row => row.stage)
+        ? 'Each selected letter i gives one stage. Append a positive i-panel step to the terminal flag, slide it across the full diagram, then cut its terminal film slab. The diagrams below follow the positive word Ω from left to right.'
+        : 'The leftmost subexpression is empty. The identity-target film is the only stage.';
+      host.replaceChildren(title, element('p', 'gs-intro', explanation));
+      return;
+    }
+    const head = element('div', 'gs-head');
+    head.append(element('h4', null, 'Two flag galleries'));
+    const pair = element('div', 'gs-pair');
+    if (frame.kind === 'insert') pair.append(variety(info.before, info.positiveStep), element('span', 'gs-symbol', '≅'), variety(info.after, info.positiveStep));
+    else if (frame.kind === 'delete') pair.append(element('span', 'gs-prefix', 'After the cut'), variety(info.after, info.positiveStep));
+    else pair.append(element('span', 'gs-prefix', 'Auxiliary variety'), variety(info.after, info.positiveStep));
+    head.append(pair);
+    const intro = element('p', 'gs-intro', stageCaption(info, frame, omega.length));
+    const residual = element('p', 'gs-residual');
+    if (info.after.cut !== null) {
+      const consumed = reading.scan.slice(0,info.after.cut).filter(r=>r.stage && r.stage.stage<=frame.stage).length;
+      const word = frame.row.prefix.slice(consumed), i = info.positiveStep;
+      const hollow = frame.after.graph.hollow.includes(frame.after.marker);
+      const trial = hollow ? word.slice(0,-1) : [...word,i];
+      residual.textContent = 'Film at cut ' + info.after.cut + ' · ' + product(word) + ' · s' + sub(i) + ' = ' + product(trial) +
+        (hollow ? ' shortens the residual. M' + sub(i) + ' is hollow.' : ' increases the length. Keep residual ' + product(word) + ' and draw a solid bridge.');
+    }
+    const axes = element('div', 'gs-axes');
+    const axisLabels = element('div', 'gs-axis-labels');
+    for (const [cls, text] of [['gs-axis-word','Ω'], ['gs-axis-upper','X₁'], ['gs-axis-lower','X₀'], ['gs-axis-cut','Cut']]) axisLabels.append(element('span', cls, text));
+    const viewport = element('div', 'gs-scroll');
+    viewport.append(galleryDiagram(omega, info, goToCut));
+    axes.append(axisLabels, viewport);
+    const controls = element('div', 'gs-foot');
+    const directions = element('p', 'gs-directions', 'Read Ω left to right. Gallery time runs from the lower right to the upper left.');
+    if (frame.kind === 'delete') directions.textContent = 'The negative flags run from Y' + sub(omega.length) + ' on the right to Y₀ on the left.';
+    const lab = element('label', 'gs-control', 'Move to cut ');
+    const select = element('select', 'gs-cut-select');
+    for (let c = 0; c <= omega.length; c++) select.add(new Option(String(c), String(c)));
+    if (info.after.cut === null) select.add(new Option('After deletion', 'none'));
+    select.value = String(info.after.cut ?? 'none');
+    select.onchange = () => { if (select.value !== 'none') goToCut?.(Number(select.value)); };
+    lab.append(select);
+    controls.append(directions, lab);
+    const details = chartDetails(info, frame);
+    details.open = detailsOpen;
+    host.replaceChildren(head, intro, axes, controls, ...(info.after.cut === null ? [] : [residual]), details);
+    if (restoreFocus) select.focus({preventScroll:true});
+    const cutToShow = info.after.cut ?? info.before.cut;
+    if (cutToShow !== null) viewport.scrollLeft = x(cutToShow) - viewport.clientWidth / 2;
+  }
+
+  globalThis.QuiverGallerySweep = Object.freeze({render, describe});
+})();
+</script>
+<script>// Label the forward film's own arrows. The Bao–Ye snapshots supply a separate
+// check on the resulting ice quivers.
+(() => {
+  'use strict';
+  const label = id => '(' + id + ')';
+  const audit = new WeakMap();
+
+  function slotLabels(side) {
+    return new Map(Object.entries(side.mapping).map(([id, slot]) => [slot, id]));
+  }
+
+  function originalSlot(side, slot) {
+    if (slot === side.marker) return null;
+    return side.marker !== null && slot > side.marker ? slot - 1 : slot;
+  }
+
+  function boundary(side) {
+    const graph = side.graph, end = side.marker;
+    if (end === null || end !== graph.beta.length) return [];
+    const bySlot = slotLabels(side), neighbors = new Map();
+    for (const [a, b, weight] of graph.arrows) {
+      if (a === end || b === end) {
+        const other = a === end ? b : a;
+        neighbors.set(other, [bySlot.get(a), bySlot.get(b), weight]);
+      }
+    }
+    const frozen = new Set(graph.frozen);
+    return graph.solid.filter(slot => slot !== end && !frozen.has(slot)).map(slot => {
+      const film = graph.films[slot], incoming = film.cuts[end - 1].changes;
+      const closing = incoming.length > 0 && film.cuts[end].changes.length === 0;
+      return {id:bySlot.get(slot), slot, edge:neighbors.get(slot), closing, incoming};
+    });
+  }
+
+  function ice(side) {
+    if (audit.has(side)) return audit.get(side);
+    const graph = side.graph, bySlot = slotLabels(side);
+    const frozen = new Set(graph.frozen);
+    if (side.snapshot.type === 'freeze') {
+      // Geometry stays in place for the freeze frame. Read the terminal
+      // adjacency before hiding entries with two frozen endpoints.
+      for (const row of boundary(side)) if (row.edge) frozen.add(row.slot);
+    }
+    const nodes = graph.solid.map(slot => {
+      const id = bySlot.get(slot);
+      if (!id) throw new Error('Missing occurrence label for solid slot ' + slot);
+      return {id, label:label(id), frozen:frozen.has(slot)};
+    });
+    const edges = graph.arrows.filter(([a,b]) => !frozen.has(a) || !frozen.has(b))
+      .map(([a,b,w]) => [bySlot.get(a), bySlot.get(b), String(w)]);
+    const result = {nodes, edges};
+    audit.set(side, result);
+    return result;
+  }
+
+  function edgeKey(edge) {
+    return edge ? edge[0] + '>' + edge[1] + '/' + edge[2] : '';
+  }
+
+  function equivalent(first, second) {
+    function sorted(graph) {
+      return JSON.stringify([
+        graph.nodes.map(n => [n.id,n.frozen]).sort(),
+        graph.edges.map(edgeKey).sort()
+      ]);
+    }
+    return sorted(first) === sorted(second);
+  }
+
+  function prefixChanges(frame) {
+    const {before, after} = frame, selected = frame.row.position;
+    const earlier = new Map(Object.entries(before.mapping).map(([id, slot]) =>
+      [id, originalSlot(before, slot)]).filter(([,slot]) => slot !== null && slot < selected));
+    function earlierEdges(side) {
+      const result = new Map();
+      for (const edge of ice(side).edges) {
+        const [a,b] = edge;
+        if (earlier.has(a) || earlier.has(b)) result.set([a,b].sort().join('|'), edge);
+      }
+      return result;
+    }
+    const old = earlierEdges(before), next = earlierEdges(after);
+    const rows = [];
+    for (const key of new Set([...old.keys(), ...next.keys()])) {
+      const first = old.get(key), second = next.get(key);
+      if (edgeKey(first) === edgeKey(second)) continue;
+      rows.push({before:first, after:second, earlier:(first || second).slice(0,2).filter(id => earlier.has(id))});
+    }
+    rows.sort((a,b) => Number(Boolean(a.before)) - Number(Boolean(b.before)));
+    return {earlier, rows};
+  }
+
+  function element(tag, text, cls) {
+    const node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (cls) node.className = cls;
+    return node;
+  }
+
+  function edgeText(edge) {
+    if (!edge) return 'No arrow';
+    return label(edge[0]) + ' → ' + label(edge[1]) + (Number(edge[2]) === 1 ? '' : ' × ' + edge[2]);
+  }
+
+  function table(container, headings, caption) {
+    const scroll = element('div', undefined, 'se-scroll');
+    const result = element('table');
+    result.setAttribute('aria-label', caption);
+    const header = result.createTHead().insertRow();
+    for (const text of headings) {
+      const th = element('th', text);
+      th.scope = 'col';
+      header.append(th);
+    }
+    scroll.append(result);
+    container.append(scroll);
+    return result.createTBody();
+  }
+
+  function render(host, reading, frame, {followBridge, pinned} = {}) {
+    const single = frame.kind === 'scan' || frame.kind === 'initial';
+    const sides = single ? [frame.after] : [frame.before,frame.after];
+    const checks = sides.map(side => equivalent(ice(side), QuiverRichardsonReading.seedGraph(side.snapshot)));
+    host.classList.add('se-panel');
+    host.replaceChildren();
+    const section = element('div', undefined, 'se-body');
+    const compared = element('p', undefined, 'se-compare');
+    const follow = (id, slot) => {
+      const button = element('button', 'Follow ' + label(id) + ' · Ω[' + slot + ']', 'se-follow');
+      button.type = 'button';
+      button.dataset.follow = id;
+      button.setAttribute('aria-pressed', String(pinned === id));
+      button.onclick = () => {
+        if (typeof followBridge !== 'function') return;
+        const hadFocus = document.activeElement === button;
+        followBridge(id, 0);
+        if (hadFocus) [...host.querySelectorAll('[data-follow]')].find(b => b.dataset.follow === id)?.focus({preventScroll:true});
+      };
+      return button;
+    };
+
+    if (frame.kind === 'square') {
+      const {earlier, rows} = prefixChanges(frame);
+      section.append(element('h4','Arrows at earlier bridges'));
+      const affected = [...new Set(rows.flatMap(row => row.earlier))].sort((a,b) => earlier.get(a) - earlier.get(b));
+      if (affected.length) {
+        section.append(element('p', 'Mutating ' + label(frame.focus) + ' changes these arrows incident to bridges before the selected Ω[' + frame.row.position + '].'));
+        const controls = element('div', undefined, 'se-follow-list');
+        for (const id of affected) controls.append(follow(id, earlier.get(id)));
+        section.append(controls);
+        const beforeEdges = new Set(ice(frame.before).edges.map(([a,b]) => a + '>' + b));
+        const body = table(section, ['Before the square','After the square'], 'Changed arrows involving earlier bridges');
+        for (const item of rows) {
+          const tr = body.insertRow();
+          tr.dataset.beforeArrow = edgeKey(item.before);
+          tr.dataset.afterArrow = edgeKey(item.after);
+          const previous = tr.insertCell();
+          previous.textContent = edgeText(item.before);
+          if (!item.before && item.after) {
+            const [a,b] = item.after;
+            if (beforeEdges.has(a + '>' + frame.focus) && beforeEdges.has(frame.focus + '>' + b))
+              previous.append(element('span', 'Via ' + [a,frame.focus,b].map(label).join(' → '), 'se-origin'));
+          }
+          tr.insertCell().textContent = edgeText(item.after);
+          if (item.earlier.includes(pinned)) tr.className = 'se-pinned';
+        }
+      } else {
+        section.append(element('p', earlier.size
+          ? 'The square at ' + label(frame.focus) + ' preserves all arrows incident to bridges before Ω[' + frame.row.position + '].'
+          : 'There are no solid bridges before the selected Ω[' + frame.row.position + '].'));
+      }
+    }
+
+    if (frame.kind === 'freeze' || frame.kind === 'delete') {
+      const side = frame.before, end = side.marker, rows = boundary(side);
+      const shown = rows.filter(row => row.closing || row.edge);
+      const filmAgrees = rows.every(row => row.closing === Boolean(row.edge));
+      section.append(element('h4','Films at the right boundary'));
+      if (shown.length) {
+        section.append(element('p', 'The last slab runs from cut ' + (end-1) + ' to cut ' + end + '. Cutting it off exposes cut ' + (end-1) + '.'));
+        const body = table(section, ['Film at its positive slot','Arrow before freezing','Last slab'], 'Films closing at the terminal crossing and mutable neighbors before freezing');
+        for (const row of shown) {
+          const tr = body.insertRow();
+          tr.dataset.film = row.id;
+          tr.dataset.omegaSlot = String(row.slot);
+          tr.dataset.closes = String(row.closing);
+          tr.dataset.neighbor = String(Boolean(row.edge));
+          if (row.id === pinned) tr.className = 'se-pinned';
+          const entry = tr.insertCell();
+          entry.append(follow(row.id,row.slot));
+          if (row.slot < frame.row.position) entry.append(element('span','Born before selected Ω[' + frame.row.position + ']','se-origin'));
+          tr.insertCell().textContent = edgeText(row.edge);
+          const cell = tr.insertCell();
+          if (row.closing) {
+            cell.append(document.createTextNode('Open at ' + (end-1) + ' · closed at ' + end));
+            const defects = row.incoming.filter(([h,k]) => k === h + 1).map(([h,k]) => '(' + h + ', ' + k + ')');
+            if (defects.length) cell.append(element('span','Remaining swap' + (defects.length === 1 ? ' ' : 's ') + defects.join(' '),'se-origin'));
+          } else cell.textContent = 'Already closed before this slab';
+        }
+        section.append(element('p', filmAgrees ? 'These films stay open when cut ' + (end-1) + ' becomes the boundary, so their bridges freeze.' : 'The film closures and terminal adjacencies differ in this diagram.', 'se-caption'));
+      } else {
+        section.append(element('p','All surviving mutable films closed before the terminal crossing. Cutting off ' + label(frame.focus) + ' freezes no additional bridges.'));
+      }
+      if (!filmAgrees) checks.push(false);
+    }
+
+    const matches = checks.every(Boolean);
+    host.dataset.checked = matches ? 'match' : 'difference';
+    const after = ice(frame.after);
+    compared.textContent = matches
+      ? 'Film and Bao–Ye agree on ' + (single ? 'this diagram' : 'both diagrams') + ' · ' + after.nodes.length + ' bridges, ' + after.nodes.filter(n=>!n.frozen).length + ' mutable' + (single ? '.' : ' after the move.')
+      : 'Computed film and Bao–Ye data differ for this move. Inspect the frozen vertices and weighted arrows.';
+    compared.title = 'Compares occurrence labels, frozen vertices, and every weighted arrow with a mutable endpoint.';
+    if (section.childElementCount) host.append(section);
+    host.append(compared);
+  }
+
+  globalThis.QuiverSweepEvidence = Object.freeze({render, ice});
+})();
+</script>
 <script>// The film proof reads the displayed word from the left. Both pictures of a
 // move use their own directly computed geometry and the same bridge labels.
 (() => {
@@ -5598,7 +6072,7 @@ sitemap: false
   const subscript = n => String(n).replace(/\d/g,d=>'₀₁₂₃₄₅₆₇₈₉'[d]);
   const generator = i => 's'+subscript(i);
   const product = word => word.map(generator).join('') || 'e';
-  const letter = i => i < 0 ? '(−'+Math.abs(i)+')' : String(i);
+  const stripLetter = i => i < 0 ? 'M'+subscript(-i) : String(i);
   const label = id => '('+id+')';
   const list = ids => ids.map(label).join(', ') || 'none';
   const point = a => '('+a.join(', ')+')';
@@ -5621,7 +6095,7 @@ sitemap: false
     switch(f.kind) {
       case 'scan': return (f.row.stage?'Select':'Skip')+' Ω['+f.row.position+'] = '+f.row.letter;
       case 'initial': return 'Initial film at e';
-      case 'insert': return 'Insert the hollow marker';
+      case 'insert': return 'Append the positive '+f.row.letter+'-step';
       case 'commute': return 'Slide past Ω['+pos+']';
       case 'transfer': return 'Transfer '+label(f.after.riding)+' to the marker';
       case 'square': return 'Square move at '+label(f.focus);
@@ -5640,10 +6114,10 @@ sitemap: false
             'Left multiplication increases the length. Keep the residual and skip this letter.');
       }
       case 'initial': return 'The induction starts at e on the positive word. Every crossing is solid. The last bridge of each color is frozen.';
-      case 'insert': return 'Change the stage target from '+product(row.previous)+' to '+product(row.prefix)+'. The new '+letter(-row.letter)+' at the left consumes the final '+generator(row.letter)+' on the right of the residual. The previous labeled quiver is preserved.';
+      case 'insert': return 'Extend the terminal positive flag by its unique '+row.letter+'-step of longer codistance. In the film this step appears at cut 0 as '+stripLetter(-row.letter)+'. It is hollow because '+product(row.prefix)+' · '+generator(row.letter)+' = '+product(row.previous)+'. All existing bridges keep their labels.';
       case 'commute': return 'The marker passes '+at+' = '+reading.omega[f.crossedPosition-1]+'. The target stays '+product(row.prefix)+' and the labeled quiver is preserved.';
       case 'transfer': return 'At '+at+' the residual is '+generator(row.letter)+'. The first of the two matching letters is hollow in each order. The positive crossing becomes hollow and its bridge '+label(f.after.riding)+' passes to the marker without mutation.';
-      case 'square': return 'Both matching crossings are solid at identity residual. Mutate at '+label(f.focus)+' as the marker passes '+at+'. The marker now carries '+label(f.after.riding)+'.';
+      case 'square': return 'Both matching crossings are solid at identity residual. Mutate the full quiver at '+label(f.focus)+' as the panel step passes '+at+'. Its new bridge label is '+label(f.after.riding)+'.';
       case 'freeze': return 'The solid marker carries '+label(f.focus)+' at the right boundary. '+(f.newlyFrozen.length?'Freeze its mutable neighbors '+list(f.newlyFrozen)+'. Their films close across this last crossing.':'It has no mutable neighbors. The frozen set stays the same.');
       case 'delete': return 'Cut off the final solid marker '+label(f.focus)+'. The preceding cut becomes the film boundary, and the positive word now has target '+product(row.prefix)+'.';
     }
@@ -5668,9 +6142,13 @@ sitemap: false
     copy.textContent='Copy move link';download.textContent='Download move data';
     shareStatus.setAttribute('role','status');sharedLink.hidden=true;
     share.append(copy,download,sharedLink,shareStatus);settings.append(followLabel,detailLabel,share);
+    const cases=el('nav',undefined,'fp-cases');
+    cases.id='forwardCases';cases.setAttribute('aria-label','Bao–Ye Example 5.3 checkpoints');
+    const gallery=el('section');gallery.id='forwardGallery';
+    const evidence=el('section');evidence.id='forwardEvidence';
     const pair=el('div',undefined,'fp-sides'),replay=QuiverSquareReplay.create();
     host.classList.add('fp-panel');
-    host.replaceChildren(header,strip,current,note,selectedProduct,settings,pair,replay.element);
+    host.replaceChildren(header,cases,strip,current,note,selectedProduct,gallery,evidence,settings,pair,replay.element);
     let reading,frames=[],cursor=0,pinned=null,shift=0,camera={},cards=[];
     let lastWidth=0;
     const observer=new ResizeObserver(entries=>{
@@ -5716,10 +6194,10 @@ sitemap: false
         const lift=model.events[selected-1].lifts.find(l=>l.shift===shift);
         if(lift?.bridge)bridge={label:pinned,slot:selected,shift,endpoints:QuiverPlabicGeometry.bridgeEndpoints(lift.bridge)};
       }
-      const seed=QuiverRichardsonReading.seedGraph(side.snapshot);
+      const seed=QuiverSweepEvidence.ice(side);
       return {target:side.target,word:side.word,markerSlot:side.marker,markerLabel:side.riding??null,
         hollowSlots:g.hollow,solidSlots:g.solid,openFilmSlots:g.frozen,bridgeSlots:side.mapping,
-        residualWindows:g.topWindows,iceQuiver:{vertices:side.snapshot.active,frozen:side.snapshot.frozen,arrows:seed.edges},
+        residualWindows:g.topWindows,iceQuiver:{vertices:seed.nodes.map(n=>n.id),frozen:seed.nodes.filter(n=>n.frozen).map(n=>n.id),arrows:seed.edges},
         followedBridge:bridge};
     }
 
@@ -5730,7 +6208,7 @@ sitemap: false
         selectedPositions:reading.scan.filter(r=>r.stage).map(r=>r.position),stage:f.stage,step:f.step,
         kind:f.kind,scanPosition:f.kind==='scan'?f.row.position:null,selectedPosition:f.stage?f.row.position:null,
         crossedPosition:f.crossedPosition,focusLabel:f.focus,newlyFrozen:f.newlyFrozen,
-        followedLabel:pinned,followedLift:pinned?shift:null,before:exportSide(f.before),after:exportSide(f.after)};
+        gallery:QuiverGallerySweep.describe(reading,f),followedLabel:pinned,followedLift:pinned?shift:null,before:exportSide(f.before),after:exportSide(f.after)};
       const blob=new Blob([JSON.stringify(data,null,2)+'\n'],{type:'application/json'});
       const a=el('a'),url=URL.createObjectURL(blob);
       a.href=url;a.download='forward-film-'+(f.kind==='scan'?'scan-'+f.row.position:'stage-'+f.stage+'-step-'+f.step)+'-'+f.kind+'.json';
@@ -5749,9 +6227,9 @@ sitemap: false
       card.dataset.proofSide=name;card.dataset.word=side.word.join(',');
       card.dataset.target=side.target.join(',');card.dataset.hollow=g.hollow.join(',');
       card.dataset.marker=side.marker??'';card.dataset.frozen=side.snapshot.frozen.join('|');
-      const wordText=side.word.map(letter).join(' ') || '∅';
+      const wordText=side.word.map(stripLetter).join(' ') || '∅';
       const pairText=el('p',undefined,'fp-pair');
-      pairText.textContent='('+product(side.target)+', '+wordText+')';
+      pairText.textContent='Film strip · '+wordText;
       head.append(el('h4',title),pairText);
       const hollows='Hollow slots '+(g.hollow.join(', ')||'∅');
       head.append(el('p',hollows+(side.marker?(' · Marker at '+side.marker+' · '+(side.riding?'solid '+label(side.riding):'hollow')):''),'fp-hollows'));
@@ -5761,9 +6239,9 @@ sitemap: false
       }
       const coords=el('p',undefined,'fp-coordinates'),q=el('div',undefined,'fp-seed');
       const summary=el('details'),data=el('div',undefined,'fp-data');
-      const seed=QuiverRichardsonReading.seedGraph(side.snapshot);
+      const seed=QuiverSweepEvidence.ice(side);
       const ar=seed.edges.map(([a,b,w])=>label(a)+' → '+label(b)+(String(w)==='1'?'':' × '+w));
-      data.append(el('p','Frozen '+list(side.snapshot.frozen)),el('p','Ice arrows   '+(ar.join(', ')||'none')));
+      data.append(el('p','Frozen '+list(seed.nodes.filter(n=>n.frozen).map(n=>n.id))),el('p','Ice arrows   '+(ar.join(', ')||'none')));
       summary.append(el('summary','Vertex and arrow data'),data);
       const ringNote=el('p','Blue rings mark films open at this diagram’s right boundary.','fp-rings');
       const seedLabel=el('p','Circles are mutable. Squares are frozen.','fp-key');
@@ -5829,6 +6307,9 @@ sitemap: false
         f.kind==='initial'?'Selected product e     ·     Final target '+product(reading.v):
         'Selected Ω slot '+f.row.position+'     ·     '+(f.kind==='insert'?'Stage target '+product(f.row.previous)+' → '+product(f.row.prefix):'Fixed stage target '+product(f.row.prefix));
       picker.value=String(cursor);prev.disabled=cursor===0;next.disabled=cursor===frames.length-1;
+      for(const button of cases.querySelectorAll('button')){
+        if(Number(button.dataset.frame)===cursor)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');
+      }
       for(const b of strip.children) {
         const r=reading.scan[Number(b.dataset.slot)-1];
         const marked=r.stage && (f.kind==='scan'?r.position<=f.row.position:r.stage.stage<=f.stage);
@@ -5839,6 +6320,11 @@ sitemap: false
       if(pinned)ids.add(pinned);
       follow.replaceChildren(new Option('Move focus',''),...[...ids].map(id=>new Option(label(id),id)));
       follow.value=pinned||'';
+      QuiverGallerySweep.render(gallery,reading,f,{goToCut(cut){
+        const index=frames.findIndex(s=>s.stage===f.stage && s.after.marker===cut+1 && s.kind!=='freeze');
+        if(index>=0)go(index);
+      }});
+      QuiverSweepEvidence.render(evidence,reading,f,{followBridge:selectBridge,pinned});
       cards=single?[makeCard(f.after,'after',f.kind==='scan'?'Leftmost scan at v':'Positive word at e')]:
         [makeCard(f.before,'before','Before'),makeCard(f.after,'after','After')];
       pair.classList.toggle('fp-single',single);pair.replaceChildren(...cards.map(c=>c.card));
@@ -5857,6 +6343,18 @@ sitemap: false
       const requested=query.get('follow'),lift=Number(query.get('lift')||0);
       pinned=reading.paper.snapshots[0].active.includes(requested)?requested:null;
       shift=pinned && QuiverPlabicGeometry.inTrackingRange({n:reading.n,beta:reading.omega},lift)?lift:0;
+      cases.replaceChildren();
+      const example=reading.n===6 && reading.omega.join(',')==='2,1,2,3,4,5,4,2,3,4,2,3,1' && reading.v.join(',')==='2,1,3,5,4,2';
+      cases.hidden=!example;
+      if(example) {
+        cases.append(el('span','Example 5.3'));
+        for(const [stage,kind,title,bridge] of [[2,'insert','2 · Codistance',null],[3,'square','3 · Prefix arrow','2,1'],[4,'freeze','4 · Boundary film','4,1']]){
+          const index=frames.findIndex(f=>f.stage===stage && f.kind===kind);
+          const button=el('button',title);button.type='button';button.dataset.frame=index;button.dataset.stage=stage;
+          button.onclick=()=>{pinned=bridge;shift=0;cursor=index;show();notify();};
+          cases.append(button);
+        }
+      }
       const groups=new Map();
       for(const [index,f] of frames.entries()) {
         const key=f.kind==='scan'?'Leftmost subexpression':f.stage?'Stage '+f.stage+' · Ω['+f.row.position+']':'Initial seed';
