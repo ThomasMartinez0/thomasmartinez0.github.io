@@ -43,6 +43,21 @@ sitemap: false
 .figure-link {color:var(--deep);text-underline-offset:2px}
 #moveGraphs {scroll-margin-top:.65rem}
 
+.modes{flex-wrap:wrap;max-width:100%}
+#richardsonPanel{margin:14px 0;padding:clamp(15px,2.7vw,32px)}
+#richardsonPanel h2{font-size:clamp(23px,2.3vw,31px)}
+#richardsonPanel h3{font:500 21px/1.2 var(--serif);letter-spacing:-.025em}
+#richardsonPanel p{font-size:13px;color:var(--muted);margin:6px 0}
+.rr-words{display:flex;gap:12px 30px;flex-wrap:wrap;background:var(--soft);border-radius:6px;padding:12px 15px;margin:15px 0}
+.rr-words div{min-width:0}.rr-words span{display:block;color:var(--muted);font-size:12px}.rr-words strong{font:600 15px var(--mono);overflow-wrap:anywhere}
+.rr-content{display:grid;gap:24px;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);margin-top:22px}.rr-content>section{min-width:0}
+.rr-table{overflow:auto;max-height:26rem;margin-top:11px}.rr-table table{width:100%}.rr-table th{font:600 12px var(--sans);position:sticky;top:0}.rr-table td{padding:7px 9px}.rr-selected{background:#e4f0e7}.rr-selected td{color:var(--deep);font-weight:650}
+.rr-graph{overflow:auto}.rr-graph svg{display:block}.rr-result{font-weight:600}
+.rr-links{display:flex;gap:8px 20px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:13px;margin-top:15px}
+.rr-links a,.rr-details a{color:var(--deep);font-size:13px;font-weight:600;text-underline-offset:3px}
+.rr-details{margin-top:17px}.rr-details summary{cursor:pointer;width:fit-content;font-size:13px}
+@media(max-width:780px){.rr-content{grid-template-columns:minmax(0,1fr);gap:20px}.rr-graph svg{max-height:225px}.rr-table td,.rr-table th{padding:6px}.rr-words{gap:12px 18px}}
+
 .sw-shell > * { min-width:0; }
 .sw-shell { display:grid; grid-template-columns:minmax(0,1fr); gap:13px; margin:16px 0 22px; }
 .sw-shell[hidden],.sw-empty[hidden],.sw-pictures[hidden],.sw-details[hidden] { display:none; }
@@ -380,14 +395,15 @@ sitemap: false
  <label class="example-label"><span>Load an example</span><select id="examples" aria-label="Load an example"></select></label></div>
  <form id="wordForm" class="word-form" novalidate>
   <label class="field field-n"><span>Nodes <i>n</i></span><input id="rank" type="number" min="3" max="24" inputmode="numeric" value="3" required></label>
-  <label class="field beta"><span>Braid word <i>β</i></span><input id="beta" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2 3 1 2 3" aria-describedby="formatHint"></label>
+  <label class="field beta"><span id="betaLabel">Braid word β</span><input id="beta" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2 3 1 2 3" aria-describedby="formatHint"></label>
   <label class="field target"><span id="targetLabel">Selected target v</span><input id="target" type="text" autocomplete="off" spellcheck="false" value="1 2 3 1 2" aria-describedby="formatHint"></label>
-  <button class="primary build" type="submit">Build quiver <span aria-hidden="true">↗</span></button>
+  <button class="primary build" type="submit"><b id="buildLabel">Build quiver</b> <span aria-hidden="true">↗</span></button>
   <span id="formatHint" class="sr">Separate generators with spaces or commas. Letter n or 0 means s zero. Use e for the identity.</span>
  </form>
  <p id="inputError" class="error" role="alert" hidden></p>
- <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="sweepTab" aria-controls="inductionWalk" aria-pressed="true">Induction walkthrough</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Bao–Ye steps</button></div>
- <label class="reading">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
+ <div class="modebar"><div class="seg modes" aria-label="Explorer mode"><button type="button" id="richardsonTab" aria-controls="richardsonPanel" aria-pressed="false">Richardson reading</button><button type="button" id="sweepTab" aria-controls="inductionWalk" aria-pressed="true">Induction walkthrough</button><button type="button" id="wordTab" aria-pressed="false">Word moves</button><button type="button" id="recTab" aria-pressed="false">Bao–Ye steps</button></div>
+ <label class="reading" id="filmConvention">Subexpression <select id="reading" aria-label="Subexpression convention"><option value="left" selected>Leftmost →</option><option value="right">← Rightmost</option></select></label></div>
+ <section id="richardsonPanel" class="panel" aria-label="Richardson reading" hidden></section>
  <section id="inductionWalk" aria-label="Induction walkthrough" hidden></section>
  <div id="subwordStrip" aria-label="Selected subexpression of beta" class="subword-strip"></div>
  <section id="wordPanel" class="panel action-panel" aria-labelledby="moveTitle"><div class="timeline-line"><div class="row"><h2 id="moveTitle">Change the braid word</h2><span id="moveCount" class="chip"></span></div><button id="undoMove" class="nextbtn" disabled>↶ Undo move</button></div>
@@ -440,13 +456,14 @@ sitemap: false
 </main>
 <dialog id="guide"><div class="guide-head"><h2>Reading the explorer</h2><button id="guideClose" class="iconbtn" aria-label="Close reading guide">×</button></div>
 <div class="guide-body">
+<h3>Signed galleries in the Richardson reading</h3><p>Enter the chronological signed word β and terminal codistance v in written order. Read the negative occurrences backwards, then the positive occurrences forwards, to obtain the positive word Ω. The table records each letter’s original slot. Walk through Ω to inspect the normalized induction, or open the raw chronological film separately.</p>
 <h3>Enter the words</h3><p><i>n</i> counts the nodes of the affine Dynkin diagram of type A<sub>n−1</sub><sup>(1)</sup>. Enter generators 1 through <i>n</i>. Both <i>n</i> and 0 denote <i>s</i><sub>0</sub>. Spaces or commas separate letters. For <i>n</i> ≤ 9, compact words such as 123123 also work. Use <b>e</b> or an empty field for the identity. The explorer accepts 3–24 nodes and up to 48 letters per word.</p>
-<p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. For a signed word, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
+<p>For a positive word, enter the selected target <i>v</i> to compare the two constructions. In the Word moves view, enter the film boundary <i>c</i> in its written order. For example, entering <i>s₂s₁</i> sets <i>c = s₂s₁</i>. The index must be reduced and feasible. A barred letter can be entered as −1 or (−1).</p>
 <h3>Bao–Ye induction and the reflected film</h3><p>Start with selected product <i>a = e</i> and fixed target <i>v</i>. In Leftmost mode, read β from left to right. At letter <i>i</i>, try appending <i>sᵢ</i> on the right. Keep <i>asᵢ</i> if it is closer to <i>v</i> in Coxeter distance. Otherwise keep <i>a</i>. For β = 2112 and target s₁s₂ the selected positions are 2 and 4, giving e → s₁ → s₁s₂.</p>
 <p>Each stage shows the Bao–Ye selected product <i>u</i> and the film pair (initial boundary <i>c</i>, signed word), where <i>c = u⁻¹</i>. In Leftmost mode, selecting <i>i</i> gives <i>u sᵢ</i>. The walkthrough shows the film in reflected slot order. Its engine receives the reversed signed word and boundary c. In these displayed slots, inserting the bar takes (c, β) to (sᵢ c, (−i)β). The boundary stays sᵢ c as the bar slides right. The selected crossing gives its label to the bar, and each later matching color gives a square mutation. Freeze the mutable neighbors of the terminal vertex and delete it to reach (sᵢ c, β).</p>
 <p>In Rightmost mode the film is shown in its native word order. Bao–Ye reads the displayed word from the right, so its product <i>u</i> is the inverse of the selected product written in displayed order. The new bar starts at the right end and the film boundary grows by the same left multiplication.</p>
 <p>The preset <a href="?#bao-ye-example-5-3">Bao–Ye Example 5.3</a> opens at the identity seed with bridge (2,1) selected. Use <b>Next</b> to compare it before and after each elementary move. <b>Follow bridge</b> selects a Bao–Ye vertex by its occurrence label (i,k). A square can change the cluster variable at that label. Freezing changes its status. If its bridge is deleted, stepping backward recovers it. The red projection records (t,y) and the blue projection records (t,x). Example 5.3 lists its mutations. Definition 5.11 specifies freezing and deletion. At stage 2 the selected product is s₂s₁. The chronological positive film on the published word has 6 arrows between mutable vertices, and Bao–Ye has 8.</p>
-<p>For a signed word the film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
+<p>In the Word moves view the signed film scan starts at <i>ρ = c</i>. Read from the left in Leftmost mode or the right in Rightmost mode. A positive <i>i</i> tests <i>ρsᵢ</i>, and a barred <i>i</i> tests <i>sᵢρ</i>. The crossing is hollow when the candidate shortens the length of <i>ρ</i>.</p>
 <h3>Inspecting the periodic 3D graph</h3>
 <p>In the induction walkthrough the graph inspector uses the chronological all-barred reverse gallery with endpoint <i>u</i>. The positive marker slides from right to left. The reflected word strip below it shows the same step in paper reading order with the tracks exchanged. During subexpression selection the inspector shows the final-target graph and highlights the crossing being tested.</p>
 <p>At each cut the dots are (x, y, t) = (u<sub>t</sub>(h), h, t). In both projections time runs to the right. Read the row y vertically in red and the column x vertically in blue. Solid positions carry black–white bridges at half-integer times. Hollow positions move strands without a bridge. Translate x and y together by <i>n</i> to get the next affine lift. The start colors follow Definition 3.4. <a href="https://arxiv.org/html/2210.04778v3#S3.SS2" target="_blank" rel="noopener">GLSBS §3.2</a>.</p>
@@ -4158,7 +4175,9 @@ sitemap: false
       const wordStrip=node('div','pg-word');
       wordStrip.setAttribute('role','group');wordStrip.setAttribute('aria-label',caption+' chronological word');
       const foot=node('div','pg-cardfoot');
-      box.append(top,wordStrip,foot,figures);stages.append(box);
+      const readingLink=node('a','figure-link','Read this chronological gallery in Bao–Ye order');
+      readingLink.href=QuiverRichardsonReading.url(location.href,{n:side.graph.n,beta:side.word,v:side.target},'richardson');
+      box.append(top,wordStrip,foot,figures,readingLink);stages.append(box);
       return {side,name,box,bounds,figures,panes,wordStrip,foot,endpoints,geometry:geometry(side),slots:stageSlots(side,name)};
     }
     function fillEndpoints(c,t){
@@ -4332,7 +4351,7 @@ sitemap: false
     function moveText(){
       if(ctx.kind==='freeze')return ctx.newlyFrozen?.length?'The embedded graph is fixed. Newly frozen '+ctx.newlyFrozen.map(label).join(', ')+'.':'The embedded graph is fixed. There are no new frozen vertices.';
       if(ctx.kind==='delete')return 'The positive marker is removed at the left cut. The target at the right cut stays fixed.';
-      if(ctx.kind==='insert')return 'The positive marker is appended at the right cut. Its crossing is hollow.';
+      if(ctx.kind==='insert')return 'The auxiliary film appends a positive marker at the right cut. Its first test uses the whole target, so this crossing is hollow.';
       if(ctx.kind==='transfer')return 'One bridge changes which letter carries its label. Compare the marked pair in the two words.';
       if(ctx.kind==='square'||ctx.kind==='word-square')return 'The two marked bridges form the square. '+(ctx.focus!=null?'The mutation is at '+label(ctx.focus)+'.':'');
       if(ctx.kind==='commute'||ctx.kind==='word-commute')return 'The marked letters exchange chronological slots.';
@@ -4769,6 +4788,143 @@ sitemap: false
   globalThis.QuiverSweepView=Object.freeze({create});
 })();
 </script>
+<script>/* The based gallery is entered in chronological order. Each occurrence keeps
+   its original slot when the two tracks are placed in the positive presentation. */
+(() => {
+  'use strict';
+  const reverse = letters => [...letters].reverse();
+  const product = letters => letters.length ? letters.map(i => 's' + String(i).replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d])).join('') : 'e';
+  const list = positions => positions.length ? positions.join(', ') : 'none';
+  const signed = letter => (letter < 0 ? '−' : '+') + Math.abs(letter);
+  const tuple = word => '(' + word.join(', ') + ')';
+
+  function compute(n, beta, v) {
+    const occurrences = beta.map((value, index) => ({value, slot: index + 1}));
+    const negative = occurrences.filter(entry => entry.value < 0);
+    const positive = occurrences.filter(entry => entry.value > 0);
+    const rows = [...reverse(negative), ...positive];
+    const omega = rows.map(row => Math.abs(row.value));
+    // QuiverPaper accepts the two words in its reflected display coordinates.
+    const paper = QuiverPaper.compute(n, reverse(omega), reverse(v));
+    const byPosition = new Map(paper.stages.map(stage => [stage.selectedPaperPosition, stage]));
+    let prefix = [];
+    const scan = rows.map((row,index) => {
+      const stage = byPosition.get(index + 1);
+      const previous = prefix;
+      if (stage) prefix = [...prefix, stage.letter];
+      return {...row, position:index + 1, letter:omega[index], stage, previous, prefix};
+    });
+    const letters = paper.stages.map(stage => stage.letter);
+    for (const row of scan) row.residual = letters.slice(row.prefix.length);
+    return {n, beta:[...beta], v:[...v], omega, scan, paper};
+  }
+
+  function url(base, reading, view) {
+    const link = new URL(base);
+    link.search = '';
+    const raw = view === 'words';
+    const original = raw || view === 'richardson';
+    link.searchParams.set('n', reading.n);
+    link.searchParams.set('beta',(original ? reading.beta : reading.omega).join(',') || 'e');
+    link.searchParams.set(raw ? 'c' : 'v', reading.v.join(',') || 'e');
+    if (!original && reading.beta.some(i => i < 0)) link.searchParams.set('gallery',reading.beta.join(','));
+    if (raw) {
+      link.searchParams.set('reading','right');
+      link.searchParams.set('relation','none');
+    }
+    link.hash = {words:'word-moves', sweep:'induction', recursion:'bao-ye', richardson:'richardson'}[view];
+    return link.href;
+  }
+
+  function element(tag, text, cls) {
+    const node = document.createElement(tag);
+    if (text !== undefined) node.textContent = text;
+    if (cls) node.className = cls;
+    return node;
+  }
+
+  function render(host, reading) {
+    const {n,beta,v,omega,scan,paper} = reading;
+    const selected = scan.filter(row => row.stage);
+    const intro = element('div', undefined, 'rr-intro');
+    intro.append(element('h2','Richardson / Bao–Ye reading'),
+      element('p','Read the signed gallery in chronological order. Let N and P be the lists of absolute generator indices on the negative and positive tracks. The terminal codistance is read from y⁻¹x, so the negative steps appear in reverse order. Append P and keep the target v fixed.'));
+    const words = element('div',undefined,'rr-words');
+    function wordRow(label, value) {
+      const row = element('div');
+      row.append(element('span',label),element('strong',value));
+      return row;
+    }
+    words.append(wordRow('Chronological β',tuple(beta.map(signed))),
+      wordRow('Ω = rev(N) P',tuple(omega)),wordRow('Terminal v',product(v)));
+    intro.append(words);
+
+    const content = element('div',undefined,'rr-content');
+    const left = element('section',undefined,'rr-scan');
+    left.append(element('h3','Leftmost subexpression of Ω'),
+      element('p','Read Ω from left to right. Select i when sᵢ shortens the residual by left multiplication. At each selection the product grows from u to u sᵢ.'));
+    const table = element('table');
+    const caption = element('caption','Occurrence map and selected products','sr');
+    const head = table.createTHead().insertRow();
+    for (const title of ['Ω slot','Generator','Source in β','Decision','Product u','Residual u⁻¹v']) {
+      const th = element('th',title);
+      th.scope = 'col';
+      head.append(th);
+    }
+    table.prepend(caption);
+    const body = table.createTBody();
+    for (const row of scan) {
+      const tr = body.insertRow();
+      if (row.stage) tr.classList.add('rr-selected');
+      for (const value of [row.position, product([row.letter]), row.slot+' ('+signed(row.value)+')',
+        row.stage ? 'Select '+row.stage.stage : 'Skip', row.stage ? product(row.previous)+' → '+product(row.prefix) : product(row.prefix), product(row.residual)]) {
+        tr.insertCell().textContent = value;
+      }
+    }
+    if (!scan.length) {
+      const cell = body.insertRow().insertCell();
+      cell.colSpan = 6;
+      cell.textContent = 'The empty word has selected product e.';
+    }
+    const scroller = element('div',undefined,'rr-table');
+    scroller.append(table);
+    left.append(scroller,
+      element('p','Selected Ω slots: '+list(selected.map(row=>row.position))+'. Signed β slots in that order: '+list(selected.map(row=>row.slot))+'.','rr-result'));
+    const right = element('section',undefined,'rr-quiver');
+    right.append(element('h3','Bao–Ye quiver on Ω'));
+    const graph = element('div',undefined,'rr-graph');
+    const frozen = new Set(paper.final.frozen);
+    const nodes = paper.final.active.map(id => ({id,label:'('+id+')',frozen:frozen.has(id)}));
+    // Snapshot arrows use the reflected film display convention.
+    const edges = paper.final.edges.filter(([a,b]) => !frozen.has(a)||!frozen.has(b)).map(([a,b,w])=>[b,a,w]);
+    right.append(graph,element('p','Circle = mutable. Square = frozen. Labels (i,k) count the surviving occurrences on Ω.'));
+    content.append(left,right);
+
+    const links = element('div',undefined,'rr-links');
+    function link(title, view) {
+      const a = element('a',title);
+      a.href = url(location.href,reading,view);
+      return a;
+    }
+    links.append(link('Walk through Ω','sweep'),link('See Bao–Ye mutations on Ω','recursion'));
+    const details = element('details',undefined,'rr-details');
+    details.append(element('summary','Compare the raw chronological film'));
+    const rawText = element('p');
+    details.append(rawText,link('Open raw film on β','words'));
+    details.addEventListener('toggle',() => {
+      if (!details.open || rawText.textContent) return;
+      try {
+        const raw = QuiverFilm.compute(n,beta,v);
+        rawText.textContent='The raw film starts at the right boundary v and scans β from its last slot. Its hollow slots in scan order are '+list(reverse(raw.hollow))+'. The normalized Bao–Ye selection uses signed slots '+list(selected.map(row=>row.slot))+'. These are separate seed computations.';
+      } catch (err) { rawText.textContent='Raw film: '+err.message; }
+    });
+    host.replaceChildren(intro,content,links,details);
+    QuiverDraw.quiver(graph,{nodes,edges,ariaLabel:'Bao–Ye ice quiver for the normalized word Ω'});
+  }
+
+  globalThis.QuiverRichardsonReading = Object.freeze({compute, url, render});
+})();
+</script>
 <script>/* Interface for the two independent engines. All correspondence verdicts
    compare computed vertices, frozen flags and oriented, weighted ice arrows. */
 (() => {
@@ -4783,10 +4939,11 @@ sitemap: false
     {name:'Signed braid', n:3, beta:[-3,2,1,-2,3,1], v:[1,3]},
     {name:'GLSBS Example 3.11 · Figures 6–7', anchor:'glsbs-figure-7', nativeWord:true, n:3, beta:[-2,1,2,1,-1], v:[2]},
     {name:'Affine seam · lifted bridge', nativeWord:true, n:3, beta:[-3,-1], v:[3]},
-    {name:'Leftmost induction · 2112', n:3, beta:[2,1,1,2], v:[2,1]}
+    {name:'Leftmost induction · 2112', n:3, beta:[2,1,1,2], v:[2,1]},
+    {name:'Signed Richardson gallery · −2 −1 −1 −2 +1', richardson:true, n:3, beta:[-2,-1,-1,-2,1], v:[1]}
   ];
   const paperPreset=presets.findIndex(p=>p.paperOrder);
-  let model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
+  let readingModel, model, index=0, birth=null, cut=0, projection='top', qView='plabic', activeCross=null, trace=false;
   let leftmost=true, mode='sweep', selectedMove=null, previewPivot=null, history=[], lastChange='';
   let geometry='chart', chartSide='after', cycleId=null;
   const reverse=w=>[...w].reverse();
@@ -4813,12 +4970,12 @@ sitemap: false
     if(['','e','id','identity','[]','()','∅'].includes(s)) return [];
     s=s.replace(/−/g,'-').replace(/[₀-₉]/g,ch=>String(ch.codePointAt(0)-0x2080))
       .replace(/s_?(?:\{(\d+)\}|(\d+))/g,(_,braced,plain)=>' '+(braced??plain)+' ')
-      .replace(/\(\s*(-\d+)\s*\)/g,' $1 ').trim();
+      .replace(/\(\s*([+-]?\d+)\s*\)/g,' $1 ').trim();
     if(s.startsWith('[')&&s.endsWith(']') || s.startsWith('(')&&s.endsWith(')')) s=s.slice(1,-1).trim();
     let tokens=/^\d+$/.test(s)&&n<=9&&s.length>1 ? s.split('') : s.split(/[\s,]+/);
     if(tokens.length>48) throw new Error(name+' may have at most 48 letters in this explorer.');
     return tokens.map(t => {
-      if(!/^-?\d+$/.test(t)) throw new Error('Separate the letters of '+name+' with spaces or commas.');
+      if(!/^[+-]?\d+$/.test(t)) throw new Error('Separate the letters of '+name+' with spaces or commas.');
       const magnitude=Math.abs(Number(t)) || n;
       if(!Number.isSafeInteger(magnitude)||magnitude>n) throw new Error('Each generator of '+name+' must be in 1…'+n+' (0 also denotes s₀).');
       if(t.startsWith('-')&&!allowSigns) throw new Error('The expression for '+name+' uses positive generators.');
@@ -4826,7 +4983,10 @@ sitemap: false
     });
   }
   function updateTargetLabel() {
-    $('targetLabel').textContent=/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
+    const focused=mode==='richardson';
+    $('targetLabel').textContent=focused?'Terminal codistance v':/[-−]/.test($('beta').value)?'Film boundary c':'Selected target v';
+    $('betaLabel').textContent=focused?'Chronological signed word β':'Braid word β';
+    $('buildLabel').textContent=focused?'Read gallery':'Build quiver';
   }
 
   function verdict(graph,step) {
@@ -4951,7 +5111,15 @@ sitemap: false
       const n=Number($('rank').value);
       if(!Number.isInteger(n)||n<3||n>24)throw new Error('Enter an integer from 3 to 24 for the number of nodes.');
       const beta=parseWord($('beta').value,n,'β',true);
-      const v=parseWord($('target').value,n,linkIndex??(isSigned(beta)?'c':'v'),false);
+      const v=parseWord($('target').value,n,linkIndex??(mode==='richardson'||!isSigned(beta)?'v':'c'),false);
+      if(mode==='richardson'){
+        readingModel=QuiverRichardsonReading.compute(n,beta,v);
+        $('inputError').hidden=true;
+        if(!preset)$('examples').value='custom';
+        render();
+        QuiverRichardsonReading.render($('richardsonPanel'),readingModel);
+        return true;
+      }
       // ?v= links historically used displayed product order even for signed β.
       // ?c= always specifies the literal boundary, including for a positive β.
       const translateLink=(linkIndex==='v'&&isSigned(beta))||(linkIndex==='c'&&!isSigned(beta));
@@ -4969,6 +5137,12 @@ sitemap: false
   }
   function loadPreset(i) {
     const p=presets[i];
+    if(p.richardson){
+      mode='richardson';
+      $('rank').value=p.n;$('beta').value=word(p.beta);$('target').value=word(p.v);$('examples').value=String(i);
+      build(p);return;
+    }
+    if(mode==='richardson'){mode='sweep';leftmost=true;$('reading').value='left';}
     if(p.nativeWord){leftmost=false;$('reading').value='right';mode='words';}
     if(p.paperOrder){leftmost=true;$('reading').value='left';mode='sweep';}
     $('rank').value=p.n;$('beta').value=word(readWord(p.beta));$('target').value=word(convertIndex(p.beta,p.v));$('examples').value=String(i);
@@ -4980,6 +5154,10 @@ sitemap: false
     }
   }
   function changeMode(next) {
+    if(mode==='richardson'){
+      if(readingModel)location.assign(QuiverRichardsonReading.url(location.href,readingModel,next));
+      return;
+    }
     if(next!=='words'&&!model.paper)return;
     walk.stop();mode=next;activeCross=null;birth=null;trace=false;previewPivot=null;qView='plabic';render();
   }
@@ -5347,6 +5525,20 @@ sitemap: false
     box.append(panels,el('p','A positive entry in row p and column q gives p → q. Exchange matrices have all vertices as rows and mutable vertices as columns.'));
   }
   function render() {
+    const focused=mode==='richardson';
+    $('richardsonPanel').hidden=!focused;
+    $('filmConvention').hidden=focused;
+    $('richardsonTab').setAttribute('aria-pressed',String(focused));
+    if(focused){
+      for(const id of ['wordPanel','recPanel','inductionWalk','moveGraphs','subwordStrip','originalDiagrams','dataPanel','diagramPlayer','chronologicalAudit'])$(id).hidden=true;
+      for(const id of ['sweepTab','wordTab','recTab']){
+        $(id).setAttribute('aria-pressed','false');
+        $(id).disabled=!readingModel;
+      }
+      document.querySelector('main').classList.remove('walking');
+      sweepView.stopReplay();moveInspector.stopReplay();
+      return;
+    }
     if(!model)return;
     $('wordTab').setAttribute('aria-pressed',String(mode==='words'));$('recTab').setAttribute('aria-pressed',String(mode==='recursion'));
     $('recTab').disabled=!model.paper;$('wordPanel').hidden=mode!=='words';$('recPanel').hidden=mode!=='recursion';
@@ -5484,12 +5676,44 @@ sitemap: false
   bindDiagramPlayer();
   for(let i=0;i<presets.length;i++)$('examples').append(opt(presets[i].name,i));
   const custom=opt('Custom words','custom');custom.disabled=true;$('examples').append(custom);
-  $('examples').onchange=e=>loadPreset(Number(e.target.value));
-  $('wordForm').onsubmit=e=>{e.preventDefault();build();};
-  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent='Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
+  $('examples').onchange=e=>{
+    const i=Number(e.target.value);
+    if(mode==='richardson' || presets[i].richardson){
+      if(presets[i].richardson){
+        location.assign(QuiverRichardsonReading.url(location.href,presets[i],'richardson'));
+      }else{
+        const link=new URL(location.href);
+        link.search='';link.hash=presets[i].anchor||'preset';
+        if(!presets[i].anchor)link.searchParams.set('example',i);
+        location.assign(link.href);
+      }
+      return;
+    }
+    loadPreset(i);
+  };
+  $('wordForm').onsubmit=e=>{
+    e.preventDefault();
+    if(build() && mode==='richardson'){
+      window.history.replaceState(null,'',QuiverRichardsonReading.url(location.href,readingModel,'richardson'));
+    }
+  };
+  $('wordForm').oninput=()=>{updateTargetLabel();walk.stop();if(mode==='recursion')walk.controls();$('inputError').textContent=mode==='richardson'?'Words edited. Choose Read gallery to update the selection.':'Words edited. Build the quiver to update the diagram.';$('inputError').hidden=false;};
   $('reading').onchange=e=>{
     const was=leftmost;leftmost=e.target.value==='left';
     if(!build()){leftmost=was;e.target.value=was?'left':'right';}
+  };
+  $('richardsonTab').onclick=()=>{
+    if(mode==='richardson')return;
+    try{
+      const n=Number($('rank').value);
+      const beta=parseWord($('beta').value,n,'β',true), v=parseWord($('target').value,n,'v',false);
+      const from=linkedWords.get('gallery');
+      let original=beta;
+      if(from && linkedWords.get('beta')===beta.join(',') && linkedWords.get('v')===v.join(',') && linkedWords.get('n')===String(n)){
+        original=parseWord(from,n,'β',true);
+      }
+      location.assign(QuiverRichardsonReading.url(location.href,{n,beta:original,v},'richardson'));
+    }catch(err){fail(err);}
   };
   $('sweepTab').onclick=()=>changeMode('sweep');
   $('wordTab').onclick=()=>changeMode('words');$('recTab').onclick=()=>changeMode('recursion');
@@ -5521,8 +5745,18 @@ sitemap: false
   const figurePreset=presets.findIndex(p=>p.anchor==='glsbs-figure-7');
   const figureHash='#'+presets[figurePreset].anchor;
   const paperHash='#'+presets[paperPreset].anchor;
-  if(location.hash!==figureHash && location.hash!==paperHash){
-    loadPreset(location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.length-1);
+  const focusedAddress=location.hash==='#richardson' || (!location.hash && !['c','reading','relation','bridge','op','stage','scan','follow','replay','example'].some(k=>linkedWords.has(k)));
+  if(focusedAddress){
+    mode='richardson';
+    if(linkedWords.has('beta')&&linkedWords.has('v')){
+      $('rank').value=linkedWords.get('n')??'3';
+      $('beta').value=linkedWords.get('beta');$('target').value=linkedWords.get('v');
+      render();build(null,'v');
+    }else loadPreset(presets.findIndex(p=>p.richardson));
+  }else if(location.hash!==figureHash && location.hash!==paperHash){
+    const presetIndex=Number(linkedWords.get('example'));
+    const specified=location.hash==='#preset' && linkedWords.has('example') && Number.isInteger(presetIndex) && presets[presetIndex] && !presets[presetIndex].richardson;
+    loadPreset(specified?presetIndex:location.hash==='#bao-ye' || location.hash==='#word-moves' ? 0 : presets.findIndex(p=>p.name==='Leftmost induction · 2112'));
     if(linkedWords.has('beta')&&(linkedWords.has('c')||linkedWords.has('v'))){
       const indexKey=linkedWords.has('c')?'c':'v';
       $('rank').value=linkedWords.get('n')??'3';
@@ -5531,6 +5765,7 @@ sitemap: false
     }
   }
   function openLinkedView(){
+    if(focusedAddress)return;
     if(location.hash===figureHash){
       if($('guide').open)$('guide').close();
       loadPreset(figurePreset);
@@ -5579,7 +5814,7 @@ sitemap: false
   window.addEventListener('hashchange',event=>{
     // The figure preset replaces the input word. Restore the preceding
     // address's word and stage when the reader leaves it via browser history.
-    if([figureHash,paperHash].includes(new URL(event.oldURL).hash))location.reload();
+    if(focusedAddress || ['#richardson','#preset'].includes(location.hash) || [figureHash,paperHash,'#richardson','#preset'].includes(new URL(event.oldURL).hash))location.reload();
     else openLinkedView();
   });
   for(const link of document.querySelectorAll('a[href="'+figureHash+'"]')){
