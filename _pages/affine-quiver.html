@@ -517,7 +517,10 @@ sitemap: false
 #soapFilms .di-controls{align-items:center;gap:.6rem 1rem}
 #soapFilms .di-controls label{display:flex;gap:.4rem;align-items:center}
 #soapFilms [data-film-cut]{max-width:11rem}
-@media(max-width:760px){#soapFilms .di-graph-views figure:first-child{grid-row:auto}}
+#soapFilms .di-graph-views{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);row-gap:14px}
+#soapFilms .di-graph-views figure:first-child{grid-row:auto}
+#soapFilms .film-quiver-key{font-size:12px;color:var(--muted)}
+@media(max-width:760px){#soapFilms .di-graph-views{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -599,7 +602,7 @@ sitemap: false
 <div class="guide-body">
 <h3>Graph and soap films</h3>
 <p>Keep the signed word in the order entered. The time axis runs left to right. The rightmost scan begins at the target on the right and tests one crossing at a time from right to left. Select any crossing in the strip or the graph to see both cut windows. Red shows (t,y), and blue shows (t,x). Soap films propagate toward cut 0 on the left.</p>
-<p>Choose a solid bridge to inspect its film. The marked boundary is at cut 0. A film that is still open there is frozen.</p>
+<p>Choose a solid bridge or its vertex in the film ice quiver to inspect its film. Each vertex is labeled by the bridge’s position in the entered word. A film that reaches the marked boundary at cut 0 gives a frozen vertex.</p>
 <h3>Bao–Ye induction</h3><p>Read the positive paper word w from left to right. The graph uses the reversed barred gallery D(w) and Bao–Ye’s original target v. The positive marker starts hollow at the chronological right end. After crossing the selected paper letter it is solid. At the left end, freeze its mutable neighbors and delete it. For a mixed signed input the induction uses its positive word Ω, displayed in the form.</p>
 <h3>Word moves</h3><p>Choose an adjacent relation to inspect the native graphs on either side. Both projections and the bridge coordinates follow the selected lift. In this tab the optional comparison labeled “reversed word” uses a different Bao–Ye input. The graph and induction tab compares the same word and target.</p>
 <p>Enter generators separated by spaces or commas, with negative integers for barred letters. For n ≤ 9, compact positive words such as 2112 also work. Both n and 0 denote the affine generator. Use e for the identity.</p>
@@ -1678,7 +1681,7 @@ sitemap: false
       if(node.blank)continue;
       const [x,y]=xy[i],r=radii[i],hot=!!node.highlight;
       const clr=hot?P.teal:node.frozen?P.muted:P.ink,fill=hot?"#e0eee5":node.frozen?"#eff0e9":P.white;
-      const group=el(svg,"g",{"data-node":String(node.id),"data-ghost":node.ghost?"true":null,opacity:node.ghost?.5:1});
+      const group=el(svg,"g",{"data-node":String(node.id),"data-ghost":node.ghost?"true":null,"aria-pressed":node.pressed,opacity:node.ghost?.5:1});
       if(hot) el(group,"circle",{cx:x,cy:y,r:r+4,fill:"none",stroke:"#a9ccc0","stroke-width":1.6});
       const style={fill,stroke:clr,"stroke-width":hot?2:1.55,"stroke-dasharray":node.ghost?"3 2":null};
       if(node.frozen) el(group,"rect",{x:x-r,y:y-r,width:r*2,height:r*2,rx:2.5,...style});
@@ -7079,12 +7082,30 @@ sitemap: false
     for(const [key,name] of [['space','3D graph and soap film'],['red','Red projection · (t,y)'],['blue','Blue projection · (t,x)']]){
       const fig=html('figure');holders[key]=html('div');fig.append(html('figcaption',name),holders[key]);views.append(fig);
     }
+    const quiverFigure=html('figure'),quiverBox=html('div');
+    const quiverKey=html('p','Circles are mutable. Squares are frozen. Select a vertex to see its film.','film-quiver-key');
+    quiverBox.dataset.filmQuiver='';
+    quiverFigure.append(html('figcaption','Film ice quiver'),quiverBox,quiverKey);
+    views.children[0].after(quiverFigure);
     const note=html('p','Gold shows a piecewise-linear representative of the selected film. Red and blue show its projections. Drag the 3D graph to rotate.','di-graph-caption');
     const slice=html('p',null,'di-graph-caption');slice.dataset.filmIntervals='';
     host.replaceChildren(title,controls,status,views,slice,scan,note);
     let graph,birth=null,cut=0,shift=0,model,viewport,data,walls,reason,slot,cam={yaw:-.6,pitch:.28};
+    let paintedGraph,paintedBirth,paintedWidth;
+    function drawQuiver(){
+      const width=quiverBox.clientWidth;
+      if(graph===paintedGraph&&birth===paintedBirth&&width===paintedWidth)return;
+      const focus=quiverBox.contains(document.activeElement)?document.activeElement.closest('[data-node]')?.dataset.node:null;
+      const nodes=graph.solid.map(p=>({id:p,label:'b'+p,frozen:graph.films[p].frozen,highlight:p===birth,pressed:p===birth}));
+      quiverKey.hidden=!nodes.length;
+      QuiverDraw.quiver(quiverBox,{nodes,edges:graph.arrows,ariaLabel:'Film ice quiver of the entered signed word',
+        onSelect:p=>chooseFromGraph(p,shift)});
+      if(focus)quiverBox.querySelector('[data-node="'+focus+'"]')?.focus({preventScroll:true});
+      paintedGraph=graph;paintedBirth=birth;paintedWidth=width;
+    }
     function draw() {
       if(!graph)return;
+      drawQuiver();
       const film=graph.films[birth],rec=film?.cuts[cut],delta=shift*graph.n;
       const callback=film?renderLayer(data,walls,rec,delta,cut,birth):undefined;
       for(const k of Object.keys(holders)){
@@ -7159,6 +7180,7 @@ sitemap: false
       birth=graph.films[requested]?requested:[...(candidates.length?candidates:graph.solid)].sort((a,b)=>score(b)-score(a)||a-b)[0]??null;
       const picked=Number(param('slot'));
       slot=Number.isSafeInteger(picked)&&picked>=1&&picked<=graph.beta.length?picked:(birth??(graph.beta.length||null));
+      if(graph.films[slot])birth=slot;
       if(birth)select.value=String(birth);
       strip.replaceChildren(...graph.beta.map((letter,j)=>{
         const p=j+1,isSolid=!!graph.films[p],b=html('button',signed(letter));
@@ -7708,10 +7730,11 @@ sitemap: false
       const v=parseWord($('target').value,n,linkIndex??(usesReading()||!isSigned(beta)?'v':'c'),false);
       if(mode==='graph'){
         const input={n,beta,v};
-        soapView??=GraphFilmView.create($('soapFilms'),({birth,cut,shift})=>{
+        soapView??=GraphFilmView.create($('soapFilms'),({birth,cut,shift,slot})=>{
           if(mode!=='graph'||!readingModel)return;
           const url=NativeRightmost.nativeLink(readingModel,null,'graph-and-films');
           if(birth!=null)url.searchParams.set('film',birth);
+          if(slot!=null&&slot!==birth)url.searchParams.set('slot',slot);
           if(cut!=null)url.searchParams.set('cut',cut);
           if(shift)url.searchParams.set('lift',shift);
           window.history.replaceState(null,'',url);
