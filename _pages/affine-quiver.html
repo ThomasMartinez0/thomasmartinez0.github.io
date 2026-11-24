@@ -520,7 +520,28 @@ sitemap: false
 #soapFilms .di-graph-views{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);row-gap:14px}
 #soapFilms .di-graph-views figure:first-child{grid-row:auto}
 #soapFilms .film-quiver-key{font-size:12px;color:var(--muted)}
+#forwardProof [data-walk-controls]{justify-content:flex-start;gap:.5rem;margin:.75rem 0}
+#forwardProof [data-walk-controls] select{width:min(100%,24rem);max-width:100%}
+#forwardProof [aria-label="Next operation"]{background:var(--deep);color:white}
 @media(max-width:760px){#soapFilms .di-graph-views{grid-template-columns:minmax(0,1fr)}}
+</style>
+<style>
+.proof-walkthrough .proof-stage{color:var(--muted);font:600 13px/1.4 var(--sans);margin:10px 0 3px}
+.proof-walkthrough h3{margin:4px 0}
+.proof-walkthrough .proof-pair{margin:8px 0 10px;font:600 14px/1.55 var(--mono);overflow-wrap:anywhere;color:var(--deep)}
+.proof-pair span{font:600 13px var(--sans);margin-right:.4em}
+.proof-pair mark{color:#653b0c;background:#ffebbc;border-bottom:2px solid #a56b25}
+.proof-discrepancy{border-left:3px solid #a34a28;color:#843719;padding:.3em .6em}
+.proof-diagrams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px;align-items:start}
+.proof-diagrams figure{min-width:0;margin:0}
+.proof-diagrams figcaption{font:600 13px/1.5 var(--sans);color:var(--deep)}
+.proof-walkthrough>.rr-links{margin:8px 0;padding:7px 0 3px}
+.proof-walkthrough>details{padding:5px 0;border-top:1px solid var(--line)}
+.proof-walkthrough>details>summary{cursor:pointer;font:600 13px/1.6 var(--sans)}
+.proof-walkthrough details .chronological-audit{margin:0;padding:3px 0}
+.proof-walkthrough .proof-pair,.proof-walkthrough .proof-stage,.proof-walkthrough .di-controls{max-width:100%}
+.proof-walkthrough label select{max-width:100%}
+@media(max-width:650px){.proof-diagrams{grid-template-columns:minmax(0,1fr);gap:8px}.proof-walkthrough .di-controls select{max-width:100%;flex:1}}
 </style>
 </head>
 <body>
@@ -7268,13 +7289,13 @@ sitemap: false
   function scanFrames(reading,old,now) {
     const {n,beta}=reading,letter=beta[now.position-1],i=Math.abs(letter),target=now.target;
     let g=QuiverFilm.compute(n,beta,old.target),names=occurrences(g);
-    let frames=[{kind:'start',graph:g,labels:names,title:'Start at Q('+product(old.target)+', β)',text:'Occurrence labels count solid letters of each color from the right.'}];
+    let frames=[{kind:'start',graph:g,labels:names,title:'Start with the previous stage’s quiver',text:'The signed word has no marker yet.'}];
     function push(frame){frames.push({graph:g,labels:names,...frame});}
     const parent=g;
     g=QuiverFilm.compute(n,[...beta,-letter],target);
     const identity=Object.fromEntries(parent.solid.map(p=>[p,p]));
     if(!g.hollow.includes(g.beta.length)||QuiverMoves.compareMappedIce(parent,g,identity))throw new Error('Hollow insertion failed its full ice-quiver check.');
-    push({kind:'append',title:'Append hollow '+(letter>0?'−':'+')+i+' at the right',focus:g.beta.length,text:'At the right boundary, '+product([i])+' acts on the '+(letter>0?'left':'right')+' of '+product(target)+' and removes its '+(letter>0?'first':'last')+' factor. Every preceding bridge retains its label and arrows.'});
+    push({kind:'append',title:'Append '+(letter>0?'−':'+')+i+' at the right boundary',focus:g.beta.length,text:'The marker is hollow. The target changes from '+product(old.target)+' to '+product(target)+' and the quiver stays the same.'});
     for(let p=beta.length;p>0;p--){
       const move=QuiverMoves.mixedAt(g,p);
       if(!move.verified)throw new Error('Full-quiver check failed at β['+p+']: '+move.reason);
@@ -7282,16 +7303,20 @@ sitemap: false
       names=Object.fromEntries(Object.entries(move.mapping).map(([from,to])=>[to,names[from]]));
       g=move.graph;
       const paperPosition=beta.length+1-p;
-      const crossing=letter<0?'Pass paper position '+paperPosition+' · '+Math.abs(beta[p-1]):'Pass β['+p+'] = '+beta[p-1];
-      push({kind:pivot?'mutate':'slide',pivot,paperPosition,title:crossing+(pivot?' · mutate '+pivot:' · preserve the quiver'),
-        focus:p,text:(p===now.position?'The selected letter becomes hollow and its bridge '+names[p]+' transfers to the marker. ':'')+'Target '+product(target)+' stays fixed. The marker is '+(g.hollow.includes(p)?'hollow.':'solid and carries '+names[p]+'.')+' The bridge identification was checked on every arrow with a mutable endpoint.'});
+      const crossing=letter<0?'paper letter '+Math.abs(beta[p-1])+' at position '+paperPosition:'letter '+beta[p-1]+' at slot '+p;
+      const marker=g.hollow.includes(p)?'The marker stays hollow.':'The solid marker carries '+names[p]+'.';
+      let effect;
+      if(p===now.position)effect='The selected letter becomes hollow. Its bridge '+names[p]+' moves onto the solid marker. The quiver stays the same.';
+      else if(pivot)effect='After the square move, the solid marker carries '+names[p]+'.';
+      else effect=marker+' The quiver stays the same.';
+      push({kind:pivot?'mutate':'slide',pivot,paperPosition,title:'Pass '+crossing+(pivot?' · mutate '+pivot:''),focus:p,text:effect});
     }
     const d=names[1],oldFrozen=new Set(g.frozen);
     if(!oldFrozen.has(1))throw new Error('The leftmost marker must carry a frozen bridge.');
     const neighbors=[...new Set(g.arrows.flatMap(([p,q])=>p===1?[q]:q===1?[p]:[]).filter(p=>!oldFrozen.has(p)))];
     const frozen=[...new Set([...g.frozen,...neighbors])];
     push({kind:'freeze',title:'Freeze the mutable neighbors of '+d,focus:1,frozen,
-      text:'The leftmost marker is solid and frozen. Newly frozen: '+(neighbors.map(p=>names[p]).join(', ')||'none')+'. The 3D picture still contains the boundary slab.'});
+      text:'The solid marker carries the frozen vertex '+d+'. Newly frozen: '+(neighbors.map(p=>names[p]).join(', ')||'none')+'.'});
     const cut={solid:g.solid.filter(p=>p!==1),frozen:frozen.filter(p=>p!==1),
       arrows:g.arrows.filter(([p,q])=>p!==1&&q!==1&&!(frozen.includes(p)&&frozen.includes(q)))};
     const map=Object.fromEntries(cut.solid.map(p=>[p,p-1]));
@@ -7301,7 +7326,7 @@ sitemap: false
     const canonical=occurrences(g),transport=Object.fromEntries(cut.solid.map(p=>[p-1,names[p]]));
     if(g.solid.some(p=>canonical[p]!==transport[p]))throw new Error('Endpoint occurrence labels disagree after deletion.');
     names=canonical;
-    push({kind:'delete',title:'Delete '+d+' at the left boundary',text:'The surviving quiver agrees with an independent film computation on the full word β at target '+product(target)+'.'});
+    push({kind:'delete',title:'Delete '+d+' at the left boundary',text:'Remove the solid marker and its vertex. The remaining quiver is the film quiver for the original signed word at '+product(target)+'.'});
     return frames;
   }
 
@@ -7313,31 +7338,42 @@ sitemap: false
     const choose=node('label','Boundary target ');choose.append(chooser);header.append(h,choose);
     const seriesChoice=node('select');seriesChoice.setAttribute('aria-label','Target sequence');
     seriesChoice.append(new Option('Bao–Ye proof on D(w)','bao-ye'),new Option('Graph of the entered word','native'),new Option('Positive graph at Bao–Ye targets','paper'));
-    const seriesLabel=node('label','Target sequence ');seriesLabel.append(seriesChoice);header.prepend(seriesLabel);header.prepend(h);
+    const seriesLabel=node('label','Target sequence ');seriesLabel.append(seriesChoice);
     const steps=node('div',undefined,'di-controls'),stepChoice=node('select');stepChoice.setAttribute('aria-label','Rightmost induction operation');
-    const back=control('Previous operation',()=>showFrame(frameIndex-1,true)),ahead=control('Next operation',()=>showFrame(frameIndex+1,true));
-    steps.append(back,stepChoice,ahead);
+    const back=control('Previous',()=>advance(-1)),ahead=control('Next',()=>advance(1));
+    back.setAttribute('aria-label','Previous operation');ahead.setAttribute('aria-label','Next operation');
+    const finished=node('span','Induction complete.','di-product');finished.setAttribute('role','status');
+    steps.dataset.walkControls='';
+    steps.append(back,ahead,stepChoice,finished);
     const operation=node('section');operation.setAttribute('aria-live','polite');
     const convention=node('p','The signed word is drawn in its entered order. Put the target at the right cut and scan toward cut 0. A positive i tests r sᵢ. A barred i tests sᵢ r. A shorter candidate gives a hollow crossing. Each solid crossing carries a bridge.','fp-note');
-    const summary=node('p',undefined,'di-product'),strip=node('div',undefined,'fp-strip');strip.setAttribute('role','group');strip.setAttribute('aria-label','Crossings in written order');
+    const summary=node('p',undefined,'proof-pair'),scanOrder=node('p',undefined,'fp-note'),strip=node('div',undefined,'fp-strip');strip.setAttribute('role','group');strip.setAttribute('aria-label','Crossings in written order');
     const readout=node('section');readout.setAttribute('aria-live','polite');
     const previous=control('Previous scan step',()=>pick(slot+1,0));
     const next=control('Next scan step',()=>pick(slot-1,0));
     const nav=node('div',undefined,'di-controls');nav.append(previous,next);
-    const views=node('div',undefined,'di-graph-views'),holders={};
-    for(const [key,title] of [['space','3D graph and projection planes'],['red','Red projection · (t, y)'],['blue','Blue projection · (t, x)']]){
-      const figure=node('figure'),box=node('div');figure.append(node('figcaption',title),box);views.append(figure);holders[key]=box;
+    const views=node('div',undefined,'proof-diagrams'),holders={};
+    for(const [key,title] of [['space','3D plabic graph'],['red','Red projection · (t, y)'],['blue','Blue projection · (t, x)']]){
+      const figure=node('figure'),box=node('div');figure.className='proof-'+key;
+      figure.append(node('figcaption',title),box);views.append(figure);holders[key]=box;
     }
-    const coords=node('p',undefined,'di-graph-caption'),boundary=node('p','The marked disk boundary is cut 0, on the left. A bridge at slot c starts its film at cut c−1. It is frozen exactly when the film is still open at cut 0.','di-graph-caption');
+    const coords=node('p',undefined,'di-graph-caption'),boundary=node('p','The marked disk boundary is cut 0, on the left. A bridge at slot c is born at time c−½. Its first integer cut is c−1. It is frozen exactly when the film is still open at cut 0.','di-graph-caption');
     const graphHost=node('div',undefined,'ep-quiver'),qData=node('details'),qBody=node('p');
     qData.append(node('summary','Frozen slots and weighted ice arrows'),qBody);
     const comparison=node('section',undefined,'chronological-audit'),actions=node('div',undefined,'rr-links');
-    host.classList.add('fp-panel');host.replaceChildren(header,convention,steps,operation,summary,strip,nav,readout,views,coords,boundary,node('h3','Film ice quiver'),graphHost,qData,comparison,actions);
+    const quiverFigure=node('figure',undefined,'proof-ice');quiverFigure.append(node('figcaption','Film ice quiver'),graphHost);views.insertBefore(quiverFigure,views.children[1]);
+    const scan=node('details'),conventions=node('details'),checks=node('details');
+    scan.dataset.proofScan='';scan.append(node('summary','Crossings and cut permutations'),scanOrder,strip,nav,readout,coords);
+    conventions.dataset.proofConventions='';conventions.append(node('summary','Conventions and other target sequences'),convention,boundary,seriesLabel);
+    const extraActions=node('div',undefined,'rr-links'),stageData=node('p');
+    checks.dataset.proofComparison='';checks.append(node('summary','Bao–Ye quiver comparison'),stageData,comparison,extraActions);
+    const discrepancy=node('p',undefined,'proof-discrepancy');discrepancy.setAttribute('role','alert');discrepancy.hidden=true;
+    host.classList.add('fp-panel','proof-walkthrough');host.replaceChildren(header,steps,operation,summary,discrepancy,views,actions,scan,qData,checks,conventions);
     function syncAddress() {
       const url=nativeLink(inputReading,stages?stage:null);
       if(series!=='native')url.searchParams.set('series',series);
       if(series==='bao-ye'&&inputReading.gallery)url.searchParams.set('gallery',inputReading.gallery.join(','));
-      if(frames.length)url.searchParams.set('move',frameIndex);
+      if(frames.length||paperOrigin)url.searchParams.set('move',frameIndex);
       if(slot)url.searchParams.set('slot',slot);
       if(shift)url.searchParams.set('lift',shift);
       window.history.replaceState(null,'',url.href);
@@ -7386,39 +7422,68 @@ sitemap: false
       }else readout.replaceChildren();
       host.dataset.slot=slot??'';paint();if(save)syncAddress();
     }
+    function advance(direction) {
+      const index=frameIndex+direction;
+      if(index>=0&&index<frames.length){showFrame(index,true);return;}
+      const adjacent=stage+direction;
+      if(!paperOrigin||!stages||adjacent<0||adjacent>=stages.length)return;
+      stage=adjacent;selectStage(null,0,true,direction>0?0:'end');
+    }
     function selectStage(at,lift,save,move) {
       const nativeStep=series!=='paper'&&stages&&stage>0;
       frames=nativeStep?scanFrames(reading,stages[stage-1],stages[stage]):[];
       const target=stages?stages[stage].target:reading.v;
       if(!frames.length)graph=QuiverFilm.compute(reading.n,reading.beta,target);
-      stepChoice.replaceChildren(...frames.map((f,j)=>new Option((j+1)+' / '+frames.length+' · '+f.title,j)));
-      steps.hidden=!frames.length;operation.hidden=!frames.length;
+      stepChoice.replaceChildren(...frames.map((f,j)=>new Option((j+1)+' / '+frames.length+' · '+(f.kind==='mutate'?'Mutate '+f.pivot:f.title),j)));
+      if(!frames.length&&paperOrigin)stepChoice.add(new Option('Initial quiver at e','0'));
+      stepChoice.disabled=!frames.length;
+      steps.hidden=!frames.length&&!paperOrigin;operation.hidden=!frames.length;
       chooser.value=String(stages?stage:0);
-      showFrame(Number.isInteger(move)?move:series==='bao-ye'&&frames.length?1:frames.length-1,save,at,lift);
+      showFrame(move==='end'?frames.length-1:Number.isInteger(move)?move:series==='bao-ye'?0:frames.length-1,save,at,lift);
     }
     function showFrame(index,save,at,lift=0) {
       frameIndex=Math.max(0,Math.min(frames.length-1,index));
       const frame=frames[frameIndex];
+      const hasPreviousStage=Boolean(paperOrigin&&stages&&stage>0);
+      const hasNextStage=Boolean(paperOrigin&&stages&&stage<stages.length-1);
+      back.disabled=frameIndex===0&&!hasPreviousStage;
+      ahead.disabled=frameIndex>=frames.length-1&&!hasNextStage;
+      finished.hidden=!(paperOrigin&&stages&&ahead.disabled);
       if(frame){
         graph=frame.graph;stepChoice.value=String(frameIndex);
-        back.disabled=frameIndex===0;ahead.disabled=frameIndex===frames.length-1;
         operation.replaceChildren(node('h3',frame.title),node('p',frame.text,'fp-note'));
       }
       const target=graph.v,displayLabels=frame?.labels??(stages?occurrences(graph):null)??Object.fromEntries(graph.solid.map(p=>[p,'b'+p]));
       host.dataset.target=target.join(',');host.dataset.series=series;host.dataset.word=graph.beta.join(',');host.dataset.hollow=graph.hollow.join(',');host.dataset.stage=stages?stage:'';host.dataset.move=frameIndex;
-            summary.textContent='Pair ('+product(target)+', '+(graph.beta.join(' ')||'∅')+') · Right boundary at cut '+graph.beta.length+' · Hollow slots in written order  '+positions(graph.hollow)+' · Scan order  '+positions([...graph.hollow].reverse())+'.';
+      const marked=graph.beta.length>reading.beta.length?frame?.focus:null;
+      summary.replaceChildren(node('span','Current pair '),document.createTextNode('('+product(target)+', '));
+      graph.beta.forEach((i,j)=>{
+        if(j)summary.append(' ');
+        const token=String(i).replace('-','−');
+        if(j+1===marked){
+          const mark=node('mark',token);mark.setAttribute('aria-label','marker '+token);summary.append(mark);
+        }else summary.append(token);
+      });
+      summary.append((graph.beta.length?'':'∅')+')');
+      scanOrder.textContent='Target at cut '+graph.beta.length+'. Hollow slots in written order '+positions(graph.hollow)+'. Scan order '+positions([...graph.hollow].reverse())+'.';
       strip.replaceChildren(...graph.beta.map((i,j)=>{
         const p=j+1,hollow=graph.hollow.includes(p),b=control(i<0?'−'+(-i):String(i),()=>pick(p,0));
         b.dataset.slot=p;b.className=hollow?'fp-taken':'';b.setAttribute('aria-label','Slot '+p+', '+(hollow?'hollow':'solid bridge '+displayLabels[p]));return b;
       }));
       const frozen=frame?.frozen??graph.frozen;
       qBody.textContent='Frozen slots '+positions(frozen)+'. Ice arrows '+(graph.arrows.filter(([a,b])=>!frozen.includes(a)||!frozen.includes(b)).map(([a,b,w])=>'slot '+a+' → '+b+(w===1?'':' × '+w)).join(', ')||'∅')+'.';
-      comparison.replaceChildren();actions.replaceChildren();
+      comparison.replaceChildren();actions.replaceChildren();extraActions.replaceChildren();stageData.textContent='';
+      discrepancy.textContent='';discrepancy.hidden=true;
+      function reportDifference(reason){
+        discrepancy.textContent=discrepancy.textContent?discrepancy.textContent+' '+reason:reason;
+        discrepancy.hidden=false;
+      }
       const filmLink=node('a','Inspect this graph and its soap films');
       filmLink.dataset.openFilms='';actions.append(filmLink);
       if(paperOrigin && stage>0){
         const step=paper.stages[stage-1], prior=stages[stage-1].target;
-        const stageLine=node('p','Stage '+stage+' · paper position '+step.selectedPaperPosition+' · '+product(prior)+' → '+product(stages[stage].target)+'. Pivots in order: '+(step.mutations.map(id=>'('+id+')').join(', ')||'none')+'. Boundary vertex: ('+step.deleteVertex+').','di-product');
+        const stageLine=node('p','Stage '+stage+' · paper position '+step.selectedPaperPosition+' · '+product(prior)+' → '+product(stages[stage].target),'proof-stage');
+        stageData.textContent='Ordered mutations '+(step.mutations.map(id=>'('+id+')').join(', ')||'∅')+'. Boundary vertex ('+step.deleteVertex+').';
         operation.prepend(stageLine);
         if(frame){
           const count=frames.slice(0,frameIndex+1).filter(f=>['mutate','freeze','delete'].includes(f.kind)).length;
@@ -7429,6 +7494,7 @@ sitemap: false
           const current={solid:graph.solid,frozen,arrows:graph.arrows.filter(([a,b])=>!currentFrozen.has(a)||!currentFrozen.has(b))};
           const err=QuiverMoves.checkPaperSnapshot(snapshot,current,map);
           comparison.dataset.frameAgreement=String(!err);
+          if(err)reportDifference('This move differs from Bao–Ye. '+err);
           comparison.append(node('p',err?'The film and Bao–Ye ice quivers differ. '+err:'The transported labels, frozen vertices and all weighted ice arrows agree with Bao–Ye at this step.'));
           if(frame.kind==='freeze'||frameIndex===reading.beta.length+1){
             const frozenBefore=new Set(graph.frozen);
@@ -7448,13 +7514,14 @@ sitemap: false
         for(const [id,p] of Object.entries(endpoint.mapping))map[id]=graph.beta.length+1-p;
         const result=QuiverMoves.checkPaperSnapshot(endpoint,graph,map);
         comparison.dataset.signedAgreement=String(!result);
+        if(result&&!discrepancy.textContent)reportDifference('The boundary quiver differs from Bao–Ye. '+result);
         const original=p=>graph.beta.length+1-p;
         comparison.append(node('h3','Bao–Ye on the original positive word'),
           node('p','Original β = '+paperOrigin.join(' ')+'. This signed graph uses Dβ = (−iₘ,…,−i₁), at the same target '+product(target)+'. Each signed slot c represents positive slot '+graph.beta.length+' + 1 − c.'),
           node('p','GLSBS hollow slots '+positions(graph.hollow)+' correspond, in that order, to positive slots '+positions(graph.hollow.map(original))+'. Bao–Ye’s leftmost selection in written order is '+positions(paper.selectedPositions.slice(0,target.length))+'.'),
           node('p',result?'The same-target ice-quiver comparison differs: '+result:'The occurrence labels, frozen set, and every weighted arrow with a mutable endpoint agree in their given orientations.'));
         const originalView=node('a','Return to the positive graph at this target');
-        const originalUrl=nativeLink({n:reading.n,beta:paperOrigin,v:reading.v},target.length);originalUrl.searchParams.set('series','paper');originalView.href=originalUrl.href;actions.append(originalView);
+        const originalUrl=nativeLink({n:reading.n,beta:paperOrigin,v:reading.v},target.length);originalUrl.searchParams.set('series','paper');originalView.href=originalUrl.href;extraActions.append(originalView);
       }else delete comparison.dataset.signedAgreement;
       if(stages&&!paperOrigin&&graph.beta.length===reading.beta.length){
         const reversed=[...graph.beta].reverse(), inverseWord=[...target].reverse();
@@ -7469,6 +7536,7 @@ sitemap: false
         const check=signature(filmIds)===signature(paperIds)&&signature(frozenFilm)===signature(frozenPaper)&&signature(arrowsFilm)===signature(arrowsPaper);
         const identification=node('details'),heading=node('summary','Check Bao–Ye on the reversed word and inverse target');
         identification.dataset.verified=String(check);
+        if(!check)reportDifference('The comparison on the reversed word and inverse target differs.');
         identification.append(heading,node('p','Bao–Ye input ('+product(inverseWord)+', '+(reversed.join(' ')||'∅')+'). Count solid occurrences in the GLSBS word from the right and reverse every Bao–Ye arrow. '+(check?'The vertex labels, frozen set and all weighted arrows with a mutable endpoint agree.':'The labeled ice quivers differ on this input.')));
         comparison.append(identification);
         const paper=QuiverPaper.computeInPaperOrder(reading.n,reading.beta,graph.v);
@@ -7483,12 +7551,14 @@ sitemap: false
           if(film[k]!==paperCounts[k])row.className='audit-difference';
         });
         const differ=film.some((v,k)=>v!==paperCounts[k]);
+        if(differ)reportDifference('On the same positive word, the two endpoint quivers have different vertex or arrow counts.');
         comparison.append(table,node('p',differ?'These counts differ, so the two endpoint ice quivers are nonisomorphic.':'The counts agree. They do not decide equality of labeled ice quivers.'));
-        const link=node('a','Inspect Bao–Ye’s seed operations');link.href=nativeLink(series==='paper'?inputReading:{...reading,v:graph.v},paper.stages.length,'induction');actions.append(link);
+        const link=node('a','Inspect Bao–Ye’s seed operations');link.href=nativeLink(series==='paper'?inputReading:{...reading,v:graph.v},paper.stages.length,'induction');extraActions.append(link);
         const gallery=node('a','Draw the all-negative reversed graph at this same target');
         const url=nativeLink({n:reading.n,beta:[...reading.beta].reverse().map(i=>-i),v:series==='paper'?reading.v:target},series==='paper'?stage:null);
-        url.searchParams.set('origin',reading.beta.join(','));gallery.href=url.href;actions.append(gallery);
+        url.searchParams.set('origin',reading.beta.join(','));gallery.href=url.href;extraActions.append(gallery);
       }
+      checks.hidden=!comparison.childElementCount&&!stageData.textContent;
       pick(Number.isInteger(at)&&at>=1&&at<=graph.beta.length?at:(frame?.focus??graph.beta.length),lift,save);
     }
     stepChoice.onchange=()=>showFrame(Number(stepChoice.value),true);
@@ -7504,12 +7574,12 @@ sitemap: false
       const origin=query.get('origin');
       if(origin&&(!paperOrigin||origin.split(',').map(Number).join()!==paperOrigin.join()))throw new Error('The source word differs from the reverse of the negative word.');
       paper=paperOrigin?QuiverPaper.computeInPaperOrder(input.n,paperOrigin,input.v):null;
-      h.textContent=paperOrigin?'Bao–Ye induction on the signed graph':'GLSBS rightmost graph';
+      h.textContent=paperOrigin?'Bao–Ye induction':'GLSBS rightmost graph';
       convention.textContent=paperOrigin?(input.gallery?'Source gallery '+input.gallery.join(' ')+'. ':'')+'Paper word w = '+(paperOrigin.join(' ')||'e')+'. The graph uses the reversed barred gallery D(w). Its rightmost scan meets the paper letters from left to right. The positive marker moves toward the marked boundary at cut 0.':'The graph uses the signed word as entered. From the target at the right, an unbarred i tests r sᵢ and a barred i tests sᵢ r. A shorter candidate gives a hollow crossing.';
       document.getElementById('betaLabel').textContent=series==='bao-ye'?'Bao–Ye word w':'Chronological signed word β';
       stages=!positive&&!negative?null:series==='paper'?QuiverPaper.computeInPaperOrder(input.n,input.beta,input.v).snapshots.filter(s=>s.boundary):nativeStages(input.n,reading.beta,input.v);
       const chosen=query.has('stage')?Number(query.get('stage')):NaN;
-      stage=stages&&Number.isInteger(chosen)?Math.min(stages.length-1,Math.max(0,chosen)):(series==='bao-ye'?Math.min(1,stages.length-1):(stages?.length??1)-1);
+      stage=stages&&Number.isInteger(chosen)?Math.min(stages.length-1,Math.max(0,chosen)):(series==='bao-ye'?0:(stages?.length??1)-1);
       chooser.replaceChildren(...(stages?stages.map(s=>new Option('Stage '+s.stage+' · '+product(s.target)+(s.position?(paperOrigin?' · paper position '+(reading.beta.length+1-s.position):' · β['+s.position+']'):''),s.stage)):[new Option(product(input.v),'0')]));
       chooser.disabled=!stages||stages.length<2;
       seriesLabel.hidden=!positive;seriesChoice.value=series;
@@ -8361,7 +8431,7 @@ sitemap: false
     }
     if(mode==='proof'){
       const p=presets[i];
-      const url=proofView.series()==='bao-ye'?NativeRightmost.paperReplayLink(QuiverRichardsonReading.compute(p.n,p.beta,p.v),1,1):NativeRightmost.nativeLink(p,null);
+      const url=proofView.series()==='bao-ye'?NativeRightmost.paperReplayLink(QuiverRichardsonReading.compute(p.n,p.beta,p.v),0,0):NativeRightmost.nativeLink(p,null);
       location.assign(url.href);return;
     }
     if(presets[i].writtenOrder){
@@ -8417,7 +8487,7 @@ sitemap: false
       if(destination==='proof'&&mode==='proof'&&(proofView.series()==='bao-ye'||beta.every(i=>i<0)))return;
       const reading=mode==='direct'?readingModel:QuiverRichardsonReading.compute(n,beta,v);
       if(destination==='proof'){
-        location.assign(NativeRightmost.paperReplayLink(reading,Math.min(1,reading.paper.stages.length),1));return;
+        location.assign(NativeRightmost.paperReplayLink(reading,0,0));return;
       }
       location.assign(QuiverRichardsonReading.url(location.href,reading,destination));
     }catch(err){fail(err);}
@@ -8487,6 +8557,7 @@ sitemap: false
   }else if(directAddress){
     mode=proofAddress?'proof':'direct';
     const example=presets[paperPreset],exampleDefaults=!linkedWords.has('beta');
+    if(proofAddress&&exampleDefaults&&!linkedWords.has('series'))linkedWords.set('series','bao-ye');
     $('rank').value=namedExample||exampleDefaults?example.n:linkedWords.get('n')??'3';
     $('beta').value=namedExample||exampleDefaults?word(example.beta):linkedWords.get('beta');
     $('target').value=namedExample||exampleDefaults?word(example.v):linkedWords.get('v')??linkedWords.get('c')??'e';
